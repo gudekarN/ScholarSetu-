@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — ScholarSetu</title>
+  <meta name="description" content="Login to ScholarSetu — Maharashtra's scholarship platform for students and college administrators." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --saffron:       #FF6B00;
+      --saffron-light: #FF8C38;
+      --saffron-pale:  rgba(255,107,0,.09);
+      --navy:          #0A1628;
+      --green:         #138808;
+      --green-tab:     #1DB954;
+      --red-alert:     #DC2626;
+      --red-alert-bg:  rgba(220,38,38,.07);
+      --red-alert-bdr: rgba(220,38,38,.25);
+      --bg:            #F4F1EC;
+      --card:          #FFFFFF;
+      --border:        #E5E1DA;
+      --text:          #1A1A1A;
+      --text-muted:    #6B7280;
+      --text-light:    #9CA3AF;
+      --input-bg:      #FAFAF9;
+      --radius:        16px;
+      --radius-sm:     10px;
+      --shadow-card:   0 32px 80px rgba(0,0,0,.13), 0 4px 20px rgba(0,0,0,.07);
+      --transition:    all .22s cubic-bezier(.4,0,.2,1);
+      --font-body:     'Inter', sans-serif;
+      --font-head:     'Outfit', sans-serif;
+      --font-logo:     'Playfair Display', serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 16px 60px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ── Tricolor gradient background ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        linear-gradient(180deg,
+          rgba(255,107,0,.09) 0%,
+          rgba(255,255,255,0) 25%,
+          rgba(255,255,255,0) 75%,
+          rgba(19,136,8,.08) 100%
+        );
+      pointer-events: none;
+    }
+
+    /* ── Tricolor stripe ── */
+    .tricolor-bar {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 4px; z-index: 200; display: flex;
+    }
+    .tc-saffron { flex:1; background: #FF6B00; }
+    .tc-white   { flex:1; background: #fff; }
+    .tc-green   { flex:1; background: #138808; }
+
+    /* ── Ashok Chakra watermark ── */
+    .chakra-wrap {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 520px; height: 520px;
+      opacity: .032;
+      pointer-events: none; z-index: 0;
+    }
+    .chakra-wrap svg { width: 100%; height: 100%; }
+
+    /* ── Page wrapper ── */
+    .page-wrap {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 420px;
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+    }
+
+    /* ── Logo block (centered, Playfair) ── */
+    .logo-block {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 10px; margin-bottom: 28px;
+    }
+    .logo-icon-wrap {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--saffron), #FF3E00);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 6px 20px rgba(255,107,0,.32);
+    }
+    .logo-text {
+      font-family: var(--font-logo);
+      font-weight: 700; font-size: 28px;
+      color: var(--navy); letter-spacing: -.01em;
+    }
+    .logo-tagline {
+      font-size: 12px; font-weight: 500;
+      color: var(--text-muted); letter-spacing: .04em;
+      text-transform: uppercase; margin-top: -4px;
+    }
+
+    /* ── Card ── */
+    .card {
+      width: 100%;
+      background: var(--card);
+      border-radius: 20px;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+    }
+    .tab-btn {
+      flex: 1; padding: 16px 10px;
+      background: none; border: none; cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 14px; font-weight: 600;
+      color: var(--text-muted);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      position: relative; transition: var(--transition);
+      border-bottom: 2.5px solid transparent;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--navy); background: rgba(0,0,0,.02); }
+    .tab-btn.active {
+      color: var(--saffron);
+      border-bottom-color: var(--saffron);
+      background: var(--saffron-pale);
+    }
+    .tab-icon { font-size: 16px; }
+
+    /* ── Card body ── */
+    .card-body { padding: 32px 32px 36px; }
+
+    /* ── Form heading ── */
+    .form-head { margin-bottom: 24px; }
+    .form-head h1 {
+      font-family: var(--font-head); font-size: 21px;
+      font-weight: 800; color: var(--navy); margin-bottom: 4px;
+    }
+    .form-head p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── Error alert ── */
+    .error-alert {
+      display: none;
+      align-items: flex-start; gap: 10px;
+      background: var(--red-alert-bg);
+      border: 1px solid var(--red-alert-bdr);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      animation: shake .35s cubic-bezier(.36,.07,.19,.97) both;
+    }
+    .error-alert.show { display: flex; }
+    @keyframes shake {
+      10%, 90% { transform: translateX(-2px); }
+      20%, 80% { transform: translateX(4px); }
+      30%, 50%, 70% { transform: translateX(-4px); }
+      40%, 60% { transform: translateX(4px); }
+    }
+    .error-alert svg {
+      width: 16px; height: 16px; flex-shrink: 0;
+      color: var(--red-alert); margin-top: 1px;
+    }
+    .error-alert-text {
+      font-size: 13px; color: var(--red-alert); font-weight: 500; line-height: 1.5;
+    }
+    .error-dismiss {
+      margin-left: auto; background: none; border: none;
+      cursor: pointer; color: var(--red-alert); opacity: .6;
+      padding: 0 2px; font-size: 16px; line-height: 1;
+      transition: opacity .2s;
+    }
+    .error-dismiss:hover { opacity: 1; }
+
+    /* ── Form ── */
+    .form-group { margin-bottom: 18px; }
+    label {
+      display: block; font-size: 13px; font-weight: 600;
+      color: var(--navy); margin-bottom: 6px;
+    }
+    input[type="email"],
+    input[type="password"],
+    input[type="text"] {
+      width: 100%; padding: 11px 14px;
+      background: var(--input-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 14px; font-family: var(--font-body);
+      color: var(--text); outline: none;
+      transition: var(--transition);
+    }
+    input:focus {
+      border-color: var(--saffron);
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255,107,0,.11);
+    }
+    input.field-error {
+      border-color: var(--red-alert);
+      box-shadow: 0 0 0 3px rgba(220,38,38,.09);
+    }
+
+    /* Password wrapper */
+    .pw-wrap { position: relative; }
+    .pw-wrap input { padding-right: 44px; }
+    .toggle-pw {
+      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      color: var(--text-light); padding: 4px;
+      display: flex; align-items: center;
+      transition: color .2s;
+    }
+    .toggle-pw:hover { color: var(--navy); }
+    .toggle-pw svg { width: 17px; height: 17px; }
+
+    /* Forgot password row */
+    .forgot-row {
+      display: flex; justify-content: flex-end; margin-top: -8px; margin-bottom: 20px;
+    }
+    .forgot-link {
+      font-size: 12px; font-weight: 600; color: var(--saffron);
+      text-decoration: none; transition: opacity .2s;
+    }
+    .forgot-link:hover { opacity: .75; }
+
+    /* Login button */
+    .btn-login {
+      width: 100%; padding: 13px;
+      background: var(--saffron); color: #fff;
+      border: none; border-radius: var(--radius-sm);
+      font-size: 15px; font-weight: 700; font-family: var(--font-body);
+      cursor: pointer; letter-spacing: .02em;
+      box-shadow: 0 4px 18px rgba(255,107,0,.32);
+      transition: var(--transition);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .btn-login:hover {
+      background: var(--saffron-light);
+      transform: translateY(-1px);
+      box-shadow: 0 7px 24px rgba(255,107,0,.38);
+    }
+    .btn-login:active { transform: translateY(0); }
+
+    /* Below-form note */
+    .below-note {
+      margin-top: 20px; text-align: center;
+      font-size: 13px; color: var(--text-muted); line-height: 1.6;
+    }
+    .below-note a {
+      color: var(--saffron); font-weight: 600;
+      text-decoration: none; transition: opacity .2s;
+    }
+    .below-note a:hover { opacity: .75; }
+    .below-note .invite-note {
+      display: flex; align-items: flex-start; gap: 8px;
+      background: rgba(19,136,8,.06);
+      border: 1px solid rgba(19,136,8,.18);
+      border-radius: 8px; padding: 9px 12px; text-align: left;
+      font-size: 12px; line-height: 1.55; color: var(--text-muted);
+      margin-top: 4px;
+    }
+    .below-note .invite-note svg { width: 14px; height: 14px; color: var(--green-tab); flex-shrink: 0; margin-top: 2px; }
+    .below-note .invite-note span { flex: 1; }
+
+    /* Divider */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 22px 0;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .divider span { font-size: 11px; color: var(--text-light); font-weight: 500; white-space: nowrap; }
+
+    /* ── Back link ── */
+    .back-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      text-decoration: none; margin-bottom: 22px;
+      transition: color .2s; align-self: flex-start;
+    }
+    .back-link:hover { color: var(--navy); }
+    .back-link svg { width: 14px; height: 14px; }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      margin-top: 24px; text-align: center;
+      font-size: 11px; color: var(--text-light);
+      line-height: 1.6; max-width: 380px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── Tab panels ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; animation: fade-in .22s ease; }
+    @keyframes fade-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+    @media (max-width: 460px) {
+      .card-body { padding: 24px 20px 28px; }
+      .logo-text { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tricolor bar -->
+  <div class="tricolor-bar">
+    <div class="tc-saffron"></div>
+    <div class="tc-white"></div>
+    <div class="tc-green"></div>
+  </div>
+
+  <!-- Ashok Chakra watermark -->
+  <div class="chakra-wrap" aria-hidden="true">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer circle -->
+      <circle cx="100" cy="100" r="98" fill="none" stroke="#0A1628" stroke-width="1.2"/>
+      <!-- Inner circle -->
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#0A1628" stroke-width="1"/>
+      <!-- Hub -->
+      <circle cx="100" cy="100" r="8" fill="#0A1628"/>
+      <!-- 24 spokes -->
+      <g stroke="#0A1628" stroke-width="1" stroke-linecap="round">
+        <line x1="100" y1="22" x2="100" y2="92"/>
+        <line x1="125.2" y1="26.6" x2="112.6" y2="89.2"/>
+        <line x1="146.6" y1="40.4" x2="119.9" y2="80.1"/>
+        <line x1="160.4" y1="61.4" x2="122" y2="86.8"/>
+        <line x1="165" y1="85.8" x2="119.2" y2="97.4"/>
+        <line x1="160" y1="111" x2="110.4" y2="104.8"/>
+        <line x1="146.2" y1="131.8" x2="107.1" y2="109.6"/>
+        <line x1="125.2" y1="145.8" x2="107" y2="116.4"/>
+        <line x1="100" y1="152" x2="100" y2="108"/>
+        <line x1="74.8" y1="145.8" x2="93" y2="116.4"/>
+        <line x1="53.8" y1="131.8" x2="92.9" y2="109.6"/>
+        <line x1="40" y1="111" x2="89.6" y2="104.8"/>
+        <line x1="35" y1="85.8" x2="80.8" y2="97.4"/>
+        <line x1="39.6" y1="61.4" x2="78" y2="86.8"/>
+        <line x1="53.4" y1="40.4" x2="80.1" y2="80.1"/>
+        <line x1="74.8" y1="26.6" x2="87.4" y2="89.2"/>
+        <!-- intermediate spokes -->
+        <line x1="112.3" y1="22.8" x2="105.3" y2="91.8"/>
+        <line x1="137.7" y1="33.2" x2="115.3" y2="85"/>
+        <line x1="155.2" y1="52.1" x2="121.2" y2="83.6"/>
+        <line x1="163.4" y1="76.6" x2="119.7" y2="97.4"/>
+        <line x1="162" y1="102" x2="118.4" y2="101"/>
+        <line x1="152.6" y1="124.5" x2="113.2" y2="107"/>
+        <line x1="136.2" y1="141.5" x2="106.8" y2="113.8"/>
+        <line x1="113.6" y1="151.2" x2="100.9" y2="119.4"/>
+      </g>
+      <!-- Spoke tips (small dots) -->
+      <g fill="#0A1628">
+        <circle cx="100" cy="20" r="2.5"/>
+        <circle cx="125.2" cy="24.8" r="2.5"/>
+        <circle cx="146.6" cy="38.2" r="2.5"/>
+        <circle cx="160.4" cy="59.2" r="2.5"/>
+        <circle cx="165" cy="84" r="2.5"/>
+        <circle cx="160.4" cy="108.8" r="2.5"/>
+        <circle cx="146.6" cy="130.2" r="2.5"/>
+        <circle cx="125.2" cy="144.2" r="2.5"/>
+        <circle cx="100" cy="150" r="2.5"/>
+        <circle cx="74.8" cy="144.2" r="2.5"/>
+        <circle cx="53.4" cy="130.2" r="2.5"/>
+        <circle cx="39.6" cy="108.8" r="2.5"/>
+        <circle cx="35" cy="84" r="2.5"/>
+        <circle cx="39.6" cy="59.2" r="2.5"/>
+        <circle cx="53.4" cy="38.2" r="2.5"/>
+        <circle cx="74.8" cy="24.8" r="2.5"/>
+        <circle cx="112.6" cy="21.2" r="2.5"/>
+        <circle cx="137.7" cy="31.4" r="2.5"/>
+        <circle cx="155.2" cy="50" r="2.5"/>
+        <circle cx="163.4" cy="74.6" r="2.5"/>
+        <circle cx="162" cy="100" r="2.5"/>
+        <circle cx="152.6" cy="122.8" r="2.5"/>
+        <circle cx="136.2" cy="140" r="2.5"/>
+        <circle cx="113.6" cy="150" r="2.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- Back to home -->
+    <a href="index.html" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to home
+    </a>
+
+    <!-- Logo -->
+    <div class="logo-block">
+      <div class="logo-icon-wrap">🎓</div>
+      <span class="logo-text">ScholarSetu</span>
+      <span class="logo-tagline">Maharashtra Scholarship Platform</span>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+
+      <!-- Tabs -->
+      <div class="tabs" role="tablist" aria-label="Login type">
+        <button
+          class="tab-btn active"
+          id="tab-student"
+          role="tab"
+          aria-selected="true"
+          aria-controls="panel-student"
+          onclick="switchTab('student')"
+        >
+          <span class="tab-icon">🎓</span> Student
+        </button>
+        <button
+          class="tab-btn"
+          id="tab-admin"
+          role="tab"
+          aria-selected="false"
+          aria-controls="panel-admin"
+          onclick="switchTab('admin')"
+        >
+          <span class="tab-icon">🏛️</span> College Admin
+        </button>
+      </div>
+
+      <!-- Card Body -->
+      <div class="card-body">
+
+        <!-- Error alert (shared) -->
+        <div class="error-alert" id="error-alert" role="alert" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span class="error-alert-text">Invalid email or password. Please try again.</span>
+          <button class="error-dismiss" onclick="hideError()" aria-label="Dismiss error">×</button>
+        </div>
+
+        <!-- ── Student Panel ── -->
+        <div class="tab-panel active" id="panel-student" role="tabpanel" aria-labelledby="tab-student">
+          <div class="form-head">
+            <h1>Student Login</h1>
+            <p>Access your scholarship dashboard and track your applications.</p>
+          </div>
+          <form id="form-student" novalidate onsubmit="handleLogin(event, 'student')">
+            <div class="form-group">
+              <label for="s-email">Email address</label>
+              <input type="email" id="s-email" placeholder="you@college.edu.in" autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="s-password">Password</label>
+              <div class="pw-wrap">
+                <input type="password" id="s-password" placeholder="Enter your password" autocomplete="current-password" />
+                <button type="button" class="toggle-pw" onclick="togglePw('s-password', this)" aria-label="Toggle password visibility">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="forgot-row">
+              <a href="#" class="forgot-link" id="s-forgot">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-login" id="btn-student-login">
+              Login to Dashboard
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </form>
+
+          <div class="below-note">
+            <div class="invite-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              <span>Don't have an account? Register via your <strong>college invite link</strong> — ask your college admin for the link.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Admin Panel ── -->
+        <div class="tab-panel" id="panel-admin" role="tabpanel" aria-labelledby="tab-admin">
+          <div class="form-head">
+            <h1>Admin Login</h1>
+            <p>Manage your college portal, broadcast notices, and track scholarship activity.</p>
+          </div>
+          <form id="form-admin" novalidate onsubmit="handleLogin(event, 'admin')">
+            <div class="form-group">
+              <label for="a-email">Email address</label>
+              <input type="email" id="a-email" placeholder="principal@college.edu.in" autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="a-password">Password</label>
+              <div class="pw-wrap">
+                <input type="password" id="a-password" placeholder="Enter your password" autocomplete="current-password" />
+                <button type="button" class="toggle-pw" onclick="togglePw('a-password', this)" aria-label="Toggle password visibility">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="forgot-row">
+              <a href="#" class="forgot-link" id="a-forgot">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-login" id="btn-admin-login">
+              Login to Admin Portal
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </form>
+
+          <div class="below-note" style="margin-top:20px">
+            New college? <a href="register-college.html" id="link-register-college">Register here →</a>
+          </div>
+        </div>
+
+      </div><!-- /card-body -->
+    </div><!-- /card -->
+
+    <!-- Disclaimer -->
+    <p class="disclaimer">
+      ScholarSetu is not affiliated with Maharashtra Shasan or the MahaDBT portal.<br>
+      All scholarship information is sourced from official government publications.
+    </p>
+
+  </div><!-- /page-wrap -->
+
+  <script>
+    // ── Tab switching ──
+    function switchTab(which) {
+      ['student', 'admin'].forEach(t => {
+        document.getElementById('tab-' + t).classList.toggle('active', t === which);
+        document.getElementById('tab-' + t).setAttribute('aria-selected', t === which);
+        document.getElementById('panel-' + t).classList.toggle('active', t === which);
+      });
+      hideError();
+    }
+
+    // ── Password toggle ──
+    const EYE_OPEN  = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+    const EYE_CLOSE = `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
+
+    function togglePw(id, btn) {
+      const inp = document.getElementById(id);
+      const show = inp.type === 'password';
+      inp.type = show ? 'text' : 'password';
+      btn.querySelector('svg').innerHTML = show ? EYE_CLOSE : EYE_OPEN;
+    }
+
+    // ── Error alert ──
+    function showError() {
+      const el = document.getElementById('error-alert');
+      el.classList.remove('show');
+      void el.offsetWidth; // reflow for re-trigger animation
+      el.classList.add('show');
+    }
+    function hideError() {
+      document.getElementById('error-alert').classList.remove('show');
+    }
+
+    // ── Form submit (demo: always show error) ──
+    function handleLogin(e, type) {
+      e.preventDefault();
+      const emailId = type === 'student' ? 's-email' : 'a-email';
+      const pwId    = type === 'student' ? 's-password' : 'a-password';
+      const email   = document.getElementById(emailId).value.trim();
+      const pw      = document.getElementById(pwId).value;
+
+      // Clear field errors
+      [emailId, pwId].forEach(id => document.getElementById(id).classList.remove('field-error'));
+
+      let hasError = false;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById(emailId).classList.add('field-error');
+        hasError = true;
+      }
+      if (!pw) {
+        document.getElementById(pwId).classList.add('field-error');
+        hasError = true;
+      }
+
+      if (hasError) { showError(); return; }
+
+      // Simulate failed auth (demo page — no backend)
+      showError();
+    }
+
+    // ── Clear field error on input ──
+    ['s-email','s-password','a-email','a-password'].forEach(id => {
+      document.getElementById(id).addEventListener('input', function() {
+        this.classList.remove('field-error');
+      });
+    });
+  </script>
+</body>
+</html>
