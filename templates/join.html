@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join ScholarSetu — Student Registration</title>
+  <title>Join ScholarSetu â€” Student Registration</title>
   <meta name="description" content="Register as a student on ScholarSetu via your college invite link. Fill in your details to access Maharashtra's scholarship platform." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ── Tokens ── */
+    /* â”€â”€ Tokens â”€â”€ */
     :root {
       --saffron:          #FF6B00;
       --saffron-light:    #FF8C38;
@@ -60,7 +60,7 @@
       overflow-x: hidden;
     }
 
-    /* ── Tricolor gradient BG ── */
+    /* â”€â”€ Tricolor gradient BG â”€â”€ */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0;
@@ -74,7 +74,7 @@
       pointer-events: none;
     }
 
-    /* ── Tricolor bar ── */
+    /* â”€â”€ Tricolor bar â”€â”€ */
     .tricolor-bar {
       position: fixed; top: 0; left: 0; right: 0;
       height: 4px; z-index: 200; display: flex;
@@ -83,7 +83,7 @@
     .tc-white   { flex:1; background: #fff; }
     .tc-green   { flex:1; background: #138808; }
 
-    /* ── Ashok Chakra watermark ── */
+    /* â”€â”€ Ashok Chakra watermark â”€â”€ */
     .chakra-wrap {
       position: fixed;
       top: 50%; left: 50%;
@@ -94,14 +94,14 @@
     }
     .chakra-wrap svg { width: 100%; height: 100%; }
 
-    /* ── Page wrapper ── */
+    /* â”€â”€ Page wrapper â”€â”€ */
     .page-wrap {
       position: relative; z-index: 1;
       width: 100%; max-width: 520px;
       display: flex; flex-direction: column; align-items: center;
     }
 
-    /* ── Back link ── */
+    /* â”€â”€ Back link â”€â”€ */
     .back-link {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 13px; font-weight: 500; color: var(--text-muted);
@@ -111,7 +111,7 @@
     .back-link:hover { color: var(--navy); }
     .back-link svg { width: 14px; height: 14px; }
 
-    /* ── Logo block ── */
+    /* â”€â”€ Logo block â”€â”€ */
     .logo-block {
       display: flex; flex-direction: column; align-items: center;
       gap: 10px; margin-bottom: 26px;
@@ -135,7 +135,7 @@
       text-transform: uppercase; margin-top: -4px;
     }
 
-    /* ── Card ── */
+    /* â”€â”€ Card â”€â”€ */
     .card {
       width: 100%;
       background: var(--card);
@@ -145,7 +145,7 @@
       overflow: hidden;
     }
 
-    /* ── College banner (top of card) ── */
+    /* â”€â”€ College banner (top of card) â”€â”€ */
     .college-banner {
       display: flex;
       align-items: center;
@@ -183,10 +183,10 @@
       font-weight: 600; color: rgba(255,255,255,.9);
     }
 
-    /* ── Card body ── */
+    /* â”€â”€ Card body â”€â”€ */
     .card-body { padding: 28px 28px 32px; }
 
-    /* ── Form heading ── */
+    /* â”€â”€ Form heading â”€â”€ */
     .form-head { margin-bottom: 22px; }
     .form-head h1 {
       font-family: var(--font-head); font-size: 21px;
@@ -194,7 +194,7 @@
     }
     .form-head p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
 
-    /* ── PRN warning (dismissable) ── */
+    /* â”€â”€ PRN warning (dismissable) â”€â”€ */
     .prn-warning {
       display: none;
       align-items: flex-start; gap: 10px;
@@ -225,7 +225,7 @@
     }
     .prn-dismiss:hover { opacity: 1; }
 
-    /* ── Form layout ── */
+    /* â”€â”€ Form layout â”€â”€ */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -334,7 +334,7 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Below card disclaimer ── */
+    /* â”€â”€ Below card disclaimer â”€â”€ */
     .disclaimer {
       margin-top: 24px; text-align: center;
       font-size: 11px; color: var(--text-light);
@@ -344,7 +344,7 @@
     .disclaimer a { color: var(--saffron); text-decoration: none; font-weight: 500; }
     .disclaimer a:hover { opacity: .75; }
 
-    /* ── Success state ── */
+    /* â”€â”€ Success state â”€â”€ */
     .success-state {
       display: none;
       flex-direction: column; align-items: center;
@@ -405,7 +405,7 @@
       opacity: .3;
     }
 
-    /* ── Step counter (small pill above form head) ── */
+    /* â”€â”€ Step counter (small pill above form head) â”€â”€ */
     .step-pill {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--saffron-pale);
@@ -417,7 +417,7 @@
     }
     .step-pill svg { width: 11px; height: 11px; }
 
-    /* ── Responsive ── */
+    /* â”€â”€ Responsive â”€â”€ */
     @media (max-width: 520px) {
       .form-grid { grid-template-columns: 1fr; }
       .form-group.full { grid-column: unset; }
@@ -507,7 +507,7 @@
 
     <!-- Logo -->
     <div class="logo-block">
-      <div class="logo-icon-wrap">🎓</div>
+      <div class="logo-icon-wrap">ðŸŽ“</div>
       <span class="logo-text">ScholarSetu</span>
       <span class="logo-tagline">Maharashtra Scholarship Platform</span>
     </div>
@@ -515,7 +515,7 @@
     <!-- Card -->
     <div class="card">
 
-      <!-- College banner — pre-filled from token -->
+      <!-- College banner â€” pre-filled from token -->
       <div class="college-banner" id="college-banner" role="status" aria-label="College invite information">
         <div class="lock-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -536,7 +536,7 @@
         <!-- Step pill -->
         <div class="step-pill" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          Student Registration · Invite Link
+          Student Registration Â· Invite Link
         </div>
 
         <div class="form-head">
@@ -554,14 +554,14 @@
           <span class="prn-warning-text">
             This PRN is already registered. If this is a mistake, contact your college admin.
           </span>
-          <button class="prn-dismiss" onclick="hidePrnWarning()" aria-label="Dismiss PRN warning">×</button>
+          <button class="prn-dismiss" onclick="hidePrnWarning()" aria-label="Dismiss PRN warning">Ã—</button>
         </div>
 
         <!-- Registration form -->
         <form id="reg-form" novalidate onsubmit="handleRegister(event)">
           <div class="form-grid">
 
-            <!-- Full Name — full width -->
+            <!-- Full Name â€” full width -->
             <div class="form-group full">
               <label for="full-name">Full Name</label>
               <input
@@ -572,7 +572,7 @@
               />
             </div>
 
-            <!-- Email — full width -->
+            <!-- Email â€” full width -->
             <div class="form-group full">
               <label for="email">Email Address</label>
               <input
@@ -587,7 +587,7 @@
               </div>
             </div>
 
-            <!-- Password — left -->
+            <!-- Password â€” left -->
             <div class="form-group">
               <label for="password">Password</label>
               <div class="pw-wrap">
@@ -601,7 +601,7 @@
               </div>
             </div>
 
-            <!-- Confirm Password — right -->
+            <!-- Confirm Password â€” right -->
             <div class="form-group">
               <label for="confirm-password">Confirm Password</label>
               <div class="pw-wrap">
@@ -615,7 +615,7 @@
               </div>
             </div>
 
-            <!-- PRN — full width -->
+            <!-- PRN â€” full width -->
             <div class="form-group full">
               <label for="prn">PRN / Permanent Registration Number</label>
               <input
@@ -627,11 +627,11 @@
               />
               <div class="field-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                Numeric only &middot; Usually 10–13 digits &middot; Check your college ID card
+                Numeric only &middot; Usually 10â€“13 digits &middot; Check your college ID card
               </div>
             </div>
 
-            <!-- Contact Number — full width -->
+            <!-- Contact Number â€” full width -->
             <div class="form-group full">
               <label for="contact">Contact Number</label>
               <input
@@ -643,7 +643,7 @@
               />
             </div>
 
-            <!-- Department — left -->
+            <!-- Department â€” left -->
             <div class="form-group">
               <label for="department">Department</label>
               <div class="select-wrap">
@@ -661,7 +661,7 @@
               </div>
             </div>
 
-            <!-- Year of Study — right -->
+            <!-- Year of Study â€” right -->
             <div class="form-group">
               <label for="year">Year of Study</label>
               <div class="select-wrap">
@@ -687,7 +687,7 @@
 
       </div><!-- /card-body -->
 
-      <!-- ── Success state ── -->
+      <!-- â”€â”€ Success state â”€â”€ -->
       <div class="success-state" id="success-state" aria-live="polite">
         <div class="success-icon-wrap">
           <!-- Email / envelope icon -->
@@ -720,11 +720,11 @@
   </div><!-- /page-wrap -->
 
   <script>
-    // ─────────────────────────────────────────────
-    //  Token parsing — read ?token= from URL
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    //  Token parsing â€” read ?token= from URL
     //  In production, exchange this token with backend
     //  for college details. For demo, parse base64 or use default.
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     (function initToken() {
       const params  = new URLSearchParams(window.location.search);
       const token   = params.get('token');
@@ -743,9 +743,9 @@
       window._collegeName = collegeName;
     })();
 
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     //  Password toggle
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const EYE_OPEN  = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
     const EYE_CLOSE = `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
 
@@ -757,9 +757,9 @@
       btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
     }
 
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     //  PRN warning
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function showPrnWarning() {
       const w = document.getElementById('prn-warning');
       w.classList.remove('show');
@@ -770,9 +770,9 @@
       document.getElementById('prn-warning').classList.remove('show');
     }
 
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     //  Field error helpers
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const REQUIRED_FIELDS = ['full-name','email','password','confirm-password','prn','contact','department','year'];
 
     function setFieldError(id, on) {
@@ -789,9 +789,9 @@
       el.addEventListener('change', function() { this.classList.remove('field-error'); });
     });
 
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     //  Form validation
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function validate() {
       clearAllErrors();
       let valid = true;
@@ -817,9 +817,9 @@
       return { valid, email, prn };
     }
 
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     //  Form submit
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function handleRegister(e) {
       e.preventDefault();
       hidePrnWarning();
@@ -834,14 +834,14 @@
       setTimeout(() => {
         setLoading(false);
 
-        // ── Demo: PRN "2021016400001" triggers the conflict warning ──
+        // â”€â”€ Demo: PRN "2021016400001" triggers the conflict warning â”€â”€
         if (prn === '2021016400001') {
           showPrnWarning();
           setFieldError('prn', true);
           return;
         }
 
-        // ── Success ──
+        // â”€â”€ Success â”€â”€
         showSuccess(email);
       }, 1500);
     }
@@ -852,14 +852,14 @@
       const arrow   = document.getElementById('btn-arrow');
       const spinner = document.getElementById('btn-spinner');
       btn.classList.toggle('loading', on);
-      label.textContent  = on ? 'Creating account…' : 'Create Account';
+      label.textContent  = on ? 'Creating accountâ€¦' : 'Create Account';
       arrow.style.display   = on ? 'none' : '';
       spinner.style.display = on ? 'block' : 'none';
     }
 
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     //  Success state
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function showSuccess(email) {
       document.getElementById('success-email').textContent = email;
       document.getElementById('form-wrapper').style.display  = 'none';
@@ -868,9 +868,9 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     //  Resend email
-    // ─────────────────────────────────────────────
+    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     function handleResend(btn) {
       btn.disabled = true;
       btn.textContent = 'Email sent!';

@@ -1,0 +1,85 @@
+/* ═══════════════════════════════════════
+   superadmin-base.css — tokens, reset, body
+═══════════════════════════════════════ */
+:root {
+    --saffron: #FF6B00;
+    --saffron-light: #FF8C38;
+    --saffron-pale: rgba(255, 107, 0, .09);
+    --saffron-pale2: rgba(255, 107, 0, .05);
+    --navy: #0A1628;
+    --navy-mid: #162240;
+    --navy-pale: rgba(10, 22, 40, .07);
+    --purple: #6D28D9;
+    --purple-pale: rgba(109, 40, 217, .08);
+    --green: #138808;
+    --green-pale: rgba(19, 136, 8, .08);
+    --red: #DC2626;
+    --red-pale: rgba(220, 38, 38, .08);
+    --amber: #D97706;
+    --amber-pale: rgba(217, 119, 6, .08);
+    --blue: #2563EB;
+    --blue-pale: rgba(37, 99, 235, .08);
+    --bg: #F0EEF8;
+    --card: #FFFFFF;
+    --border: #E2DFF0;
+    --border-light: #EAE8F5;
+    --text: #1A1A1A;
+    --text-muted: #6B7280;
+    --text-light: #9CA3AF;
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, .08), 0 1px 4px rgba(0, 0, 0, .05);
+    --shadow-nav: 0 2px 20px rgba(0, 0, 0, .12);
+    --shadow-drop: 0 12px 40px rgba(0, 0, 0, .16), 0 2px 8px rgba(0, 0, 0, .08);
+    --shadow-hover: 0 8px 32px rgba(0, 0, 0, .12);
+    --transition: all .22s cubic-bezier(.4, 0, .2, 1);
+    --font-body: 'Inter', sans-serif;
+    --font-head: 'Outfit', sans-serif;
+    --font-logo: 'Playfair Display', serif;
+    --navbar-h: 64px;
+    --sidebar-w: 230px;
+    --sidebar-bg: #06082E;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* Tricolor */
+.tricolor-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 600;
+    display: flex;
+}
+
+.tc-saffron { flex: 1; background: #FF6B00; }
+.tc-white   { flex: 1; background: #fff; box-shadow: inset 0 0 0 .5px #E5E1DA; }
+.tc-green   { flex: 1; background: #138808; }
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

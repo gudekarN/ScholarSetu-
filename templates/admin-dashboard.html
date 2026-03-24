@@ -1,0 +1,917 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard â€” ScholarSetu</title>
+    <meta name="description"
+        content="College Admin Panel for ScholarSetu â€” manage notices, student data, and scholarship tracking." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin-panels.css') }}">
+</head>
+
+<body>
+
+    <!-- Tricolor bar -->
+    <div class="tricolor-bar" aria-hidden="true">
+        <div class="tc-saffron"></div>
+        <div class="tc-white"></div>
+        <div class="tc-green"></div>
+    </div>
+
+    <!-- â•â• NAVBAR â•â• -->
+    <nav class="navbar" role="navigation" aria-label="Admin navigation">
+        <a href="index.html" class="nav-logo" id="logo-link" aria-label="ScholarSetu home">
+            <div class="nav-logo-icon">ðŸŽ“</div>
+            <div class="nav-logo-texts">
+                <span class="nav-logo-text">ScholarSetu</span>
+                <span class="nav-logo-sub">Maharashtra Scholarship Platform</span>
+            </div>
+        </a>
+
+        <span class="nav-admin-badge" aria-label="Admin Panel">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            Admin Panel
+        </span>
+
+        <div class="nav-college-wrap">
+            <span class="nav-college-center">DY Patil College of Engineering</span>
+            <span class="nav-college-sub">Pune, Maharashtra</span>
+        </div>
+
+        <div class="nav-spacer"></div>
+
+        <!-- Profile -->
+        <div class="profile-wrap">
+            <div class="profile-circle" id="profile-btn" role="button" aria-haspopup="true" aria-expanded="false"
+                aria-controls="profile-dropdown" tabindex="0"
+                aria-label="Open admin profile menu">DA
+            </div>
+
+            <div class="profile-dropdown" id="profile-dropdown" role="menu" aria-label="Admin profile menu">
+                <div class="dropdown-header">
+                    <div class="dropdown-avatar">DA</div>
+                    <div>
+                        <div class="dropdown-name">Dr. Amruta Kulkarni</div>
+                        <div class="dropdown-role">Scholarship Coordinator</div>
+                    </div>
+                </div>
+                <nav class="dropdown-menu">
+                    <a href="#" class="dropdown-item" role="menuitem" id="dd-settings">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                        </svg>
+                        Settings
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="login.html" class="dropdown-item logout" role="menuitem" id="dd-logout">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        Logout
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <div class="page-body">
+
+        <!-- â•â• SIDEBAR â•â• -->
+        <aside class="sidebar" role="navigation" aria-label="Admin navigation">
+            <span class="sidebar-label">Management</span>
+
+            <button class="sidebar-btn active" id="sb-notice" aria-label="Notice Board">
+                <span class="sidebar-icon">ðŸ“‹</span> Notice Board
+            </button>
+            <button class="sidebar-btn" id="sb-students" aria-label="Student Data">
+                <span class="sidebar-icon">ðŸ‘¥</span> Student Data
+            </button>
+            <button class="sidebar-btn" id="sb-generate" aria-label="Generate Excel">
+                <span class="sidebar-icon">ðŸ“Š</span> Generate Excel
+            </button>
+            <button class="sidebar-btn" id="sb-upload" aria-label="Upload Excel">
+                <span class="sidebar-icon">ðŸ“¤</span> Upload Excel
+            </button>
+            <button class="sidebar-btn" id="sb-export" aria-label="Export Data">
+                <span class="sidebar-icon">ðŸ’¾</span> Export Data
+            </button>
+
+            <span class="sidebar-label" style="margin-top: 12px;">Communication</span>
+
+            <button class="sidebar-btn" id="sb-query" aria-label="Query Tracker">
+                <span class="sidebar-icon">ðŸ’¬</span> Query Tracker
+            </button>
+            <button class="sidebar-btn" id="sb-invite" aria-label="Invite Link">
+                <span class="sidebar-icon">ðŸ”—</span> Invite Link
+            </button>
+        </aside>
+
+        <!-- â•â• MAIN CONTENT â•â• -->
+        <main class="main-content">
+
+            <!-- â”€â”€â”€ TAB: NOTICE BOARD â”€â”€â”€ -->
+            <section class="tab-panel active" id="panel-notice" role="tabpanel">
+
+                <!-- Metrics strip -->
+                <div class="metrics-strip" role="region" aria-label="Key statistics">
+                    <div class="metric-card m-total">
+                        <div class="metric-value" id="m-total">312</div>
+                        <div class="metric-label">Total Students</div>
+                    </div>
+                    <div class="metric-card m-verified">
+                        <div class="metric-value" id="m-verified">298</div>
+                        <div class="metric-label">Verified</div>
+                    </div>
+                    <div class="metric-card m-pending">
+                        <div class="metric-value" id="m-pending">14</div>
+                        <div class="metric-label">Pending Verification</div>
+                    </div>
+                    <div class="metric-card m-notices">
+                        <div class="metric-value" id="m-notices">8</div>
+                        <div class="metric-label">Notices Posted</div>
+                    </div>
+                </div>
+
+                <!-- Section: Post Notice -->
+                <div class="section-head">
+                    <span class="head-icon">âœï¸</span>
+                    <h2>Post New Notice</h2>
+                </div>
+
+                <div class="post-notice-card">
+
+                    <!-- Type selector -->
+                    <div class="form-label" style="margin-bottom:10px;">Notice Type</div>
+                    <div class="type-selector" role="radiogroup" aria-label="Select notice type">
+                        <label class="type-radio-label t-general" id="lbl-general">
+                            <input type="radio" name="notice-type" value="general" id="nt-general" checked>
+                            <div class="type-card" id="card-general">
+                                <span class="type-card-icon">ðŸ””</span>
+                                <span class="type-card-label">General</span>
+                            </div>
+                        </label>
+                        <label class="type-radio-label t-high" id="lbl-high">
+                            <input type="radio" name="notice-type" value="high" id="nt-high">
+                            <div class="type-card" id="card-high">
+                                <span class="type-card-icon">ðŸ”´</span>
+                                <span class="type-card-label">High Priority</span>
+                            </div>
+                        </label>
+                        <label class="type-radio-label t-deadline" id="lbl-deadline">
+                            <input type="radio" name="notice-type" value="deadline" id="nt-deadline">
+                            <div class="type-card" id="card-deadline">
+                                <span class="type-card-icon">â°</span>
+                                <span class="type-card-label">Deadline</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Email info badge (shown for High Priority) -->
+                    <div class="info-badge" id="email-info-badge" role="alert" aria-live="polite">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                            <polyline points="22,6 12,13 2,6" />
+                        </svg>
+                        ðŸ“§ Email alert will be sent automatically to all <strong style="margin:0 4px;">312
+                            students</strong> when
+                        this notice is posted.
+                    </div>
+
+                    <!-- Title -->
+                    <div class="form-row">
+                        <label class="form-label" for="notice-title">Notice Title</label>
+                        <input class="form-input" type="text" id="notice-title"
+                            placeholder="e.g. MahaDBT Application Deadline Extended" maxlength="120">
+                    </div>
+
+                    <!-- Content -->
+                    <div class="form-row">
+                        <label class="form-label" for="notice-content">Notice Content</label>
+                        <textarea class="form-textarea" id="notice-content"
+                            placeholder="Write the full notice content here. Be clear and concise â€” students will see this on their dashboard."
+                            maxlength="2000"></textarea>
+                    </div>
+
+                    <!-- Deadline date picker â€” conditional -->
+                    <div class="form-row field-conditional" id="deadline-date-field">
+                        <label class="form-label" for="notice-deadline-date">Deadline Date</label>
+                        <input class="form-input" type="date" id="notice-deadline-date">
+                    </div>
+
+                    <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+                        <button class="btn-post-notice" id="post-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" style="width:16px;height:16px;">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                            Post Notice
+                        </button>
+                    </div>
+
+                    <!-- Success toast -->
+                    <div class="post-success-toast" id="post-success" role="status" aria-live="polite">
+                        âœ… Notice posted successfully! All students will see it on their dashboards.
+                    </div>
+
+                </div>
+
+                <!-- Section: All Notices -->
+                <div class="section-head">
+                    <span class="head-icon">ðŸ“‹</span>
+                    <h2>All Notices <span id="notices-count-badge"
+                            style="font-size:14px;font-weight:500;color:var(--text-muted);">(3 notices)</span></h2>
+                </div>
+
+                <div class="notices-stack" id="notices-list">
+
+                    <!-- Notice 1 â€” Deadline -->
+                    <article class="notice-card notice-deadline" id="adm-notice-1"
+                        aria-label="MahaDBT Application Deadline notice">
+                        <div class="notice-top">
+                            <div class="notice-meta">
+                                <span class="badge badge-deadline">â° Deadline</span>
+                                <span class="badge badge-email">ðŸ“§ Email Sent</span>
+                            </div>
+                            <span class="notice-date">Posted 2 days ago Â· 18 Mar 2026</span>
+                        </div>
+                        <div class="notice-title">MahaDBT Scholarship Application â€” Last date to apply</div>
+                        <div class="notice-preview">Reminder to all students: The MahaDBT online scholarship application
+                            portal will
+                            close in 12 days. Students must submit before the deadline to be eligible for the 2025â€“26
+                            academic year...
+                        </div>
+                        <div class="notice-footer">
+                            <div class="admin-read-receipt">
+                                <span class="read-count">89 / 312</span>
+                                <span class="read-of">students read</span>
+                                <div class="read-bar" aria-label="28.5% read rate">
+                                    <div class="read-bar-fill" style="width:28.5%; background: var(--saffron);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Notice 2 â€” High Priority -->
+                    <article class="notice-card notice-high" id="adm-notice-2"
+                        aria-label="Mandatory DBT Enabling Camp notice">
+                        <div class="notice-top">
+                            <div class="notice-meta">
+                                <span class="badge badge-high">ðŸ”´ High Priority</span>
+                                <span class="badge badge-email">ðŸ“§ Email Sent</span>
+                            </div>
+                            <span class="notice-date">Posted 4 days ago Â· 16 Mar 2026</span>
+                        </div>
+                        <div class="notice-title">Mandatory DBT Enabling Camp â€” Thursday 10 AM Room 204</div>
+                        <div class="notice-preview">All scholarship-eligible students must attend the DBT enabling
+                            session on
+                            Thursday, 27th March 2026 at 10:00 AM in Room 204. Bring Aadhaar card (original +
+                            photocopy), bank
+                            passbook, and your mobile...</div>
+                        <div class="notice-footer">
+                            <div class="admin-read-receipt">
+                                <span class="read-count">201 / 312</span>
+                                <span class="read-of">students read</span>
+                                <div class="read-bar" aria-label="64.4% read rate">
+                                    <div class="read-bar-fill" style="width:64.4%; background: var(--red);"></div>
+                                </div>
+                            </div>
+                            <div class="email-sent-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                    <polyline points="22,6 12,13 2,6" />
+                                </svg>
+                                Email sent to all 312 students
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Notice 3 â€” General -->
+                    <article class="notice-card notice-general" id="adm-notice-3"
+                        aria-label="Academic calendar update notice">
+                        <div class="notice-top">
+                            <div class="notice-meta">
+                                <span class="badge badge-general">ðŸ”” General</span>
+                            </div>
+                            <span class="notice-date">Posted 7 days ago Â· 14 Mar 2026</span>
+                        </div>
+                        <div class="notice-title">Academic calendar updated â€” check portal for revised exam dates</div>
+                        <div class="notice-preview">The Academic Calendar for 2025â€“26 has been revised. Unit tests for
+                            Semester IV
+                            rescheduled to April 7â€“11. End Semester Examinations start May 5, 2026. Students should plan
+                            scholarship
+                            activities accordingly...</div>
+                        <div class="notice-footer">
+                            <div class="admin-read-receipt">
+                                <span class="read-count">147 / 312</span>
+                                <span class="read-of">students read</span>
+                                <div class="read-bar" aria-label="47.1% read rate">
+                                    <div class="read-bar-fill" style="width:47.1%; background:#9CA3AF;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </section>
+
+            <!-- â”€â”€â”€ TAB: STUDENT DATA â”€â”€â”€ -->
+            <section class="tab-panel" id="panel-students" role="tabpanel">
+                <h1 class="panel-heading">Student Data</h1>
+                <p class="panel-sub">All registered student records. Search, filter, and edit individual entries.</p>
+
+                <!-- Toolbar -->
+                <div class="sd-toolbar">
+                    <div class="sd-search-wrap">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg>
+                        <input class="sd-search" id="sd-search" type="text"
+                            placeholder="Search by Name, PRN, Departmentâ€¦"
+                            aria-label="Search students">
+                    </div>
+                    <select class="sd-filter" id="sd-dept" aria-label="Filter by department">
+                        <option value="">All Departments</option>
+                        <option>Computer Engineering</option>
+                        <option>Mechanical</option>
+                        <option>Civil</option>
+                        <option>IT</option>
+                        <option>ENTC</option>
+                        <option>Electrical</option>
+                        <option>Electronics</option>
+                        <option>Other</option>
+                    </select>
+                    <select class="sd-filter" id="sd-year" aria-label="Filter by year">
+                        <option value="">All Years</option>
+                        <option>1st Year</option>
+                        <option>2nd Year</option>
+                        <option>3rd Year</option>
+                        <option>4th Year</option>
+                    </select>
+                    <span class="sd-count" id="sd-count">Showing 12 students</span>
+                </div>
+
+                <!-- Desktop Table -->
+                <div class="sd-table-wrap">
+                    <table class="sd-table" aria-label="Student records">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Full Name</th>
+                                <th>PRN</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Department</th>
+                                <th>Year</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="sd-tbody">
+                            <tr data-name="Rahul Sharma" data-prn="2021COMP0042" data-dept="Computer Engineering" data-year="3rd Year">
+                                <td>1</td><td>Rahul Sharma</td><td>2021COMP0042</td><td>rahul.sharma@dypcoe.edu</td><td>9876543210</td><td>Computer Engineering</td><td>3rd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Priya Mehta" data-prn="2021COMP0089" data-dept="Computer Engineering" data-year="3rd Year">
+                                <td>2</td><td>Priya Mehta</td><td>2021COMP0089</td><td>priya.mehta@dypcoe.edu</td><td>9123456780</td><td>Computer Engineering</td><td>3rd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Amit Kulkarni" data-prn="2021MECH0017" data-dept="Mechanical" data-year="2nd Year">
+                                <td>3</td><td>Amit Kulkarni</td><td>2021MECH0017</td><td>amit.kulkarni@dypcoe.edu</td><td>9988776655</td><td>Mechanical</td><td>2nd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Sneha Patil" data-prn="2022IT0056" data-dept="IT" data-year="2nd Year">
+                                <td>4</td><td>Sneha Patil</td><td>2022IT0056</td><td>sneha.patil@dypcoe.edu</td><td>9765432109</td><td>IT</td><td>2nd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Vikram Jadhav" data-prn="2021COMP0031" data-dept="Computer Engineering" data-year="3rd Year">
+                                <td>5</td><td>Vikram Jadhav</td><td>2021COMP0031</td><td>vikram.j@dypcoe.edu</td><td>9456781230</td><td>Computer Engineering</td><td>3rd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Anjali Desai" data-prn="2022ENTC0012" data-dept="ENTC" data-year="2nd Year">
+                                <td>6</td><td>Anjali Desai</td><td>2022ENTC0012</td><td>anjali.d@dypcoe.edu</td><td>9345678901</td><td>ENTC</td><td>2nd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Rohit More" data-prn="2020CIVIL0008" data-dept="Civil" data-year="4th Year">
+                                <td>7</td><td>Rohit More</td><td>2020CIVIL0008</td><td>rohit.m@dypcoe.edu</td><td>9234567890</td><td>Civil</td><td>4th Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Kavya Nair" data-prn="2022IT0078" data-dept="IT" data-year="2nd Year">
+                                <td>8</td><td>Kavya Nair</td><td>2022IT0078</td><td>kavya.n@dypcoe.edu</td><td>9876501234</td><td>IT</td><td>2nd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Siddharth Joshi" data-prn="2021MECH0044" data-dept="Mechanical" data-year="3rd Year">
+                                <td>9</td><td>Siddharth Joshi</td><td>2021MECH0044</td><td>sid.j@dypcoe.edu</td><td>9654321098</td><td>Mechanical</td><td>3rd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Meera Kulkarni" data-prn="2020COMP0005" data-dept="Computer Engineering" data-year="4th Year">
+                                <td>10</td><td>Meera Kulkarni</td><td>2020COMP0005</td><td>meera.k@dypcoe.edu</td><td>9543210987</td><td>Computer Engineering</td><td>4th Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Arjun Sawant" data-prn="2022ELEX0033" data-dept="Electronics" data-year="1st Year">
+                                <td>11</td><td>Arjun Sawant</td><td>2022ELEX0033</td><td>arjun.s@dypcoe.edu</td><td>9432109876</td><td>Electronics</td><td>1st Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                            <tr data-name="Pooja Bhosale" data-prn="2021CIVIL0022" data-dept="Civil" data-year="3rd Year">
+                                <td>12</td><td>Pooja Bhosale</td><td>2021CIVIL0022</td><td>pooja.b@dypcoe.edu</td><td>9321098765</td><td>Civil</td><td>3rd Year</td>
+                                <td><button class="btn-edit-row">âœï¸ Edit</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mobile Cards -->
+                <div class="sd-cards" id="sd-cards">
+                    <!-- Populated by JS on mobile -->
+                </div>
+            </section>
+
+            <!-- Edit Student Modal -->
+            <div class="modal-overlay" id="sd-modal" role="dialog" aria-modal="true" aria-labelledby="sd-modal-title">
+                <div class="modal-card">
+                    <div class="modal-header">
+                        <div class="modal-title" id="sd-modal-title">Edit Student</div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-grid">
+                            <div class="form-row"><label class="form-label" for="m-name">Full Name</label><input class="form-input" id="m-name" type="text"></div>
+                            <div class="form-row">
+                                <label class="form-label" for="m-prn">PRN</label>
+                                <input class="form-input" id="m-prn" type="text">
+                                <div class="prn-warn">âš  Edit PRN only when a correction is required. This updates the student's login key.</div>
+                            </div>
+                            <div class="form-row"><label class="form-label" for="m-email">Email</label><input class="form-input" id="m-email" type="email"></div>
+                            <div class="form-row"><label class="form-label" for="m-contact">Contact</label><input class="form-input" id="m-contact" type="tel"></div>
+                            <div class="form-row"><label class="form-label" for="m-dept">Department</label>
+                                <select class="form-select" id="m-dept">
+                                    <option>Computer Engineering</option>
+                                    <option>Mechanical</option>
+                                    <option>Civil</option>
+                                    <option>IT</option>
+                                    <option>ENTC</option>
+                                    <option>Electrical</option>
+                                    <option>Electronics</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="form-row"><label class="form-label" for="m-year">Year of Study</label>
+                                <select class="form-select" id="m-year">
+                                    <option>1st Year</option>
+                                    <option>2nd Year</option>
+                                    <option>3rd Year</option>
+                                    <option>4th Year</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-ghost" id="sd-modal-cancel">Cancel</button>
+                        <button class="btn-saffron" id="sd-modal-save">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- â”€â”€â”€ TAB: GENERATE EXCEL â”€â”€â”€ -->
+            <section class="tab-panel" id="panel-generate" role="tabpanel">
+                <h2 class="panel-heading">Generate Student Excel Sheet</h2>
+                <p class="panel-sub">PRN and Full Name are pre-filled and locked. Add the extra columns you need, then click Download.</p>
+
+                <div class="locked-pills">
+                    <span class="locked-pill">ðŸ”’ PRN</span>
+                    <span class="locked-pill">ðŸ”’ Full Name</span>
+                </div>
+                <p class="locked-note">These columns are auto-populated and cannot be moved or removed.</p>
+
+                <div class="col-builder-card">
+                    <div class="col-builder-title">Add Custom Columns</div>
+                    <div class="custom-col-list" id="gen-col-list"></div>
+                    <div class="col-add-row">
+                        <input class="col-add-input" id="gen-col-input" type="text"
+                            placeholder="e.g. Bank Account Number, Aadhaar Number, Father's Nameâ€¦">
+                        <button class="btn-add-col" id="gen-add-col-btn">Add Column +</button>
+                    </div>
+                </div>
+
+                <div class="col-builder-card">
+                    <div class="col-builder-title">Column Preview</div>
+                    <div class="preview-table-wrap" style="overflow-x:auto;">
+                        <table class="preview-table" id="gen-preview-table">
+                            <thead>
+                                <tr id="gen-preview-row">
+                                    <th class="locked-col">PRN ðŸ”’</th>
+                                    <th class="locked-col">Full Name ðŸ”’</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <p class="gen-info-bar">Each custom column header has a âœï¸ icon â€” click it to rename inline.</p>
+                </div>
+
+                <button class="btn-saffron" id="gen-download-btn"
+                    style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                        style="width:16px;height:16px;">
+                        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                    Download Excel Sheet
+                </button>
+                <p style="font-size:12.5px;color:var(--text-muted);margin-top:10px;">ðŸ“Ž Share this file with students. They fill in the empty columns and return it to you.</p>
+            </section>
+
+            <!-- â”€â”€â”€ TAB: UPLOAD EXCEL â”€â”€â”€ -->
+            <section class="tab-panel" id="panel-upload" role="tabpanel">
+                <h2 class="panel-heading">Upload Filled Student Excel</h2>
+                <p class="panel-sub">Upload the Excel sheet that students have filled. The system matches each row by PRN and updates records.</p>
+
+                <input type="file" id="upload-file-input" accept=".xlsx" style="display:none">
+
+                <div class="upload-zone" id="upload-zone" role="button" tabindex="0" aria-label="Upload .xlsx file">
+                    <div class="upload-zone-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                            <polyline points="16 16 12 12 8 16" />
+                            <line x1="12" y1="12" x2="12" y2="21" />
+                            <path d="M20.39 18.39A5 5 0 0018 9h-1.26A8 8 0 103 16.3" />
+                        </svg>
+                    </div>
+                    <div class="upload-zone-title" id="upload-zone-title">Drop your .xlsx file here</div>
+                    <div>or <span class="upload-zone-link">click to browse files</span></div>
+                    <div class="upload-zone-note">Accepted: .xlsx only</div>
+                </div>
+
+                <div class="upload-result" id="upload-result">
+                    <div class="upload-filename" id="upload-filename">Students_Filled_Apr2025.xlsx Â· 312 rows detected</div>
+                    <div class="upload-metrics">
+                        <div class="upload-metric-card green">
+                            <div class="upload-metric-val">287</div>
+                            <div class="upload-metric-label">âœ… Records Updated</div>
+                        </div>
+                        <div class="upload-metric-card amber">
+                            <div class="upload-metric-val">18</div>
+                            <div class="upload-metric-label">âš  PRNs Not Matched</div>
+                        </div>
+                        <div class="upload-metric-card gray">
+                            <div class="upload-metric-val">7</div>
+                            <div class="upload-metric-label">â­ Rows Skipped</div>
+                        </div>
+                    </div>
+                    <button class="unmatched-toggle" id="unmatched-toggle">View Unmatched PRNs â–¼</button>
+                    <div class="unmatched-list" id="unmatched-list">
+                        <span class="prn-chip">2022ENTC9901</span><span class="prn-chip">2019MECH0003</span>
+                        <span class="prn-chip">2023IT1102</span><span class="prn-chip">2020COMP9977</span>
+                        <span class="prn-chip">2022CIVIL0099</span><span class="prn-chip">2021ELEX0087</span>
+                        <span class="prn-chip">2019COMP0014</span><span class="prn-chip">2022MECH0201</span>
+                        <span class="prn-chip">2023IT0045</span><span class="prn-chip">2020CIVIL0099</span>
+                        <span class="prn-chip">2021ENTC0200</span><span class="prn-chip">2022ELEX0301</span>
+                        <span class="prn-chip">2020COMP0412</span><span class="prn-chip">2023MECH0019</span>
+                        <span class="prn-chip">2021IT0098</span><span class="prn-chip">2023CIVIL0405</span>
+                        <span class="prn-chip">2020ENTC0088</span><span class="prn-chip">2022COMP0500</span>
+                    </div>
+                    <div class="upload-action-row">
+                        <button class="btn-saffron" id="up-confirm-btn">Confirm &amp; Apply to Database</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- â”€â”€â”€ TAB: EXPORT DATA â”€â”€â”€ -->
+            <section class="tab-panel" id="panel-export" role="tabpanel">
+                <h2 class="panel-heading">Export Student Data</h2>
+                <p class="panel-sub">Download the complete or filtered student dataset in .xlsx format for submissions or record keeping.</p>
+
+                <div class="export-cards">
+                    <div class="export-card">
+                        <div class="export-card-icon">ðŸ“Š</div>
+                        <div class="export-card-body">
+                            <div class="export-card-title">Full Student Report</div>
+                            <div class="export-card-desc">All 12 student records with all available fields â€” PRN, name, email, contact, department, year, and any uploaded data.</div>
+                            <button class="btn-saffron" data-export-label="Full_Report">Export as .xlsx</button>
+                        </div>
+                    </div>
+                    <div class="export-card">
+                        <div class="export-card-icon">ðŸ—‚ï¸</div>
+                        <div class="export-card-body">
+                            <div class="export-card-title">Export by Department</div>
+                            <div class="export-card-desc">Download records for a specific department only.</div>
+                            <select class="sd-filter" id="exp-dept-sel" style="margin-bottom:12px;display:block;">
+                                <option>Computer Engineering</option>
+                                <option>Mechanical</option>
+                                <option>Civil</option>
+                                <option>IT</option>
+                                <option>ENTC</option>
+                                <option>Electrical</option>
+                                <option>Electronics</option>
+                                <option>Other</option>
+                            </select>
+                            <button class="btn-saffron" id="exp-dept-btn">Export Filtered .xlsx</button>
+                        </div>
+                    </div>
+                    <div class="export-card">
+                        <div class="export-card-icon">ðŸŽ“</div>
+                        <div class="export-card-body">
+                            <div class="export-card-title">Export by Year of Study</div>
+                            <div class="export-card-desc">Download records for a specific year group only.</div>
+                            <select class="sd-filter" id="exp-year-sel" style="margin-bottom:12px;display:block;">
+                                <option>1st Year</option>
+                                <option>2nd Year</option>
+                                <option>3rd Year</option>
+                                <option>4th Year</option>
+                            </select>
+                            <button class="btn-saffron" id="exp-year-btn">Export Filtered .xlsx</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="export-info-bar">ðŸ“ All exports include data as it currently appears in the Student Data tab.</div>
+            </section>
+
+            <!-- â”€â”€â”€ TAB: QUERY TRACKER â”€â”€â”€ -->
+            <section class="tab-panel" id="panel-query" role="tabpanel">
+
+                <div class="section-head">
+                    <span class="head-icon">ðŸ’¬</span>
+                    <h2>Query Tracker <span id="qt-total-badge" style="font-size:14px;font-weight:500;color:var(--text-muted);">(14 questions)</span></h2>
+                </div>
+
+                <div class="qt-filter-bar" role="tablist" aria-label="Filter queries">
+                    <button class="qt-pill active" id="qt-filter-all" role="tab" aria-selected="true">
+                        All <span class="qt-count" id="qt-cnt-all">14</span>
+                    </button>
+                    <button class="qt-pill" id="qt-filter-unanswered" role="tab" aria-selected="false">
+                        â“ Unanswered <span class="qt-count" id="qt-cnt-unanswered">6</span>
+                    </button>
+                    <button class="qt-pill" id="qt-filter-replied" role="tab" aria-selected="false">
+                        âœ… Replied <span class="qt-count" id="qt-cnt-replied">8</span>
+                    </button>
+                </div>
+
+                <div class="qt-stack" id="qt-stack">
+
+                    <!-- Q1 â€” Unanswered (expanded by default) -->
+                    <article class="qt-card open" id="qtc-1" data-status="unanswered" aria-label="Query from Priya Mehta">
+                        <div class="qt-card-header" role="button" tabindex="0">
+                            <div class="qt-card-top">
+                                <div class="qt-student-info">
+                                    <div class="qt-avatar">PM</div>
+                                    <div>
+                                        <div class="qt-student-name">Priya Mehta</div>
+                                        <div class="qt-student-dept">CompE Â· 3rd Year</div>
+                                    </div>
+                                </div>
+                                <div class="qt-badges">
+                                    <span class="qt-badge-unanswered">â³ Unanswered</span>
+                                    <span class="qt-posted-date">3 days ago</span>
+                                    <svg class="qt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                        <polyline points="6 9 12 15 18 9" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="qt-question">I submitted my application but haven't received the first installment after 4 months. What should I do?</div>
+                        </div>
+                        <div class="qt-reply-body">
+                            <div class="qt-reply-label">Admin Reply</div>
+                            <textarea class="qt-reply-textarea" id="qtreply-1" placeholder="Type your official reply here..."></textarea>
+                            <div class="qt-reply-actions">
+                                <span class="qt-contact">Student contact: <a href="mailto:priya.mehta@college.edu" id="qt-email-1">priya.mehta@college.edu</a></span>
+                                <button class="btn-post-reply" id="qtbtn-1" disabled
+                                    data-qt-reply="qtc-1" data-qt-ta="qtreply-1"
+                                    data-qt-initials="PM" data-qt-name="Priya Mehta"
+                                    data-qt-dept="CompE Â· 3rd Year" data-qt-email="priya.mehta@college.edu">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:13px;height:13px;">
+                                        <line x1="22" y1="2" x2="11" y2="13" />
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                    </svg>
+                                    Post Reply
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Q2 â€” Replied -->
+                    <article class="qt-card qt-replied" id="qtc-2" data-status="replied" aria-label="Query from Amit Kulkarni">
+                        <div class="qt-card-header" role="button" tabindex="0">
+                            <div class="qt-card-top">
+                                <div class="qt-student-info">
+                                    <div class="qt-avatar">AK</div>
+                                    <div>
+                                        <div class="qt-student-name">Amit Kulkarni</div>
+                                        <div class="qt-student-dept">Mech Â· 2nd Year</div>
+                                    </div>
+                                </div>
+                                <div class="qt-badges">
+                                    <span class="qt-badge-replied">âœ… Replied</span>
+                                    <span class="qt-posted-date">5 days ago</span>
+                                    <svg class="qt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                        <polyline points="6 9 12 15 18 9" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="qt-question">Is the EBC scholarship available for branch changers in second year?</div>
+                        </div>
+                        <div class="qt-reply-body">
+                            <div class="qt-reply-block" id="qtreplyblock-2">
+                                <div class="qt-reply-block-label">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12" /></svg>
+                                    Official Admin Reply
+                                </div>
+                                <div class="qt-reply-text" id="qtreplytext-2">Yes, EBC scholarship is available regardless of branch change provided income criteria is met. Please apply on MahaDBT portal with latest bonafide certificate.</div>
+                            </div>
+                            <textarea class="qt-reply-textarea" id="qtreply-2" style="display:none;"></textarea>
+                            <div class="qt-reply-actions">
+                                <div class="qt-replied-meta">
+                                    <span class="replied-tick">âœ…</span>
+                                    Replied 1 day ago Â· <a href="mailto:amit.kulkarni@college.edu" style="color:var(--blue);font-weight:600;text-decoration:none;font-size:11.5px;">amit.kulkarni@college.edu</a>
+                                </div>
+                                <div style="display:flex;gap:8px;align-items:center;">
+                                    <button class="btn-edit-reply" id="qtbtn-2"
+                                        data-qt-edit="qtc-2" data-qt-ta="qtreply-2"
+                                        data-qt-block="qtreplyblock-2" data-qt-text="qtreplytext-2">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px;"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                                        Edit Reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Q3 â€” Unanswered -->
+                    <article class="qt-card open" id="qtc-3" data-status="unanswered" aria-label="Query from Sneha Patil">
+                        <div class="qt-card-header" role="button" tabindex="0">
+                            <div class="qt-card-top">
+                                <div class="qt-student-info">
+                                    <div class="qt-avatar">SP</div>
+                                    <div>
+                                        <div class="qt-student-name">Sneha Patil</div>
+                                        <div class="qt-student-dept">IT Â· 2nd Year</div>
+                                    </div>
+                                </div>
+                                <div class="qt-badges">
+                                    <span class="qt-badge-unanswered">â³ Unanswered</span>
+                                    <span class="qt-posted-date">1 day ago</span>
+                                    <svg class="qt-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                        <polyline points="6 9 12 15 18 9" />
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="qt-question">What income certificate format is accepted? The CA certificate or tehsildar certificate?</div>
+                        </div>
+                        <div class="qt-reply-body">
+                            <div class="qt-reply-label">Admin Reply</div>
+                            <textarea class="qt-reply-textarea" id="qtreply-3" placeholder="Type your official reply here..."></textarea>
+                            <div class="qt-reply-actions">
+                                <span class="qt-contact">Student contact: <a href="mailto:sneha.patil@college.edu" id="qt-email-3">sneha.patil@college.edu</a></span>
+                                <button class="btn-post-reply" id="qtbtn-3" disabled
+                                    data-qt-reply="qtc-3" data-qt-ta="qtreply-3"
+                                    data-qt-initials="SP" data-qt-name="Sneha Patil"
+                                    data-qt-dept="IT Â· 2nd Year" data-qt-email="sneha.patil@college.edu">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:13px;height:13px;">
+                                        <line x1="22" y1="2" x2="11" y2="13" />
+                                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                    </svg>
+                                    Post Reply
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Empty state -->
+                <div class="qt-empty" id="qt-empty">
+                    <div class="qe-icon">ðŸŽ‰</div>
+                    <p>No questions match this filter right now.</p>
+                </div>
+
+            </section>
+
+            <!-- â”€â”€â”€ TAB: INVITE LINK â”€â”€â”€ -->
+            <section class="tab-panel" id="panel-invite" role="tabpanel">
+                <h2 class="panel-heading">Student Invite Link</h2>
+                <p class="panel-sub">Share this link with students to let them register on ScholarSetu. One link is valid for the entire academic year.</p>
+
+                <div class="invite-link-card">
+                    <div class="active-link-label">ðŸŸ¢ Active Link Â· Academic Year 2025â€“26</div>
+                    <div class="invite-link-row">
+                        <input class="invite-link-input" id="invite-link-val" type="text" readonly
+                            value="https://scholarsetu.in/join/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+                        <button class="btn-saffron" id="invite-copy-btn" style="display:inline-flex;align-items:center;gap:6px;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:14px;height:14px;">
+                                <rect x="9" y="9" width="13" height="13" rx="2" />
+                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+                            </svg>
+                            Copy Link
+                        </button>
+                    </div>
+                    <div class="invite-stats">
+                        <span class="invite-stat-chip">ðŸ‘¥ 89 students registered via this link</span>
+                        <span class="invite-stat-chip">ðŸ“… Valid until: 31 March 2026</span>
+                        <span class="invite-stat-chip" id="invite-created-chip">ðŸ”— Created: 1 April 2025</span>
+                    </div>
+
+                    <div class="qr-placeholder">
+                        <div class="qr-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                                <rect x="3" y="3" width="7" height="7" />
+                                <rect x="14" y="3" width="7" height="7" />
+                                <rect x="3" y="14" width="7" height="7" />
+                                <rect x="5" y="5" width="3" height="3" fill="currentColor" stroke="none" />
+                                <rect x="16" y="5" width="3" height="3" fill="currentColor" stroke="none" />
+                                <rect x="5" y="16" width="3" height="3" fill="currentColor" stroke="none" />
+                                <line x1="14" y1="14" x2="14" y2="14" />
+                                <line x1="17" y1="14" x2="21" y2="14" />
+                                <line x1="14" y1="17" x2="14" y2="21" />
+                                <line x1="17" y1="17" x2="21" y2="17" />
+                            </svg>
+                            QR Code â€” Display on notice board
+                        </div>
+                        <button class="btn-ghost" id="qr-download-btn">Download QR Code</button>
+                    </div>
+
+                    <div class="invite-divider"></div>
+
+                    <div class="amber-warn">âš  Regenerating will immediately invalidate the current link. Students who haven't registered yet won't be able to use the old link.</div>
+                    <button class="btn-red-ghost" id="invite-regen-btn">Regenerate New Link</button>
+                </div>
+
+                <div class="share-card">
+                    <div class="share-card-title">How to share</div>
+                    <div class="share-row"><span class="share-row-icon">ðŸ’¬</span> Share the link directly in your class WhatsApp groups</div>
+                    <div class="share-row"><span class="share-row-icon">ðŸ“‹</span> Print the QR code and display it on the college notice board</div>
+                    <div class="share-row"><span class="share-row-icon">ðŸ“§</span> Email the link to new students via the college office</div>
+                </div>
+            </section>
+
+            <!-- Regenerate Confirm Modal -->
+            <div class="modal-overlay" id="regen-modal" role="dialog" aria-modal="true" aria-labelledby="regen-modal-title">
+                <div class="modal-card" style="max-width:420px;">
+                    <div class="modal-header">
+                        <div class="modal-title" id="regen-modal-title">Regenerate Invite Link?</div>
+                    </div>
+                    <div class="modal-body">
+                        <p style="font-size:13.5px;color:var(--text-muted);line-height:1.6;">The current link will stop working immediately. A new link will be generated. All previously registered students remain unaffected.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn-ghost" id="regen-cancel-btn">Cancel</button>
+                        <button class="btn-red-ghost" id="regen-confirm-btn">Yes, Regenerate</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- â•â• BOTTOM TAB BAR (mobile) â•â• -->
+    <nav class="bottom-tab-bar" role="tablist" aria-label="Admin navigation (mobile)">
+        <button class="bottom-tab-btn active" id="btb-notice" aria-label="Notice Board">
+            <span class="btb-icon">ðŸ“‹</span> Notices
+        </button>
+        <button class="bottom-tab-btn" id="btb-students" aria-label="Students">
+            <span class="btb-icon">ðŸ‘¥</span> Students
+        </button>
+        <button class="bottom-tab-btn" id="btb-generate" aria-label="Generate Excel">
+            <span class="btb-icon">ðŸ“Š</span> Excel
+        </button>
+        <button class="bottom-tab-btn" id="btb-upload" aria-label="Upload">
+            <span class="btb-icon">ðŸ“¤</span> Upload
+        </button>
+        <button class="bottom-tab-btn" id="btb-export" aria-label="Export">
+            <span class="btb-icon">ðŸ’¾</span> Export
+        </button>
+        <button class="bottom-tab-btn" id="btb-query" aria-label="Queries">
+            <span class="btb-icon">ðŸ’¬</span> Queries
+        </button>
+        <button class="bottom-tab-btn" id="btb-invite" aria-label="Invite">
+            <span class="btb-icon">ðŸ”—</span> Invite
+        </button>
+    </nav>
+
+    <script src="{{ url_for('static', filename='js/admin-main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin-navbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin-notices.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin-queries.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin-students.js') }}"></script>
+</body>
+
+</html>

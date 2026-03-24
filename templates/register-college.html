@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register Your College — ScholarSetu</title>
+  <title>Register Your College â€” ScholarSetu</title>
   <meta name="description" content="Register your college on ScholarSetu to help students discover and apply for Maharashtra scholarships." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    /* ── Tokens ── */
+    /* â”€â”€ Tokens â”€â”€ */
     :root {
       --saffron: #FF6B00;
       --saffron-light: #FF8C38;
@@ -51,7 +51,7 @@
       overflow-x: hidden;
     }
 
-    /* ── Tricolor background ── */
+    /* â”€â”€ Tricolor background â”€â”€ */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0;
@@ -74,7 +74,7 @@
       pointer-events: none; z-index: 0;
     }
 
-    /* ── Tricolor stripe at top ── */
+    /* â”€â”€ Tricolor stripe at top â”€â”€ */
     .tricolor-bar {
       position: fixed; top: 0; left: 0; right: 0;
       height: 4px; z-index: 100;
@@ -84,10 +84,10 @@
     .tc-white   { flex: 1; background: #ffffff; }
     .tc-green   { flex: 1; background: #138808; }
 
-    /* ── Page wrapper ── */
+    /* â”€â”€ Page wrapper â”€â”€ */
     .page-wrap { position: relative; z-index: 1; width: 100%; max-width: 480px; }
 
-    /* ── Back to home ── */
+    /* â”€â”€ Back to home â”€â”€ */
     .back-link {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 13px; font-weight: 500; color: var(--text-muted);
@@ -97,7 +97,7 @@
     .back-link:hover { color: var(--navy); }
     .back-link svg { width: 14px; height: 14px; }
 
-    /* ── Card ── */
+    /* â”€â”€ Card â”€â”€ */
     .card {
       background: var(--card);
       border-radius: 20px;
@@ -106,7 +106,7 @@
       border: 1px solid var(--border);
     }
 
-    /* ── Logo ── */
+    /* â”€â”€ Logo â”€â”€ */
     .card-logo {
       display: flex; align-items: center; gap: 10px;
       margin-bottom: 8px;
@@ -134,7 +134,7 @@
     }
     .already-note a:hover { opacity: .75; }
 
-    /* ── Progress Steps ── */
+    /* â”€â”€ Progress Steps â”€â”€ */
     .progress-wrap { margin-bottom: 32px; }
     .progress-steps {
       display: flex; align-items: center;
@@ -176,7 +176,7 @@
     }
     .step-connector.done { background: var(--green); }
 
-    /* ── Form heading ── */
+    /* â”€â”€ Form heading â”€â”€ */
     .form-heading { margin-bottom: 24px; }
     .form-heading h1 {
       font-family: var(--font-head); font-size: 22px;
@@ -184,7 +184,7 @@
     }
     .form-heading p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
 
-    /* ── Form ── */
+    /* â”€â”€ Form â”€â”€ */
     .form-group { margin-bottom: 18px; }
     label {
       display: block; font-size: 13px; font-weight: 600;
@@ -270,7 +270,7 @@
     /* Two col */
     .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 
-    /* ── Buttons ── */
+    /* â”€â”€ Buttons â”€â”€ */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 12px 22px; border-radius: var(--radius-sm);
@@ -302,11 +302,11 @@
     .form-actions .btn-ghost { flex: 0 0 auto; }
     .form-actions .btn-saffron { flex: 1; }
 
-    /* ── Step panels ── */
+    /* â”€â”€ Step panels â”€â”€ */
     .step-panel { display: none; }
     .step-panel.active { display: block; }
 
-    /* ── Step 3 Success ── */
+    /* â”€â”€ Step 3 Success â”€â”€ */
     .success-screen { text-align: center; padding: 16px 0 8px; }
     .success-icon {
       width: 84px; height: 84px;
@@ -342,14 +342,14 @@
     .success-detail-row:last-child { margin-bottom: 0; }
     .success-detail-row svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; margin-top: 1px; }
 
-    /* ── Slide animation ── */
+    /* â”€â”€ Slide animation â”€â”€ */
     @keyframes slide-in {
       from { opacity: 0; transform: translateX(20px); }
       to   { opacity: 1; transform: translateX(0); }
     }
     .step-panel.active { animation: slide-in .3s ease forwards; }
 
-    /* ── Footer note ── */
+    /* â”€â”€ Footer note â”€â”€ */
     .page-footer {
       margin-top: 20px; text-align: center;
       font-size: 12px; color: var(--text-light);
@@ -383,12 +383,12 @@
 
       <!-- Logo -->
       <div class="card-logo">
-        <div class="logo-icon">🎓</div>
+        <div class="logo-icon">ðŸŽ“</div>
         <span class="logo-text">ScholarSetu</span>
       </div>
 
       <!-- Already registered note -->
-      <p class="already-note">Already registered? <a href="login.html">Log in here →</a></p>
+      <p class="already-note">Already registered? <a href="login.html">Log in here â†’</a></p>
 
       <!-- Progress indicator -->
       <div class="progress-wrap" id="progress-wrap">
@@ -410,7 +410,7 @@
         </div>
       </div>
 
-      <!-- ══════ STEP 1 ══════ -->
+      <!-- â•â•â•â•â•â• STEP 1 â•â•â•â•â•â• -->
       <div class="step-panel active" id="step-1">
         <div class="form-heading">
           <h1>College Details</h1>
@@ -511,7 +511,7 @@
         </form>
       </div><!-- /step-1 -->
 
-      <!-- ══════ STEP 2 ══════ -->
+      <!-- â•â•â•â•â•â• STEP 2 â•â•â•â•â•â• -->
       <div class="step-panel" id="step-2">
         <div class="form-heading">
           <h1>Admin Account</h1>
@@ -595,7 +595,7 @@
         </form>
       </div><!-- /step-2 -->
 
-      <!-- ══════ STEP 3 — Success ══════ -->
+      <!-- â•â•â•â•â•â• STEP 3 â€” Success â•â•â•â•â•â• -->
       <div class="step-panel" id="step-3">
         <div class="success-screen">
           <div class="success-icon">
@@ -621,17 +621,17 @@
             </div>
           </div>
 
-          <a href="login.html" class="btn btn-green btn-full" id="btn-go-login">Go to Login →</a>
+          <a href="login.html" class="btn btn-green btn-full" id="btn-go-login">Go to Login â†’</a>
         </div>
       </div><!-- /step-3 -->
 
     </div><!-- /card -->
 
-    <p class="page-footer">ScholarSetu · Maharashtra Scholarship Platform · ₹0 cost to colleges</p>
+    <p class="page-footer">ScholarSetu Â· Maharashtra Scholarship Platform Â· â‚¹0 cost to colleges</p>
   </div>
 
   <script>
-    // ── Step management ──
+    // â”€â”€ Step management â”€â”€
     let currentStep = 1;
 
     function goToStep(n) {
@@ -666,7 +666,7 @@
       }
     }
 
-    // ── Password toggle ──
+    // â”€â”€ Password toggle â”€â”€
     function togglePw(id, btn) {
       const input = document.getElementById(id);
       const isText = input.type === 'text';
@@ -677,7 +677,7 @@
         : `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
     }
 
-    // ── Password strength ──
+    // â”€â”€ Password strength â”€â”€
     function checkStrength(val) {
       const wrap = document.getElementById('strength-wrap');
       if (!val) { wrap.style.display = 'none'; return; }
@@ -700,7 +700,7 @@
       lbl.style.color = colors[score - 1] || 'var(--text-light)';
     }
 
-    // ── Inline error helpers ──
+    // â”€â”€ Inline error helpers â”€â”€
     function showErr(id, show) {
       const el = document.getElementById('err-' + id);
       const input = document.getElementById(id);
@@ -710,7 +710,7 @@
     }
     function clearErrors(ids) { ids.forEach(id => showErr(id, false)); }
 
-    // ── Clear error on input ──
+    // â”€â”€ Clear error on input â”€â”€
     ['collegeName','aisheCode','secretKey','district','collegeType',
      'adminName','adminEmail','adminPassword','confirmPassword','adminPhone']
     .forEach(id => {
@@ -719,7 +719,7 @@
       if (el) el.addEventListener('change', () => showErr(id, false));
     });
 
-    // ── Step 1 validation ──
+    // â”€â”€ Step 1 validation â”€â”€
     document.getElementById('form-1').addEventListener('submit', function(e) {
       e.preventDefault();
       let valid = true;
@@ -741,7 +741,7 @@
       if (valid) goToStep(2);
     });
 
-    // ── Step 2 validation ──
+    // â”€â”€ Step 2 validation â”€â”€
     document.getElementById('form-2').addEventListener('submit', function(e) {
       e.preventDefault();
       let valid = true;
@@ -768,7 +768,7 @@
       if (valid) goToStep(3);
     });
 
-    // ── AISHE auto-format ──
+    // â”€â”€ AISHE auto-format â”€â”€
     document.getElementById('aisheCode').addEventListener('input', function() {
       let v = this.value.toUpperCase().replace(/[^C0-9-]/g, '');
       if (v.length === 1 && v !== 'C') v = 'C-' + v;
@@ -776,7 +776,7 @@
       this.value = v;
     });
 
-    // ── Phone formatter ──
+    // â”€â”€ Phone formatter â”€â”€
     document.getElementById('adminPhone').addEventListener('input', function() {
       let v = this.value.replace(/[^\d+]/g, '');
       if (v.startsWith('+91')) v = '+91 ' + v.slice(3).replace(/(\d{5})(\d{5})/, '$1 $2');

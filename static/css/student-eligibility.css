@@ -1,0 +1,361 @@
+/* ══════════════════════════════════════════
+   ELIGIBILITY CHECKER
+══════════════════════════════════════════ */
+.elig-intro {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+    max-width: 700px;
+}
+
+.elig-form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: 28px 28px 24px;
+    margin-bottom: 28px;
+}
+
+.elig-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 32px;
+}
+
+.elig-col-head {
+    font-family: var(--font-head);
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.elig-field {
+    margin-bottom: 16px;
+}
+
+.elig-label {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    letter-spacing: .01em;
+}
+
+.elig-select {
+    width: 100%;
+    padding: 10px 36px 10px 13px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2.5' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 11px center;
+    background-size: 16px;
+}
+
+.elig-select:focus {
+    outline: none;
+    border-color: var(--saffron);
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, .12);
+    background-color: #fff;
+}
+
+.elig-select:hover {
+    border-color: var(--saffron);
+}
+
+.elig-submit-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--saffron), #FF3E00);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 18px rgba(255, 107, 0, .32);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: .01em;
+}
+
+.elig-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(255, 107, 0, .42);
+}
+
+.elig-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Results section */
+.elig-results {
+    display: none;
+    animation: fadeUp .3s ease;
+}
+
+.elig-results.visible {
+    display: block;
+}
+
+.elig-results-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.elig-results-count {
+    font-family: var(--font-head);
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+}
+
+.elig-results-count span {
+    color: var(--green);
+}
+
+.elig-reset-btn {
+    margin-left: auto;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 7px 16px;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.elig-reset-btn:hover {
+    border-color: var(--saffron);
+    color: var(--saffron);
+}
+
+.elig-cards-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+/* Result card */
+.result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    padding: 22px 24px;
+    transition: var(--transition);
+    border-left: 4px solid var(--border);
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, .1);
+}
+
+.result-card.eligible {
+    border-left-color: var(--green);
+}
+
+.result-card.near-miss {
+    border-left-color: #D97706;
+}
+
+.result-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.result-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.badge-eligible {
+    background: var(--green-pale);
+    color: var(--green);
+    border: 1px solid rgba(19, 136, 8, .2);
+}
+
+.badge-near-miss {
+    background: rgba(217, 119, 6, .1);
+    color: #D97706;
+    border: 1px solid rgba(217, 119, 6, .25);
+}
+
+.result-benefit-pill {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--saffron);
+    background: var(--saffron-pale);
+    border: 1px solid rgba(255, 107, 0, .2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.result-scheme-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.35;
+    margin-bottom: 5px;
+}
+
+.result-dept {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.near-miss-note {
+    font-size: 12.5px;
+    color: #92400E;
+    background: rgba(217, 119, 6, .08);
+    border: 1px solid rgba(217, 119, 6, .2);
+    border-radius: var(--radius-xs);
+    padding: 9px 12px;
+    margin-bottom: 14px;
+    line-height: 1.5;
+}
+
+.result-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.result-btn-ghost {
+    padding: 9px 18px;
+    border-radius: var(--radius-xs);
+    border: 1.5px solid var(--border);
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.result-btn-ghost:hover {
+    border-color: var(--navy);
+    color: var(--navy);
+    background: rgba(0, 0, 0, .03);
+}
+
+.result-btn-primary {
+    padding: 9px 18px;
+    border-radius: var(--radius-xs);
+    border: none;
+    background: linear-gradient(135deg, var(--saffron), #FF3E00);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 3px 10px rgba(255, 107, 0, .28);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.result-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 16px rgba(255, 107, 0, .38);
+}
+
+/* Docs modal */
+.docs-modal-box {
+    max-width: 480px;
+}
+
+.docs-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 8px;
+}
+
+.docs-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.5;
+    padding: 10px 12px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xs);
+    background: var(--bg);
+}
+
+.docs-list li .doc-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.docs-note {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: 14px;
+    line-height: 1.6;
+}
+
+/* Eligibility responsive */
+@media (max-width: 740px) {
+    .elig-form-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .elig-form-card {
+        padding: 20px 16px 18px;
+    }
+}

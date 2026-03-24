@@ -1,0 +1,1617 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard â€” ScholarSetu</title>
+    <meta name="description"
+        content="Your personal scholarship dashboard on ScholarSetu â€” track DBT status, notices, and scholarship applications." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student-base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student-layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student-components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student-notices.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student-story.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student-eligibility.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student-schemes.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/student-qa.css') }}">
+</head>
+
+<body>
+
+    <!-- Tricolor bar -->
+    <div class="tricolor-bar" aria-hidden="true">
+        <div class="tc-saffron"></div>
+        <div class="tc-white"></div>
+        <div class="tc-green"></div>
+    </div>
+
+    <!-- â•â• NAVBAR â•â• -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <a href="index.html" class="nav-logo" id="logo-link" aria-label="ScholarSetu home">
+            <div class="nav-logo-icon">ðŸŽ“</div>
+            <div class="nav-logo-texts">
+                <span class="nav-logo-text">ScholarSetu</span>
+                <span class="nav-logo-sub">Maharashtra Scholarship Platform</span>
+            </div>
+        </a>
+
+        <div class="nav-spacer"></div>
+
+        <!-- College badge -->
+        <div class="nav-college-badge" aria-label="Your college">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            VJTI Mumbai
+        </div>
+
+        <!-- Profile -->
+        <div class="profile-wrap">
+            <div class="profile-circle" id="profile-btn" role="button" aria-haspopup="true" aria-expanded="false"
+                aria-controls="profile-dropdown" tabindex="0" 
+                 aria-label="Open profile menu">RS
+            </div>
+
+            <div class="profile-dropdown" id="profile-dropdown" role="menu" aria-label="Profile menu">
+                <div class="dropdown-header">
+                    <div class="dropdown-avatar">RS</div>
+                    <div>
+                        <div class="dropdown-name">Rahul Sharma</div>
+                        <div class="dropdown-prn">PRN: 2021COMP0042</div>
+                    </div>
+                </div>
+                <nav class="dropdown-menu">
+                    <a href="#" class="dropdown-item" role="menuitem" id="dd-docs">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                            <polyline points="14 2 14 8 20 8" />
+                            <line x1="16" y1="13" x2="8" y2="13" />
+                            <line x1="16" y1="17" x2="8" y2="17" />
+                            <polyline points="10 9 9 9 8 9" />
+                        </svg>
+                        Important Documents
+                    </a>
+                    <a href="index.html" class="dropdown-item" role="menuitem" id="dd-about">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
+                        About Us
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="login.html" class="dropdown-item logout" role="menuitem" id="dd-logout">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                        Logout
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <!-- â•â• TAB BAR â•â• -->
+    <div class="tab-bar" role="tablist" aria-label="Dashboard sections">
+        <button class="tab-btn active" id="tab-home" role="tab" aria-selected="true" aria-controls="panel-home"
+            data-tab="home"><span class="tab-icon">ðŸ </span> Home</button>
+        <button class="tab-btn" id="tab-dbt-status" role="tab" aria-selected="false" aria-controls="panel-dbt-status"
+            data-tab="dbt-status"><span class="tab-icon">ðŸ“‹</span> Check DBT Status</button>
+        <button class="tab-btn" id="tab-enable-dbt" role="tab" aria-selected="false" aria-controls="panel-enable-dbt"
+            data-tab="enable-dbt"><span class="tab-icon">âš¡</span> Enable DBT</button>
+        <button class="tab-btn" id="tab-eligibility" role="tab" aria-selected="false" aria-controls="panel-eligibility"
+            data-tab="eligibility"><span class="tab-icon">âœ…</span> Eligibility</button>
+        <button class="tab-btn" id="tab-apply-guide" role="tab" aria-selected="false" aria-controls="panel-apply-guide"
+            data-tab="apply-guide"><span class="tab-icon">ðŸ“–</span> Apply Guide</button>
+        <button class="tab-btn" id="tab-qa" role="tab" aria-selected="false" aria-controls="panel-qa"
+            data-tab="qa"><span class="tab-icon">ðŸ’¬</span> Q&amp;A</button>
+        <button class="tab-btn" id="tab-grievance" role="tab" aria-selected="false" aria-controls="panel-grievance"
+            data-tab="grievance"><span class="tab-icon">ðŸ›¡ï¸</span> Grievance</button>
+    </div>
+
+    <!-- â•â• MAIN CONTENT â•â• -->
+    <main class="main-content">
+
+        <!-- â”€â”€ TAB: HOME â”€â”€ -->
+        <section class="tab-panel active" id="panel-home" role="tabpanel" aria-labelledby="tab-home">
+
+            <!-- SECTION A â€” Notice Board -->
+            <div class="section-head">
+                <span class="head-icon">ðŸ””</span>
+                <h2>Notice Board</h2>
+            </div>
+
+            <div class="notices-stack">
+
+                <!-- Notice 1: Deadline / Pinned -->
+                <article class="notice-card notice-deadline" id="notice-1" data-modal="modal-notice-1"
+                    aria-label="Open full notice â€” MahaDBT Scholarship Application deadline">
+                    <div class="notice-top">
+                        <div class="notice-meta">
+                            <span class="badge badge-deadline">ðŸ“Œ Deadline</span>
+                            <span class="badge badge-pinned">Pinned</span>
+                        </div>
+                        <span class="notice-date">Posted 18 Mar 2026</span>
+                    </div>
+
+                    <div class="notice-title">MahaDBT Scholarship Application â€” Last date to apply</div>
+
+                    <div class="countdown-wrap">
+                        <span class="countdown-label">Closes in:</span>
+                        <div class="countdown-units">
+                            <div class="cd-unit"><span class="cd-num" id="cd-days">12</span><span
+                                    class="cd-lbl">Days</span></div>
+                            <span class="cd-sep">:</span>
+                            <div class="cd-unit"><span class="cd-num" id="cd-hours">04</span><span
+                                    class="cd-lbl">Hrs</span></div>
+                            <span class="cd-sep">:</span>
+                            <div class="cd-unit"><span class="cd-num" id="cd-mins">22</span><span
+                                    class="cd-lbl">Min</span></div>
+                            <span class="cd-sep">:</span>
+                            <div class="cd-unit"><span class="cd-num" id="cd-secs">00</span><span
+                                    class="cd-lbl">Sec</span></div>
+                        </div>
+                    </div>
+
+                    <div class="notice-footer">
+                        <div class="read-receipt">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            89 of 312 students read
+                            <div class="read-bar">
+                                <div class="read-bar-fill" style="width:28.5%"></div>
+                            </div>
+                        </div>
+                        <span class="notice-expand-hint">Tap to read full notice â†’</span>
+                    </div>
+                </article>
+
+                <!-- Notice 2: High Priority -->
+                <article class="notice-card notice-high" id="notice-2" data-modal="modal-notice-2"
+                    aria-label="Open full notice â€” Mandatory DBT Enabling Camp">
+                    <div class="notice-top">
+                        <div class="notice-meta">
+                            <span class="badge badge-high">ðŸ”´ High Priority</span>
+                        </div>
+                        <span class="notice-date">Posted 16 Mar 2026</span>
+                    </div>
+
+                    <div class="notice-title">Mandatory DBT Enabling Camp â€” Thursday 10 AM Room 204</div>
+
+                    <div class="notice-footer">
+                        <div class="read-receipt">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            201 of 312 students read
+                            <div class="read-bar">
+                                <div class="read-bar-fill" style="width:64.4%; background: var(--red);"></div>
+                            </div>
+                        </div>
+                        <div class="email-indicator">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                            Email sent to all students
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Notice 3: General -->
+                <article class="notice-card notice-general" id="notice-3" data-modal="modal-notice-3"
+                    aria-label="Open full notice â€” Academic calendar updated">
+                    <div class="notice-top">
+                        <div class="notice-meta">
+                            <span class="badge badge-general">General</span>
+                        </div>
+                        <span class="notice-date">Posted 14 Mar 2026</span>
+                    </div>
+
+                    <div class="notice-title">Academic calendar updated â€” check portal for revised exam dates</div>
+
+                    <div class="notice-footer">
+                        <div class="read-receipt">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                stroke-linecap="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            147 of 312 students read
+                            <div class="read-bar">
+                                <div class="read-bar-fill" style="width:47.1%; background: #9CA3AF;"></div>
+                            </div>
+                        </div>
+                        <span class="notice-expand-hint">Tap to read full notice â†’</span>
+                    </div>
+                </article>
+
+            </div><!-- /notices-stack -->
+
+            <!-- SECTION B â€” Importance of Scholarship -->
+            <div class="section-head">
+                <span class="head-icon">ðŸ’¡</span>
+                <h2>Why Your Scholarship Matters</h2>
+            </div>
+
+            <div class="importance-section">
+
+                <!-- Stats card -->
+                <div class="stats-card">
+                    <div class="stats-card-head">Maharashtra Scholarship Impact</div>
+                    <div class="stat-item">
+                        <div class="stat-value">â‚¹24,000+</div>
+                        <div class="stat-label">Average annual scholarship per student through MahaDBT</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">â‚¹4,800 Cr</div>
+                        <div class="stat-label">Distributed nationally to eligible students every year</div>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <div class="stat-value">12 Lakh+</div>
+                        <div class="stat-label">Students benefited across Maharashtra in 2024â€“25</div>
+                    </div>
+                </div>
+
+                <!-- Why fill the form card -->
+                <div class="why-card">
+                    <div class="why-card-head">
+                        <span>ðŸ“</span> Why fill the form?
+                    </div>
+                    <ul class="why-list" aria-label="Reasons to fill the scholarship form">
+                        <li class="why-item">
+                            <div class="why-bullet">1</div>
+                            <span>Covers tuition, exam, and other fees â€” <strong>directly into your bank
+                                    account</strong> via
+                                DBT.</span>
+                        </li>
+                        <li class="why-item">
+                            <div class="why-bullet">2</div>
+                            <span>Benefit continues <strong>every year</strong> of your course â€” missing one year may
+                                cause a gap in
+                                benefits.</span>
+                        </li>
+                        <li class="why-item">
+                            <div class="why-bullet">3</div>
+                            <span>The application takes <strong>under 20 minutes</strong> â€” ScholarSetu guides you step
+                                by
+                                step.</span>
+                        </li>
+                        <li class="why-item">
+                            <div class="why-bullet">4</div>
+                            <span>Many students miss out due to <strong>DBT not enabled</strong> â€” act before the
+                                deadline shown
+                                above.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div><!-- /importance-section -->
+
+            <!-- SECTION C â€” DBT vs Aadhaar Linking -->
+            <div class="dbt-section">
+                <div class="section-head">
+                    <span class="head-icon">ðŸ”—</span>
+                    <h2>Aadhaar Linking vs DBT â€” What's the Difference?</h2>
+                </div>
+                <p class="dbt-intro">
+                    Students often confuse <strong>Aadhaarâ€“Bank linking</strong> with <strong>DBT (Direct Benefit
+                        Transfer)
+                        enabling</strong>.
+                    Both are required for your scholarship to reach your account â€” but they are two completely separate
+                    steps done
+                    in different places.
+                </p>
+
+                <div class="dbt-grid">
+                    <!-- Aadhaar Linking Card -->
+                    <div class="dbt-card aadhaar">
+                        <span class="dbt-card-icon">ðŸªª</span>
+                        <div class="dbt-card-title">Aadhaarâ€“Bank Linking</div>
+                        <div class="dbt-card-desc">Connecting your Aadhaar number to your savings account so the bank
+                            recognises you
+                            as the account holder.</div>
+                        <ul class="dbt-card-points">
+                            <li>Done at your bank branch, ATM, or net banking</li>
+                            <li>Links your 12-digit Aadhaar to the account number</li>
+                            <li>Required for any government scheme â€” not just scholarships</li>
+                            <li>One-time setup; doesn't expire unless you change banks</li>
+                            <li>Verify status at UIDAI website or your bank app</li>
+                        </ul>
+                    </div>
+
+                    <!-- DBT Enabling Card -->
+                    <div class="dbt-card dbt-enable">
+                        <span class="dbt-card-icon">âš¡</span>
+                        <div class="dbt-card-title">DBT Enabling (NPCI Mapper)</div>
+                        <div class="dbt-card-desc">Activating your Aadhaar in the NPCI mapper so scholarship funds can
+                            be routed
+                            directly to your account via the Aadhaar Payment Bridge.</div>
+                        <ul class="dbt-card-points">
+                            <li>Done via MahaDBT portal or your bank â€” separate from linking</li>
+                            <li>Activates the Aadhaar Payment Bridge (APB) for your account</li>
+                            <li>Without this, scholarship payment fails even if Aadhaar is linked</li>
+                            <li>Must be active <em>before</em> submitting the scholarship form</li>
+                            <li>Check status on NPCI website using your Aadhaar number</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="dbt-callout">
+                    <div class="dbt-callout-icon">ðŸ’¡</div>
+                    <div class="dbt-callout-text">
+                        <strong>In simple words:</strong> Aadhaar linking tells the bank <em>"this account belongs to
+                            me."</em> DBT
+                        enabling tells the government <em>"send money to this Aadhaar-linked account."</em> You need
+                        <strong>both</strong>. Many students have Aadhaar linked but DBT not enabled â€” their scholarship
+                        payment
+                        silently fails every year.
+                    </div>
+                </div>
+            </div><!-- /dbt-section -->
+
+        </section><!-- /panel-home -->
+
+        <!-- â”€â”€ TAB: CHECK DBT STATUS â”€â”€ -->
+        <section class="tab-panel" id="panel-dbt-status" role="tabpanel" aria-labelledby="tab-dbt-status">
+
+            <div class="section-head">
+                <span class="head-icon">ðŸ“‹</span>
+                <h2>Check DBT Status</h2>
+            </div>
+            <p class="story-tab-intro">Follow these steps to verify whether your Aadhaar is mapped in the NPCI system
+                for Direct Benefit Transfer. Choose the method that works best for you.</p>
+
+            <!-- Method pills -->
+            <div class="method-pills" id="dbt-status-pills" role="tablist" aria-label="Choose method">
+                <button class="method-pill active" id="dbt-status-pill-npci" role="tab" aria-selected="true"
+                    data-story-method="npci" data-story-id="dbt-status">ðŸŒ Via NPCI Portal</button>
+                <button class="method-pill" id="dbt-status-pill-myaadhaar" role="tab" aria-selected="false"
+                    data-story-method="myaadhaar" data-story-id="dbt-status">ðŸ“± Via MyAadhaar App</button>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="story-progress-wrap" id="dbt-status-progress-wrap">
+                <span class="story-progress-label" id="dbt-status-progress-label">Step 1 of 6</span>
+                <div class="story-progress-bar" aria-label="Step progress">
+                    <div class="story-progress-fill" id="dbt-status-progress-fill" style="width:16.67%"></div>
+                </div>
+            </div>
+
+            <!-- Step card -->
+            <div class="step-card" id="dbt-status-step-card">
+                <div class="step-card-top">
+                    <div class="step-number-badge" id="dbt-status-badge">1</div>
+                    <div class="step-title" id="dbt-status-title">Open NPCI portal at npci.org.in</div>
+                </div>
+                <div class="step-screenshot" aria-label="Step screenshot placeholder">
+                    <div class="screenshot-icon" id="dbt-status-ss-icon">ðŸ–¥ï¸</div>
+                    <div class="screenshot-label" id="dbt-status-screenshot-label">Screenshot: NPCI homepage with URL
+                        bar showing npci.org.in</div>
+                    <div class="screenshot-tag">Screenshot Placeholder</div>
+                </div>
+                <div class="step-instruction-wrap">
+                    <p class="step-instruction" id="dbt-status-instruction">
+                        <span class="student-name">Rahul</span>, open your browser and go to
+                        <strong>npci.org.in</strong>. You can use Chrome, Firefox, or any browser on your phone or
+                        laptop.
+                    </p>
+                </div>
+                <div class="step-nav-bar">
+                    <button class="step-btn-ghost" id="dbt-status-prev" data-story-nav="prev" data-story-id="dbt-status" disabled
+                        aria-label="Previous step">
+                        â† Previous
+                    </button>
+                    <button class="report-btn" data-open-report="dbt-status"
+                        aria-label="Report an issue with this step">Report incorrect step ðŸš©</button>
+                    <button class="step-btn-primary" id="dbt-status-next" data-story-nav="next" data-story-id="dbt-status"
+                        aria-label="Next step">
+                        Next Step â†’
+                    </button>
+                </div>
+            </div>
+
+            <!-- Completion banner -->
+            <div class="story-complete-banner" id="dbt-status-complete">
+                <div class="complete-icon">âœ…</div>
+                <div class="complete-title">Status Checked!</div>
+                <div class="complete-sub">You've successfully completed all steps. You should now be able to see your
+                    DBT linking status and bank details on the portal.</div>
+                <button class="complete-restart" data-story-restart="dbt-status">â†º Start Again</button>
+            </div>
+
+        </section>
+
+        <!-- â”€â”€ TAB: ENABLE DBT â”€â”€ -->
+        <section class="tab-panel" id="panel-enable-dbt" role="tabpanel" aria-labelledby="tab-enable-dbt">
+
+            <div class="section-head">
+                <span class="head-icon">âš¡</span>
+                <h2>Enable DBT</h2>
+            </div>
+            <p class="story-tab-intro">Follow these steps to enable Direct Benefit Transfer on your bank account linked
+                to Aadhaar. Without this, your scholarship funds cannot reach you even if Aadhaar is linked.</p>
+
+            <!-- Method pills -->
+            <div class="method-pills" id="enable-dbt-pills" role="tablist" aria-label="Choose method">
+                <button class="method-pill" id="enable-dbt-pill-online" role="tab" aria-selected="false"
+                    data-story-method="online" data-story-id="enable-dbt">ðŸŒ Online Method</button>
+                <button class="method-pill active" id="enable-dbt-pill-offline" role="tab" aria-selected="true"
+                    data-story-method="offline" data-story-id="enable-dbt">ðŸ¦ Offline Method</button>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="story-progress-wrap" id="enable-dbt-progress-wrap">
+                <span class="story-progress-label" id="enable-dbt-progress-label">Step 1 of 5</span>
+                <div class="story-progress-bar" aria-label="Step progress">
+                    <div class="story-progress-fill" id="enable-dbt-progress-fill" style="width:20%"></div>
+                </div>
+            </div>
+
+            <!-- Step card -->
+            <div class="step-card" id="enable-dbt-step-card">
+                <div class="step-card-top">
+                    <div class="step-number-badge" id="enable-dbt-badge">1</div>
+                    <div class="step-title" id="enable-dbt-title">Visit your nearest bank branch</div>
+                </div>
+                <div class="step-screenshot" aria-label="Step screenshot placeholder">
+                    <div class="screenshot-icon" id="enable-dbt-ss-icon">ðŸ¦</div>
+                    <div class="screenshot-label" id="enable-dbt-screenshot-label">Screenshot: Bank branch exterior or
+                        entrance illustration</div>
+                    <div class="screenshot-tag">Screenshot Placeholder</div>
+                </div>
+                <div class="step-instruction-wrap">
+                    <p class="step-instruction" id="enable-dbt-instruction">
+                        <span class="student-name">Rahul</span>, go to the bank branch where your scholarship account is
+                        held. Make sure to visit during banking hours â€” usually <strong>10 AM to 4 PM on
+                            weekdays</strong>.
+                    </p>
+                </div>
+                <div class="step-nav-bar">
+                    <button class="step-btn-ghost" id="enable-dbt-prev" data-story-nav="prev" data-story-id="enable-dbt" disabled
+                        aria-label="Previous step">
+                        â† Previous
+                    </button>
+                    <button class="report-btn" data-open-report="enable-dbt"
+                        aria-label="Report an issue with this step">Report incorrect step ðŸš©</button>
+                    <button class="step-btn-primary" id="enable-dbt-next" data-story-nav="next" data-story-id="enable-dbt"
+                        aria-label="Next step">
+                        Next Step â†’
+                    </button>
+                </div>
+            </div>
+
+            <!-- Completion banner -->
+            <div class="story-complete-banner" id="enable-dbt-complete">
+                <div class="complete-icon">ðŸŽ‰</div>
+                <div class="complete-title">DBT Enabled!</div>
+                <div class="complete-sub">You've completed all the steps to enable DBT. Your scholarship payments should
+                    now reach your account once your application is approved.</div>
+                <button class="complete-restart" data-story-restart="enable-dbt">â†º Start Again</button>
+            </div>
+
+        </section>
+
+        <!-- â”€â”€ TAB: ELIGIBILITY â”€â”€ -->
+        <section class="tab-panel" id="panel-eligibility" role="tabpanel" aria-labelledby="tab-eligibility">
+
+            <div class="section-head">
+                <span class="head-icon">âœ…</span>
+                <h2>Eligibility Checker</h2>
+            </div>
+            <p class="elig-intro">
+                Answer the questions below to instantly see which MahaDBT scholarships you qualify for. Results are
+                based on official eligibility criteria â€” no personal data is stored.
+            </p>
+
+            <!-- Form card -->
+            <div class="elig-form-card" id="elig-form-card">
+                <form id="elig-form" data-elig-form="1" novalidate>
+                    <div class="elig-form-grid">
+
+                        <!-- Column 1: Personal Details -->
+                        <div class="elig-col">
+                            <div class="elig-col-head">ðŸ‘¤ Personal Details</div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-domicile">Domicile</label>
+                                <select class="elig-select" id="elig-domicile" name="domicile" required>
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="mh">Maharashtra</option>
+                                    <option value="other">Outside Maharashtra</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-caste">Caste Category</label>
+                                <select class="elig-select" id="elig-caste" name="caste" required>
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="SC">SC (Scheduled Caste)</option>
+                                    <option value="ST">ST (Scheduled Tribe)</option>
+                                    <option value="OBC">OBC (Other Backward Class)</option>
+                                    <option value="VJNT">VJNT (Vimukta Jati / Nomadic Tribes)</option>
+                                    <option value="SBC">SBC (Special Backward Category)</option>
+                                    <option value="EWS">EWS (Economically Weaker Section)</option>
+                                    <option value="Open">Open / General</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-religion">Religion</label>
+                                <select class="elig-select" id="elig-religion" name="religion">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="Hindu">Hindu</option>
+                                    <option value="Muslim">Muslim</option>
+                                    <option value="Christian">Christian</option>
+                                    <option value="Buddhist">Buddhist</option>
+                                    <option value="Jain">Jain</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-income">Annual Family Income</label>
+                                <select class="elig-select" id="elig-income" name="income" required>
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="below1L">Below â‚¹1 Lakh</option>
+                                    <option value="1to2.5L">â‚¹1L â€“ â‚¹2.5L</option>
+                                    <option value="2.5to6L">â‚¹2.5L â€“ â‚¹6L</option>
+                                    <option value="6to8L">â‚¹6L â€“ â‚¹8L</option>
+                                    <option value="above8L">Above â‚¹8L</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-ration">Ration Card Type</label>
+                                <select class="elig-select" id="elig-ration" name="ration">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="Yellow">Yellow (Antyodaya / BPL)</option>
+                                    <option value="Saffron">Saffron (Priority Household)</option>
+                                    <option value="White">White (Non-Priority)</option>
+                                    <option value="APL">APL</option>
+                                    <option value="None">No Ration Card</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-disability">Disability Status</label>
+                                <select class="elig-select" id="elig-disability" name="disability">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="none">None</option>
+                                    <option value="40plus">40% or more disability (with certificate)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Column 2: Academic Details -->
+                        <div class="elig-col">
+                            <div class="elig-col-head">ðŸŽ“ Academic Details</div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-level">Course Level</label>
+                                <select class="elig-select" id="elig-level" name="level" required>
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="11-12">11th â€“ 12th (Junior College)</option>
+                                    <option value="Diploma">Diploma</option>
+                                    <option value="UG">Under-Graduate (UG)</option>
+                                    <option value="PG">Post-Graduate (PG)</option>
+                                    <option value="PhD">PhD / Research</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-type">Course Type</label>
+                                <select class="elig-select" id="elig-type" name="type">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="Technical">Technical (Engineering / Pharmacy / Architecture)</option>
+                                    <option value="NonTech">Non-Technical (Arts / Science / Commerce / Law)</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-admission">Admission Type</label>
+                                <select class="elig-select" id="elig-admission" name="admission">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="Regular">Regular</option>
+                                    <option value="Lateral">Lateral Entry (Direct Second Year)</option>
+                                    <option value="DSP">DSP (Defence Service Personnel quota)</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-year">Year of Study</label>
+                                <select class="elig-select" id="elig-year" name="year">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="1">1st Year</option>
+                                    <option value="2">2nd Year</option>
+                                    <option value="3">3rd Year</option>
+                                    <option value="4">4th Year</option>
+                                    <option value="5">5th Year</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-percent">Previous Year Percentage</label>
+                                <select class="elig-select" id="elig-percent" name="percent">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="below50">Below 50%</option>
+                                    <option value="50to60">50% â€“ 60%</option>
+                                    <option value="60to75">60% â€“ 75%</option>
+                                    <option value="75to85">75% â€“ 85%</option>
+                                    <option value="above85">Above 85%</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-gap">Gap Years</label>
+                                <select class="elig-select" id="elig-gap" name="gap">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="none">None</option>
+                                    <option value="1">1 Year Gap</option>
+                                    <option value="2plus">2 or More Years Gap</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-applicant">Applicant Type</label>
+                                <select class="elig-select" id="elig-applicant" name="applicant">
+                                    <option value="">â€” Select â€”</option>
+                                    <option value="DayScholar">Day Scholar</option>
+                                    <option value="Hosteller">Hosteller</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div><!-- /elig-form-grid -->
+
+                    <!-- Submit -->
+                    <div style="margin-top:8px;">
+                        <button type="submit" class="elig-submit-btn" id="elig-submit-btn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round">
+                                <circle cx="11" cy="11" r="8" />
+                                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                            </svg>
+                            Check My Eligibility â†’
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Results section (hidden until submit) -->
+            <div class="elig-results" id="elig-results">
+
+                <div class="elig-results-head">
+                    <div class="elig-results-count" id="elig-results-count">
+                        <span>3</span> scholarships match your profile
+                    </div>
+                    <button class="elig-reset-btn" class="btn-secondary elig-reset-btn" aria-label="Reset form and start over">â†º
+                        Check Again</button>
+                </div>
+
+                <div class="elig-cards-stack" id="elig-cards-stack">
+
+                    <!-- Card 1: Eligible -->
+                    <article class="result-card eligible" id="result-card-1">
+                        <div class="result-card-top">
+                            <div>
+                                <span class="result-badge badge-eligible">âœ“ Eligible</span>
+                            </div>
+                            <span class="result-benefit-pill" id="rc1-benefit">Up to â‚¹32,000/year</span>
+                        </div>
+                        <div class="result-scheme-name" id="rc1-name">Government Vidya Niketan Scholarship</div>
+                        <div class="result-dept" id="rc1-dept">ðŸ›ï¸ Social Justice &amp; Special Assistance Dept. Â·
+                            MahaDBT Scheme</div>
+                        <div class="result-actions">
+                            <button class="result-btn-ghost" data-open-docs="docs-1" id="rc1-docs-btn">ðŸ“‹ View
+                                Documents Required</button>
+                            <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                                class="result-btn-primary" id="rc1-apply-btn">
+                                Apply on MahaDBT
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Card 2: Eligible -->
+                    <article class="result-card eligible" id="result-card-2">
+                        <div class="result-card-top">
+                            <div>
+                                <span class="result-badge badge-eligible">âœ“ Eligible</span>
+                            </div>
+                            <span class="result-benefit-pill" id="rc2-benefit">Up to â‚¹20,000/year</span>
+                        </div>
+                        <div class="result-scheme-name" id="rc2-name">Post-Matric Scholarship for SC Students</div>
+                        <div class="result-dept" id="rc2-dept">ðŸ›ï¸ Social Justice &amp; Special Assistance Dept. Â·
+                            MahaDBT Scheme</div>
+                        <div class="result-actions">
+                            <button class="result-btn-ghost" data-open-docs="docs-2" id="rc2-docs-btn">ðŸ“‹ View
+                                Documents Required</button>
+                            <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                                class="result-btn-primary" id="rc2-apply-btn">
+                                Apply on MahaDBT
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Card 3: Eligible -->
+                    <article class="result-card eligible" id="result-card-3">
+                        <div class="result-card-top">
+                            <div>
+                                <span class="result-badge badge-eligible">âœ“ Eligible</span>
+                            </div>
+                            <span class="result-benefit-pill" id="rc3-benefit">â‚¹1,200/month maintenance</span>
+                        </div>
+                        <div class="result-scheme-name" id="rc3-name">Rajarshi Chhatrapati Shahu Maharaj Scholarship
+                        </div>
+                        <div class="result-dept" id="rc3-dept">ðŸ›ï¸ Higher &amp; Technical Education Dept. Â· MahaDBT
+                            Scheme</div>
+                        <div class="result-actions">
+                            <button class="result-btn-ghost" data-open-docs="docs-3" id="rc3-docs-btn">ðŸ“‹ View
+                                Documents Required</button>
+                            <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                                class="result-btn-primary" id="rc3-apply-btn">
+                                Apply on MahaDBT
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- Card 4: Near miss -->
+                    <article class="result-card near-miss" id="result-card-4">
+                        <div class="result-card-top">
+                            <div>
+                                <span class="result-badge badge-near-miss">âš  Check Manually</span>
+                            </div>
+                            <span class="result-benefit-pill" id="rc4-benefit">Up to â‚¹48,000/year</span>
+                        </div>
+                        <div class="result-scheme-name" id="rc4-name">EBC Scholarship for Open Category Students</div>
+                        <div class="result-dept" id="rc4-dept">ðŸ›ï¸ Higher &amp; Technical Education Dept. Â· MahaDBT
+                            Scheme</div>
+                        <div class="near-miss-note" id="rc4-note">
+                            âš ï¸ <strong>Almost eligible:</strong> This scheme requires income below â‚¹8L per year. Your
+                            selected income bracket is close to the threshold â€” verify your income certificate amount on
+                            the portal before applying.
+                        </div>
+                        <div class="result-actions">
+                            <button class="result-btn-ghost" data-open-docs="docs-4" id="rc4-docs-btn">ðŸ“‹ View
+                                Documents Required</button>
+                            <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                                class="result-btn-primary" id="rc4-apply-btn">
+                                Check on MahaDBT
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </a>
+                        </div>
+                    </article>
+
+                </div><!-- /elig-cards-stack -->
+
+                <p style="font-size:11.5px; color:var(--text-light); line-height:1.6; margin-top:6px;">
+                    * Results are indicative only. Verify final eligibility on the official <a
+                        href="https://mahadbt.maharashtra.gov.in" target="_blank"
+                        style="color:var(--saffron); text-decoration:none; font-weight:600;">MahaDBT portal</a>. Scheme
+                    criteria are subject to change each academic year.
+                </p>
+
+            </div><!-- /elig-results -->
+
+        </section>
+
+        <!-- â”€â”€ TAB: APPLY GUIDE â”€â”€ -->
+        <section class="tab-panel" id="panel-apply-guide" role="tabpanel" aria-labelledby="tab-apply-guide">
+
+            <!-- Section A â€” Scheme Listing -->
+            <div class="section-head">
+                <span class="head-icon">ðŸŽ“</span>
+                <h2>Scholarship Application Guide</h2>
+            </div>
+
+            <!-- Search bar -->
+            <div class="scheme-search-wrap">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                    aria-hidden="true">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                </svg>
+                <input type="search" id="scheme-search-input" class="scheme-search-input"
+                    placeholder="Search schemes by name or category..." autocomplete="off"
+                    aria-label="Search scholarship schemes" data-scheme-search="1" />
+            </div>
+
+            <!-- Filter pills -->
+            <div class="scheme-filters" role="group" aria-label="Filter by category">
+                <button class="filter-pill active" id="pill-all" data-pill="all"
+                    aria-pressed="true">All</button>
+                <button class="filter-pill" id="pill-scst" data-pill="scst" aria-pressed="false">SC/ST</button>
+                <button class="filter-pill" id="pill-obc" data-pill="obc" aria-pressed="false">OBC</button>
+                <button class="filter-pill" id="pill-ews" data-pill="ews" aria-pressed="false">EWS</button>
+                <button class="filter-pill" id="pill-open" data-pill="open" aria-pressed="false">Open</button>
+                <button class="filter-pill" id="pill-technical" data-pill="technical"
+                    aria-pressed="false">Technical</button>
+                <button class="filter-pill" id="pill-nontechnical" data-pill="nontechnical"
+                    aria-pressed="false">Non-Technical</button>
+            </div>
+
+            <!-- Scheme cards grid -->
+            <div class="scheme-grid" id="scheme-grid" role="list">
+
+                <!-- Card 1 -->
+                <article class="scheme-card" id="sc-1" role="listitem"
+                    data-name="rajarshi chhatrapati shahu maharaj scholarship" data-cats="scst technical open">
+                    <div class="scheme-card-header">
+                        <h3 class="scheme-name">Rajarshi Chhatrapati Shahu Maharaj Scholarship</h3>
+                        <span class="dept-badge dept-sj">Social Justice</span>
+                    </div>
+                    <div class="scheme-cats">
+                        <span class="cat-pill">SC</span>
+                        <span class="cat-pill cat-neutral">Income limit â‚¹2.5L</span>
+                        <span class="cat-pill cat-neutral">UG / PG</span>
+                    </div>
+                    <div class="scheme-actions">
+                        <button class="btn-ghost-sm" data-open-scheme-docs="sc1" id="sc1-docs-btn">
+                            ðŸ“„ Required Documents
+                        </button>
+                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                            class="btn-saffron-sm" id="sc1-apply-btn">
+                            Apply on MahaDBT â†—
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="scheme-card" id="sc-2" role="listitem" data-name="post matric scholarship sc students"
+                    data-cats="scst nontechnical">
+                    <div class="scheme-card-header">
+                        <h3 class="scheme-name">Post-Matric Scholarship for SC Students</h3>
+                        <span class="dept-badge dept-sj">Social Justice</span>
+                    </div>
+                    <div class="scheme-cats">
+                        <span class="cat-pill">SC</span>
+                        <span class="cat-pill cat-neutral">Income limit â‚¹2.5L</span>
+                        <span class="cat-pill cat-neutral">Post-Matric</span>
+                    </div>
+                    <div class="scheme-actions">
+                        <button class="btn-ghost-sm" data-open-scheme-docs="sc2" id="sc2-docs-btn">
+                            ðŸ“„ Required Documents
+                        </button>
+                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                            class="btn-saffron-sm" id="sc2-apply-btn">
+                            Apply on MahaDBT â†—
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="scheme-card" id="sc-3" role="listitem"
+                    data-name="tribal development scholarship vijay raje scholarship"
+                    data-cats="scst technical nontechnical">
+                    <div class="scheme-card-header">
+                        <h3 class="scheme-name">Vijay Raje Scholarship for ST Students</h3>
+                        <span class="dept-badge dept-td">Tribal Dev.</span>
+                    </div>
+                    <div class="scheme-cats">
+                        <span class="cat-pill">ST</span>
+                        <span class="cat-pill cat-neutral">Income limit â‚¹2.5L</span>
+                        <span class="cat-pill cat-neutral">UG / PG</span>
+                    </div>
+                    <div class="scheme-actions">
+                        <button class="btn-ghost-sm" data-open-scheme-docs="sc3" id="sc3-docs-btn">
+                            ðŸ“„ Required Documents
+                        </button>
+                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                            class="btn-saffron-sm" id="sc3-apply-btn">
+                            Apply on MahaDBT â†—
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="scheme-card" id="sc-4" role="listitem"
+                    data-name="obc welfare scholarship non creamy layer" data-cats="obc nontechnical technical">
+                    <div class="scheme-card-header">
+                        <h3 class="scheme-name">OBC Non-Creamy Layer Post-Matric Scholarship</h3>
+                        <span class="dept-badge dept-obc">OBC Welfare</span>
+                    </div>
+                    <div class="scheme-cats">
+                        <span class="cat-pill">OBC</span>
+                        <span class="cat-pill cat-neutral">Non-Creamy Layer</span>
+                        <span class="cat-pill cat-neutral">Post-Matric</span>
+                    </div>
+                    <div class="scheme-actions">
+                        <button class="btn-ghost-sm" data-open-scheme-docs="sc4" id="sc4-docs-btn">
+                            ðŸ“„ Required Documents
+                        </button>
+                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                            class="btn-saffron-sm" id="sc4-apply-btn">
+                            Apply on MahaDBT â†—
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 5 -->
+                <article class="scheme-card" id="sc-5" role="listitem"
+                    data-name="ebc economically backward class freeship open category scholarship"
+                    data-cats="open ews technical nontechnical">
+                    <div class="scheme-card-header">
+                        <h3 class="scheme-name">EBC Freeship â€” Open Category</h3>
+                        <span class="dept-badge dept-hte">Higher &amp; Tech. Ed.</span>
+                    </div>
+                    <div class="scheme-cats">
+                        <span class="cat-pill">EWS / Open</span>
+                        <span class="cat-pill cat-neutral">Income limit â‚¹8L</span>
+                        <span class="cat-pill cat-neutral">UG Only</span>
+                    </div>
+                    <div class="scheme-actions">
+                        <button class="btn-ghost-sm" data-open-scheme-docs="sc5" id="sc5-docs-btn">
+                            ðŸ“„ Required Documents
+                        </button>
+                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                            class="btn-saffron-sm" id="sc5-apply-btn">
+                            Apply on MahaDBT â†—
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 6 -->
+                <article class="scheme-card" id="sc-6" role="listitem"
+                    data-name="minority welfare scholarship ntdnt vimukta jati nomadic tribes"
+                    data-cats="scst nontechnical technical">
+                    <div class="scheme-card-header">
+                        <h3 class="scheme-name">VJNT &amp; Special Backward Class Scholarship</h3>
+                        <span class="dept-badge dept-obc">OBC Welfare</span>
+                    </div>
+                    <div class="scheme-cats">
+                        <span class="cat-pill">VJNT</span>
+                        <span class="cat-pill cat-neutral">Income limit â‚¹1L</span>
+                        <span class="cat-pill cat-neutral">Post-Matric</span>
+                    </div>
+                    <div class="scheme-actions">
+                        <button class="btn-ghost-sm" data-open-scheme-docs="sc6" id="sc6-docs-btn">
+                            ðŸ“„ Required Documents
+                        </button>
+                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
+                            class="btn-saffron-sm" id="sc6-apply-btn">
+                            Apply on MahaDBT â†—
+                        </a>
+                    </div>
+                </article>
+
+                <!-- No results message -->
+                <div class="scheme-no-results" id="scheme-no-results" aria-live="polite">
+                    ðŸ” No schemes match your search. Try a different keyword or filter.
+                </div>
+
+            </div><!-- /scheme-grid -->
+
+            <!-- Section B â€” Important tip bar -->
+            <div class="official-tip-bar" role="note" aria-label="Official portal notice">
+                <span class="tip-bar-icon">âš ï¸</span>
+                <p class="tip-bar-text">
+                    Always apply on the official MahaDBT portal at
+                    <a href="https://mahadbt.maharashtra.gov.in" target="_blank"
+                        rel="noopener">mahadbt.maharashtra.gov.in</a>
+                    â€” ScholarSetu does <strong>not</strong> process applications.
+                </p>
+            </div>
+
+        </section>
+
+        <!-- â”€â”€ TAB: Q&A â”€â”€ -->
+        <section class="tab-panel" id="panel-qa" role="tabpanel" aria-labelledby="tab-qa">
+
+            <!-- â”€â”€ PANEL A: Ask / Search â”€â”€ -->
+            <div class="qa-panel-a">
+
+                <!-- Search existing questions -->
+                <div class="qa-search-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                        aria-hidden="true">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <input type="search" id="qa-search-input" class="qa-search-input"
+                        placeholder="Search questions already asked..." autocomplete="off"
+                        aria-label="Search existing questions" data-qa-search="1" />
+                </div>
+
+                <!-- Ask textarea -->
+                <div class="qa-textarea-wrap">
+                    <textarea id="qa-textarea" class="qa-textarea"
+                        placeholder="Ask a scholarship question... (be specific for faster answers)" maxlength="500"
+                        aria-label="Write your question" data-qa-input="1" rows="4"></textarea>
+                    <span class="qa-char-counter" id="qa-char-counter" aria-live="polite">0 / 500</span>
+                </div>
+
+                <!-- Post row -->
+                <div class="qa-post-row">
+                    <p class="qa-disclaimer">
+                        ðŸ”’ Questions are visible to all students in your college. Answers are not verified until Admin
+                        responds.
+                    </p>
+                    <button class="btn-post-qa" id="qa-post-btn" disabled data-qa-post="1"
+                        aria-describedby="qa-disclaimer">
+                        Post Question â†’
+                    </button>
+                </div>
+
+                <!-- Success state -->
+                <div class="qa-post-success" id="qa-post-success" role="status" aria-live="polite">
+                    âœ… Your question was posted! Admin or peers will reply soon.
+                </div>
+
+            </div><!-- /qa-panel-a -->
+
+            <!-- â”€â”€ PANEL B: Questions Feed â”€â”€ -->
+            <div>
+
+                <!-- Feed heading + sort -->
+                <div class="qa-feed-head">
+                    <h2 class="qa-feed-title">Recent Questions</h2>
+                    <span class="qa-count-badge" id="qa-count-badge">14 questions</span>
+                </div>
+
+                <div class="qa-sort-pills" role="group" aria-label="Sort questions">
+                    <button class="qa-sort-pill active" id="qa-sort-latest" data-qa-sort="latest"
+                        aria-pressed="true">Latest</button>
+                    <button class="qa-sort-pill" id="qa-sort-unanswered" data-qa-sort="unanswered"
+                        aria-pressed="false">Unanswered</button>
+                    <button class="qa-sort-pill" id="qa-sort-admin" data-qa-sort="admin"
+                        aria-pressed="false">Admin Replied</button>
+                </div>
+
+                <!-- Feed cards -->
+                <div class="qa-feed" id="qa-feed" role="list">
+
+                    <!-- Card 1 â€” Admin replied (featured) -->
+                    <article class="qa-card" id="qac-1" role="listitem" data-type="admin"
+                        data-text="i submitted my application but haven't received the first installment after 4 months what should i do">
+
+                        <div class="qa-card-strip strip-admin">
+                            <span class="qa-status-badge status-admin">âœ“ Admin Replied</span>
+                            <span class="qa-card-date">3 days ago</span>
+                        </div>
+
+                        <div class="qa-card-body">
+                            <p class="qa-question-text">&ldquo;I submitted my application but haven&rsquo;t received the
+                                first installment after 4 months. What should I do?&rdquo;</p>
+                            <div class="qa-poster-meta">
+                                <span>Priya M.</span>
+                                <span class="qa-poster-dot"></span>
+                                <span>Computer Engg</span>
+                                <span class="qa-poster-dot"></span>
+                                <span>2nd Year</span>
+                                <span class="qa-poster-dot"></span>
+                                <span>3 days ago</span>
+                            </div>
+
+                            <!-- Admin reply (expanded by default) -->
+                            <div class="qa-admin-reply" id="qac1-admin-reply">
+                                <div class="qa-reply-header">
+                                    <span class="qa-admin-badge">Admin</span>
+                                    <span class="qa-reply-date">2 days ago</span>
+                                </div>
+                                <p class="qa-reply-text">Hi Priya, if your application status shows
+                                    &lsquo;Approved&rsquo; on MahaDBT portal, the delay is usually at the bank&rsquo;s
+                                    DBT processing queue. Please visit Tab 7 for the grievance process â€” you can raise a
+                                    formal complaint through the portal. Meanwhile, check your NPCI mapper status to
+                                    ensure the Aadhaar-bank linking is active.</p>
+                            </div>
+
+                        </div><!-- /card-body -->
+
+                        <div class="qa-card-footer">
+                            <button class="qa-replies-link" id="qac1-replies-btn" data-qa-toggle-thread="qac1"
+                                aria-expanded="false" aria-controls="qac1-thread">
+                                ðŸ’¬ 2 replies Â· View thread
+                            </button>
+                        </div>
+
+                        <!-- Collapsed thread -->
+                        <div id="qac1-thread" style="display:none; padding:0 18px 14px;">
+                            <div
+                                style="border-left:3px solid var(--border-light); padding-left:14px; font-size:12.5px; color:var(--text-muted); line-height:1.6;">
+                                <strong style="color:var(--text);">Priya M.</strong> Â· 1 day ago<br>
+                                Thank you! I'll check the NPCI mapper now and raise a grievance.
+                            </div>
+                        </div>
+
+                    </article>
+
+                    <!-- Card 2 â€” Unanswered -->
+                    <article class="qa-card" id="qac-2" role="listitem" data-type="unanswered"
+                        data-text="is the ebc scholarship available for students who changed their branch in second year">
+
+                        <div class="qa-card-strip strip-await">
+                            <span class="qa-status-badge status-await">â³ Awaiting Answer</span>
+                            <span class="qa-card-date">1 day ago</span>
+                        </div>
+
+                        <div class="qa-card-body">
+                            <p class="qa-question-text">&ldquo;Is the EBC scholarship available for students who changed
+                                their branch in second year?&rdquo;</p>
+                            <div class="qa-poster-meta">
+                                <span>Amit K.</span>
+                                <span class="qa-poster-dot"></span>
+                                <span>1 day ago</span>
+                            </div>
+                        </div>
+
+                        <div class="qa-card-footer">
+                            <button class="btn-reply-ghost" id="qac2-reply-btn" data-qa-reply-box="qac2"
+                                aria-expanded="false" aria-controls="qac2-reply-box">
+                                â†© Reply
+                            </button>
+                        </div>
+
+                        <!-- Inline reply box -->
+                        <div class="qa-reply-box" id="qac2-reply-box">
+                            <textarea class="qa-reply-textarea" id="qac2-reply-ta"
+                                placeholder="Share what you know... (not an official answer)" rows="3"
+                                maxlength="400"></textarea>
+                            <div class="qa-reply-actions">
+                                <button class="btn-reply-ghost" data-qa-cancel-reply="qac2"
+                                    style="font-size:12px;">Cancel</button>
+                                <button class="btn-post-qa" style="padding:7px 16px; font-size:12.5px;"
+                                    data-qa-submit-reply="qac2">Post Reply</button>
+                            </div>
+                        </div>
+
+                    </article>
+
+                    <!-- Card 3 â€” Peer replied -->
+                    <article class="qa-card" id="qac-3" role="listitem" data-type="peer"
+                        data-text="what is the income certificate format accepted by social justice department">
+
+                        <div class="qa-card-strip strip-peer">
+                            <span class="qa-status-badge status-peer">ðŸ‘¤ Peer Reply</span>
+                            <span class="qa-card-date">4 days ago</span>
+                        </div>
+
+                        <div class="qa-card-body">
+                            <p class="qa-question-text">&ldquo;What is the income certificate format accepted by Social
+                                Justice department?&rdquo;</p>
+                            <div class="qa-poster-meta">
+                                <span>Sneha D.</span>
+                                <span class="qa-poster-dot"></span>
+                                <span>Civil Engg</span>
+                                <span class="qa-poster-dot"></span>
+                                <span>3rd Year</span>
+                                <span class="qa-poster-dot"></span>
+                                <span>4 days ago</span>
+                            </div>
+
+                            <!-- Peer reply collapsed -->
+                            <div class="qa-peer-reply" id="qac3-peer-reply">
+                                <div class="qa-reply-header">
+                                    <span class="qa-peer-badge">Peer</span>
+                                    <span style="font-size:11px; color:var(--text-light); font-weight:500;">Rahul S. Â· 3
+                                        days ago</span>
+                                </div>
+                                <p class="qa-reply-text">The Social Justice dept. accepts the income certificate issued
+                                    by the Tehsildar of your district. The format is the standard Govt. of Maharashtra
+                                    template â€” you can download it from the MahaOnline portal. It must be for the
+                                    current financial year and show the total annual income of the family.</p>
+                            </div>
+
+                        </div><!-- /card-body -->
+
+                        <div class="qa-card-footer">
+                            <button class="qa-replies-link" id="qac3-view-btn" data-qa-toggle-peer="qac3"
+                                aria-expanded="false" aria-controls="qac3-peer-reply">
+                                ðŸ‘ View 1 peer reply
+                            </button>
+                            <button class="btn-reply-ghost" data-qa-reply-box="qac3"
+                                style="margin-left:auto;">â†© Reply</button>
+                        </div>
+
+                        <!-- Inline reply box -->
+                        <div class="qa-reply-box" id="qac3-reply-box">
+                            <textarea class="qa-reply-textarea" id="qac3-reply-ta"
+                                placeholder="Share what you know... (not an official answer)" rows="3"
+                                maxlength="400"></textarea>
+                            <div class="qa-reply-actions">
+                                <button class="btn-reply-ghost" data-qa-cancel-reply="qac3"
+                                    style="font-size:12px;">Cancel</button>
+                                <button class="btn-post-qa" style="padding:7px 16px; font-size:12.5px;"
+                                    data-qa-submit-reply="qac3">Post Reply</button>
+                            </div>
+                        </div>
+
+                    </article>
+
+                    <!-- Empty state -->
+                    <div class="qa-empty" id="qa-empty" aria-live="polite">ðŸ” No questions match your search.</div>
+
+                </div><!-- /qa-feed -->
+            </div><!-- /panel-b -->
+
+        </section>
+
+        <!-- â”€â”€ TAB: GRIEVANCE â”€â”€ -->
+        <section class="tab-panel" id="panel-grievance" role="tabpanel" aria-labelledby="tab-grievance">
+
+            <div class="griev-context-banner">
+                <div class="griev-context-icon">ðŸ›¡ï¸</div>
+                <div class="griev-context-text">
+                    This guide is for students whose <strong>application was approved</strong> but scholarship money was
+                    not received. If your application is still pending or needs document upload, please visit Tab 5
+                    first.
+                </div>
+            </div>
+
+            <div class="section-head">
+                <span class="head-icon">ðŸ“</span>
+                <h2>Filing a Scholarship Grievance on MahaDBT</h2>
+            </div>
+
+            <!-- Method pills -->
+            <div class="method-pills" id="grievance-pills" role="tablist" aria-label="Choose grievance method">
+                <button class="method-pill active" id="grievance-pill-online" role="tab" aria-selected="true"
+                    data-story-method="online" data-story-id="grievance">ðŸ’» Online Grievance</button>
+                <button class="method-pill" id="grievance-pill-offline" role="tab" aria-selected="false"
+                    data-story-method="offline" data-story-id="grievance">ðŸ¢ Offline Grievance</button>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="story-progress-wrap" id="grievance-progress-wrap">
+                <span class="story-progress-label" id="grievance-progress-label">Step 1 of 5</span>
+                <div class="story-progress-bar" aria-label="Step progress">
+                    <div class="story-progress-fill" id="grievance-progress-fill" style="width:20%"></div>
+                </div>
+            </div>
+
+            <!-- Step card -->
+            <div class="step-card" id="grievance-step-card">
+                <div class="step-card-top">
+                    <div class="step-number-badge" id="grievance-badge">1</div>
+                    <div class="step-title" id="grievance-title">Log in to MahaDBT portal</div>
+                </div>
+                <div class="step-screenshot" aria-label="Step screenshot placeholder">
+                    <div class="screenshot-icon" id="grievance-ss-icon">ðŸ”‘</div>
+                    <div class="screenshot-label" id="grievance-screenshot-label">Screenshot Placeholder</div>
+                    <div class="screenshot-tag">Screenshot Placeholder</div>
+                </div>
+                <div class="step-instruction-wrap">
+                    <p class="step-instruction" id="grievance-instruction">...</p>
+                </div>
+                <div class="step-nav-bar">
+                    <button class="step-btn-ghost" id="grievance-prev" data-story-nav="prev" data-story-id="grievance" disabled
+                        aria-label="Previous step">
+                        â† Previous
+                    </button>
+                    <button class="report-btn" data-open-report="grievance"
+                        aria-label="Report an issue">Report incorrect step ðŸš©</button>
+                    <button class="step-btn-primary" id="grievance-next" data-story-nav="next" data-story-id="grievance"
+                        aria-label="Next step">
+                        Next Step â†’
+                    </button>
+                </div>
+            </div>
+
+            <!-- Completion banner -->
+            <div class="story-complete-banner" id="grievance-complete">
+                <div class="complete-icon">âœ…</div>
+                <div class="complete-title">Grievance Filed!</div>
+                <div class="complete-sub">Your complaint has been submitted. Keep checking the portal for updates, or
+                    follow the escalation path below if unresolved.</div>
+                <button class="complete-restart" data-story-restart="grievance">â†º Start Again</button>
+            </div>
+
+            <!-- Escalation Path -->
+            <div class="griev-escalate-wrap">
+                <h3 class="griev-escalate-title">If grievance is not resolved in 30 days</h3>
+                <div class="griev-escalate-grid">
+                    <div class="esc-card">
+                        <div class="esc-icon">ðŸ¢</div>
+                        <div class="esc-title">District Social Welfare Office</div>
+                        <div class="esc-desc">Visit the District Social Welfare Office or concerned dept. with your
+                            printed grievance receipt.</div>
+                    </div>
+                    <div class="esc-card">
+                        <div class="esc-icon">ðŸ“§</div>
+                        <div class="esc-title">Email Department Head</div>
+                        <div class="esc-desc">Email <strong>grievance@mahadbt.maharashtra.gov.in</strong> with your App
+                            ID and issue details.</div>
+                    </div>
+                    <div class="esc-card">
+                        <div class="esc-icon">ðŸ“ž</div>
+                        <div class="esc-title">CM Helpline</div>
+                        <div class="esc-desc">Call toll-free <strong>1800-120-8040</strong> to escalate a long-pending
+                            scholarship complaint.</div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- â•â• MODALS â•â• -->
+
+    <!-- Modal: Required Documents (Eligibility tab) -->
+    <div class="modal-backdrop" id="modal-docs" role="dialog" aria-modal="true" aria-labelledby="docs-modal-title"
+        data-modal-id="modal-docs">
+        <div class="modal-box docs-modal-box">
+            <div class="modal-header">
+                <div class="modal-titles">
+                    <div class="modal-title" id="docs-modal-title">Documents Required</div>
+                </div>
+                <button class="modal-close" data-close-modal="modal-docs" aria-label="Close documents list">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:13.5px; color:var(--text-muted); line-height:1.5;">Prepare clear, scanned copies
+                    (PDF/JPEG) of the following documents to apply for this scholarship on the MahaDBT portal:</p>
+                <ul class="docs-list" id="docs-modal-list">
+                    <!-- Populated by JS -->
+                </ul>
+                <div class="docs-note">
+                    <strong>Note:</strong> Ensure all names match your Aadhaar card exactly. Bank accounts must be
+                    seeded with Aadhaar and enabled for DBT to receive funds.
+                </div>
+                <button class="result-btn-primary"
+                    style="width:100%; margin-top:20px; justify-content:center; padding:12px;"
+                    data-close-modal="modal-docs">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Scheme Document Checklist (Apply Guide tab) -->
+    <div class="modal-backdrop" id="modal-scheme-docs" role="dialog" aria-modal="true" aria-labelledby="sdm-title"
+        data-modal-id="modal-scheme-docs">
+        <div class="modal-box scheme-doc-modal-box">
+            <div class="modal-header">
+                <div class="modal-titles">
+                    <div class="modal-title">Required Documents</div>
+                    <div class="sdm-scheme-heading" id="sdm-scheme-title"></div>
+                </div>
+                <button class="modal-close" data-close-modal="modal-scheme-docs"
+                    aria-label="Close document checklist">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" style="padding-top:4px;">
+                <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+                    Click any document to view a guide on how to obtain it.
+                </p>
+                <ul class="sdm-checklist" id="sdm-checklist" role="list">
+                    <!-- Populated by JS -->
+                </ul>
+                <div style="margin-top:18px;">
+                    <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener" class="btn-saffron-sm"
+                        style="display:inline-flex; width:auto; padding:10px 22px;">
+                        Apply on MahaDBT â†—
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Notice 1 -->
+    <div class="modal-backdrop" id="modal-notice-1" role="dialog" aria-modal="true" aria-labelledby="mn1-title"
+        data-modal-id="modal-notice-1">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-titles">
+                    <div class="modal-badge-wrap">
+                        <span class="badge badge-deadline">ðŸ“Œ Deadline</span>
+                        <span class="badge badge-pinned">Pinned</span>
+                    </div>
+                    <div class="modal-title" id="mn1-title">MahaDBT Scholarship Application â€” Last date to apply</div>
+                </div>
+                <button class="modal-close" data-close-modal="modal-notice-1" aria-label="Close notice">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Dear Students,</p>
+                <p>This is an important reminder that the <strong>MahaDBT Online Scholarship Application</strong> portal
+                    will
+                    close in <strong>12 days</strong>. All eligible students who have not yet submitted their
+                    application must do
+                    so on priority.</p>
+                <p>Ensure the following documents are ready before applying: Aadhaar Card, Income Certificate (current
+                    year),
+                    Caste Certificate, Bonafide Certificate, Previous year marksheet, and a bank account linked with
+                    Aadhaar (DBT
+                    enabled).</p>
+                <p>Students who miss the deadline will not be eligible for scholarship benefits for the current academic
+                    year
+                    2025â€“26. No extensions are expected.</p>
+                <p>For assistance, attend the DBT Enabling Camp on <strong>Thursday 10 AM, Room 204</strong> or contact
+                    your
+                    scholarship coordinator.</p>
+                <p style="font-size:12px; color:var(--text-light);">Posted by: College Administration Â· 18 Mar 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Notice 2 -->
+    <div class="modal-backdrop" id="modal-notice-2" role="dialog" aria-modal="true" aria-labelledby="mn2-title"
+        data-modal-id="modal-notice-2">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-titles">
+                    <div class="modal-badge-wrap"><span class="badge badge-high">ðŸ”´ High Priority</span></div>
+                    <div class="modal-title" id="mn2-title">Mandatory DBT Enabling Camp â€” Thursday 10 AM Room 204</div>
+                </div>
+                <button class="modal-close" data-close-modal="modal-notice-2" aria-label="Close notice">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Dear Students,</p>
+                <p>Attendance is <strong>mandatory</strong> for the DBT Enabling Camp being held on <strong>Thursday,
+                        27th March
+                        2026 at 10:00 AM in Room 204</strong>.</p>
+                <p>During this session, our scholarship coordinator and a bank representative will help you:</p>
+                <p>â€¢ Link your Aadhaar with your bank account (DBT activation)<br>â€¢ Verify your NPCI mapper status<br>â€¢
+                    Complete
+                    any pending steps on the MahaDBT portal<br>â€¢ Resolve any document upload or form errors</p>
+                <p>Please bring your <strong>Aadhaar card (original + photocopy)</strong>, bank passbook, and your
+                    mobile phone.
+                    Students who do not attend and later face DBT issues will not be guaranteed support before the
+                    application
+                    deadline.</p>
+                <p>An email has been sent to all registered students with this information.</p>
+                <p style="font-size:12px; color:var(--text-light);">Posted by: College Administration Â· 16 Mar 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Notice 3 -->
+    <div class="modal-backdrop" id="modal-notice-3" role="dialog" aria-modal="true" aria-labelledby="mn3-title"
+        data-modal-id="modal-notice-3">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-titles">
+                    <div class="modal-badge-wrap"><span class="badge badge-general">General</span></div>
+                    <div class="modal-title" id="mn3-title">Academic calendar updated â€” check portal for revised exam
+                        dates</div>
+                </div>
+                <button class="modal-close" data-close-modal="modal-notice-3" aria-label="Close notice">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Dear Students,</p>
+                <p>The <strong>Academic Calendar for 2025â€“26</strong> has been revised. The updated calendar is now
+                    available on
+                    the college portal.</p>
+                <p>Key changes include:</p>
+                <p>â€¢ Unit tests for Semester IV rescheduled to <strong>April 7â€“11, 2026</strong><br>â€¢ End Semester
+                    Examinations
+                    begin <strong>May 5, 2026</strong> (moved 1 week earlier)<br>â€¢ Practical examinations: April 28 â€“
+                    May 2,
+                    2026<br>â€¢ Revised holidays: Gudi Padwa (March 30) added as a college holiday</p>
+                <p>Students are advised to plan their scholarship applications and DBT-enabling activities well before
+                    the exam
+                    season begins. Please check the official portal for the complete updated schedule.</p>
+                <p style="font-size:12px; color:var(--text-light);">Posted by: Academic Section Â· 14 Mar 2026</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- â•â• REPORT MODAL â•â• -->
+    <div class="modal-backdrop" id="modal-report" role="dialog" aria-modal="true" aria-labelledby="report-modal-title"
+        data-modal-id="modal-report">
+        <div class="modal-box report-modal-box">
+            <div class="modal-header">
+                <div class="modal-titles">
+                    <div class="modal-title" id="report-modal-title">Report Incorrect Step ðŸš©</div>
+                </div>
+                <button class="modal-close" data-close-modal="modal-report" aria-label="Close report modal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:13.5px; color:var(--text-muted);">Which part of this step is incorrect?</p>
+                <div class="report-radio-group" role="radiogroup" aria-label="Issue type">
+                    <label class="report-radio-label" id="report-opt-1">
+                        <input type="radio" name="report-issue" value="screenshot" id="r-screenshot"> Screenshot is
+                        outdated or wrong
+                    </label>
+                    <label class="report-radio-label" id="report-opt-2">
+                        <input type="radio" name="report-issue" value="instructions" id="r-instructions"> Instructions
+                        are wrong or unclear
+                    </label>
+                    <label class="report-radio-label" id="report-opt-3">
+                        <input type="radio" name="report-issue" value="order" id="r-order"> This is the wrong step order
+                    </label>
+                </div>
+                <button class="report-submit-btn" id="report-submit-btn">Submit Report</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- â•â• FOOTER â•â• -->
+    <footer class="site-footer" role="contentinfo">
+        <a href="index.html" class="footer-logo" aria-label="ScholarSetu home">
+            <div class="footer-logo-icon">ðŸŽ“</div>
+            <span class="footer-logo-text">ScholarSetu</span>
+        </a>
+
+        <nav class="footer-links" aria-label="Footer links">
+            <a href="#" class="footer-link" id="footer-privacy">Privacy Policy</a>
+            <a href="#" class="footer-link" id="footer-terms">Terms of Use</a>
+            <a href="#" class="footer-link" id="footer-contact">Contact</a>
+        </nav>
+
+        <div class="footer-copy">Â© 2026 ScholarSetu. Built for Maharashtra students.</div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/student-utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-navbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-tabs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-modal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-notices.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-story.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-eligibility.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-schemes.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/student-qa.js') }}"></script>
+</body>
+
+</html>

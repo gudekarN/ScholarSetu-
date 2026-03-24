@@ -1,0 +1,488 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Super Admin â€” ScholarSetu</title>
+    <meta name="description"
+        content="ScholarSetu Platform Super Admin â€” manage colleges, keys, deadlines, and academic year." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/superadmin-base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/superadmin-layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/superadmin-components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/superadmin-panels.css') }}">
+</head>
+
+<body>
+
+    <!-- Tricolor Bar -->
+    <div class="tricolor-bar">
+        <div class="tc-saffron"></div>
+        <div class="tc-white"></div>
+        <div class="tc-green"></div>
+    </div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-icon">ðŸ‘‘</div>
+            <div class="nav-logo-texts">
+                <span class="nav-logo-text">ScholarSetu</span>
+                <span class="nav-logo-sub">Maharashtra Scholarship</span>
+            </div>
+        </a>
+        <div class="nav-superadmin-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z">
+                </path>
+            </svg>
+            Super Admin
+        </div>
+
+        <div class="nav-spacer"></div>
+
+        <div class="nav-center">
+            <div class="nav-center-title">Platform Administration</div>
+            <div class="nav-center-sub">Central Control Panel</div>
+        </div>
+
+        <div class="nav-spacer"></div>
+
+        <div class="profile-wrap">
+            <div class="profile-circle" id="profile-btn">SA</div>
+            <div class="profile-dropdown" id="profile-dropdown">
+                <div class="dropdown-header">
+                    <div class="dropdown-avatar">SA</div>
+                    <div>
+                        <div class="dropdown-name">Super Admin</div>
+                        <div class="dropdown-role">System Owner</div>
+                    </div>
+                </div>
+                <div class="dropdown-menu">
+                    <button class="dropdown-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        Security Settings
+                    </button>
+                    <div class="dropdown-divider"></div>
+                    <button class="dropdown-item logout" id="sa-logout-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        System Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-body">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-header-icon">âš™ï¸</div>
+                <div class="sidebar-header-text">Admin Menu</div>
+            </div>
+
+            <div class="sidebar-label">Platform</div>
+            <button class="sidebar-btn active" data-tab="colleges">
+                <span class="sidebar-icon">ðŸ«</span> College Registry
+            </button>
+            <button class="sidebar-btn" data-tab="keys">
+                <span class="sidebar-icon">ðŸ”‘</span> Secret Key Generator
+            </button>
+
+            <div class="sidebar-label">Tracking</div>
+            <button class="sidebar-btn" data-tab="reports">
+                <span class="sidebar-icon">ðŸ“¸</span> Step Report Tracker
+            </button>
+            <button class="sidebar-btn" data-tab="deadlines">
+                <span class="sidebar-icon">ðŸ“…</span> Deadline Manager
+            </button>
+            <button class="sidebar-btn" data-tab="data">
+                <span class="sidebar-icon">ðŸ“š</span> Data Manager
+            </button>
+
+            <div class="sidebar-label">System</div>
+            <button class="sidebar-btn" data-tab="reset" style="color: var(--red); opacity: 0.9;">
+                <span class="sidebar-icon">ðŸ”„</span> Academic Year Reset
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <!-- TAB 1: College Registry -->
+            <div id="tab-colleges" class="tab-panel active">
+                <div class="section-head">
+                    <span class="head-icon">ðŸ«</span>
+                    <h2>College Registry</h2>
+                </div>
+                <div class="section-sub">Manage all colleges registered on the ScholarSetu platform.</div>
+
+                <div class="metrics-strip">
+                    <div class="metric-card m-total">
+                        <div class="metric-value">8</div>
+                        <div class="metric-label">Total Colleges</div>
+                    </div>
+                    <div class="metric-card m-active">
+                        <div class="metric-value">6</div>
+                        <div class="metric-label">Active</div>
+                    </div>
+                    <div class="metric-card m-pending">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">Pending / Inactive</div>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>College Name</th>
+                                    <th>AISHE Code</th>
+                                    <th>Admin Email</th>
+                                    <th>Status</th>
+                                    <th>Registered On</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>DY Patil College of Engineering</strong></td>
+                                    <td class="td-mono">C-41324</td>
+                                    <td>admin@dypcoe.edu</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td class="td-muted">12 Jan 2025</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-deactivate">Deactivate</button>
+                                            <button class="btn-link" data-college-name="DY Patil College of Engineering" data-college-email="admin@dypcoe.edu">Update Email</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Government College of Engineering, Pune</strong></td>
+                                    <td class="td-mono">C-41221</td>
+                                    <td>principal@coep.ac.in</td>
+                                    <td><span class="status-badge status-active">Active</span></td>
+                                    <td class="td-muted">05 Feb 2025</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-deactivate">Deactivate</button>
+                                            <button class="btn-link" data-college-name="Government College of Engineering, Pune" data-college-email="principal@coep.ac.in">Update Email</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>PICT Pune</strong></td>
+                                    <td class="td-mono">C-41200</td>
+                                    <td>admin@pict.edu</td>
+                                    <td><span class="status-badge status-pending">Pending</span></td>
+                                    <td class="td-muted">18 Mar 2026</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-activate">Activate</button>
+                                            <button class="btn-link" data-college-name="PICT Pune" data-college-email="admin@pict.edu">Update Email</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr style="opacity: 0.7;">
+                                    <td><strong>Sinhgad Institute of Technology</strong></td>
+                                    <td class="td-mono">C-41299</td>
+                                    <td>admin@sinhgad.edu</td>
+                                    <td><span class="status-badge status-inactive">Inactive</span></td>
+                                    <td class="td-muted">10 Nov 2024</td>
+                                    <td>
+                                        <div class="action-group">
+                                            <button class="btn-activate">Activate</button>
+                                            <button class="btn-link" data-college-name="Sinhgad Institute of Technology" data-college-email="admin@sinhgad.edu">Update Email</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: Secret Key Generator -->
+            <div id="tab-keys" class="tab-panel">
+                <div class="section-head">
+                    <span class="head-icon">ðŸ”‘</span>
+                    <h2>Secret Key Generator</h2>
+                </div>
+                <div class="section-sub">Generate unique registration keys for new colleges.</div>
+
+                <div class="keygen-card">
+                    <div class="keygen-info">
+                        <div class="keygen-info-icon">â„¹ï¸</div>
+                        <div class="keygen-info-text">
+                            Generate a unique Secret Key for a new college <strong>after verifying their request</strong>.
+                            The college will need this key along with their AISHE code to register their admin account.
+                        </div>
+                    </div>
+
+                    <div class="keygen-form">
+                        <div class="form-row">
+                            <label class="form-label" for="gk-college">College Name</label>
+                            <input type="text" class="form-input" id="gk-college" placeholder="e.g. VIT Pune" />
+                        </div>
+                        <div class="form-row">
+                            <label class="form-label" for="gk-aishe">AISHE Code</label>
+                            <input type="text" class="form-input" id="gk-aishe" placeholder="e.g. C-41255" />
+                        </div>
+                    </div>
+
+                    <button class="btn-generate" id="btn-generate-key">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;">
+                            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"></path>
+                        </svg>
+                        Generate Secret Key
+                    </button>
+
+                    <div class="key-result" id="key-result">
+                        <div class="key-result-label">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            Generated Secure Key
+                        </div>
+                        <div class="key-display-wrap">
+                            <div class="key-display masked" id="secret-key-display">â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢</div>
+                            <button class="btn-reveal" id="btn-reveal">Reveal</button>
+                            <button class="btn-copy" id="btn-copy-key">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;">
+                                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                                Copy Key
+                            </button>
+                        </div>
+                        <div class="key-warning">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                            This key is shown only once. Store it securely before sharing. It cannot be recovered later.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: Step Report Tracker -->
+            <div id="tab-reports" class="tab-panel">
+                <div class="section-head">
+                    <span class="head-icon">ðŸ“¸</span>
+                    <h2>Step Report Tracker</h2>
+                </div>
+                <div class="section-sub">Monitor student issue reports and update tutorial steps globally.</div>
+
+                <div class="table-card">
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Process</th>
+                                    <th>Step Number</th>
+                                    <th>Issue Reports</th>
+                                    <th>Last Reported</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Check DBT Status (NPCI)</strong></td>
+                                    <td>Step 3: Finding portal link</td>
+                                    <td><span class="report-count-badge">7</span></td>
+                                    <td class="td-muted">2 days ago</td>
+                                    <td>
+                                        <button class="btn-mark-updated">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                                                style="width:14px;height:14px;">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            Mark as Updated
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Enable DBT (Online)</strong></td>
+                                    <td>Step 5: Document upload size</td>
+                                    <td><span class="report-count-badge low">3</span></td>
+                                    <td class="td-muted">5 days ago</td>
+                                    <td>
+                                        <button class="btn-mark-updated">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                                                style="width:14px;height:14px;">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            Mark as Updated
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Grievance (Online)</strong></td>
+                                    <td>Step 2: Category selection</td>
+                                    <td><span class="report-count-badge low">1</span></td>
+                                    <td class="td-muted">1 week ago</td>
+                                    <td>
+                                        <button class="btn-mark-updated">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                                                style="width:14px;height:14px;">
+                                                <polyline points="20 6 9 17 4 12"></polyline>
+                                            </svg>
+                                            Mark as Updated
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: Academic Year Reset -->
+            <div id="tab-reset" class="tab-panel">
+                <div class="section-head">
+                    <span class="head-icon" style="color:var(--red);">ðŸ”„</span>
+                    <h2 style="color:var(--red);">Academic Year Reset</h2>
+                </div>
+                <div class="section-sub">Prepare the entire ScholarSetu platform for the next academic year.</div>
+
+                <div class="reset-warning-card">
+                    <div class="reset-warning-header">
+                        <div class="reset-warning-header-icon">âš ï¸</div>
+                        <div>
+                            <h3>Academic Year Reset â€” 2024â€“25 â†’ 2025â€“26</h3>
+                            <p>This is a destructive action that will affect all colleges and students globally.</p>
+                        </div>
+                    </div>
+                    <div class="reset-warning-body">
+                        <ul class="reset-bullet-list">
+                            <li>
+                                <div class="reset-bullet-icon">1</div>
+                                <span><strong>Refreshes all invite tokens:</strong> Old invite links will become invalid immediately.</span>
+                            </li>
+                            <li>
+                                <div class="reset-bullet-icon">2</div>
+                                <span><strong>Increments student year:</strong> 1st year students become 2nd year, etc. 4th year students are archived.</span>
+                            </li>
+                            <li>
+                                <div class="reset-bullet-icon">3</div>
+                                <span><strong>Archives current notices:</strong> Dashboard notice boards for all colleges will be cleared.</span>
+                            </li>
+                            <li>
+                                <div class="reset-bullet-icon">4</div>
+                                <span><strong>Resets scholarship deadlines:</strong> All active scholarship trackers are reset to default state.</span>
+                            </li>
+                        </ul>
+
+                        <div class="reset-actions">
+                            <button class="btn-preview" id="btn-preview-reset">Preview Changes</button>
+                            <button class="btn-execute" id="btn-execute-reset" disabled>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px;">
+                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                                Execute Reset
+                            </button>
+                            <div class="preview-confirmed-badge" id="preview-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                                    stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                                Preview Confirmed
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Placeholder tabs -->
+            <div id="tab-deadlines" class="tab-panel">
+                <div class="coming-soon">
+                    <div class="cs-icon">ðŸ“…</div>
+                    <h2>Deadline Manager</h2>
+                    <p>Global management of MahaDBT scholarship deadlines to sync across all colleges.</p>
+                    <div class="cs-pill">Coming Soon</div>
+                </div>
+            </div>
+
+            <div id="tab-data" class="tab-panel">
+                <div class="coming-soon">
+                    <div class="cs-icon">ðŸ“š</div>
+                    <h2>Scholarship Data Manager</h2>
+                    <p>Update scholarship criteria, required documents, and eligibility rules centrally.</p>
+                    <div class="cs-pill">Coming Soon</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div class="modal-overlay" id="reset-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-icon">âš ï¸</div>
+                <div class="modal-title">Confirm Academic Reset</div>
+            </div>
+            <div class="modal-body">
+                <p>You are about to reset the platform from <strong>2024â€“25</strong> to <strong>2025â€“26</strong>. Please
+                    review the changes that will be applied globally to 8 colleges and all 2,400+ students.</p>
+
+                <ul class="modal-changes">
+                    <li>1,850 students will be incremented to next year.</li>
+                    <li>550 4th-year students will be marked as Alumni.</li>
+                    <li>24 active notices will be archived.</li>
+                    <li>8 college invite links will be rotated.</li>
+                </ul>
+
+                <div class="modal-confirm-input-wrap">
+                    <div class="modal-confirm-label">Type 'CONFIRM RESET' to proceed</div>
+                    <input type="text" class="modal-confirm-input" id="reset-confirm-input"
+                        placeholder="CONFIRM RESET" autocomplete="off" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-modal-cancel" id="btn-modal-cancel">Cancel</button>
+                <button class="btn-modal-confirm" id="btn-modal-confirm" disabled>Acknowledge &amp; Enable Execution</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/superadmin-utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/superadmin-navbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/superadmin-main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/superadmin-colleges.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/superadmin-keys.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/superadmin-reports.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/superadmin-reset.js') }}"></script>
+</body>
+
+</html>

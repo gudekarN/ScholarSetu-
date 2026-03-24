@@ -1,15 +1,15 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login — ScholarSetu</title>
-  <meta name="description" content="Login to ScholarSetu — Maharashtra's scholarship platform for students and college administrators." />
+  <title>Login â€” ScholarSetu</title>
+  <meta name="description" content="Login to ScholarSetu â€” Maharashtra's scholarship platform for students and college administrators." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
   <style>
-    /* ── Tokens ── */
+    /* â”€â”€ Tokens â”€â”€ */
     :root {
       --saffron:       #FF6B00;
       --saffron-light: #FF8C38;
@@ -52,7 +52,7 @@
       overflow-x: hidden;
     }
 
-    /* ── Tricolor gradient background ── */
+    /* â”€â”€ Tricolor gradient background â”€â”€ */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0;
@@ -66,7 +66,7 @@
       pointer-events: none;
     }
 
-    /* ── Tricolor stripe ── */
+    /* â”€â”€ Tricolor stripe â”€â”€ */
     .tricolor-bar {
       position: fixed; top: 0; left: 0; right: 0;
       height: 4px; z-index: 200; display: flex;
@@ -75,7 +75,7 @@
     .tc-white   { flex:1; background: #fff; }
     .tc-green   { flex:1; background: #138808; }
 
-    /* ── Ashok Chakra watermark ── */
+    /* â”€â”€ Ashok Chakra watermark â”€â”€ */
     .chakra-wrap {
       position: fixed;
       top: 50%; left: 50%;
@@ -86,14 +86,14 @@
     }
     .chakra-wrap svg { width: 100%; height: 100%; }
 
-    /* ── Page wrapper ── */
+    /* â”€â”€ Page wrapper â”€â”€ */
     .page-wrap {
       position: relative; z-index: 1;
       width: 100%; max-width: 420px;
       display: flex; flex-direction: column; align-items: center; gap: 0;
     }
 
-    /* ── Logo block (centered, Playfair) ── */
+    /* â”€â”€ Logo block (centered, Playfair) â”€â”€ */
     .logo-block {
       display: flex; flex-direction: column; align-items: center;
       gap: 10px; margin-bottom: 28px;
@@ -117,7 +117,7 @@
       text-transform: uppercase; margin-top: -4px;
     }
 
-    /* ── Card ── */
+    /* â”€â”€ Card â”€â”€ */
     .card {
       width: 100%;
       background: var(--card);
@@ -127,7 +127,7 @@
       overflow: hidden;
     }
 
-    /* ── Tabs ── */
+    /* â”€â”€ Tabs â”€â”€ */
     .tabs {
       display: flex;
       border-bottom: 1px solid var(--border);
@@ -151,10 +151,10 @@
     }
     .tab-icon { font-size: 16px; }
 
-    /* ── Card body ── */
+    /* â”€â”€ Card body â”€â”€ */
     .card-body { padding: 32px 32px 36px; }
 
-    /* ── Form heading ── */
+    /* â”€â”€ Form heading â”€â”€ */
     .form-head { margin-bottom: 24px; }
     .form-head h1 {
       font-family: var(--font-head); font-size: 21px;
@@ -162,7 +162,7 @@
     }
     .form-head p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
 
-    /* ── Error alert ── */
+    /* â”€â”€ Error alert â”€â”€ */
     .error-alert {
       display: none;
       align-items: flex-start; gap: 10px;
@@ -195,7 +195,7 @@
     }
     .error-dismiss:hover { opacity: 1; }
 
-    /* ── Form ── */
+    /* â”€â”€ Form â”€â”€ */
     .form-group { margin-bottom: 18px; }
     label {
       display: block; font-size: 13px; font-weight: 600;
@@ -294,7 +294,7 @@
     }
     .divider span { font-size: 11px; color: var(--text-light); font-weight: 500; white-space: nowrap; }
 
-    /* ── Back link ── */
+    /* â”€â”€ Back link â”€â”€ */
     .back-link {
       display: inline-flex; align-items: center; gap: 6px;
       font-size: 13px; font-weight: 500; color: var(--text-muted);
@@ -304,7 +304,7 @@
     .back-link:hover { color: var(--navy); }
     .back-link svg { width: 14px; height: 14px; }
 
-    /* ── Disclaimer ── */
+    /* â”€â”€ Disclaimer â”€â”€ */
     .disclaimer {
       margin-top: 24px; text-align: center;
       font-size: 11px; color: var(--text-light);
@@ -312,7 +312,7 @@
       position: relative; z-index: 1;
     }
 
-    /* ── Tab panels ── */
+    /* â”€â”€ Tab panels â”€â”€ */
     .tab-panel { display: none; }
     .tab-panel.active { display: block; animation: fade-in .22s ease; }
     @keyframes fade-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
@@ -409,7 +409,7 @@
 
     <!-- Logo -->
     <div class="logo-block">
-      <div class="logo-icon-wrap">🎓</div>
+      <div class="logo-icon-wrap">ðŸŽ“</div>
       <span class="logo-text">ScholarSetu</span>
       <span class="logo-tagline">Maharashtra Scholarship Platform</span>
     </div>
@@ -427,7 +427,7 @@
           aria-controls="panel-student"
           onclick="switchTab('student')"
         >
-          <span class="tab-icon">🎓</span> Student
+          <span class="tab-icon">ðŸŽ“</span> Student
         </button>
         <button
           class="tab-btn"
@@ -437,7 +437,7 @@
           aria-controls="panel-admin"
           onclick="switchTab('admin')"
         >
-          <span class="tab-icon">🏛️</span> College Admin
+          <span class="tab-icon">ðŸ›ï¸</span> College Admin
         </button>
       </div>
 
@@ -452,10 +452,10 @@
             <line x1="12" y1="16" x2="12.01" y2="16"/>
           </svg>
           <span class="error-alert-text">Invalid email or password. Please try again.</span>
-          <button class="error-dismiss" onclick="hideError()" aria-label="Dismiss error">×</button>
+          <button class="error-dismiss" onclick="hideError()" aria-label="Dismiss error">Ã—</button>
         </div>
 
-        <!-- ── Student Panel ── -->
+        <!-- â”€â”€ Student Panel â”€â”€ -->
         <div class="tab-panel active" id="panel-student" role="tabpanel" aria-labelledby="tab-student">
           <div class="form-head">
             <h1>Student Login</h1>
@@ -490,12 +490,12 @@
           <div class="below-note">
             <div class="invite-note">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
-              <span>Don't have an account? Register via your <strong>college invite link</strong> — ask your college admin for the link.</span>
+              <span>Don't have an account? Register via your <strong>college invite link</strong> â€” ask your college admin for the link.</span>
             </div>
           </div>
         </div>
 
-        <!-- ── Admin Panel ── -->
+        <!-- â”€â”€ Admin Panel â”€â”€ -->
         <div class="tab-panel" id="panel-admin" role="tabpanel" aria-labelledby="tab-admin">
           <div class="form-head">
             <h1>Admin Login</h1>
@@ -528,7 +528,7 @@
           </form>
 
           <div class="below-note" style="margin-top:20px">
-            New college? <a href="register-college.html" id="link-register-college">Register here →</a>
+            New college? <a href="register-college.html" id="link-register-college">Register here â†’</a>
           </div>
         </div>
 
@@ -544,7 +544,7 @@
   </div><!-- /page-wrap -->
 
   <script>
-    // ── Tab switching ──
+    // â”€â”€ Tab switching â”€â”€
     function switchTab(which) {
       ['student', 'admin'].forEach(t => {
         document.getElementById('tab-' + t).classList.toggle('active', t === which);
@@ -554,7 +554,7 @@
       hideError();
     }
 
-    // ── Password toggle ──
+    // â”€â”€ Password toggle â”€â”€
     const EYE_OPEN  = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
     const EYE_CLOSE = `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
 
@@ -565,7 +565,7 @@
       btn.querySelector('svg').innerHTML = show ? EYE_CLOSE : EYE_OPEN;
     }
 
-    // ── Error alert ──
+    // â”€â”€ Error alert â”€â”€
     function showError() {
       const el = document.getElementById('error-alert');
       el.classList.remove('show');
@@ -576,7 +576,7 @@
       document.getElementById('error-alert').classList.remove('show');
     }
 
-    // ── Form submit (demo: always show error) ──
+    // â”€â”€ Form submit (demo: always show error) â”€â”€
     function handleLogin(e, type) {
       e.preventDefault();
       const emailId = type === 'student' ? 's-email' : 'a-email';
@@ -599,11 +599,11 @@
 
       if (hasError) { showError(); return; }
 
-      // Simulate failed auth (demo page — no backend)
+      // Simulate failed auth (demo page â€” no backend)
       showError();
     }
 
-    // ── Clear field error on input ──
+    // â”€â”€ Clear field error on input â”€â”€
     ['s-email','s-password','a-email','a-password'].forEach(id => {
       document.getElementById(id).addEventListener('input', function() {
         this.classList.remove('field-error');
