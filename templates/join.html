@@ -3,429 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join ScholarSetu â€” Student Registration</title>
+  <title>Join ScholarSetu — Student Registration</title>
   <meta name="description" content="Register as a student on ScholarSetu via your college invite link. Fill in your details to access Maharashtra's scholarship platform." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
-  <style>
-    /* â”€â”€ Tokens â”€â”€ */
-    :root {
-      --saffron:          #FF6B00;
-      --saffron-light:    #FF8C38;
-      --saffron-pale:     rgba(255,107,0,.09);
-      --navy:             #0A1628;
-      --green:            #138808;
-      --green-dark:       #0D6B06;
-      --green-pale:       rgba(19,136,8,.08);
-      --green-bdr:        rgba(19,136,8,.22);
-      --green-success:    #16A34A;
-      --green-success-bg: rgba(22,163,74,.07);
-      --green-success-bdr:rgba(22,163,74,.28);
-      --amber:            #D97706;
-      --amber-bg:         rgba(217,119,6,.08);
-      --amber-bdr:        rgba(217,119,6,.28);
-      --red-alert:        #DC2626;
-      --red-alert-bg:     rgba(220,38,38,.07);
-      --red-alert-bdr:    rgba(220,38,38,.25);
-      --bg:               #F4F1EC;
-      --card:             #FFFFFF;
-      --border:           #E5E1DA;
-      --text:             #1A1A1A;
-      --text-muted:       #6B7280;
-      --text-light:       #9CA3AF;
-      --input-bg:         #FAFAF9;
-      --radius:           16px;
-      --radius-sm:        10px;
-      --shadow-card:      0 32px 80px rgba(0,0,0,.13), 0 4px 20px rgba(0,0,0,.07);
-      --transition:       all .22s cubic-bezier(.4,0,.2,1);
-      --font-body:        'Inter', sans-serif;
-      --font-head:        'Outfit', sans-serif;
-      --font-logo:        'Playfair Display', serif;
-    }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      min-height: 100vh;
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 16px 60px;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* â”€â”€ Tricolor gradient BG â”€â”€ */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background:
-        linear-gradient(180deg,
-          rgba(255,107,0,.09) 0%,
-          rgba(255,255,255,0) 25%,
-          rgba(255,255,255,0) 75%,
-          rgba(19,136,8,.08) 100%
-        );
-      pointer-events: none;
-    }
-
-    /* â”€â”€ Tricolor bar â”€â”€ */
-    .tricolor-bar {
-      position: fixed; top: 0; left: 0; right: 0;
-      height: 4px; z-index: 200; display: flex;
-    }
-    .tc-saffron { flex:1; background: #FF6B00; }
-    .tc-white   { flex:1; background: #fff; }
-    .tc-green   { flex:1; background: #138808; }
-
-    /* â”€â”€ Ashok Chakra watermark â”€â”€ */
-    .chakra-wrap {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 520px; height: 520px;
-      opacity: .032;
-      pointer-events: none; z-index: 0;
-    }
-    .chakra-wrap svg { width: 100%; height: 100%; }
-
-    /* â”€â”€ Page wrapper â”€â”€ */
-    .page-wrap {
-      position: relative; z-index: 1;
-      width: 100%; max-width: 520px;
-      display: flex; flex-direction: column; align-items: center;
-    }
-
-    /* â”€â”€ Back link â”€â”€ */
-    .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; font-weight: 500; color: var(--text-muted);
-      text-decoration: none; margin-bottom: 22px;
-      transition: color .2s; align-self: flex-start;
-    }
-    .back-link:hover { color: var(--navy); }
-    .back-link svg { width: 14px; height: 14px; }
-
-    /* â”€â”€ Logo block â”€â”€ */
-    .logo-block {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 10px; margin-bottom: 26px;
-    }
-    .logo-icon-wrap {
-      width: 52px; height: 52px;
-      background: linear-gradient(135deg, var(--saffron), #FF3E00);
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px;
-      box-shadow: 0 6px 20px rgba(255,107,0,.32);
-    }
-    .logo-text {
-      font-family: var(--font-logo);
-      font-weight: 700; font-size: 28px;
-      color: var(--navy); letter-spacing: -.01em;
-    }
-    .logo-tagline {
-      font-size: 12px; font-weight: 500;
-      color: var(--text-muted); letter-spacing: .04em;
-      text-transform: uppercase; margin-top: -4px;
-    }
-
-    /* â”€â”€ Card â”€â”€ */
-    .card {
-      width: 100%;
-      background: var(--card);
-      border-radius: 20px;
-      box-shadow: var(--shadow-card);
-      border: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    /* â”€â”€ College banner (top of card) â”€â”€ */
-    .college-banner {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: linear-gradient(135deg, #15803D 0%, #16A34A 100%);
-      padding: 14px 20px;
-      border-bottom: 1px solid rgba(255,255,255,.12);
-    }
-    .college-banner .lock-icon {
-      width: 32px; height: 32px; flex-shrink: 0;
-      background: rgba(255,255,255,.18);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .college-banner .lock-icon svg {
-      width: 15px; height: 15px; color: #fff;
-    }
-    .college-banner-text {
-      flex: 1; line-height: 1.45;
-    }
-    .college-banner-text .join-label {
-      font-size: 11px; font-weight: 500;
-      color: rgba(255,255,255,.78); letter-spacing: .04em;
-      text-transform: uppercase;
-    }
-    .college-banner-text .college-name {
-      font-size: 14px; font-weight: 700;
-      color: #fff; margin-top: 1px;
-    }
-    .college-banner-text .invited-by {
-      font-size: 11.5px; color: rgba(255,255,255,.72);
-      margin-top: 2px;
-    }
-    .college-banner-text .invited-by span {
-      font-weight: 600; color: rgba(255,255,255,.9);
-    }
-
-    /* â”€â”€ Card body â”€â”€ */
-    .card-body { padding: 28px 28px 32px; }
-
-    /* â”€â”€ Form heading â”€â”€ */
-    .form-head { margin-bottom: 22px; }
-    .form-head h1 {
-      font-family: var(--font-head); font-size: 21px;
-      font-weight: 800; color: var(--navy); margin-bottom: 4px;
-    }
-    .form-head p { font-size: 13px; color: var(--text-muted); line-height: 1.55; }
-
-    /* â”€â”€ PRN warning (dismissable) â”€â”€ */
-    .prn-warning {
-      display: none;
-      align-items: flex-start; gap: 10px;
-      background: var(--amber-bg);
-      border: 1px solid var(--amber-bdr);
-      border-radius: var(--radius-sm);
-      padding: 12px 14px;
-      margin-bottom: 20px;
-      animation: slide-in .28s cubic-bezier(.4,0,.2,1);
-    }
-    .prn-warning.show { display: flex; }
-    @keyframes slide-in {
-      from { opacity:0; transform:translateY(-6px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    .prn-warning svg {
-      width: 16px; height: 16px; flex-shrink: 0;
-      color: var(--amber); margin-top: 1px;
-    }
-    .prn-warning-text {
-      font-size: 13px; color: #92400E; font-weight: 500; line-height: 1.5; flex:1;
-    }
-    .prn-dismiss {
-      background: none; border: none; cursor: pointer;
-      color: var(--amber); opacity: .7;
-      padding: 0 2px; font-size: 17px; line-height: 1;
-      transition: opacity .2s; flex-shrink: 0;
-    }
-    .prn-dismiss:hover { opacity: 1; }
-
-    /* â”€â”€ Form layout â”€â”€ */
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px 14px;
-    }
-
-    .form-group.full { grid-column: 1 / -1; }
-
-    label {
-      display: block; font-size: 13px; font-weight: 600;
-      color: var(--navy); margin-bottom: 6px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="tel"],
-    select {
-      width: 100%; padding: 11px 14px;
-      background: var(--input-bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 14px; font-family: var(--font-body);
-      color: var(--text); outline: none;
-      transition: var(--transition);
-      appearance: none; -webkit-appearance: none;
-    }
-    input:focus, select:focus {
-      border-color: var(--saffron);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(255,107,0,.11);
-    }
-    input.field-error, select.field-error {
-      border-color: var(--red-alert);
-      box-shadow: 0 0 0 3px rgba(220,38,38,.09);
-    }
-
-    /* Select arrow */
-    .select-wrap { position: relative; }
-    .select-wrap::after {
-      content: '';
-      position: absolute; right: 13px; top: 50%;
-      transform: translateY(-50%);
-      width: 0; height: 0;
-      border-left: 4.5px solid transparent;
-      border-right: 4.5px solid transparent;
-      border-top: 5.5px solid var(--text-muted);
-      pointer-events: none;
-    }
-
-    /* Helper text under input */
-    .field-hint {
-      margin-top: 5px;
-      font-size: 11.5px; color: var(--text-light); line-height: 1.5;
-      display: flex; align-items: flex-start; gap: 5px;
-    }
-    .field-hint svg { width: 12px; height: 12px; flex-shrink: 0; margin-top: 1px; color: var(--text-light); }
-
-    /* Email hint (colored) */
-    .email-hint {
-      margin-top: 5px;
-      font-size: 11.5px; color: var(--green-success);
-      font-weight: 500; display: flex; align-items: center; gap: 5px;
-    }
-    .email-hint svg { width: 12px; height: 12px; flex-shrink: 0; }
-
-    /* Password wrapper */
-    .pw-wrap { position: relative; }
-    .pw-wrap input { padding-right: 44px; }
-    .toggle-pw {
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; cursor: pointer;
-      color: var(--text-light); padding: 4px;
-      display: flex; align-items: center;
-      transition: color .2s;
-    }
-    .toggle-pw:hover { color: var(--navy); }
-    .toggle-pw svg { width: 17px; height: 17px; }
-
-    /* Submit button */
-    .btn-submit {
-      width: 100%; padding: 13px;
-      background: var(--saffron); color: #fff;
-      border: none; border-radius: var(--radius-sm);
-      font-size: 15px; font-weight: 700; font-family: var(--font-body);
-      cursor: pointer; letter-spacing: .02em;
-      box-shadow: 0 4px 18px rgba(255,107,0,.32);
-      transition: var(--transition);
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-      margin-top: 24px;
-    }
-    .btn-submit:hover {
-      background: var(--saffron-light);
-      transform: translateY(-1px);
-      box-shadow: 0 7px 24px rgba(255,107,0,.38);
-    }
-    .btn-submit:active { transform: translateY(0); }
-    .btn-submit.loading { opacity: .75; pointer-events: none; }
-
-    /* Spinner */
-    .spinner {
-      width: 17px; height: 17px; border-radius: 50%;
-      border: 2.5px solid rgba(255,255,255,.4);
-      border-top-color: #fff;
-      animation: spin .65s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* â”€â”€ Below card disclaimer â”€â”€ */
-    .disclaimer {
-      margin-top: 24px; text-align: center;
-      font-size: 11px; color: var(--text-light);
-      line-height: 1.6; max-width: 420px;
-      position: relative; z-index: 1;
-    }
-    .disclaimer a { color: var(--saffron); text-decoration: none; font-weight: 500; }
-    .disclaimer a:hover { opacity: .75; }
-
-    /* â”€â”€ Success state â”€â”€ */
-    .success-state {
-      display: none;
-      flex-direction: column; align-items: center;
-      text-align: center; padding: 48px 28px 52px;
-      animation: fade-up .4s cubic-bezier(.4,0,.2,1);
-    }
-    .success-state.show { display: flex; }
-    @keyframes fade-up {
-      from { opacity:0; transform:translateY(18px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    .success-icon-wrap {
-      width: 72px; height: 72px;
-      background: linear-gradient(135deg, rgba(22,163,74,.12) 0%, rgba(22,163,74,.06) 100%);
-      border: 1.5px solid rgba(22,163,74,.3);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 20px;
-      position: relative;
-    }
-    .success-icon-wrap::after {
-      content: '';
-      position: absolute; inset: -6px;
-      border-radius: 50%;
-      border: 1px solid rgba(22,163,74,.12);
-    }
-    .success-icon-wrap svg {
-      width: 32px; height: 32px; color: var(--green-success);
-    }
-    .success-state h2 {
-      font-family: var(--font-head);
-      font-size: 22px; font-weight: 800;
-      color: var(--navy); margin-bottom: 10px;
-    }
-    .success-state p {
-      font-size: 14px; color: var(--text-muted);
-      line-height: 1.65; max-width: 340px;
-    }
-    .success-state p strong {
-      color: var(--navy); font-weight: 600;
-    }
-    .resend-btn {
-      margin-top: 22px;
-      background: none; border: none; cursor: pointer;
-      font-size: 13px; font-weight: 600;
-      color: var(--saffron); font-family: var(--font-body);
-      letter-spacing: .01em; transition: opacity .2s;
-      text-decoration: underline; text-underline-offset: 3px;
-      text-decoration-color: rgba(255,107,0,.35);
-    }
-    .resend-btn:hover { opacity: .75; }
-    .resend-btn:disabled { opacity: .45; cursor: not-allowed; }
-
-    .success-divider {
-      width: 48px; height: 3px;
-      background: linear-gradient(90deg, var(--saffron), var(--saffron-light));
-      border-radius: 2px; margin: 20px auto 0;
-      opacity: .3;
-    }
-
-    /* â”€â”€ Step counter (small pill above form head) â”€â”€ */
-    .step-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--saffron-pale);
-      border: 1px solid rgba(255,107,0,.18);
-      border-radius: 20px; padding: 4px 10px;
-      font-size: 11px; font-weight: 600;
-      color: var(--saffron); margin-bottom: 14px;
-      letter-spacing: .03em;
-    }
-    .step-pill svg { width: 11px; height: 11px; }
-
-    /* â”€â”€ Responsive â”€â”€ */
-    @media (max-width: 520px) {
-      .form-grid { grid-template-columns: 1fr; }
-      .form-group.full { grid-column: unset; }
-      .card-body { padding: 22px 18px 26px; }
-      .logo-text { font-size: 24px; }
-      .college-banner { padding: 12px 16px; gap: 10px; }
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-layout.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-components.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-join.css') }}">
 </head>
 <body>
 
@@ -507,7 +94,7 @@
 
     <!-- Logo -->
     <div class="logo-block">
-      <div class="logo-icon-wrap">ðŸŽ“</div>
+      <div class="logo-icon-wrap">🎓</div>
       <span class="logo-text">ScholarSetu</span>
       <span class="logo-tagline">Maharashtra Scholarship Platform</span>
     </div>
@@ -515,7 +102,7 @@
     <!-- Card -->
     <div class="card">
 
-      <!-- College banner â€” pre-filled from token -->
+      <!-- College banner — pre-filled from token -->
       <div class="college-banner" id="college-banner" role="status" aria-label="College invite information">
         <div class="lock-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -536,7 +123,7 @@
         <!-- Step pill -->
         <div class="step-pill" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          Student Registration Â· Invite Link
+          Student Registration · Invite Link
         </div>
 
         <div class="form-head">
@@ -554,14 +141,14 @@
           <span class="prn-warning-text">
             This PRN is already registered. If this is a mistake, contact your college admin.
           </span>
-          <button class="prn-dismiss" onclick="hidePrnWarning()" aria-label="Dismiss PRN warning">Ã—</button>
+          <button class="prn-dismiss" onclick="hidePrnWarning()" aria-label="Dismiss PRN warning">×</button>
         </div>
 
         <!-- Registration form -->
         <form id="reg-form" novalidate onsubmit="handleRegister(event)">
           <div class="form-grid">
 
-            <!-- Full Name â€” full width -->
+            <!-- Full Name — full width -->
             <div class="form-group full">
               <label for="full-name">Full Name</label>
               <input
@@ -572,7 +159,7 @@
               />
             </div>
 
-            <!-- Email â€” full width -->
+            <!-- Email — full width -->
             <div class="form-group full">
               <label for="email">Email Address</label>
               <input
@@ -587,7 +174,7 @@
               </div>
             </div>
 
-            <!-- Password â€” left -->
+            <!-- Password — left -->
             <div class="form-group">
               <label for="password">Password</label>
               <div class="pw-wrap">
@@ -601,7 +188,7 @@
               </div>
             </div>
 
-            <!-- Confirm Password â€” right -->
+            <!-- Confirm Password — right -->
             <div class="form-group">
               <label for="confirm-password">Confirm Password</label>
               <div class="pw-wrap">
@@ -615,7 +202,7 @@
               </div>
             </div>
 
-            <!-- PRN â€” full width -->
+            <!-- PRN — full width -->
             <div class="form-group full">
               <label for="prn">PRN / Permanent Registration Number</label>
               <input
@@ -627,11 +214,11 @@
               />
               <div class="field-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                Numeric only &middot; Usually 10â€“13 digits &middot; Check your college ID card
+                Numeric only &middot; Usually 10–13 digits &middot; Check your college ID card
               </div>
             </div>
 
-            <!-- Contact Number â€” full width -->
+            <!-- Contact Number — full width -->
             <div class="form-group full">
               <label for="contact">Contact Number</label>
               <input
@@ -643,7 +230,7 @@
               />
             </div>
 
-            <!-- Department â€” left -->
+            <!-- Department — left -->
             <div class="form-group">
               <label for="department">Department</label>
               <div class="select-wrap">
@@ -661,7 +248,7 @@
               </div>
             </div>
 
-            <!-- Year of Study â€” right -->
+            <!-- Year of Study — right -->
             <div class="form-group">
               <label for="year">Year of Study</label>
               <div class="select-wrap">
@@ -687,7 +274,7 @@
 
       </div><!-- /card-body -->
 
-      <!-- â”€â”€ Success state â”€â”€ -->
+      <!-- ── Success state ── -->
       <div class="success-state" id="success-state" aria-live="polite">
         <div class="success-icon-wrap">
           <!-- Email / envelope icon -->
@@ -719,167 +306,6 @@
 
   </div><!-- /page-wrap -->
 
-  <script>
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    //  Token parsing â€” read ?token= from URL
-    //  In production, exchange this token with backend
-    //  for college details. For demo, parse base64 or use default.
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    (function initToken() {
-      const params  = new URLSearchParams(window.location.search);
-      const token   = params.get('token');
-      let collegeName = 'DY Patil College of Engineering, Pune';
-
-      if (token) {
-        // Demo: token is base64-encoded college name (real app: API call)
-        try {
-          const decoded = atob(token);
-          if (decoded.length > 3) collegeName = decoded;
-        } catch (e) { /* keep default */ }
-      }
-
-      document.getElementById('banner-college-name').textContent = collegeName;
-      // Store for success state
-      window._collegeName = collegeName;
-    })();
-
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    //  Password toggle
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    const EYE_OPEN  = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
-    const EYE_CLOSE = `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
-
-    function togglePw(id, btn) {
-      const inp  = document.getElementById(id);
-      const show = inp.type === 'password';
-      inp.type   = show ? 'text' : 'password';
-      btn.querySelector('svg').innerHTML = show ? EYE_CLOSE : EYE_OPEN;
-      btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
-    }
-
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    //  PRN warning
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    function showPrnWarning() {
-      const w = document.getElementById('prn-warning');
-      w.classList.remove('show');
-      void w.offsetWidth;
-      w.classList.add('show');
-    }
-    function hidePrnWarning() {
-      document.getElementById('prn-warning').classList.remove('show');
-    }
-
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    //  Field error helpers
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    const REQUIRED_FIELDS = ['full-name','email','password','confirm-password','prn','contact','department','year'];
-
-    function setFieldError(id, on) {
-      document.getElementById(id).classList.toggle('field-error', on);
-    }
-    function clearAllErrors() {
-      REQUIRED_FIELDS.forEach(id => setFieldError(id, false));
-    }
-
-    REQUIRED_FIELDS.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.addEventListener('input', function() { this.classList.remove('field-error'); });
-      el.addEventListener('change', function() { this.classList.remove('field-error'); });
-    });
-
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    //  Form validation
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    function validate() {
-      clearAllErrors();
-      let valid = true;
-
-      const fullName = document.getElementById('full-name').value.trim();
-      const email    = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const confirm  = document.getElementById('confirm-password').value;
-      const prn      = document.getElementById('prn').value.trim();
-      const contact  = document.getElementById('contact').value.trim();
-      const dept     = document.getElementById('department').value;
-      const year     = document.getElementById('year').value;
-
-      if (!fullName || fullName.length < 2)           { setFieldError('full-name', true);         valid = false; }
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setFieldError('email', true); valid = false; }
-      if (!password || password.length < 8)           { setFieldError('password', true);          valid = false; }
-      if (!confirm || confirm !== password)            { setFieldError('confirm-password', true);  valid = false; }
-      if (!prn || !/^\d{10,16}$/.test(prn))           { setFieldError('prn', true);               valid = false; }
-      if (!contact || !/^(\+91[\s-]?)?\d{10}$/.test(contact.replace(/\s/g,''))) { setFieldError('contact', true); valid = false; }
-      if (!dept)                                       { setFieldError('department', true);        valid = false; }
-      if (!year)                                       { setFieldError('year', true);              valid = false; }
-
-      return { valid, email, prn };
-    }
-
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    //  Form submit
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    function handleRegister(e) {
-      e.preventDefault();
-      hidePrnWarning();
-
-      const { valid, email, prn } = validate();
-      if (!valid) return;
-
-      // Show loading
-      setLoading(true);
-
-      // Simulate API call (1.5s)
-      setTimeout(() => {
-        setLoading(false);
-
-        // â”€â”€ Demo: PRN "2021016400001" triggers the conflict warning â”€â”€
-        if (prn === '2021016400001') {
-          showPrnWarning();
-          setFieldError('prn', true);
-          return;
-        }
-
-        // â”€â”€ Success â”€â”€
-        showSuccess(email);
-      }, 1500);
-    }
-
-    function setLoading(on) {
-      const btn     = document.getElementById('btn-register');
-      const label   = document.getElementById('btn-label');
-      const arrow   = document.getElementById('btn-arrow');
-      const spinner = document.getElementById('btn-spinner');
-      btn.classList.toggle('loading', on);
-      label.textContent  = on ? 'Creating accountâ€¦' : 'Create Account';
-      arrow.style.display   = on ? 'none' : '';
-      spinner.style.display = on ? 'block' : 'none';
-    }
-
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    //  Success state
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    function showSuccess(email) {
-      document.getElementById('success-email').textContent = email;
-      document.getElementById('form-wrapper').style.display  = 'none';
-      document.getElementById('success-state').classList.add('show');
-      // Scroll to top of card nicely
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    //  Resend email
-    // â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-    function handleResend(btn) {
-      btn.disabled = true;
-      btn.textContent = 'Email sent!';
-      // Re-enable after 30 seconds
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.textContent = 'Resend email';
-      }, 30000);
-    }
-  </script>
+  <script src="{{ url_for('static', filename='js/auth-join.js') }}"></script>
 </body>
 </html>

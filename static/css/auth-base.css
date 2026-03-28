@@ -1,0 +1,61 @@
+/* ── auth-base.css ── */
+/* Design tokens, global reset, body styles */
+/* Layout elements (tricolor, chakra, page-wrap) are in auth-layout.css */
+
+/* ── Design Tokens ── */
+:root {
+  --saffron:           #FF6B00;
+  --saffron-light:     #FF8C38;
+  --saffron-pale:      rgba(255,107,0,.09);
+  --saffron-pale-bdr:  rgba(255,107,0,.18);
+  --navy:              #0A1628;
+  --green:             #138808;
+  --green-dark:        #0D6B06;
+  --green-pale:        rgba(19,136,8,.08);
+  --green-bdr:         rgba(19,136,8,.22);
+  --green-success:     #16A34A;
+  --green-success-bg:  rgba(22,163,74,.07);
+  --green-success-bdr: rgba(22,163,74,.28);
+  --green-tab:         #1DB954;
+  --amber:             #D97706;
+  --amber-bg:          rgba(217,119,6,.08);
+  --amber-bdr:         rgba(217,119,6,.28);
+  --red-alert:         #DC2626;
+  --red-alert-bg:      rgba(220,38,38,.07);
+  --red-alert-bdr:     rgba(220,38,38,.25);
+  --bg:                #F4F1EC;
+  --card:              #FFFFFF;
+  --border:            #E5E1DA;
+  --text:              #1A1A1A;
+  --text-muted:        #6B7280;
+  --text-light:        #9CA3AF;
+  --input-bg:          #FAFAF9;
+  --radius:            16px;
+  --radius-sm:         10px;
+  --shadow-card:       0 32px 80px rgba(0,0,0,.13), 0 4px 20px rgba(0,0,0,.07);
+  --transition:        all .22s cubic-bezier(.4,0,.2,1);
+  --font-body:         'Inter', sans-serif;
+  --font-head:         'Outfit', sans-serif;
+  --font-logo:         'Playfair Display', serif;
+  /* register-college extras */
+  --border-focus:      #FF6B00;
+  --red-error:         #DC2626;
+  --navy-mid:          #112240;
+  --white-india:       #FFFFFF;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  min-height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px 60px;
+  position: relative;
+  overflow-x: hidden;
+}

@@ -1,0 +1,191 @@
+/* ══════════════════════════════════════
+   auth-register.css
+   Register College page — page-specific styles only
+══════════════════════════════════════ */
+
+/* ── Tricolor background (body pseudo-elements) ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0;
+  background:
+    linear-gradient(180deg,
+      rgba(255,107,0,.07) 0%,
+      rgba(255,255,255,0) 22%,
+      rgba(255,255,255,0) 78%,
+      rgba(29,185,84,.07) 100%
+    );
+  pointer-events: none;
+}
+/* Subtle radial glow behind card */
+body::after {
+  content: '';
+  position: fixed;
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 700px; height: 700px;
+  background: radial-gradient(ellipse, rgba(255,107,0,.06) 0%, transparent 65%);
+  pointer-events: none; z-index: 0;
+}
+
+/* Override body justify-content for register page (top-aligned) */
+body {
+  justify-content: flex-start;
+}
+
+/* ── Tricolor stripe at top ── */
+.tricolor-bar {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 4px; z-index: 100;
+  display: flex;
+}
+.tc-saffron { flex: 1; background: #FF6B00; }
+.tc-white   { flex: 1; background: #ffffff; }
+.tc-green   { flex: 1; background: #138808; }
+
+/* ── Page wrapper ── */
+.page-wrap {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 480px;
+  margin-top: 28px;
+}
+
+/* ── Card ── */
+.card {
+  background: var(--card);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  padding: 36px 36px 40px;
+  border: 1px solid var(--border);
+}
+
+/* ── Logo block (register-specific variant) ── */
+.card-logo {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 8px;
+}
+.logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--saffron), #FF3E00);
+  border-radius: 9px; display: flex; align-items: center;
+  justify-content: center; font-size: 17px;
+  box-shadow: 0 4px 12px rgba(255,107,0,.3);
+}
+.logo-text {
+  font-family: var(--font-head); font-weight: 800;
+  font-size: 18px; color: var(--navy);
+}
+
+/* ── Progress Steps ── */
+.progress-wrap { margin-bottom: 32px; }
+.progress-steps {
+  display: flex; align-items: center;
+  gap: 0; margin-bottom: 0;
+}
+.step-item {
+  display: flex; align-items: center; gap: 10px; flex: 1;
+}
+.step-item:last-child { flex: none; }
+.step-circle {
+  width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; flex-shrink: 0;
+  border: 2px solid var(--border);
+  color: var(--text-light);
+  background: var(--bg);
+  transition: var(--transition);
+}
+.step-circle.active {
+  border-color: var(--saffron); color: var(--saffron);
+  background: rgba(255,107,0,.08);
+  box-shadow: 0 0 0 4px rgba(255,107,0,.12);
+}
+.step-circle.done {
+  border-color: var(--green-tab); background: var(--green-tab);
+  color: #fff;
+}
+.step-label {
+  font-size: 11px; font-weight: 600;
+  color: var(--text-light); white-space: nowrap;
+  transition: color .2s;
+}
+.step-label.active { color: var(--saffron); }
+.step-label.done { color: var(--green-tab); }
+.step-connector {
+  flex: 1; height: 2px; background: var(--border);
+  margin: 0 8px; border-radius: 99px;
+  transition: background .3s;
+}
+.step-connector.done { background: var(--green-tab); }
+
+/* ── Form heading ── */
+.form-heading { margin-bottom: 24px; }
+.form-heading h1 {
+  font-family: var(--font-head); font-size: 22px;
+  font-weight: 800; color: var(--navy); margin-bottom: 4px;
+}
+.form-heading p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+/* ── Form group spacer for .form-row children ── */
+.form-row .form-group { margin-bottom: 0; }
+
+/* ── Step panels ── */
+.step-panel { display: none; }
+.step-panel.active { display: block; }
+
+/* ── Slide animation ── */
+@keyframes slide-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.step-panel.active { animation: slide-in .3s ease forwards; }
+
+/* ── Step 3 — Success Screen ── */
+.success-screen { text-align: center; padding: 16px 0 8px; }
+.success-icon {
+  width: 84px; height: 84px;
+  background: linear-gradient(135deg, #22C55E, #16A34A);
+  border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; margin: 0 auto 24px;
+  box-shadow: 0 8px 32px rgba(34,197,94,.3);
+  animation: pop-in .5s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes pop-in {
+  0%   { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.success-icon svg { width: 40px; height: 40px; color: #fff; }
+.success-screen h2 {
+  font-family: var(--font-head); font-size: 24px;
+  font-weight: 800; color: var(--navy); margin-bottom: 12px;
+}
+.success-screen p {
+  font-size: 14px; color: var(--text-muted);
+  line-height: 1.7; max-width: 340px; margin: 0 auto 28px;
+}
+.success-details {
+  background: rgba(29,185,84,.08);
+  border: 1px solid rgba(29,185,84,.2);
+  border-radius: var(--radius); padding: 16px 20px;
+  margin-bottom: 28px; text-align: left;
+}
+.success-detail-row {
+  display: flex; gap: 10px; align-items: flex-start;
+  font-size: 13px; color: var(--text-muted); margin-bottom: 8px;
+}
+.success-detail-row:last-child { margin-bottom: 0; }
+.success-detail-row svg { width: 15px; height: 15px; color: var(--green-tab); flex-shrink: 0; margin-top: 1px; }
+
+/* ── strength-wrap hidden by default (JS toggles) ── */
+.strength-wrap { display: none; }
+
+/* ── Footer note ── */
+.page-footer {
+  margin-top: 20px; text-align: center;
+  font-size: 12px; color: var(--text-light);
+  position: relative; z-index: 1;
+}
+
+/* ── Responsive ── */
+@media (max-width: 520px) {
+  .card { padding: 28px 20px 32px; }
+  .form-row { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,62 @@
+/* ══════════════════════════════════════
+   main-base.css
+   Design Tokens · Reset · Typography · Base Tags
+══════════════════════════════════════ */
+
+/* ── Design Tokens ── */
+:root {
+  --saffron: #FF6B00;
+  --saffron-light: #FF8C38;
+  --saffron-glow: rgba(255, 107, 0, .18);
+  --navy: #0A1628;
+  --navy-mid: #112240;
+  --green: #1DB954;
+  --green-light: #25D366;
+  --green-glow: rgba(29, 185, 84, .18);
+  --bg: #F7F4EF;
+  --bg-card: #FFFFFF;
+  --dark: #111110;
+  --dark-card: #1A1A18;
+  --text: #1A1A1A;
+  --text-muted: #6B7280;
+  --text-light: #9CA3AF;
+  --border: rgba(0, 0, 0, .08);
+  --border-dark: rgba(255, 255, 255, .1);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, .08);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, .15);
+  --font-body: 'Inter', sans-serif;
+  --font-head: 'Outfit', sans-serif;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── Base Tags ── */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}

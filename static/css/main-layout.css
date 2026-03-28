@@ -1,0 +1,131 @@
+/* ══════════════════════════════════════
+   main-layout.css
+   Container · Grids · Spacing · Responsive
+══════════════════════════════════════ */
+
+/* ── Container ── */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Section shared padding ── */
+section {
+  padding: 96px 0;
+}
+
+/* ── Hero Grid ── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Problems Grid ── */
+.problems-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* ── Features Grid ── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ── How-It-Works Grid ── */
+.how-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+
+/* ── Mock cards (hero mockup internal grid) ── */
+.mock-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+══════════════════════════════════════ */
+
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .mockup {
+    transform: none !important;
+  }
+
+  .problems-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-stats {
+    gap: 20px;
+  }
+
+  .story-stats {
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .story-stat-num {
+    font-size: 52px;
+  }
+
+  .problems-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .how-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-ctas {
+    flex-direction: column;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+}

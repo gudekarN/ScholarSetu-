@@ -1,366 +1,16 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register Your College â€” ScholarSetu</title>
+  <title>Register Your College — ScholarSetu</title>
   <meta name="description" content="Register your college on ScholarSetu to help students discover and apply for Maharashtra scholarships." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet" />
-  <style>
-    /* â”€â”€ Tokens â”€â”€ */
-    :root {
-      --saffron: #FF6B00;
-      --saffron-light: #FF8C38;
-      --saffron-pale: rgba(255,107,0,.08);
-      --navy: #0A1628;
-      --navy-mid: #112240;
-      --green: #1DB954;
-      --green-pale: rgba(29,185,84,.08);
-      --white-india: #FFFFFF;
-      --red-error: #DC2626;
-      --bg: #F4F1EC;
-      --card: #FFFFFF;
-      --border: #E5E1DA;
-      --border-focus: #FF6B00;
-      --text: #1A1A1A;
-      --text-muted: #6B7280;
-      --text-light: #9CA3AF;
-      --input-bg: #FAFAF9;
-      --radius: 14px;
-      --radius-sm: 9px;
-      --shadow-card: 0 24px 80px rgba(0,0,0,.12), 0 4px 20px rgba(0,0,0,.06);
-      --font-body: 'Inter', sans-serif;
-      --font-head: 'Outfit', sans-serif;
-      --transition: all .22s cubic-bezier(.4,0,.2,1);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-body);
-      min-height: 100vh;
-      background: var(--bg);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 40px 16px 60px;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* â”€â”€ Tricolor background â”€â”€ */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      background:
-        linear-gradient(180deg,
-          rgba(255,107,0,.07) 0%,
-          rgba(255,255,255,0) 22%,
-          rgba(255,255,255,0) 78%,
-          rgba(29,185,84,.07) 100%
-        );
-      pointer-events: none;
-    }
-    /* Subtle radial glow behind card */
-    body::after {
-      content: '';
-      position: fixed;
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
-      width: 700px; height: 700px;
-      background: radial-gradient(ellipse, rgba(255,107,0,.06) 0%, transparent 65%);
-      pointer-events: none; z-index: 0;
-    }
-
-    /* â”€â”€ Tricolor stripe at top â”€â”€ */
-    .tricolor-bar {
-      position: fixed; top: 0; left: 0; right: 0;
-      height: 4px; z-index: 100;
-      display: flex;
-    }
-    .tc-saffron { flex: 1; background: #FF6B00; }
-    .tc-white   { flex: 1; background: #ffffff; }
-    .tc-green   { flex: 1; background: #138808; }
-
-    /* â”€â”€ Page wrapper â”€â”€ */
-    .page-wrap { position: relative; z-index: 1; width: 100%; max-width: 480px; }
-
-    /* â”€â”€ Back to home â”€â”€ */
-    .back-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 13px; font-weight: 500; color: var(--text-muted);
-      text-decoration: none; margin-bottom: 24px;
-      transition: color .2s;
-    }
-    .back-link:hover { color: var(--navy); }
-    .back-link svg { width: 14px; height: 14px; }
-
-    /* â”€â”€ Card â”€â”€ */
-    .card {
-      background: var(--card);
-      border-radius: 20px;
-      box-shadow: var(--shadow-card);
-      padding: 36px 36px 40px;
-      border: 1px solid var(--border);
-    }
-
-    /* â”€â”€ Logo â”€â”€ */
-    .card-logo {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 8px;
-    }
-    .logo-icon {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--saffron), #FF3E00);
-      border-radius: 9px; display: flex; align-items: center;
-      justify-content: center; font-size: 17px;
-      box-shadow: 0 4px 12px rgba(255,107,0,.3);
-    }
-    .logo-text {
-      font-family: var(--font-head); font-weight: 800;
-      font-size: 18px; color: var(--navy);
-    }
-
-    /* Already registered note */
-    .already-note {
-      font-size: 13px; color: var(--text-muted);
-      margin-bottom: 28px;
-    }
-    .already-note a {
-      color: var(--saffron); font-weight: 600;
-      text-decoration: none; transition: opacity .2s;
-    }
-    .already-note a:hover { opacity: .75; }
-
-    /* â”€â”€ Progress Steps â”€â”€ */
-    .progress-wrap { margin-bottom: 32px; }
-    .progress-steps {
-      display: flex; align-items: center;
-      gap: 0; margin-bottom: 0;
-    }
-    .step-item {
-      display: flex; align-items: center; gap: 10px; flex: 1;
-    }
-    .step-item:last-child { flex: none; }
-    .step-circle {
-      width: 30px; height: 30px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: 700; flex-shrink: 0;
-      border: 2px solid var(--border);
-      color: var(--text-light);
-      background: var(--bg);
-      transition: var(--transition);
-    }
-    .step-circle.active {
-      border-color: var(--saffron); color: var(--saffron);
-      background: var(--saffron-pale);
-      box-shadow: 0 0 0 4px rgba(255,107,0,.12);
-    }
-    .step-circle.done {
-      border-color: var(--green); background: var(--green);
-      color: #fff;
-    }
-    .step-label {
-      font-size: 11px; font-weight: 600;
-      color: var(--text-light); white-space: nowrap;
-      transition: color .2s;
-    }
-    .step-label.active { color: var(--saffron); }
-    .step-label.done { color: var(--green); }
-    .step-connector {
-      flex: 1; height: 2px; background: var(--border);
-      margin: 0 8px; border-radius: 99px;
-      transition: background .3s;
-    }
-    .step-connector.done { background: var(--green); }
-
-    /* â”€â”€ Form heading â”€â”€ */
-    .form-heading { margin-bottom: 24px; }
-    .form-heading h1 {
-      font-family: var(--font-head); font-size: 22px;
-      font-weight: 800; color: var(--navy); margin-bottom: 4px;
-    }
-    .form-heading p { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
-
-    /* â”€â”€ Form â”€â”€ */
-    .form-group { margin-bottom: 18px; }
-    label {
-      display: block; font-size: 13px; font-weight: 600;
-      color: var(--navy); margin-bottom: 6px;
-    }
-    label span.required { color: var(--saffron); margin-left: 2px; }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="tel"],
-    select {
-      width: 100%; padding: 11px 14px;
-      background: var(--input-bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 14px; font-family: var(--font-body);
-      color: var(--text); outline: none;
-      transition: var(--transition);
-      appearance: none; -webkit-appearance: none;
-    }
-    input:focus, select:focus {
-      border-color: var(--border-focus);
-      background: #fff;
-      box-shadow: 0 0 0 3px rgba(255,107,0,.12);
-    }
-    input.error, select.error {
-      border-color: var(--red-error);
-      box-shadow: 0 0 0 3px rgba(220,38,38,.1);
-    }
-    input:disabled, select:disabled {
-      background: #F0EEE9; color: var(--text-muted); cursor: not-allowed;
-    }
-
-    /* Select chevron */
-    .select-wrap { position: relative; }
-    .select-wrap::after {
-      content: '';
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      width: 0; height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 5px solid var(--text-muted);
-      pointer-events: none;
-    }
-
-    /* Password wrapper */
-    .input-wrap { position: relative; }
-    .input-wrap input { padding-right: 42px; }
-    .toggle-pw {
-      position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
-      cursor: pointer; background: none; border: none;
-      color: var(--text-muted); padding: 4px;
-      display: flex; align-items: center;
-      transition: color .2s;
-    }
-    .toggle-pw:hover { color: var(--navy); }
-    .toggle-pw svg { width: 17px; height: 17px; }
-
-    /* Helper & error text */
-    .helper-text {
-      font-size: 11px; color: var(--text-light);
-      margin-top: 5px; display: flex; align-items: center; gap: 4px;
-    }
-    .helper-text a { color: var(--saffron); text-decoration: none; font-weight: 500; }
-    .error-msg {
-      font-size: 11px; color: var(--red-error);
-      margin-top: 5px; display: flex; align-items: center; gap: 4px;
-      display: none;
-    }
-    .error-msg.show { display: flex; }
-    .error-msg svg { width: 12px; height: 12px; flex-shrink: 0; }
-
-    /* Strength bar */
-    .strength-wrap { margin-top: 8px; }
-    .strength-bars { display: flex; gap: 4px; margin-bottom: 4px; }
-    .strength-bar {
-      flex: 1; height: 3px; border-radius: 99px;
-      background: var(--border); transition: background .3s;
-    }
-    .strength-label { font-size: 11px; font-weight: 500; color: var(--text-light); }
-
-    /* Two col */
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
-    /* â”€â”€ Buttons â”€â”€ */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 12px 22px; border-radius: var(--radius-sm);
-      font-size: 14px; font-weight: 600; font-family: var(--font-body);
-      cursor: pointer; border: none; transition: var(--transition);
-      letter-spacing: .01em;
-    }
-    .btn-saffron {
-      background: var(--saffron); color: #fff;
-      box-shadow: 0 4px 16px rgba(255,107,0,.3);
-    }
-    .btn-saffron:hover { background: var(--saffron-light); transform: translateY(-1px); box-shadow: 0 6px 22px rgba(255,107,0,.4); }
-    .btn-saffron:active { transform: translateY(0); }
-    .btn-ghost {
-      background: transparent; color: var(--navy);
-      border: 1.5px solid var(--border);
-    }
-    .btn-ghost:hover { border-color: var(--navy); background: rgba(10,22,40,.04); }
-    .btn-green {
-      background: var(--green); color: #fff;
-      box-shadow: 0 4px 16px rgba(29,185,84,.3);
-    }
-    .btn-green:hover { background: #25D366; transform: translateY(-1px); }
-    .btn-full { width: 100%; }
-
-    .form-actions {
-      display: flex; gap: 12px; margin-top: 28px;
-    }
-    .form-actions .btn-ghost { flex: 0 0 auto; }
-    .form-actions .btn-saffron { flex: 1; }
-
-    /* â”€â”€ Step panels â”€â”€ */
-    .step-panel { display: none; }
-    .step-panel.active { display: block; }
-
-    /* â”€â”€ Step 3 Success â”€â”€ */
-    .success-screen { text-align: center; padding: 16px 0 8px; }
-    .success-icon {
-      width: 84px; height: 84px;
-      background: linear-gradient(135deg, #22C55E, #16A34A);
-      border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; margin: 0 auto 24px;
-      box-shadow: 0 8px 32px rgba(34,197,94,.3);
-      animation: pop-in .5s cubic-bezier(.34,1.56,.64,1) forwards;
-    }
-    @keyframes pop-in {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .success-icon svg { width: 40px; height: 40px; color: #fff; }
-    .success-screen h2 {
-      font-family: var(--font-head); font-size: 24px;
-      font-weight: 800; color: var(--navy); margin-bottom: 12px;
-    }
-    .success-screen p {
-      font-size: 14px; color: var(--text-muted);
-      line-height: 1.7; max-width: 340px; margin: 0 auto 28px;
-    }
-    .success-details {
-      background: var(--green-pale);
-      border: 1px solid rgba(29,185,84,.2);
-      border-radius: var(--radius); padding: 16px 20px;
-      margin-bottom: 28px; text-align: left;
-    }
-    .success-detail-row {
-      display: flex; gap: 10px; align-items: flex-start;
-      font-size: 13px; color: var(--text-muted); margin-bottom: 8px;
-    }
-    .success-detail-row:last-child { margin-bottom: 0; }
-    .success-detail-row svg { width: 15px; height: 15px; color: var(--green); flex-shrink: 0; margin-top: 1px; }
-
-    /* â”€â”€ Slide animation â”€â”€ */
-    @keyframes slide-in {
-      from { opacity: 0; transform: translateX(20px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-    .step-panel.active { animation: slide-in .3s ease forwards; }
-
-    /* â”€â”€ Footer note â”€â”€ */
-    .page-footer {
-      margin-top: 20px; text-align: center;
-      font-size: 12px; color: var(--text-light);
-      position: relative; z-index: 1;
-    }
-
-    @media (max-width: 520px) {
-      .card { padding: 28px 20px 32px; }
-      .form-row { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-components.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-register.css') }}">
 </head>
 <body>
 
@@ -371,7 +21,7 @@
     <div class="tc-green"></div>
   </div>
 
-  <div class="page-wrap" style="margin-top: 28px;">
+  <div class="page-wrap">
 
     <!-- Back to home -->
     <a href="index.html" class="back-link">
@@ -383,12 +33,12 @@
 
       <!-- Logo -->
       <div class="card-logo">
-        <div class="logo-icon">ðŸŽ“</div>
+        <div class="logo-icon">🎓</div>
         <span class="logo-text">ScholarSetu</span>
       </div>
 
       <!-- Already registered note -->
-      <p class="already-note">Already registered? <a href="login.html">Log in here â†’</a></p>
+      <p class="already-note">Already registered? <a href="login.html">Log in here →</a></p>
 
       <!-- Progress indicator -->
       <div class="progress-wrap" id="progress-wrap">
@@ -410,7 +60,7 @@
         </div>
       </div>
 
-      <!-- â•â•â•â•â•â• STEP 1 â•â•â•â•â•â• -->
+      <!-- ══════ STEP 1 ══════ -->
       <div class="step-panel active" id="step-1">
         <div class="form-heading">
           <h1>College Details</h1>
@@ -419,7 +69,7 @@
         <form id="form-1" novalidate>
           <div class="form-group">
             <label for="collegeName">College Full Name <span class="required">*</span></label>
-            <input type="text" id="collegeName" placeholder="e.g. Government College of Arts & Science, Pune" />
+            <input type="text" id="collegeName" placeholder="e.g. Government College of Arts &amp; Science, Pune" />
             <div class="error-msg" id="err-collegeName">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
               College name is required.
@@ -458,11 +108,11 @@
           </div>
 
           <div class="form-row">
-            <div class="form-group" style="margin-bottom:0">
+            <div class="form-group mb-0">
               <label for="state">State</label>
               <input type="text" id="state" value="Maharashtra" disabled />
             </div>
-            <div class="form-group" style="margin-bottom:0">
+            <div class="form-group mb-0">
               <label for="district">District <span class="required">*</span></label>
               <div class="select-wrap">
                 <select id="district">
@@ -485,7 +135,7 @@
             </div>
           </div>
 
-          <div class="form-group" style="margin-top:18px">
+          <div class="form-group mt-18">
             <label for="collegeType">College Type <span class="required">*</span></label>
             <div class="select-wrap">
               <select id="collegeType">
@@ -502,7 +152,7 @@
             </div>
           </div>
 
-          <div class="form-actions" style="margin-top:24px">
+          <div class="form-actions mt-24">
             <button type="submit" class="btn btn-saffron btn-full" id="btn-step1">
               Continue
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -511,7 +161,7 @@
         </form>
       </div><!-- /step-1 -->
 
-      <!-- â•â•â•â•â•â• STEP 2 â•â•â•â•â•â• -->
+      <!-- ══════ STEP 2 ══════ -->
       <div class="step-panel" id="step-2">
         <div class="form-heading">
           <h1>Admin Account</h1>
@@ -539,12 +189,12 @@
           <div class="form-group">
             <label for="adminPassword">Password <span class="required">*</span></label>
             <div class="input-wrap">
-              <input type="password" id="adminPassword" placeholder="Create a strong password" oninput="checkStrength(this.value)" />
+              <input type="password" id="adminPassword" placeholder="Create a strong password" />
               <button type="button" class="toggle-pw" onclick="togglePw('adminPassword', this)" aria-label="Toggle visibility">
                 <svg id="eye-adminPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
-            <div class="strength-wrap" id="strength-wrap" style="display:none">
+            <div class="strength-wrap" id="strength-wrap">
               <div class="strength-bars">
                 <div class="strength-bar" id="sb-1"></div>
                 <div class="strength-bar" id="sb-2"></div>
@@ -587,7 +237,7 @@
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
               Back
             </button>
-            <button type="submit" class="btn btn-saffron" style="flex:1" id="btn-step2">
+            <button type="submit" class="btn btn-saffron flex-1" id="btn-step2">
               Create Account
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
@@ -595,7 +245,7 @@
         </form>
       </div><!-- /step-2 -->
 
-      <!-- â•â•â•â•â•â• STEP 3 â€” Success â•â•â•â•â•â• -->
+      <!-- ══════ STEP 3 — Success ══════ -->
       <div class="step-panel" id="step-3">
         <div class="success-screen">
           <div class="success-icon">
@@ -621,168 +271,15 @@
             </div>
           </div>
 
-          <a href="login.html" class="btn btn-green btn-full" id="btn-go-login">Go to Login â†’</a>
+          <a href="login.html" class="btn btn-green btn-full" id="btn-go-login">Go to Login →</a>
         </div>
       </div><!-- /step-3 -->
 
     </div><!-- /card -->
 
-    <p class="page-footer">ScholarSetu Â· Maharashtra Scholarship Platform Â· â‚¹0 cost to colleges</p>
+    <p class="page-footer">ScholarSetu · Maharashtra Scholarship Platform · ₹0 cost to colleges</p>
   </div>
 
-  <script>
-    // â”€â”€ Step management â”€â”€
-    let currentStep = 1;
-
-    function goToStep(n) {
-      document.getElementById('step-' + currentStep).classList.remove('active');
-      currentStep = n;
-      document.getElementById('step-' + n).classList.add('active');
-      updateProgress(n);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function updateProgress(n) {
-      for (let i = 1; i <= 3; i++) {
-        const circle = document.getElementById('sc-' + i);
-        const label  = document.getElementById('sl-' + i);
-        circle.classList.remove('active', 'done');
-        label.classList.remove('active', 'done');
-        if (i < n) {
-          circle.classList.add('done');
-          circle.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-          label.classList.add('done');
-        } else if (i === n) {
-          circle.classList.add('active');
-          circle.textContent = i;
-          label.classList.add('active');
-        } else {
-          circle.textContent = i;
-        }
-      }
-      for (let c = 1; c <= 2; c++) {
-        const conn = document.getElementById('conn-' + c);
-        conn.classList.toggle('done', c < n);
-      }
-    }
-
-    // â”€â”€ Password toggle â”€â”€
-    function togglePw(id, btn) {
-      const input = document.getElementById(id);
-      const isText = input.type === 'text';
-      input.type = isText ? 'password' : 'text';
-      const eye = btn.querySelector('svg');
-      eye.innerHTML = isText
-        ? `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`
-        : `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
-    }
-
-    // â”€â”€ Password strength â”€â”€
-    function checkStrength(val) {
-      const wrap = document.getElementById('strength-wrap');
-      if (!val) { wrap.style.display = 'none'; return; }
-      wrap.style.display = 'block';
-
-      let score = 0;
-      if (val.length >= 8) score++;
-      if (/[A-Z]/.test(val)) score++;
-      if (/[0-9]/.test(val)) score++;
-      if (/[^A-Za-z0-9]/.test(val)) score++;
-
-      const colors = ['#DC2626','#F97316','#EAB308','#22C55E'];
-      const labels = ['Weak','Fair','Good','Strong'];
-      for (let i = 1; i <= 4; i++) {
-        const bar = document.getElementById('sb-' + i);
-        bar.style.background = i <= score ? colors[score - 1] : 'var(--border)';
-      }
-      const lbl = document.getElementById('strength-label');
-      lbl.textContent = labels[score - 1] || '';
-      lbl.style.color = colors[score - 1] || 'var(--text-light)';
-    }
-
-    // â”€â”€ Inline error helpers â”€â”€
-    function showErr(id, show) {
-      const el = document.getElementById('err-' + id);
-      const input = document.getElementById(id);
-      if (!el || !input) return;
-      el.classList.toggle('show', show);
-      input.classList.toggle('error', show);
-    }
-    function clearErrors(ids) { ids.forEach(id => showErr(id, false)); }
-
-    // â”€â”€ Clear error on input â”€â”€
-    ['collegeName','aisheCode','secretKey','district','collegeType',
-     'adminName','adminEmail','adminPassword','confirmPassword','adminPhone']
-    .forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.addEventListener('input', () => showErr(id, false));
-      if (el) el.addEventListener('change', () => showErr(id, false));
-    });
-
-    // â”€â”€ Step 1 validation â”€â”€
-    document.getElementById('form-1').addEventListener('submit', function(e) {
-      e.preventDefault();
-      let valid = true;
-
-      const collegeName = document.getElementById('collegeName').value.trim();
-      const aisheCode   = document.getElementById('aisheCode').value.trim();
-      const secretKey   = document.getElementById('secretKey').value.trim();
-      const district    = document.getElementById('district').value;
-      const collegeType = document.getElementById('collegeType').value;
-
-      clearErrors(['collegeName','aisheCode','secretKey','district','collegeType']);
-
-      if (!collegeName) { showErr('collegeName', true); valid = false; }
-      if (!aisheCode || !/^C-\d{5}$/i.test(aisheCode)) { showErr('aisheCode', true); valid = false; }
-      if (!secretKey) { showErr('secretKey', true); valid = false; }
-      if (!district) { showErr('district', true); valid = false; }
-      if (!collegeType) { showErr('collegeType', true); valid = false; }
-
-      if (valid) goToStep(2);
-    });
-
-    // â”€â”€ Step 2 validation â”€â”€
-    document.getElementById('form-2').addEventListener('submit', function(e) {
-      e.preventDefault();
-      let valid = true;
-
-      const adminName   = document.getElementById('adminName').value.trim();
-      const adminEmail  = document.getElementById('adminEmail').value.trim();
-      const pw          = document.getElementById('adminPassword').value;
-      const cpw         = document.getElementById('confirmPassword').value;
-      const phone       = document.getElementById('adminPhone').value.trim();
-
-      clearErrors(['adminName','adminEmail','adminPassword','confirmPassword','adminPhone']);
-
-      if (!adminName) { showErr('adminName', true); valid = false; }
-
-      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!adminEmail || !emailRe.test(adminEmail)) { showErr('adminEmail', true); valid = false; }
-
-      if (!pw || pw.length < 8) { showErr('adminPassword', true); valid = false; }
-      if (!cpw || pw !== cpw)   { showErr('confirmPassword', true); valid = false; }
-
-      const phoneDigits = phone.replace(/\D/g, '');
-      if (!phone || phoneDigits.length < 10) { showErr('adminPhone', true); valid = false; }
-
-      if (valid) goToStep(3);
-    });
-
-    // â”€â”€ AISHE auto-format â”€â”€
-    document.getElementById('aisheCode').addEventListener('input', function() {
-      let v = this.value.toUpperCase().replace(/[^C0-9-]/g, '');
-      if (v.length === 1 && v !== 'C') v = 'C-' + v;
-      else if (v.startsWith('C') && !v.startsWith('C-') && v.length > 1) v = 'C-' + v.slice(1);
-      this.value = v;
-    });
-
-    // â”€â”€ Phone formatter â”€â”€
-    document.getElementById('adminPhone').addEventListener('input', function() {
-      let v = this.value.replace(/[^\d+]/g, '');
-      if (v.startsWith('+91')) v = '+91 ' + v.slice(3).replace(/(\d{5})(\d{5})/, '$1 $2');
-      else if (v.length === 10) v = v.replace(/(\d{5})(\d{5})/, '$1 $2');
-      this.value = v;
-    });
-  </script>
+  <script src="{{ url_for('static', filename='js/auth-register.js') }}"></script>
 </body>
 </html>

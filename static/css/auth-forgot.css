@@ -1,0 +1,65 @@
+/* ── auth-forgot.css ── */
+/* Forgot-password page-specific styles only */
+
+/* ── Page wrapper override (forgot-password: 460px) ── */
+.page-wrap { max-width: 460px; }
+
+/* ── Screen transitions ── */
+.screen { display: none; flex-direction: column; animation: fade-up .35s cubic-bezier(.4,0,.2,1); }
+.screen.active { display: flex; }
+@keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── Centered icon circle ── */
+.icon-wrap {
+  width: 68px; height: 68px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 22px; position: relative;
+}
+.icon-wrap::after { content: ''; position: absolute; inset: -6px; border-radius: 50%; pointer-events: none; }
+.icon-wrap.saffron { background: linear-gradient(135deg, rgba(255,107,0,.14) 0%, rgba(255,107,0,.06) 100%); border: 1.5px solid rgba(255,107,0,.28); }
+.icon-wrap.saffron::after { border: 1px solid rgba(255,107,0,.1); }
+.icon-wrap.green { background: linear-gradient(135deg, rgba(22,163,74,.13) 0%, rgba(22,163,74,.06) 100%); border: 1.5px solid rgba(22,163,74,.3); }
+.icon-wrap.green::after { border: 1px solid rgba(22,163,74,.12); }
+.icon-wrap svg { width: 30px; height: 30px; }
+.icon-wrap.saffron svg { color: var(--saffron); }
+.icon-wrap.green svg   { color: var(--green-success); }
+
+/* ── Screen heading ── */
+.screen-head { margin-bottom: 24px; }
+.screen-head.centered { text-align: center; }
+.screen-head h1 { font-family: var(--font-head); font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 6px; line-height: 1.2; }
+.screen-head p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+.screen-head p strong { color: var(--navy); font-weight: 600; }
+
+/* ── Password strength ── */
+.strength-wrap { margin-top: 10px; }
+.strength-bars { display: flex; gap: 5px; margin-bottom: 6px; }
+.strength-bar { flex: 1; height: 4px; border-radius: 3px; background: var(--border); transition: background .3s ease; }
+.strength-label { font-size: 11.5px; font-weight: 600; color: var(--text-light); transition: color .3s; min-height: 16px; }
+.strength-wrap[data-strength="weak"]   .strength-bar:nth-child(1)              { background: #EF4444; }
+.strength-wrap[data-strength="weak"]   .strength-label                         { color: #EF4444; }
+.strength-wrap[data-strength="medium"] .strength-bar:nth-child(1),
+.strength-wrap[data-strength="medium"] .strength-bar:nth-child(2)              { background: #F59E0B; }
+.strength-wrap[data-strength="medium"] .strength-label                         { color: #D97706; }
+.strength-wrap[data-strength="strong"] .strength-bar                           { background: var(--green-success); }
+.strength-wrap[data-strength="strong"] .strength-label                         { color: var(--green-success); }
+
+/* ── Requirement checklist ── */
+.pw-req-list { margin-top: 10px; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 10px; }
+.pw-req-list li { display: flex; align-items: center; gap: 5px; font-size: 11.5px; color: var(--text-light); transition: color .25s; }
+.pw-req-list li.met { color: var(--green-success); }
+.pw-req-list li svg { width: 11px; height: 11px; flex-shrink: 0; }
+
+/* ── Screen 2 extras ── */
+.expiry-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(217,119,6,.08); border: 1px solid rgba(217,119,6,.25); border-radius: 20px; padding: 4px 11px; font-size: 11.5px; font-weight: 600; color: #92400E; margin-top: 12px; }
+.expiry-pill svg { width: 11px; height: 11px; }
+.action-center { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 24px; }
+.demo-divider { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; }
+.demo-divider p { font-size: 11.5px; color: var(--text-light); margin-bottom: 10px; }
+
+/* ── Gradient accent divider ── */
+.accent-bar { width: 48px; height: 3px; border-radius: 2px; margin: 0 auto 22px; opacity: .35; }
+.accent-bar.saffron { background: linear-gradient(90deg, var(--saffron), var(--saffron-light)); }
+.accent-bar.green   { background: linear-gradient(90deg, var(--green-success), #4ADE80); }
+
+@media (max-width: 520px) { .pw-req-list { grid-template-columns: 1fr; } }

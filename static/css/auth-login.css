@@ -1,0 +1,24 @@
+/* ── auth-login.css ── */
+/* Login page-specific layout and tab-panel animations */
+
+/* ── Page wrapper override (login: 420px) ── */
+.page-wrap { max-width: 420px; gap: 0; }
+
+/* ── Logo bottom spacing override ── */
+.logo-block { margin-bottom: 28px; }
+
+/* ── Card body padding override ── */
+.card-body { padding: 32px 32px 36px; }
+
+/* ── Form heading (login size) ── */
+.form-head { margin-bottom: 24px; }
+
+/* ── Tab panels ── */
+.tab-panel { display: none; }
+.tab-panel.active { display: block; animation: fade-in .22s ease; }
+@keyframes fade-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+@media (max-width: 460px) {
+  .card-body { padding: 24px 20px 28px; }
+  .logo-text { font-size: 24px; }
+}
