@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (ddDocs) ddDocs.addEventListener('click', closeDropdown);
     if (ddAbout) ddAbout.addEventListener('click', closeDropdown);
     if (ddLogout) ddLogout.addEventListener('click', function () {
-        window.location.href = 'login.html';
+        window.location.href = '/auth/logout';
     });
 
     // Close dropdown on outside click

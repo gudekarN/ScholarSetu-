@@ -2,10 +2,10 @@
    State
 ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  */
 let currentScreen = 1;
-let userEmail     = '';
-let resendTimer   = null;
+let userEmail = '';
+let resendTimer = null;
 
-const EYE_OPEN  = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+const EYE_OPEN = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
 const EYE_CLOSE = `<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
 
 /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
@@ -20,7 +20,7 @@ function goToScreen(n) {
 }
 
 function updateChrome(n) {
-  const backEl      = document.getElementById('global-back');
+  const backEl = document.getElementById('global-back');
   const disclaimerEl = document.getElementById('footer-disclaimer');
 
   // Screens 2 & 4 have their own navigation; hide global back on screen 4
@@ -38,7 +38,7 @@ function updateChrome(n) {
     backEl.insertAdjacentHTML('afterbegin',
       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><polyline points="15 18 9 12 15 6"/></svg> Back to Login`
     );
-    backEl.onclick = () => window.location.href = 'login.html';
+    backEl.onclick = () => window.location.href = LOGIN_URL;
   } else if (n === 3) {
     backEl.textContent = '';
     backEl.insertAdjacentHTML('afterbegin',
@@ -50,13 +50,13 @@ function updateChrome(n) {
     backEl.insertAdjacentHTML('afterbegin',
       `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;flex-shrink:0;"><polyline points="15 18 9 12 15 6"/></svg> Back to Login`
     );
-    backEl.onclick = () => window.location.href = 'login.html';
+    backEl.onclick = () => window.location.href = LOGIN_URL;
   }
 }
 
 function handleBack() {
   if (currentScreen === 3) { goToScreen(1); }
-  else { window.location.href = 'login.html'; }
+  else { window.location.href = LOGIN_URL; }
 }
 
 /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
@@ -65,9 +65,9 @@ function handleBack() {
 function handleSendLink(e) {
   e.preventDefault();
   const emailInp = document.getElementById('reset-email');
-  const errEl    = document.getElementById('email-error');
-  const errTxt   = document.getElementById('email-error-text');
-  const emailRx  = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errEl = document.getElementById('email-error');
+  const errTxt = document.getElementById('email-error-text');
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   emailInp.classList.remove('field-error');
   errEl.classList.remove('show');
@@ -89,56 +89,59 @@ function handleSendLink(e) {
   }
 
   userEmail = val;
-  const btn     = document.getElementById('send-btn');
-  const label   = document.getElementById('send-label');
-  const arrow   = document.getElementById('send-arrow');
+  const btn = document.getElementById('send-btn');
+  const label = document.getElementById('send-label');
+  const arrow = document.getElementById('send-arrow');
   const spinner = document.getElementById('send-spinner');
 
   btn.classList.add('loading');
-  label.textContent     = 'Sending…';
-  arrow.style.display   = 'none';
+  label.textContent = 'Sending…';
+  arrow.style.display = 'none';
   spinner.style.display = 'block';
 
   setTimeout(() => {
     btn.classList.remove('loading');
-    label.textContent   = 'Send Reset Link';
+    label.textContent = 'Send Reset Link';
     arrow.style.display = '';
     spinner.style.display = 'none';
-    
+
     const sentEmailDisplay = document.getElementById('sent-email-display');
     if (sentEmailDisplay) sentEmailDisplay.textContent = userEmail;
-    
+
     goToScreen(2);
     startResendCooldown();
   }, 1400);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const resetEmail = document.getElementById('reset-email');
-    if (resetEmail) {
-        resetEmail.addEventListener('input', function() {
-            this.classList.remove('field-error');
-            const emailError = document.getElementById('email-error');
-            if(emailError) emailError.classList.remove('show');
-        });
-    }
 
-    const confirmNewPw = document.getElementById('confirm-new-password');
-    if (confirmNewPw) {
-        confirmNewPw.addEventListener('input', function() {
-            this.classList.remove('field-error');
-            const confirmError = document.getElementById('confirm-error');
-            if(confirmError) confirmError.classList.remove('show');
-        });
-    }
+  updateChrome(1);
 
-    /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
-       On load — if ?token= in URL → screen 3
-    ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  */
-    (function checkToken() {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('token')) goToScreen(3);
-    })();
+  const resetEmail = document.getElementById('reset-email');
+  if (resetEmail) {
+    resetEmail.addEventListener('input', function () {
+      this.classList.remove('field-error');
+      const emailError = document.getElementById('email-error');
+      if (emailError) emailError.classList.remove('show');
+    });
+  }
+
+  const confirmNewPw = document.getElementById('confirm-new-password');
+  if (confirmNewPw) {
+    confirmNewPw.addEventListener('input', function () {
+      this.classList.remove('field-error');
+      const confirmError = document.getElementById('confirm-error');
+      if (confirmError) confirmError.classList.remove('show');
+    });
+  }
+
+  /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
+     On load — if ?token= in URL → screen 3
+  ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  */
+  (function checkToken() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('token')) goToScreen(3);
+  })();
 });
 
 /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
@@ -167,7 +170,7 @@ function startResendCooldown() {
   }, 1000);
 }
 
-window.handleResend = function() {
+window.handleResend = function () {
   const btn = document.getElementById('resend-btn');
   if (!btn || btn.disabled) return;
   btn.disabled = true;
@@ -187,9 +190,9 @@ function getStrength(pw) {
     /[^A-Za-z0-9]/.test(pw)
   ].filter(Boolean).length;
 
-  if (score <= 2) return { level: 'weak',   label: 'Weak — add more variety' };
-  if (score === 3) return { level: 'medium', label: 'Medium — almost there!'  };
-  return { level: 'strong', label: 'Strong — great password!'  };
+  if (score <= 2) return { level: 'weak', label: 'Weak — add more variety' };
+  if (score === 3) return { level: 'medium', label: 'Medium — almost there!' };
+  return { level: 'strong', label: 'Strong — great password!' };
 }
 
 function setReq(id, met) {
@@ -202,39 +205,39 @@ function setReq(id, met) {
 }
 
 // Global for inline oninput
-window.onPasswordInput = function(inp) {
-  const pw    = inp.value;
-  const wrap  = document.getElementById('strength-wrap');
+window.onPasswordInput = function (inp) {
+  const pw = inp.value;
+  const wrap = document.getElementById('strength-wrap');
   const label = document.getElementById('strength-label');
 
   inp.classList.remove('field-error');
 
   if (!pw) {
     wrap.dataset.strength = '';
-    label.textContent     = '';
-    ['req-len','req-upper','req-num','req-special'].forEach(id => setReq(id, false));
+    label.textContent = '';
+    ['req-len', 'req-upper', 'req-num', 'req-special'].forEach(id => setReq(id, false));
     return;
   }
 
   const { level, label: lbl } = getStrength(pw);
   wrap.dataset.strength = level;
-  label.textContent     = lbl;
+  label.textContent = lbl;
 
-  setReq('req-len',     pw.length >= 8);
-  setReq('req-upper',   /[A-Z]/.test(pw));
-  setReq('req-num',     /[0-9]/.test(pw));
+  setReq('req-len', pw.length >= 8);
+  setReq('req-upper', /[A-Z]/.test(pw));
+  setReq('req-num', /[0-9]/.test(pw));
   setReq('req-special', /[^A-Za-z0-9]/.test(pw));
 };
 
 /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
    Screen 3 — Submit
 ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  */
-window.handleUpdatePassword = function(e) {
+window.handleUpdatePassword = function (e) {
   e.preventDefault();
   const pwInp = document.getElementById('new-password');
   const cfInp = document.getElementById('confirm-new-password');
   const cfErr = document.getElementById('confirm-error');
-  let valid   = true;
+  let valid = true;
 
   cfErr.classList.remove('show');
   pwInp.classList.remove('field-error');
@@ -253,19 +256,19 @@ window.handleUpdatePassword = function(e) {
   }
   if (!valid) return;
 
-  const btn     = document.getElementById('update-btn');
-  const label   = document.getElementById('update-label');
-  const arrow   = document.getElementById('update-arrow');
+  const btn = document.getElementById('update-btn');
+  const label = document.getElementById('update-label');
+  const arrow = document.getElementById('update-arrow');
   const spinner = document.getElementById('update-spinner');
 
   btn.classList.add('loading');
-  label.textContent     = 'Updating…';
-  arrow.style.display   = 'none';
+  label.textContent = 'Updating…';
+  arrow.style.display = 'none';
   spinner.style.display = 'block';
 
   setTimeout(() => {
     btn.classList.remove('loading');
-    label.textContent   = 'Update Password';
+    label.textContent = 'Update Password';
     arrow.style.display = '';
     spinner.style.display = 'none';
     goToScreen(4);
@@ -275,10 +278,10 @@ window.handleUpdatePassword = function(e) {
 /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
    Shared — password eye toggle
 ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═  */
-window.togglePw = function(id, btn) {
-  const inp  = document.getElementById(id);
+window.togglePw = function (id, btn) {
+  const inp = document.getElementById(id);
   const show = inp.type === 'password';
-  inp.type   = show ? 'text' : 'password';
+  inp.type = show ? 'text' : 'password';
   btn.querySelector('svg').innerHTML = show ? EYE_CLOSE : EYE_OPEN;
   btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
 }

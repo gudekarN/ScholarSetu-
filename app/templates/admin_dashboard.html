@@ -29,7 +29,7 @@
 
     <!-- ══ NAVBAR ══ -->
     <nav class="navbar" role="navigation" aria-label="Admin navigation">
-        <a href="index.html" class="nav-logo" id="logo-link" aria-label="ScholarSetu home">
+        <a class="nav-logo" id="logo-link" aria-label="ScholarSetu home">
             <div class="nav-logo-icon">🎓</div>
             <div class="nav-logo-texts">
                 <span class="nav-logo-text">ScholarSetu</span>
@@ -76,7 +76,7 @@
                         Settings
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="login.html" class="dropdown-item logout" role="menuitem" id="dd-logout">
+                    <a href="{{url_for('auth.logout')}}" class="dropdown-item logout" role="menuitem" id="dd-logout">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round">
                             <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
@@ -1032,11 +1032,22 @@
         </button>
     </nav>
 
+    <script>
+        // Fires when page loads from bfcache (back/forward swipe)
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                // page loaded from bfcache → force reload
+                window.location.reload();
+            }
+        });
+    </script>
+
     <script src="{{ url_for('static', filename='js/admin-main.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin-navbar.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin-notices.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin-queries.js') }}"></script>
     <script src="{{ url_for('static', filename='js/admin-students.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cache-fix.js') }}"></script>
 </body>
 
 </html>

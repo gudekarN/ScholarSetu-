@@ -33,7 +33,7 @@
 
     <!-- ══ NAVBAR ══ -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <a href="index.html" class="nav-logo" id="logo-link" aria-label="ScholarSetu home">
+        <a class="nav-logo" id="logo-link" aria-label="ScholarSetu home">
             <div class="nav-logo-icon">🎓</div>
             <div class="nav-logo-texts">
                 <span class="nav-logo-text">ScholarSetu</span>
@@ -78,7 +78,7 @@
                         </svg>
                         Important Documents
                     </a>
-                    <a href="index.html" class="dropdown-item" role="menuitem" id="dd-about">
+                    <a href="{{url_for('main.index')}}" class="dropdown-item" role="menuitem" id="dd-about">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round">
                             <circle cx="12" cy="12" r="10" />
@@ -88,7 +88,7 @@
                         About Us
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a href="login.html" class="dropdown-item logout" role="menuitem" id="dd-logout">
+                    <a href="{{url_for('auth.logout')}}" class="dropdown-item logout" role="menuitem" id="dd-logout">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                             stroke-linecap="round">
                             <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
@@ -1276,7 +1276,7 @@
             </div>
 
             <div class="section-head">
-                <span class="head-icon">📝</span>
+                <span class="head-icon">📝</span>
                 <h2>Filing a Scholarship Grievance on MahaDBT</h2>
             </div>
 
@@ -1350,7 +1350,7 @@
                             ID and issue details.</div>
                     </div>
                     <div class="esc-card">
-                        <div class="esc-icon">📝ž</div>
+                        <div class="esc-icon">📝</div>
                         <div class="esc-title">CM Helpline</div>
                         <div class="esc-desc">Call toll-free <strong>1800-120-8040</strong> to escalate a long-pending
                             scholarship complaint.</div>
@@ -1586,7 +1586,7 @@
 
     <!-- ══ FOOTER ══ -->
     <footer class="site-footer" role="contentinfo">
-        <a href="index.html" class="footer-logo" aria-label="ScholarSetu home">
+        <a href="#" class="footer-logo" aria-label="ScholarSetu home">
             <div class="footer-logo-icon">🎓</div>
             <span class="footer-logo-text">ScholarSetu</span>
         </a>
@@ -1610,6 +1610,7 @@
     <script src="{{ url_for('static', filename='js/student-eligibility.js') }}"></script>
     <script src="{{ url_for('static', filename='js/student-schemes.js') }}"></script>
     <script src="{{ url_for('static', filename='js/student-qa.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cache-fix.js') }}"></script>
 </body>
 
 </html>

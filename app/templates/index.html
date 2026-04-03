@@ -34,8 +34,12 @@
           <a href="#about">About</a>
         </div>
         <div class="nav-actions">
-          <a href="login.html" class="btn btn-ghost" id="nav-student-login">Student Login</a>
-          <a href="register-college.html" class="btn btn-saffron" id="nav-register-college">Register College</a>
+          <a href="{{ url_for('auth.login') }}" class="btn btn-ghost">
+            Student Login
+          </a>
+          <a href="{{ url_for('auth.register_college')}}" class="btn btn-saffron">
+            Register College
+          </a>
         </div>
       </div>
     </div>
@@ -85,7 +89,8 @@
           <p class="hero-sub reveal reveal-delay-2">ScholarSetu bridges the gap between Maharashtra's scholarship
             schemes and the students who deserve them — with zero complexity, zero cost.</p>
           <div class="hero-ctas reveal reveal-delay-3">
-            <a href="register-college.html" class="btn btn-saffron btn-lg" id="hero-register">Register Your College
+            <a href="{{url_for('auth.register_college')}}" class="btn btn-saffron btn-lg" id="hero-register">Register
+              Your College
               →</a>
             <a href="#how-it-works" class="btn btn-ghost btn-lg" id="hero-learn-more">How It Works</a>
           </div>
@@ -258,6 +263,7 @@
   </section>
 
   <!-- ══════════ FEATURES GRID ══════════ -->
+  <section class="how-it-works" id="how-it-works"></section>
   <section class="features" id="features">
     <div class="container">
       <div class="features-header">
@@ -316,140 +322,139 @@
   </section>
 
   <!-- ══════════ HOW IT WORKS ══════════ -->
-  <section class="how-it-works" id="how-it-works">
-    <div class="container">
-      <div class="how-header">
-        <div class="section-tag" style="justify-content:center"><span>Process</span></div>
-        <h2 class="section-head reveal">Simple for colleges. Powerful for students.</h2>
-        <p class="section-sub reveal reveal-delay-1" style="margin:0 auto">Two clear journeys — one for the institution,
-          one for the student.</p>
-      </div>
-      <div class="how-grid" id="for-colleges">
-        <!-- For Colleges -->
-        <div class="reveal">
-          <h3 style="color:var(--navy)">For Colleges <span class="how-col-badge saffron">Institution</span></h3>
-          <div class="how-steps">
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num saffron">1</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Register your college</h4>
-                <p>Submit your college details — AISHE code, principal contact, and student enrollment count.
-                  Verification takes under 24 hours.</p>
-              </div>
+  <div class="container">
+    <div class="how-header">
+      <div class="section-tag" style="justify-content:center"><span>Process</span></div>
+      <h2 class="section-head reveal">Simple for colleges. Powerful for students.</h2>
+      <p class="section-sub reveal reveal-delay-1" style="margin:0 auto">Two clear journeys — one for the institution,
+        one for the student.</p>
+    </div>
+    <div class="how-grid" id="for-colleges">
+      <!-- For Colleges -->
+      <div class="reveal">
+        <h3 style="color:var(--navy)">For Colleges <span class="how-col-badge saffron">Institution</span></h3>
+        <div class="how-steps">
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num saffron">1</div>
+              <div class="step-connector"></div>
             </div>
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num saffron">2</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Get your college portal live</h4>
-                <p>A branded college page is auto-generated with your logo, announcement board, and unique student
-                  invite link.</p>
-              </div>
+            <div class="step-content">
+              <h4>Register your college</h4>
+              <p>Submit your college details — AISHE code, principal contact, and student enrollment count.
+                Verification takes under 24 hours.</p>
             </div>
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num saffron">3</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Invite students via link or QR</h4>
-                <p>Share the invite link in class groups or display the QR code on notice boards. No app download
-                  required.</p>
-              </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num saffron">2</div>
+              <div class="step-connector"></div>
             </div>
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num saffron">4</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Broadcast scholarship notices</h4>
-                <p>Post official scholarship deadlines and announcements that every registered student sees instantly —
-                  no WhatsApp chaos.</p>
-              </div>
+            <div class="step-content">
+              <h4>Get your college portal live</h4>
+              <p>A branded college page is auto-generated with your logo, announcement board, and unique student
+                invite link.</p>
             </div>
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num saffron">5</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Track impact with reports</h4>
-                <p>View scheme uptake analytics, DBT linking rates, and export student-level data for your IQAC records.
-                </p>
-              </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num saffron">3</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Invite students via link or QR</h4>
+              <p>Share the invite link in class groups or display the QR code on notice boards. No app download
+                required.</p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num saffron">4</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Broadcast scholarship notices</h4>
+              <p>Post official scholarship deadlines and announcements that every registered student sees instantly —
+                no WhatsApp chaos.</p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num saffron">5</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Track impact with reports</h4>
+              <p>View scheme uptake analytics, DBT linking rates, and export student-level data for your IQAC records.
+              </p>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- For Students -->
-        <div class="reveal reveal-delay-2">
-          <h3 style="color:var(--navy)">For Students <span class="how-col-badge green">Student</span></h3>
-          <div class="how-steps">
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num green">1</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Join via college invite link</h4>
-                <p>Click your college's ScholarSetu link, register with your name, course, and basic profile in under 2
-                  minutes.</p>
-              </div>
+      <!-- For Students -->
+      <div class="reveal reveal-delay-2">
+        <h3 style="color:var(--navy)">For Students <span class="how-col-badge green">Student</span></h3>
+        <div class="how-steps">
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num green">1</div>
+              <div class="step-connector"></div>
             </div>
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num green">2</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Discover eligible schemes</h4>
-                <p>Answer a quick eligibility quiz. ScholarSetu shows exactly which schemes you qualify for and
-                  estimated amounts.</p>
-              </div>
+            <div class="step-content">
+              <h4>Join via college invite link</h4>
+              <p>Click your college's ScholarSetu link, register with your name, course, and basic profile in under 2
+                minutes.</p>
             </div>
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num green">3</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Prepare documents with guidance</h4>
-                <p>Get a personalized document checklist for your scheme with links to government portals and sample
-                  formats.</p>
-              </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num green">2</div>
+              <div class="step-connector"></div>
             </div>
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num green">4</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Link DBT &amp; apply step-by-step</h4>
-                <p>Follow the guided DBT linking flow, then apply on MahaDBT with screenshot-level application guidance.
-                </p>
-              </div>
+            <div class="step-content">
+              <h4>Discover eligible schemes</h4>
+              <p>Answer a quick eligibility quiz. ScholarSetu shows exactly which schemes you qualify for and
+                estimated amounts.</p>
             </div>
-            <div class="how-step">
-              <div class="step-num-wrap">
-                <div class="step-num green">5</div>
-                <div class="step-connector"></div>
-              </div>
-              <div class="step-content">
-                <h4>Track status &amp; raise grievances</h4>
-                <p>Follow up on your application, know when to expect disbursement, and raise grievances directly if
-                  needed.</p>
-              </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num green">3</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Prepare documents with guidance</h4>
+              <p>Get a personalized document checklist for your scheme with links to government portals and sample
+                formats.</p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num green">4</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Link DBT &amp; apply step-by-step</h4>
+              <p>Follow the guided DBT linking flow, then apply on MahaDBT with screenshot-level application guidance.
+              </p>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="step-num-wrap">
+              <div class="step-num green">5</div>
+              <div class="step-connector"></div>
+            </div>
+            <div class="step-content">
+              <h4>Track status &amp; raise grievances</h4>
+              <p>Follow up on your application, know when to expect disbursement, and raise grievances directly if
+                needed.</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
   </section>
 
   <!-- ══════════ CTA ══════════ -->
@@ -460,9 +465,11 @@
       <p class="reveal reveal-delay-1">Join the growing network of Maharashtra colleges ensuring no student loses their
         scholarship due to lack of information.</p>
       <div class="cta-btns reveal reveal-delay-2">
-        <a href="register-college.html" class="btn btn-saffron btn-lg" id="cta-register">Register Your College — It's
+        <a href="{{ url_for('auth.register_college')}}" class="btn btn-saffron btn-lg" id="cta-register">Register Your
+          College — It's
           Free →</a>
-        <a href="login.html" class="btn btn-outline-white btn-lg" id="cta-student-login">Student Login</a>
+        <a href="{{ url_for('auth.login')}}" class="btn btn-outline-white btn-lg" id="cta-student-login">Student
+          Login</a>
       </div>
     </div>
   </section>

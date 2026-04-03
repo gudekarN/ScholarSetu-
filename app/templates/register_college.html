@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Register Your College — ScholarSetu</title>
-  <meta name="description" content="Register your college on ScholarSetu to help students discover and apply for Maharashtra scholarships." />
+  <meta name="description"
+    content="Register your college on ScholarSetu to help students discover and apply for Maharashtra scholarships." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-base.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-components.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-register.css') }}">
 </head>
+
 <body>
 
   <!-- Tricolor bar -->
@@ -24,8 +29,11 @@
   <div class="page-wrap">
 
     <!-- Back to home -->
-    <a href="index.html" class="back-link">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <a href="{{url_for('main.index')}}" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
       Back to home
     </a>
 
@@ -38,7 +46,7 @@
       </div>
 
       <!-- Already registered note -->
-      <p class="already-note">Already registered? <a href="login.html">Log in here →</a></p>
+      <p class="already-note">Already registered? <a href="{{url_for('auth.login')}}">Log in here →</a></p>
 
       <!-- Progress indicator -->
       <div class="progress-wrap" id="progress-wrap">
@@ -71,7 +79,11 @@
             <label for="collegeName">College Full Name <span class="required">*</span></label>
             <input type="text" id="collegeName" placeholder="e.g. Government College of Arts &amp; Science, Pune" />
             <div class="error-msg" id="err-collegeName">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               College name is required.
             </div>
           </div>
@@ -80,11 +92,19 @@
             <label for="aisheCode">AISHE Code <span class="required">*</span></label>
             <input type="text" id="aisheCode" placeholder="C-XXXXX" maxlength="8" />
             <p class="helper-text">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="16" x2="12" y2="12" />
+                <line x1="12" y1="8" x2="12.01" y2="8" />
+              </svg>
               Find your AISHE code at <a href="https://aishe.gov.in" target="_blank" rel="noopener">aishe.gov.in</a>
             </p>
             <div class="error-msg" id="err-aisheCode">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               Enter a valid AISHE code (e.g. C-12345).
             </div>
           </div>
@@ -93,16 +113,28 @@
             <label for="secretKey">Secret Key <span class="required">*</span></label>
             <div class="input-wrap">
               <input type="password" id="secretKey" placeholder="Enter secret key" autocomplete="off" />
-              <button type="button" class="toggle-pw" onclick="togglePw('secretKey', this)" aria-label="Toggle visibility">
-                <svg id="eye-secretKey" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <button type="button" class="toggle-pw" onclick="togglePw('secretKey', this)"
+                aria-label="Toggle visibility">
+                <svg id="eye-secretKey" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
               </button>
             </div>
             <p class="helper-text">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0110 0v4" />
+              </svg>
               Provided by ScholarSetu owner after verification
             </p>
             <div class="error-msg" id="err-secretKey">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               Secret key is required.
             </div>
           </div>
@@ -129,7 +161,11 @@
                 </select>
               </div>
               <div class="error-msg" id="err-district">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
                 Please select a district.
               </div>
             </div>
@@ -147,7 +183,11 @@
               </select>
             </div>
             <div class="error-msg" id="err-collegeType">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               Please select a college type.
             </div>
           </div>
@@ -155,7 +195,10 @@
           <div class="form-actions mt-24">
             <button type="submit" class="btn btn-saffron btn-full" id="btn-step1">
               Continue
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
             </button>
           </div>
         </form>
@@ -172,7 +215,11 @@
             <label for="adminName">Admin Full Name <span class="required">*</span></label>
             <input type="text" id="adminName" placeholder="e.g. Dr. Rajan Patil" />
             <div class="error-msg" id="err-adminName">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               Full name is required.
             </div>
           </div>
@@ -181,7 +228,11 @@
             <label for="adminEmail">Official College Email <span class="required">*</span></label>
             <input type="email" id="adminEmail" placeholder="principal@college.edu.in" />
             <div class="error-msg" id="err-adminEmail">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               Enter a valid email address.
             </div>
           </div>
@@ -190,8 +241,13 @@
             <label for="adminPassword">Password <span class="required">*</span></label>
             <div class="input-wrap">
               <input type="password" id="adminPassword" placeholder="Create a strong password" />
-              <button type="button" class="toggle-pw" onclick="togglePw('adminPassword', this)" aria-label="Toggle visibility">
-                <svg id="eye-adminPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <button type="button" class="toggle-pw" onclick="togglePw('adminPassword', this)"
+                aria-label="Toggle visibility">
+                <svg id="eye-adminPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
               </button>
             </div>
             <div class="strength-wrap" id="strength-wrap">
@@ -204,7 +260,11 @@
               <span class="strength-label" id="strength-label"></span>
             </div>
             <div class="error-msg" id="err-adminPassword">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               Password must be at least 8 characters.
             </div>
           </div>
@@ -213,12 +273,21 @@
             <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
             <div class="input-wrap">
               <input type="password" id="confirmPassword" placeholder="Re-enter your password" />
-              <button type="button" class="toggle-pw" onclick="togglePw('confirmPassword', this)" aria-label="Toggle visibility">
-                <svg id="eye-confirmPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+              <button type="button" class="toggle-pw" onclick="togglePw('confirmPassword', this)"
+                aria-label="Toggle visibility">
+                <svg id="eye-confirmPassword" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                  <circle cx="12" cy="12" r="3" />
+                </svg>
               </button>
             </div>
             <div class="error-msg" id="err-confirmPassword">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               Passwords do not match.
             </div>
           </div>
@@ -227,19 +296,29 @@
             <label for="adminPhone">Phone Number <span class="required">*</span></label>
             <input type="tel" id="adminPhone" placeholder="+91 XXXXX XXXXX" maxlength="13" />
             <div class="error-msg" id="err-adminPhone">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>
               Enter a valid 10-digit phone number.
             </div>
           </div>
 
           <div class="form-actions">
             <button type="button" class="btn btn-ghost" id="btn-back" onclick="goToStep(1)">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
               Back
             </button>
             <button type="submit" class="btn btn-saffron flex-1" id="btn-step2">
               Create Account
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
             </button>
           </div>
         </form>
@@ -249,29 +328,37 @@
       <div class="step-panel" id="step-3">
         <div class="success-screen">
           <div class="success-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="20 6 9 17 4 12"/>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+              stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
           <h2>Registration Submitted!</h2>
-          <p>Thank you for registering your college on ScholarSetu. Our Super Admin team will review and verify your details.</p>
+          <p>Thank you for registering your college on ScholarSetu. Our Super Admin team will review and verify your
+            details.</p>
 
           <div class="success-details">
             <div class="success-detail-row">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span>Your college portal will be <strong>activated within 24 hours</strong> after verification.</span>
             </div>
             <div class="success-detail-row">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span>A <strong>confirmation email</strong> will be sent to your registered email address.</span>
             </div>
             <div class="success-detail-row">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
               <span>Once active, you can <strong>invite students</strong> and broadcast scholarship notices.</span>
             </div>
           </div>
 
-          <a href="login.html" class="btn btn-green btn-full" id="btn-go-login">Go to Login →</a>
+          <a href="{{url_for('auth.login')}}" class="btn btn-green btn-full" id="btn-go-login">Go to Login →</a>
         </div>
       </div><!-- /step-3 -->
 
@@ -282,4 +369,5 @@
 
   <script src="{{ url_for('static', filename='js/auth-register.js') }}"></script>
 </body>
+
 </html>

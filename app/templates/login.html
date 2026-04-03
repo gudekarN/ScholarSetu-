@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login — ScholarSetu</title>
+  <meta name="description"
+    content="Login to ScholarSetu — Maharashtra's scholarship platform for students and college administrators." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-base.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-layout.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-components.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-login.css') }}">
+</head>
+
+<body>
+
+  <!-- Tricolor bar -->
+  <div class="tricolor-bar">
+    <div class="tc-saffron"></div>
+    <div class="tc-white"></div>
+    <div class="tc-green"></div>
+  </div>
+
+  <!-- Ashok Chakra watermark -->
+  <div class="chakra-wrap" aria-hidden="true">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer circle -->
+      <circle cx="100" cy="100" r="98" fill="none" stroke="#0A1628" stroke-width="1.2" />
+      <!-- Inner circle -->
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#0A1628" stroke-width="1" />
+      <!-- Hub -->
+      <circle cx="100" cy="100" r="8" fill="#0A1628" />
+      <!-- 24 spokes -->
+      <g stroke="#0A1628" stroke-width="1" stroke-linecap="round">
+        <line x1="100" y1="22" x2="100" y2="92" />
+        <line x1="125.2" y1="26.6" x2="112.6" y2="89.2" />
+        <line x1="146.6" y1="40.4" x2="119.9" y2="80.1" />
+        <line x1="160.4" y1="61.4" x2="122" y2="86.8" />
+        <line x1="165" y1="85.8" x2="119.2" y2="97.4" />
+        <line x1="160" y1="111" x2="110.4" y2="104.8" />
+        <line x1="146.2" y1="131.8" x2="107.1" y2="109.6" />
+        <line x1="125.2" y1="145.8" x2="107" y2="116.4" />
+        <line x1="100" y1="152" x2="100" y2="108" />
+        <line x1="74.8" y1="145.8" x2="93" y2="116.4" />
+        <line x1="53.8" y1="131.8" x2="92.9" y2="109.6" />
+        <line x1="40" y1="111" x2="89.6" y2="104.8" />
+        <line x1="35" y1="85.8" x2="80.8" y2="97.4" />
+        <line x1="39.6" y1="61.4" x2="78" y2="86.8" />
+        <line x1="53.4" y1="40.4" x2="80.1" y2="80.1" />
+        <line x1="74.8" y1="26.6" x2="87.4" y2="89.2" />
+        <!-- intermediate spokes -->
+        <line x1="112.3" y1="22.8" x2="105.3" y2="91.8" />
+        <line x1="137.7" y1="33.2" x2="115.3" y2="85" />
+        <line x1="155.2" y1="52.1" x2="121.2" y2="83.6" />
+        <line x1="163.4" y1="76.6" x2="119.7" y2="97.4" />
+        <line x1="162" y1="102" x2="118.4" y2="101" />
+        <line x1="152.6" y1="124.5" x2="113.2" y2="107" />
+        <line x1="136.2" y1="141.5" x2="106.8" y2="113.8" />
+        <line x1="113.6" y1="151.2" x2="100.9" y2="119.4" />
+      </g>
+      <!-- Spoke tips (small dots) -->
+      <g fill="#0A1628">
+        <circle cx="100" cy="20" r="2.5" />
+        <circle cx="125.2" cy="24.8" r="2.5" />
+        <circle cx="146.6" cy="38.2" r="2.5" />
+        <circle cx="160.4" cy="59.2" r="2.5" />
+        <circle cx="165" cy="84" r="2.5" />
+        <circle cx="160.4" cy="108.8" r="2.5" />
+        <circle cx="146.6" cy="130.2" r="2.5" />
+        <circle cx="125.2" cy="144.2" r="2.5" />
+        <circle cx="100" cy="150" r="2.5" />
+        <circle cx="74.8" cy="144.2" r="2.5" />
+        <circle cx="53.4" cy="130.2" r="2.5" />
+        <circle cx="39.6" cy="108.8" r="2.5" />
+        <circle cx="35" cy="84" r="2.5" />
+        <circle cx="39.6" cy="59.2" r="2.5" />
+        <circle cx="53.4" cy="38.2" r="2.5" />
+        <circle cx="74.8" cy="24.8" r="2.5" />
+        <circle cx="112.6" cy="21.2" r="2.5" />
+        <circle cx="137.7" cy="31.4" r="2.5" />
+        <circle cx="155.2" cy="50" r="2.5" />
+        <circle cx="163.4" cy="74.6" r="2.5" />
+        <circle cx="162" cy="100" r="2.5" />
+        <circle cx="152.6" cy="122.8" r="2.5" />
+        <circle cx="136.2" cy="140" r="2.5" />
+        <circle cx="113.6" cy="150" r="2.5" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="page-wrap">
+
+    <!-- Back to home -->
+    <a href="{{url_for('main.index')}}" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+      Back to home
+    </a>
+
+    <!-- Logo -->
+    <div class="logo-block">
+      <div class="logo-icon-wrap">🎓</div>
+      <span class="logo-text">ScholarSetu</span>
+      <span class="logo-tagline">Maharashtra Scholarship Platform</span>
+    </div>
+
+    <!-- Card -->
+    <div class="card">
+
+      <!-- Tabs -->
+      <div class="tabs" role="tablist" aria-label="Login type">
+        <button class="tab-btn active" id="tab-student" role="tab" aria-selected="true" aria-controls="panel-student"
+          onclick="switchTab('student')">
+          <span class="tab-icon">🎓</span> Student
+        </button>
+        <button class="tab-btn" id="tab-admin" role="tab" aria-selected="false" aria-controls="panel-admin"
+          onclick="switchTab('admin')">
+          <span class="tab-icon">🏛️</span> College Admin
+        </button>
+      </div>
+
+      <!-- Card Body -->
+      <div class="card-body">
+
+        <!-- Error alert (shared) -->
+        <div class="error-alert" id="error-alert" role="alert" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <span class="error-alert-text">Invalid email or password. Please try again.</span>
+          <button class="error-dismiss" onclick="hideError()" aria-label="Dismiss error">×</button>
+        </div>
+
+        <!-- ── Student Panel ── -->
+        <div class="tab-panel active" id="panel-student" role="tabpanel" aria-labelledby="tab-student">
+          <div class="form-head">
+            <h1>Student Login</h1>
+            <p>Access your scholarship dashboard and track your applications.</p>
+          </div>
+          <form action="{{url_for('auth.login')}}" method="post" id="form-student" novalidate
+            onsubmit="handleLogin(event, 'student')">
+            <div class="form-group">
+              <label for="s-email">Email address</label>
+              <input type="email" id="s-email" name="email" placeholder="you@college.edu.in" autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="s-password">Password</label>
+              <div class="pw-wrap">
+                <input type="password" id="s-password" name="password" placeholder="Enter your password"
+                  autocomplete="current-password" />
+                <input type="hidden" name="role" value="student" />
+                <button type="button" class="toggle-pw" onclick="togglePw('s-password', this)"
+                  aria-label="Toggle password visibility">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="forgot-row">
+              <a href="{{url_for('auth.forgot_password')}}" class="forgot-link" id="s-forgot">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-login" id="btn-student-login">
+              Login to Dashboard
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </form>
+
+          <div class="below-note">
+            <div class="invite-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+              </svg>
+              <span>Don't have an account? Register via your <strong>college invite link</strong> — ask your college
+                admin for the link.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Admin Panel ── -->
+        <div class="tab-panel" id="panel-admin" role="tabpanel" aria-labelledby="tab-admin">
+          <div class="form-head">
+            <h1>Admin Login</h1>
+            <p>Manage your college portal, broadcast notices, and track scholarship activity.</p>
+          </div>
+          <form action="{{url_for('auth.login')}}" method="post" id="form-admin" novalidate
+            onsubmit="handleLogin(event, 'admin')">
+            <div class="form-group">
+              <label for="a-email">Email address</label>
+              <input type="email" id="a-email" name="email" placeholder="principal@college.edu.in"
+                autocomplete="email" />
+            </div>
+            <div class="form-group">
+              <label for="a-password">Password</label>
+              <div class="pw-wrap">
+                <input type="password" id="a-password" name="password" placeholder="Enter your password"
+                  autocomplete="current-password" />
+                <input type="hidden" name="role" value="admin" />
+                <button type="button" class="toggle-pw" onclick="togglePw('a-password', this)"
+                  aria-label="Toggle password visibility">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <div class="forgot-row">
+              <a href="{{url_for('auth.forgot_password')}}" class="forgot-link" id="a-forgot">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn-login" id="btn-admin-login">
+              Login to Admin Portal
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                stroke-linecap="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </form>
+
+          <div class="below-note" style="margin-top:20px">
+            New college? <a href="{{url_for('auth.register_college')}}" id="link-register-college">Register here →</a>
+          </div>
+        </div>
+
+      </div><!-- /card-body -->
+    </div><!-- /card -->
+
+    <!-- Disclaimer -->
+    <p class="disclaimer">
+      ScholarSetu is not affiliated with Maharashtra Shasan or the MahaDBT portal.<br>
+      All scholarship information is sourced from official government publications.
+    </p>
+
+  </div><!-- /page-wrap -->
+  <script src="{{ url_for('static', filename='js/auth-login.js') }}"></script>
+</body>
+
+</html>
