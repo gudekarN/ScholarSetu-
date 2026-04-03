@@ -35,8 +35,8 @@ build/
 dist/
 *.egg-info/
 
-# Migrations (optional - keep if needed)
-# migrations/
+# Migrations versions (auto-generated)
+migrations/versions/
 
 # Temporary files
 *.swp
