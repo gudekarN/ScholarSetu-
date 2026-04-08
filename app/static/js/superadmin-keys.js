@@ -2,7 +2,7 @@
 let generatedKey = '';
 
 function generateKey() {
-    const col = document.getElementById('gk-college').value.trim();
+    const col   = document.getElementById('gk-college').value.trim();
     const aishe = document.getElementById('gk-aishe').value.trim();
 
     if (!col || !aishe) {
@@ -10,18 +10,30 @@ function generateKey() {
         return;
     }
 
-    const initials = col.split(' ').map(n => n[0]).join('').substring(0, 4).toUpperCase();
-    const randomStr = Math.random().toString(36).substring(2, 10).toUpperCase();
-    generatedKey = `SS-${initials}-${aishe.substring(2)}-${randomStr}`;
+    // Send to Flask — let Flask generate the secure key
+    fetch('/superadmin/generate_key', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ college_name: col, aishe_code: aishe })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            generatedKey = data.key;
 
-    const display = document.getElementById('secret-key-display');
-    const btnReveal = document.getElementById('btn-reveal');
+            const display    = document.getElementById('secret-key-display');
+            const btnReveal  = document.getElementById('btn-reveal');
 
-    display.innerText = '••••••••••••••••••••••••••••';
-    display.classList.add('masked');
-    btnReveal.innerText = 'Reveal';
+            display.innerText = '••••••••••••••••••••••••••••';
+            display.classList.add('masked');
+            btnReveal.innerText = 'Reveal';
 
-    document.getElementById('key-result').classList.add('show');
+            document.getElementById('key-result').classList.add('show');
+        } else {
+            alert(data.message || 'Failed to generate key.');
+        }
+    })
+    .catch(() => alert('Network error. Please try again.'));
 }
 
 function toggleKeyReveal() {

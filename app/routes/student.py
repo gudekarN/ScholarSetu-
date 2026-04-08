@@ -10,7 +10,7 @@ student_bp=Blueprint('student', __name__, url_prefix="/student")
 
 @student_bp.route("/dashboard")
 def dashboard():
-    if 'email' not in session or session.get('role') != 'student':
+    if 'user_id' not in session or session.get('role') != 'student':
         session.clear()  # wipe any partial/wrong session
         return redirect(url_for('auth.login'))
 

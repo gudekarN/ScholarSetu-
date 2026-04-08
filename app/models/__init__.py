@@ -5,9 +5,13 @@ class College(db.Model):
     __tablename__ ="colleges"
 
     college_id= db.Column(db.Integer, primary_key=True)
+    college_name= db.Column(db.String(200), nullable=False)
     aishe_code= db.Column(db.String(200), unique=True, nullable=False)
     secret_key= db.Column(db.String(200), nullable=False)
+    district= db.Column(db.String(200), nullable=False)
+    college_type= db.Column(db.String(200), nullable=False)
     admin_email= db.Column(db.String(200), nullable=False)
+    admin_phone= db.Column(db.String(15), nullable=False)
     password=db.Column(db.String(200), nullable=False)
     status=db.Column(db.Boolean, nullable=False, default=False)
     created_at=db.Column(db.DateTime, default=datetime.utcnow)
@@ -34,6 +38,16 @@ class ScholarshipData(db.Model):
     official_link= db.Column(db.String(200), nullable=False)
     updated_at= db.Column(db.DateTime, default=datetime.utcnow)
 
+class SecretKeys(db.Model):
+    __tablename__ = "secret_keys"
+
+    key_id      = db.Column(db.Integer, primary_key=True)
+    college_name = db.Column(db.String(200), nullable=False)
+    aishe_code  = db.Column(db.String(200), nullable=False)
+    secret_key  = db.Column(db.String(200), unique=True, nullable=False)
+    is_used     = db.Column(db.Boolean, nullable=False, default=False)
+    created_at  = db.Column(db.DateTime, default=datetime.utcnow)
+
 class Students(db.Model):
     __tablename__="students"
     __table_args__ = (db.UniqueConstraint('prn', 'college_id'),)
@@ -44,7 +58,7 @@ class Students(db.Model):
     email= db.Column(db.String(200), nullable=False, unique=True)
     password= db.Column(db.String(200), nullable=False)
     prn= db.Column(db.String(200), nullable=False)
-    contact_number= db.Column(db.String(10), nullable=False)
+    contact_number= db.Column(db.String(15), nullable=False)
     department= db.Column(db.String(200), nullable=False)
     year= db.Column(db.String(200), nullable=False)
     is_verified= db.Column(db.Boolean, nullable=False, default=False)

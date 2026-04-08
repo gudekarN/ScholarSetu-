@@ -10,7 +10,7 @@ admin_bp=Blueprint('admin', __name__, url_prefix='/admin')
 
 @admin_bp.route("/dashboard")
 def dashboard():
-    if 'email' not in session or session.get('role') != 'admin':
+    if 'user_id' not in session or session.get('role') != 'admin':
         session.clear() # wipe any partial/wrong session
         return redirect(url_for('auth.login'))
 

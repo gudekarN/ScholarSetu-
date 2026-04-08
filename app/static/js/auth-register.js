@@ -5,16 +5,15 @@
  * Functions exposed globally (used in HTML onclick):
  *   window.goToStep(n)
  *   window.togglePw(id, btn)
- *
- * All other logic is encapsulated inside DOMContentLoaded.
  */
 
 document.addEventListener("DOMContentLoaded", function () {
 
   /* ════════════════════════════
-     1. STEP MANAGEMENT
+     1. STATE & STEP MANAGEMENT
   ════════════════════════════ */
   let currentStep = 1;
+  let step1Data = {}; // Outer scope — survives across all step functions
 
   window.goToStep = function (n) {
     document.getElementById('step-' + currentStep).classList.remove('active');
@@ -28,8 +27,11 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let i = 1; i <= 3; i++) {
       const circle = document.getElementById('sc-' + i);
       const label  = document.getElementById('sl-' + i);
+      if (!circle || !label) continue;
+
       circle.classList.remove('active', 'done');
       label.classList.remove('active', 'done');
+
       if (i < n) {
         circle.classList.add('done');
         circle.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>`;
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     for (let c = 1; c <= 2; c++) {
       const conn = document.getElementById('conn-' + c);
-      conn.classList.toggle('done', c < n);
+      if (conn) conn.classList.toggle('done', c < n);
     }
   }
 
@@ -68,13 +70,14 @@ document.addEventListener("DOMContentLoaded", function () {
   ════════════════════════════ */
   function checkStrength(val) {
     const wrap = document.getElementById('strength-wrap');
+    if (!wrap) return;
     if (!val) { wrap.style.display = 'none'; return; }
     wrap.style.display = 'block';
 
     let score = 0;
-    if (val.length >= 8) score++;
-    if (/[A-Z]/.test(val)) score++;
-    if (/[0-9]/.test(val)) score++;
+    if (val.length >= 8)          score++;
+    if (/[A-Z]/.test(val))        score++;
+    if (/[0-9]/.test(val))        score++;
     if (/[^A-Za-z0-9]/.test(val)) score++;
 
     const colors = ['#DC2626', '#F97316', '#EAB308', '#22C55E'];
@@ -82,14 +85,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     for (let i = 1; i <= 4; i++) {
       const bar = document.getElementById('sb-' + i);
-      bar.style.background = i <= score ? colors[score - 1] : 'var(--border)';
+      if (bar) bar.style.background = i <= score ? colors[score - 1] : 'var(--border)';
     }
     const lbl = document.getElementById('strength-label');
-    lbl.textContent = labels[score - 1] || '';
-    lbl.style.color = colors[score - 1] || 'var(--text-light)';
+    if (lbl) {
+      lbl.textContent = labels[score - 1] || '';
+      lbl.style.color  = colors[score - 1] || 'var(--text-light)';
+    }
   }
 
-  // Attach strength checker to password input
   const adminPasswordEl = document.getElementById('adminPassword');
   if (adminPasswordEl) {
     adminPasswordEl.addEventListener('input', function () {
@@ -99,36 +103,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
   /* ════════════════════════════
-     4. INLINE ERROR HELPERS
+     4. ERROR HELPERS
   ════════════════════════════ */
-  function showErr(id, show) {
+  function showErr(id, show, customMsg) {
     const el    = document.getElementById('err-' + id);
     const input = document.getElementById(id);
     if (!el || !input) return;
     el.classList.toggle('show', show);
     input.classList.toggle('error', show);
+    // If a custom message from Flask is provided, inject it into the error element
+    if (show && customMsg) {
+      const textNode = el.lastChild;
+      if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+        textNode.textContent = ' ' + customMsg;
+      } else {
+        el.insertAdjacentText('beforeend', ' ' + customMsg);
+      }
+    }
   }
 
   function clearErrors(ids) {
     ids.forEach(id => showErr(id, false));
   }
 
-
-  /* ════════════════════════════
-     5. CLEAR ERROR ON INPUT
-  ════════════════════════════ */
+  // Clear error automatically when user starts fixing input
   [
     'collegeName', 'aisheCode', 'secretKey', 'district', 'collegeType',
     'adminName', 'adminEmail', 'adminPassword', 'confirmPassword', 'adminPhone'
   ].forEach(id => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener('input',  () => showErr(id, false));
-    if (el) el.addEventListener('change', () => showErr(id, false));
+    if (el) {
+      el.addEventListener('input',  () => showErr(id, false));
+      el.addEventListener('change', () => showErr(id, false));
+    }
   });
 
 
   /* ════════════════════════════
-     6. STEP 1 VALIDATION
+     5. STEP 1 — VALIDATE & SAVE
+     Saves data to step1Data object
+     Does NOT contact Flask yet
   ════════════════════════════ */
   const form1 = document.getElementById('form-1');
   if (form1) {
@@ -144,19 +158,33 @@ document.addEventListener("DOMContentLoaded", function () {
 
       clearErrors(['collegeName', 'aisheCode', 'secretKey', 'district', 'collegeType']);
 
-      if (!collegeName) { showErr('collegeName', true); valid = false; }
-      if (!aisheCode || !/^C-\d{5}$/i.test(aisheCode)) { showErr('aisheCode', true); valid = false; }
-      if (!secretKey)  { showErr('secretKey', true);   valid = false; }
-      if (!district)   { showErr('district', true);    valid = false; }
-      if (!collegeType){ showErr('collegeType', true); valid = false; }
+      if (!collegeName)                                { showErr('collegeName', true); valid = false; }
+      if (!aisheCode || !/^C-\d{5}$/i.test(aisheCode)){ showErr('aisheCode',   true); valid = false; }
+      if (!secretKey)                                  { showErr('secretKey',   true); valid = false; }
+      if (!district)                                   { showErr('district',    true); valid = false; }
+      if (!collegeType)                                { showErr('collegeType', true); valid = false; }
 
-      if (valid) goToStep(2);
+      if (valid) {
+        // Save Step 1 data in outer-scope object — persists until Step 2 submits
+        step1Data = {
+          college_name: collegeName,
+          aishe_code:   aisheCode,
+          secret_key:   secretKey,
+          district:     district,
+          college_type: collegeType
+        };
+        goToStep(2);
+      }
     });
   }
 
 
+
   /* ════════════════════════════
-     7. STEP 2 VALIDATION
+     6. STEP 2 — VALIDATE & POST
+     Combines step1Data + step2 data
+     Sends ONE fetch() POST to Flask
+     goToStep(3) only on Flask success
   ════════════════════════════ */
   const form2 = document.getElementById('form-2');
   if (form2) {
@@ -175,22 +203,71 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!adminName) { showErr('adminName', true); valid = false; }
 
       const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!adminEmail || !emailRe.test(adminEmail)) { showErr('adminEmail', true); valid = false; }
-
-      if (!pw || pw.length < 8) { showErr('adminPassword', true); valid = false; }
-      if (!cpw || pw !== cpw)   { showErr('confirmPassword', true); valid = false; }
+      if (!adminEmail || !emailRe.test(adminEmail)) { showErr('adminEmail',    true); valid = false; }
+      if (!pw || pw.length < 8)                     { showErr('adminPassword', true); valid = false; }
+      if (!cpw || pw !== cpw)                       { showErr('confirmPassword', true); valid = false; }
 
       const phoneDigits = phone.replace(/\D/g, '');
       if (!phone || phoneDigits.length < 10) { showErr('adminPhone', true); valid = false; }
 
-      if (valid) goToStep(3);
+      if (!valid) return; // Stop here if frontend validation fails
+
+      // Combine both steps into one payload
+      const payload = {
+        ...step1Data,
+        admin_name:  adminName,
+        admin_email: adminEmail,
+        password:    pw,
+        admin_phone: phone
+      };
+
+      // Lock button to prevent double submit
+      const btn = document.getElementById('btn-step2');
+      if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+
+      // Send POST to Flask — goToStep(3) only after Flask confirms success
+      fetch('/auth/register-college', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          goToStep(3); // ← only runs after real Flask success response
+
+        } else {
+          // Show error on the correct step — not a generic alert
+          if (data.field === 'aishe_code') {
+            goToStep(1);
+            showErr('aisheCode', true, data.message);
+          } else if (data.field === 'secret_key') {
+            goToStep(1);
+            showErr('secretKey', true, data.message);
+          } else if (data.field === 'admin_email') {
+            showErr('adminEmail', true, data.message);
+          } else {
+            // Fallback for unexpected errors
+            showErr('adminEmail', true, data.message || 'Something went wrong. Please try again.');
+          }
+          // Re-enable button so user can fix and resubmit
+          if (btn) { btn.disabled = false; btn.textContent = 'Create Account ›'; }
+        }
+      })
+      .catch(() => {
+        // Network or server crash
+        showErr('adminEmail', true, 'Network error. Please check your connection and try again.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Create Account ›'; }
+      });
     });
   }
 
 
   /* ════════════════════════════
-     8. AISHE AUTO-FORMAT
+     7. INPUT FORMATTERS
   ════════════════════════════ */
+
+  // AISHE code — auto uppercase + C- prefix
   const aisheEl = document.getElementById('aisheCode');
   if (aisheEl) {
     aisheEl.addEventListener('input', function () {
@@ -201,16 +278,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-
-  /* ════════════════════════════
-     9. PHONE FORMATTER
-  ════════════════════════════ */
+  // Phone — digits only, max 10, formatted as XXXXX XXXXX
   const phoneEl = document.getElementById('adminPhone');
   if (phoneEl) {
     phoneEl.addEventListener('input', function () {
-      let v = this.value.replace(/[^\d+]/g, '');
-      if (v.startsWith('+91')) v = '+91 ' + v.slice(3).replace(/(\d{5})(\d{5})/, '$1 $2');
-      else if (v.length === 10) v = v.replace(/(\d{5})(\d{5})/, '$1 $2');
+      let v = this.value.replace(/\D/g, '');
+      if (v.length > 10) v = v.slice(0, 10);
+      if (v.length > 5)  v = v.slice(0, 5) + ' ' + v.slice(5);
       this.value = v;
     });
   }

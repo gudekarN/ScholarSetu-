@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Logout button */
     const logoutBtn = document.getElementById('sa-logout-btn');
     if (logoutBtn) logoutBtn.addEventListener('click', () => {
-        window.location.href = '/auth/logout';
+        window.location.href = '/superadmin/logME';
     });
 
     /* Close dropdown on outside click */
