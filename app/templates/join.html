@@ -1,19 +1,24 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join ScholarSetu — Student Registration</title>
-  <meta name="description" content="Register as a student on ScholarSetu via your college invite link. Fill in your details to access Maharashtra's scholarship platform." />
+  <meta name="description"
+    content="Register as a student on ScholarSetu via your college invite link. Fill in your details to access Maharashtra's scholarship platform." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@700;800;900&family=Playfair+Display:wght@700;800&display=swap"
+    rel="stylesheet" />
 
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-base.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-layout.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-components.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/auth-join.css') }}">
 </head>
+
 <body>
 
   <!-- Tricolor bar -->
@@ -26,60 +31,60 @@
   <!-- Ashok Chakra watermark -->
   <div class="chakra-wrap" aria-hidden="true">
     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="100" cy="100" r="98" fill="none" stroke="#0A1628" stroke-width="1.2"/>
-      <circle cx="100" cy="100" r="78" fill="none" stroke="#0A1628" stroke-width="1"/>
-      <circle cx="100" cy="100" r="8" fill="#0A1628"/>
+      <circle cx="100" cy="100" r="98" fill="none" stroke="#0A1628" stroke-width="1.2" />
+      <circle cx="100" cy="100" r="78" fill="none" stroke="#0A1628" stroke-width="1" />
+      <circle cx="100" cy="100" r="8" fill="#0A1628" />
       <g stroke="#0A1628" stroke-width="1" stroke-linecap="round">
-        <line x1="100" y1="22" x2="100" y2="92"/>
-        <line x1="125.2" y1="26.6" x2="112.6" y2="89.2"/>
-        <line x1="146.6" y1="40.4" x2="119.9" y2="80.1"/>
-        <line x1="160.4" y1="61.4" x2="122" y2="86.8"/>
-        <line x1="165" y1="85.8" x2="119.2" y2="97.4"/>
-        <line x1="160" y1="111" x2="110.4" y2="104.8"/>
-        <line x1="146.2" y1="131.8" x2="107.1" y2="109.6"/>
-        <line x1="125.2" y1="145.8" x2="107" y2="116.4"/>
-        <line x1="100" y1="152" x2="100" y2="108"/>
-        <line x1="74.8" y1="145.8" x2="93" y2="116.4"/>
-        <line x1="53.8" y1="131.8" x2="92.9" y2="109.6"/>
-        <line x1="40" y1="111" x2="89.6" y2="104.8"/>
-        <line x1="35" y1="85.8" x2="80.8" y2="97.4"/>
-        <line x1="39.6" y1="61.4" x2="78" y2="86.8"/>
-        <line x1="53.4" y1="40.4" x2="80.1" y2="80.1"/>
-        <line x1="74.8" y1="26.6" x2="87.4" y2="89.2"/>
-        <line x1="112.3" y1="22.8" x2="105.3" y2="91.8"/>
-        <line x1="137.7" y1="33.2" x2="115.3" y2="85"/>
-        <line x1="155.2" y1="52.1" x2="121.2" y2="83.6"/>
-        <line x1="163.4" y1="76.6" x2="119.7" y2="97.4"/>
-        <line x1="162" y1="102" x2="118.4" y2="101"/>
-        <line x1="152.6" y1="124.5" x2="113.2" y2="107"/>
-        <line x1="136.2" y1="141.5" x2="106.8" y2="113.8"/>
-        <line x1="113.6" y1="151.2" x2="100.9" y2="119.4"/>
+        <line x1="100" y1="22" x2="100" y2="92" />
+        <line x1="125.2" y1="26.6" x2="112.6" y2="89.2" />
+        <line x1="146.6" y1="40.4" x2="119.9" y2="80.1" />
+        <line x1="160.4" y1="61.4" x2="122" y2="86.8" />
+        <line x1="165" y1="85.8" x2="119.2" y2="97.4" />
+        <line x1="160" y1="111" x2="110.4" y2="104.8" />
+        <line x1="146.2" y1="131.8" x2="107.1" y2="109.6" />
+        <line x1="125.2" y1="145.8" x2="107" y2="116.4" />
+        <line x1="100" y1="152" x2="100" y2="108" />
+        <line x1="74.8" y1="145.8" x2="93" y2="116.4" />
+        <line x1="53.8" y1="131.8" x2="92.9" y2="109.6" />
+        <line x1="40" y1="111" x2="89.6" y2="104.8" />
+        <line x1="35" y1="85.8" x2="80.8" y2="97.4" />
+        <line x1="39.6" y1="61.4" x2="78" y2="86.8" />
+        <line x1="53.4" y1="40.4" x2="80.1" y2="80.1" />
+        <line x1="74.8" y1="26.6" x2="87.4" y2="89.2" />
+        <line x1="112.3" y1="22.8" x2="105.3" y2="91.8" />
+        <line x1="137.7" y1="33.2" x2="115.3" y2="85" />
+        <line x1="155.2" y1="52.1" x2="121.2" y2="83.6" />
+        <line x1="163.4" y1="76.6" x2="119.7" y2="97.4" />
+        <line x1="162" y1="102" x2="118.4" y2="101" />
+        <line x1="152.6" y1="124.5" x2="113.2" y2="107" />
+        <line x1="136.2" y1="141.5" x2="106.8" y2="113.8" />
+        <line x1="113.6" y1="151.2" x2="100.9" y2="119.4" />
       </g>
       <g fill="#0A1628">
-        <circle cx="100" cy="20" r="2.5"/>
-        <circle cx="125.2" cy="24.8" r="2.5"/>
-        <circle cx="146.6" cy="38.2" r="2.5"/>
-        <circle cx="160.4" cy="59.2" r="2.5"/>
-        <circle cx="165" cy="84" r="2.5"/>
-        <circle cx="160.4" cy="108.8" r="2.5"/>
-        <circle cx="146.6" cy="130.2" r="2.5"/>
-        <circle cx="125.2" cy="144.2" r="2.5"/>
-        <circle cx="100" cy="150" r="2.5"/>
-        <circle cx="74.8" cy="144.2" r="2.5"/>
-        <circle cx="53.4" cy="130.2" r="2.5"/>
-        <circle cx="39.6" cy="108.8" r="2.5"/>
-        <circle cx="35" cy="84" r="2.5"/>
-        <circle cx="39.6" cy="59.2" r="2.5"/>
-        <circle cx="53.4" cy="38.2" r="2.5"/>
-        <circle cx="74.8" cy="24.8" r="2.5"/>
-        <circle cx="112.6" cy="21.2" r="2.5"/>
-        <circle cx="137.7" cy="31.4" r="2.5"/>
-        <circle cx="155.2" cy="50" r="2.5"/>
-        <circle cx="163.4" cy="74.6" r="2.5"/>
-        <circle cx="162" cy="100" r="2.5"/>
-        <circle cx="152.6" cy="122.8" r="2.5"/>
-        <circle cx="136.2" cy="140" r="2.5"/>
-        <circle cx="113.6" cy="150" r="2.5"/>
+        <circle cx="100" cy="20" r="2.5" />
+        <circle cx="125.2" cy="24.8" r="2.5" />
+        <circle cx="146.6" cy="38.2" r="2.5" />
+        <circle cx="160.4" cy="59.2" r="2.5" />
+        <circle cx="165" cy="84" r="2.5" />
+        <circle cx="160.4" cy="108.8" r="2.5" />
+        <circle cx="146.6" cy="130.2" r="2.5" />
+        <circle cx="125.2" cy="144.2" r="2.5" />
+        <circle cx="100" cy="150" r="2.5" />
+        <circle cx="74.8" cy="144.2" r="2.5" />
+        <circle cx="53.4" cy="130.2" r="2.5" />
+        <circle cx="39.6" cy="108.8" r="2.5" />
+        <circle cx="35" cy="84" r="2.5" />
+        <circle cx="39.6" cy="59.2" r="2.5" />
+        <circle cx="53.4" cy="38.2" r="2.5" />
+        <circle cx="74.8" cy="24.8" r="2.5" />
+        <circle cx="112.6" cy="21.2" r="2.5" />
+        <circle cx="137.7" cy="31.4" r="2.5" />
+        <circle cx="155.2" cy="50" r="2.5" />
+        <circle cx="163.4" cy="74.6" r="2.5" />
+        <circle cx="162" cy="100" r="2.5" />
+        <circle cx="152.6" cy="122.8" r="2.5" />
+        <circle cx="136.2" cy="140" r="2.5" />
+        <circle cx="113.6" cy="150" r="2.5" />
       </g>
     </svg>
   </div>
@@ -87,8 +92,11 @@
   <div class="page-wrap">
 
     <!-- Back link -->
-    <a href="{{url_for('auth.login')}}" class="back-link" id="back-to-login">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    <a href="{{ url_for('auth.login') }}" class="back-link" id="back-to-login">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
       Back to Login
     </a>
 
@@ -102,198 +110,221 @@
     <!-- Card -->
     <div class="card">
 
-      <!-- College banner — pre-filled from token -->
-      <div class="college-banner" id="college-banner" role="status" aria-label="College invite information">
-        <div class="lock-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-        </div>
-        <div class="college-banner-text">
-          <div class="join-label">You are joining</div>
-          <div class="college-name" id="banner-college-name">DY Patil College of Engineering, Pune</div>
-          <div class="invited-by">Invited by <span>College Admin</span></div>
-        </div>
-      </div>
+      {% if invalid %}
 
-      <!-- Card body (form) -->
-      <div class="card-body" id="form-wrapper">
-
-        <!-- Step pill -->
-        <div class="step-pill" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          Student Registration · Invite Link
+        <!-- ── Invalid token state — form is hidden ── -->
+        <div class="card-body" style="text-align:center; padding: 48px 24px;">
+          <div style="font-size: 48px; margin-bottom: 16px;">🔗</div>
+          <h2 style="margin-bottom: 12px; color: var(--text-primary);">Invalid Invite Link</h2>
+          <p style="color: var(--text-muted); line-height: 1.6; font-size: 14px;">
+            This invite link has expired or is invalid.<br>
+            Please contact your college admin for a new link.
+          </p>
+          <a href="{{ url_for('auth.login') }}"
+            style="display:inline-block; margin-top:24px; color:var(--saffron); font-weight:600; font-size:14px; text-decoration:none;">
+            ← Back to Login
+          </a>
         </div>
 
-        <div class="form-head">
-          <h1>Create your account</h1>
-          <p>Fill in your details to join your college on ScholarSetu and access scholarship opportunities.</p>
+      {% else %}
+
+        <!-- College banner — pre-filled from token -->
+        <div class="college-banner" id="college-banner" role="status" aria-label="College invite information">
+          <div class="lock-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+          </div>
+          <div class="college-banner-text">
+            <div class="join-label">You are joining</div>
+            <!-- college_name comes from Flask, displayed and locked -->
+            <div class="college-name" id="banner-college-name">{{ college_name }}</div>
+            <div class="invited-by">Invited by <span>College Admin</span></div>
+          </div>
         </div>
 
-        <!-- PRN conflict warning (dismissable) -->
-        <div class="prn-warning" id="prn-warning" role="alert" aria-live="polite">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
-            <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-            <line x1="12" y1="9" x2="12" y2="13"/>
-            <line x1="12" y1="17" x2="12.01" y2="17"/>
-          </svg>
-          <span class="prn-warning-text">
-            This PRN is already registered. If this is a mistake, contact your college admin.
-          </span>
-          <button class="prn-dismiss" onclick="hidePrnWarning()" aria-label="Dismiss PRN warning">×</button>
-        </div>
+        <!-- Card body (form) -->
+        <div class="card-body" id="form-wrapper">
 
-        <!-- Registration form -->
-        <form id="reg-form" novalidate onsubmit="handleRegister(event)">
-          <div class="form-grid">
+          <!-- Step pill -->
+          <div class="step-pill" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+              <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 00-3-3.87" />
+              <path d="M16 3.13a4 4 0 010 7.75" />
+            </svg>
+            Student Registration · Invite Link
+          </div>
 
-            <!-- Full Name — full width -->
-            <div class="form-group full">
-              <label for="full-name">Full Name</label>
-              <input
-                type="text"
-                id="full-name"
-                placeholder="e.g. Priya Suresh Patil"
-                autocomplete="name"
-              />
-            </div>
+          <div class="form-head">
+            <h1>Create your account</h1>
+            <p>Fill in your details to join your college on ScholarSetu and access scholarship opportunities.</p>
+          </div>
 
-            <!-- Email — full width -->
-            <div class="form-group full">
-              <label for="email">Email Address</label>
-              <input
-                type="email"
-                id="email"
-                placeholder="you@college.edu.in"
-                autocomplete="email"
-              />
-              <div class="email-hint" aria-live="polite">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11l-1.27 1.27"/></svg>
-                Verification email will be sent here
+          <!-- PRN conflict warning (dismissable) -->
+          <div class="prn-warning" id="prn-warning" role="alert" aria-live="polite">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <span class="prn-warning-text">
+              This PRN is already registered. If this is a mistake, contact your college admin.
+            </span>
+            <button class="prn-dismiss" onclick="hidePrnWarning()" aria-label="Dismiss PRN warning">×</button>
+          </div>
+
+          <!-- Registration form -->
+          <!-- token is passed as hidden field so JS can read it and send to /auth/register-student -->
+          <form id="reg-form" novalidate onsubmit="handleRegister(event)">
+
+            <!-- Hidden token field — JS reads this and includes in fetch() payload -->
+            <input type="hidden" id="invite-token" value="{{ token }}" />
+
+            <div class="form-grid">
+
+              <!-- Full Name -->
+              <div class="form-group full">
+                <label for="full-name">Full Name</label>
+                <input type="text" id="full-name" placeholder="e.g. Priya Suresh Patil" autocomplete="name" />
               </div>
-            </div>
 
-            <!-- Password — left -->
-            <div class="form-group">
-              <label for="password">Password</label>
-              <div class="pw-wrap">
-                <input type="password" id="password" placeholder="Min. 8 characters" autocomplete="new-password" />
-                <button type="button" class="toggle-pw" onclick="togglePw('password', this)" aria-label="Toggle password visibility">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                    <circle cx="12" cy="12" r="3"/>
+              <!-- Email -->
+              <div class="form-group full">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="you@college.edu.in" autocomplete="email" />
+                <div class="email-hint" aria-live="polite">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <path
+                      d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .5h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11l-1.27 1.27" />
                   </svg>
-                </button>
+                  Verification email will be sent here
+                </div>
               </div>
-            </div>
 
-            <!-- Confirm Password — right -->
-            <div class="form-group">
-              <label for="confirm-password">Confirm Password</label>
-              <div class="pw-wrap">
-                <input type="password" id="confirm-password" placeholder="Re-enter password" autocomplete="new-password" />
-                <button type="button" class="toggle-pw" onclick="togglePw('confirm-password', this)" aria-label="Toggle confirm password visibility">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                    <circle cx="12" cy="12" r="3"/>
+              <!-- Password -->
+              <div class="form-group">
+                <label for="password">Password</label>
+                <div class="pw-wrap">
+                  <input type="password" id="password" placeholder="Min. 8 characters" autocomplete="new-password" />
+                  <button type="button" class="toggle-pw" onclick="togglePw('password', this)"
+                    aria-label="Toggle password visibility">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Confirm Password -->
+              <div class="form-group">
+                <label for="confirm-password">Confirm Password</label>
+                <div class="pw-wrap">
+                  <input type="password" id="confirm-password" placeholder="Re-enter password"
+                    autocomplete="new-password" />
+                  <button type="button" class="toggle-pw" onclick="togglePw('confirm-password', this)"
+                    aria-label="Toggle confirm password visibility">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- PRN -->
+              <div class="form-group full">
+                <label for="prn">PRN / Permanent Registration Number</label>
+                <input type="text" id="prn" placeholder="e.g. 2021016400101234" inputmode="numeric" maxlength="16" />
+                <div class="field-hint">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="16" x2="12" y2="12" />
+                    <line x1="12" y1="8" x2="12.01" y2="8" />
                   </svg>
-                </button>
+                  Numeric only &middot; Usually 10–13 digits &middot; Check your college ID card
+                </div>
               </div>
-            </div>
 
-            <!-- PRN — full width -->
-            <div class="form-group full">
-              <label for="prn">PRN / Permanent Registration Number</label>
-              <input
-                type="text"
-                id="prn"
-                placeholder="e.g. 2021016400101234"
-                inputmode="numeric"
-                maxlength="16"
-              />
-              <div class="field-hint">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                Numeric only &middot; Usually 10–13 digits &middot; Check your college ID card
+              <!-- Contact Number -->
+              <div class="form-group full">
+                <label for="contact">Contact Number</label>
+                <input type="tel" id="contact" placeholder="+91 98765 43210" autocomplete="tel" maxlength="13" />
               </div>
-            </div>
 
-            <!-- Contact Number — full width -->
-            <div class="form-group full">
-              <label for="contact">Contact Number</label>
-              <input
-                type="tel"
-                id="contact"
-                placeholder="+91 98765 43210"
-                autocomplete="tel"
-                maxlength="13"
-              />
-            </div>
-
-            <!-- Department — left -->
-            <div class="form-group">
-              <label for="department">Department</label>
-              <div class="select-wrap">
-                <select id="department">
-                  <option value="" disabled selected>Select department</option>
-                  <option value="ce">Computer Engineering</option>
-                  <option value="mech">Mechanical</option>
-                  <option value="civil">Civil</option>
-                  <option value="elex">Electronics</option>
-                  <option value="it">IT</option>
-                  <option value="entc">ENTC</option>
-                  <option value="electrical">Electrical</option>
-                  <option value="other">Other</option>
-                </select>
+              <!-- Department -->
+              <div class="form-group">
+                <label for="department">Department</label>
+                <div class="select-wrap">
+                  <select id="department">
+                    <option value="" disabled selected>Select department</option>
+                    <option value="Computer Engineering">Computer Engineering</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="IT">IT</option>
+                    <option value="ENTC">ENTC</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
               </div>
-            </div>
 
-            <!-- Year of Study — right -->
-            <div class="form-group">
-              <label for="year">Year of Study</label>
-              <div class="select-wrap">
-                <select id="year">
-                  <option value="" disabled selected>Select year</option>
-                  <option value="1">First Year</option>
-                  <option value="2">Second Year</option>
-                  <option value="3">Third Year</option>
-                  <option value="4">Fourth Year</option>
-                </select>
+              <!-- Year of Study -->
+              <div class="form-group">
+                <label for="year">Year of Study</label>
+                <div class="select-wrap">
+                  <select id="year">
+                    <option value="" disabled selected>Select year</option>
+                    <option value="1st Year">First Year</option>
+                    <option value="2nd Year">Second Year</option>
+                    <option value="3rd Year">Third Year</option>
+                    <option value="4th Year">Fourth Year</option>
+                  </select>
+                </div>
               </div>
-            </div>
 
-          </div><!-- /form-grid -->
+            </div><!-- /form-grid -->
 
-          <button type="submit" class="btn-submit" id="btn-register">
-            <span id="btn-label">Create Account</span>
-            <svg id="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-            <div class="spinner" id="btn-spinner" style="display:none;" aria-hidden="true"></div>
+            <button type="submit" class="btn-submit" id="btn-register">
+              <span id="btn-label">Create Account</span>
+              <svg id="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+              <div class="spinner" id="btn-spinner" style="display:none;" aria-hidden="true"></div>
+            </button>
+
+          </form>
+
+        </div><!-- /card-body -->
+
+        <!-- ── Success state ── -->
+        <div class="success-state" id="success-state" aria-live="polite">
+          <div class="success-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+              stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+          </div>
+          <h2>Verify your email</h2>
+          <p>
+            We sent a confirmation link to<br>
+            <strong id="success-email">you@college.edu.in</strong>.<br>
+            Click it to activate your account.
+          </p>
+          <button class="resend-btn" id="resend-btn" onclick="handleResend(this)">
+            Resend email
           </button>
-
-        </form>
-
-      </div><!-- /card-body -->
-
-      <!-- ── Success state ── -->
-      <div class="success-state" id="success-state" aria-live="polite">
-        <div class="success-icon-wrap">
-          <!-- Email / envelope icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
+          <div class="success-divider"></div>
         </div>
-        <h2>Verify your email</h2>
-        <p>
-          We sent a confirmation link to<br>
-          <strong id="success-email">you@college.edu.in</strong>.<br>
-          Click it to activate your account.
-        </p>
-        <button class="resend-btn" id="resend-btn" onclick="handleResend(this)">
-          Resend email
-        </button>
-        <div class="success-divider"></div>
-      </div>
+
+      {% endif %}
 
     </div><!-- /card -->
 
@@ -308,4 +339,5 @@
 
   <script src="{{ url_for('static', filename='js/auth-join.js') }}"></script>
 </body>
+
 </html>

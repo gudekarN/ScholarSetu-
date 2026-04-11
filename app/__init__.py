@@ -1,8 +1,7 @@
 from config import Config
 from flask import Flask
 from .routes import main_bp, auth_bp, admin_bp, student_bp, superadmin_bp
-from .extensions import db
-
+from .extensions import db, mail
 
 def create_app():
 
@@ -13,6 +12,8 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+
+    mail.init_app(app)
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
