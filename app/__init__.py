@@ -9,11 +9,10 @@ def create_app():
     app.config.from_object(Config)
 
     db.init_app(app)
+    mail.init_app(app)
 
     with app.app_context():
         db.create_all()
-
-    mail.init_app(app)
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)

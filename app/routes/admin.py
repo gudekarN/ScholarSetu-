@@ -1,6 +1,10 @@
+from app.utils import get_academic_year
+from flask_mail import Message
+from app.models import Students
+from datetime import datetime
 from flask import jsonify
-from app.extensions import db
-from app.models import InviteTokens
+from app.extensions import db, mail
+from app.models import InviteTokens, Notices
 from flask import abort
 from app.models import College
 from flask import render_template
@@ -11,6 +15,7 @@ from flask import redirect
 from flask import url_for
 from flask import make_response
 import uuid 
+import os
 
 admin_bp=Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -36,7 +41,7 @@ def generate_token():
         if 'user_id' not in session or session["role"]!="admin":
             return abort(401)
 
-        existing=InviteTokens.query.filter_by(college_id=str(session['user_id']), is_active=True).first()
+        existing=InviteTokens.query.filter_by(college_id=session['user_id'], is_active=True).first()
 
         if existing:
             existing.is_active=False
@@ -66,12 +71,95 @@ def get_token():
     if 'user_id' not in session or session.get('role') != 'admin':
         return abort(401)
 
-    inviteToken=InviteTokens.query.filter_by(college_id=str(session['user_id']), is_active=True).first()
+    inviteToken=InviteTokens.query.filter_by(college_id=session['user_id'], is_active=True).first()
 
     if inviteToken:
         token=inviteToken.token
         createdAt=inviteToken.created_at
 
-        return jsonify({"success":True, "token":token, "created_at":createdAt})
+        return jsonify({"success":True, "token":token, "created_at":str(createdAt)})
 
     return jsonify({"success":False})
+
+@admin_bp.route("/post_notice", methods=["POST"])
+def post_notice():
+    if request.method=="POST":
+
+        if 'user_id' not in session or session["role"]!="admin":
+            return abort(401)
+
+        data=request.get_json()
+
+        title=data.get("title")
+        content=data.get("content")
+        type=data.get("type")
+        deadline_date=data.get("deadline_date")
+
+        parsed_deadline = None
+        if deadline_date:
+            parsed_deadline = datetime.strptime(deadline_date, "%Y-%m-%d")
+
+        db_college=College.query.filter_by(college_id=session["user_id"]).first()
+
+        if db_college:
+
+            notice=Notices(
+                college_id=session["user_id"],
+                title= title,
+                content= content,
+                type= type,
+                deadline_date= parsed_deadline,
+                academic_year=get_academic_year()
+            )
+
+            try:
+                if type=="high":
+                    db_student=Students.query.filter_by(college_id=session["user_id"]).all()
+
+                    emails = [s.email for s in db_student]
+
+                    html_body = f"""
+                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #eee;">
+                        <h2 style="color: #e07b00;">{title}</h2>
+                        <p style="font-size: 15px; color: #333;">{content}</p>
+                        <hr style="border: none; border-top: 1px solid #eee;">
+                        <p style="font-size: 12px; color: #888;">This is an automated notice from ScholarSetu. Do not reply to this email.</p>
+                    </div>
+                    """
+
+                    message = Message(
+                        subject=title,
+                        sender="gudekarnihar96@gmail.com",
+                        recipients=emails
+                    )
+                    message.html = html_body
+                    mail.send(message)
+
+                db.session.add(notice)
+                db.session.commit()
+                return jsonify({"success":True})
+            except Exception as e:
+                return jsonify({"success":False})
+        
+        return jsonify({"success":False})
+
+@admin_bp.route("/get_notices")
+def get_notices():
+    if 'user_id' not in session or session["role"]!="admin":
+        return abort(401)
+
+    notices=Notices.query.filter_by(college_id=session["user_id"]).order_by(Notices.posted_at.desc()).all()
+
+    data=[]
+
+    for notice in notices:
+        data.append({
+            "notice_id": notice.notice_id,
+            "title": notice.title,
+            "content": notice.content,
+            "type": notice.type,
+            "deadline_date": str(notice.deadline_date) if notice.deadline_date else None,
+            "posted_at": notice.posted_at.strftime("%d %b %Y") if notice.posted_at else None
+        })
+
+    return jsonify({"success": True, "notices": data})

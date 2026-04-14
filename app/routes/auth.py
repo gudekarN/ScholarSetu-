@@ -163,59 +163,47 @@ def register_student():
                 return jsonify({"success": False, "field": "email", "message": "Email already registered"})
 
         else:
-            return jsonify({"success":False, "field":token}) 
+            return jsonify({"success": False, "field": "token", "message": "Invalid or expired invite link"})
 
-        encrypted_password=generate_password_hash(password)
+        encrypted_password = generate_password_hash(password)
 
         student = Students(
-            college_id     = db_inviteToken.college_id, 
+            college_id     = db_inviteToken.college_id,
             full_name      = full_name,
             email          = email,
             password       = encrypted_password,
             prn            = prn,
-            contact_number = contact_number,             
+            contact_number = contact_number,
             department     = department,
             year           = year,
             is_verified    = False
-    
         )
+
+        verification_token = str(uuid.uuid4())
+        expiry = datetime.utcnow() + timedelta(minutes=5)
 
         try:
             db.session.add(student)
-            db.session.commit()
-        
-        except Exception as e:
-            db.session.rollback()
-            return jsonify({"success":False})
+            db.session.flush()  # assigns student.student_id without committing yet
 
-        db_student = Students.query.filter_by(email=email).first()
+            emailVerification = EmailVerifications(
+                student_id = student.student_id,  # available after flush
+                token      = verification_token,
+                expires_at = expiry,
+                is_used    = False
+            )
 
-        verification_token=str(uuid.uuid4())
-        expiry=datetime.utcnow() + timedelta(minutes=5)
-
-        emailVerification=EmailVerifications(
-            student_id= db_student.student_id,
-            token= verification_token,
-            expires_at= expiry,
-            is_used= False
-        )
-
-        try:
             db.session.add(emailVerification)
-            db.session.commit()
-        
+            db.session.commit()  # single commit for both student + verification record
+
         except Exception as e:
             db.session.rollback()
-            return jsonify({"success":False})
-                    
-        # Send verification email using Flask-Mail
-        # Return {"success": True}
-        # This 2 steps are remining to implement also learn how to send link, doc, images via email. HTML temp too
+            return jsonify({"success": False})
 
-        message=Message(
-            subject="Student Verification",
-            sender="gudekarnihar96@gmail.com",
-            recipients=[email]
+        message = Message(
+            subject   = "Student Verification",
+            sender    = "gudekarnihar96@gmail.com",
+            recipients = [email]
         )
 
         message.html = f"<h1>This is STUDENT VERIFICATION mail</h1><br><a href='http://127.0.0.1:5000/auth/verify/{verification_token}'>Click here</a><br><h2 style='color:Red'>Link is valid for only 5 minutes</h2>"
@@ -259,7 +247,6 @@ def verify(token):
 
         try:
             db_student.is_verified=True
-            db.session.commit()
             db_emailVerification.is_used=True
             db.session.commit()
 

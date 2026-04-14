@@ -46,10 +46,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Notice card open
-    document.querySelectorAll('.notice-card[data-modal]').forEach(card => {
-        card.addEventListener('click', function () {
-            openModal(this.dataset.modal);
-        });
-    });
+    // Notice card wiring removed — handled dynamically by student-notices.js
 });
