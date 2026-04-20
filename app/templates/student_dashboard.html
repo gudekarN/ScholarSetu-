@@ -49,21 +49,21 @@
                 <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
                 <polyline points="9 22 9 12 15 12 15 22" />
             </svg>
-            VJTI Mumbai
+            {{ college_name }}
         </div>
 
         <!-- Profile -->
         <div class="profile-wrap">
             <div class="profile-circle" id="profile-btn" role="button" aria-haspopup="true" aria-expanded="false"
-                aria-controls="profile-dropdown" tabindex="0" aria-label="Open profile menu">RS
+                aria-controls="profile-dropdown" tabindex="0" aria-label="Open profile menu">{{ initials }}
             </div>
 
             <div class="profile-dropdown" id="profile-dropdown" role="menu" aria-label="Profile menu">
                 <div class="dropdown-header">
-                    <div class="dropdown-avatar">RS</div>
+                    <div class="dropdown-avatar">{{ initials }}</div>
                     <div>
-                        <div class="dropdown-name">Rahul Sharma</div>
-                        <div class="dropdown-prn">PRN: 2021COMP0042</div>
+                        <div class="dropdown-name">{{ full_name }}</div>
+                        <div class="dropdown-prn">PRN: {{ prn }}</div>
                     </div>
                 </div>
                 <nav class="dropdown-menu">
@@ -1400,6 +1400,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const STUDENT = {
+            name: "{{ full_name }}",
+            firstName: "{{ full_name.split()[0] }}",
+            prn: "{{ prn }}",
+            college: "{{ college_name }}",
+            initials: "{{ initials }}"
+        };
+    </script>
 
     <!-- ══ FOOTER ══ -->
     <footer class="site-footer" role="contentinfo">

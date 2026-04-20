@@ -228,7 +228,7 @@ function renderStory(tabId) {
     const steps = STORY_DATA[tabId][method];
     const total = steps.length;
     const data = steps[step];
-    const studentName = 'Rahul';
+    const studentName = (typeof STUDENT !== 'undefined' && STUDENT.firstName) ? STUDENT.firstName : 'Student';
 
     document.getElementById(tabId + '-progress-label').textContent = `Step ${step + 1} of ${total}`;
     document.getElementById(tabId + '-progress-fill').style.width = `${((step + 1) / total) * 100}%`;

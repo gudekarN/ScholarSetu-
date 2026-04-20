@@ -1,6 +1,6 @@
 from flask import jsonify
 from datetime import datetime
-from app.models import Students, Notices
+from app.models import Students, Notices, College 
 from flask import abort
 from flask import make_response
 from flask import render_template
@@ -18,7 +18,22 @@ def dashboard():
         session.clear()  # wipe any partial/wrong session
         return redirect(url_for('auth.login'))
 
-    response = make_response(render_template("student_dashboard.html"))
+    db_student = Students.query.filter_by(student_id=session["user_id"]).first()
+
+    name = db_student.full_name.strip().split()
+
+    if len(name) == 1:
+        initials = name[0][0].upper()
+    else:
+        initials = (name[0][0] + name[-1][0]).upper()
+
+    full_name=db_student.full_name
+    prn=db_student.prn
+    db_college=College.query.filter_by(college_id=db_student.college_id).first()
+    college_name=db_college.college_name
+
+
+    response = make_response(render_template("student_dashboard.html", full_name=full_name, initials=initials, prn=prn, college_name=college_name))
     response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     response.headers['Pragma']        = 'no-cache'
     response.headers['Expires']       = '0'
