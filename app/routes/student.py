@@ -31,12 +31,9 @@ def get_notices():
 
     db_student = Students.query.filter_by(student_id=session["user_id"]).first()
 
-    if not db_student:
-        return abort(401)
-
-    college_id = db_student.college_id
-
     if db_student:
+        college_id = db_student.college_id
+
         notices=Notices.query.filter_by(college_id=college_id).order_by(Notices.posted_at.desc()).all()
 
         data=[]

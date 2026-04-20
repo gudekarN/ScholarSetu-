@@ -3,9 +3,6 @@
    ScholarSetu Student Dashboard
    ═══════════════════════════════════════════════════ */
 
-/* ══════════════════════════════════════════════
-   HELPERS
-   ══════════════════════════════════════════════ */
 function escHtml(s) {
     if (!s) return '';
     return s
@@ -33,12 +30,11 @@ let countdownInterval = null;
 
 function startCountdown(deadlineDateStr) {
     if (countdownInterval) clearInterval(countdownInterval);
-
     countdownTarget = new Date(deadlineDateStr);
 
     function tick() {
-        const now  = new Date();
-        let diff   = Math.max(0, Math.floor((countdownTarget - now) / 1000));
+        const now = new Date();
+        let diff  = Math.max(0, Math.floor((countdownTarget - now) / 1000));
 
         const d = Math.floor(diff / 86400); diff -= d * 86400;
         const h = Math.floor(diff / 3600);  diff -= h * 3600;
@@ -61,9 +57,9 @@ function startCountdown(deadlineDateStr) {
 }
 
 /* ══════════════════════════════════════════════
-   BUILD NOTICE CARD HTML
+   BUILD NOTICE CARD
    ══════════════════════════════════════════════ */
-function buildStudentNoticeCard(notice, index) {
+function buildStudentNoticeCard(notice) {
     const modalId = `modal-notice-dyn-${notice.notice_id}`;
 
     const badgeMap = {
@@ -101,11 +97,10 @@ function buildStudentNoticeCard(notice, index) {
         <article class="notice-card notice-${notice.type || 'general'}"
                  id="notice-dyn-${notice.notice_id}"
                  data-modal="${modalId}"
+                 style="cursor:pointer;"
                  aria-label="Open full notice — ${escHtml(notice.title)}">
             <div class="notice-top">
-                <div class="notice-meta">
-                    ${badgeMap[notice.type] || badgeMap.general}
-                </div>
+                <div class="notice-meta">${badgeMap[notice.type] || badgeMap.general}</div>
                 <span class="notice-date">Posted ${formatDate(notice.posted_at)}</span>
             </div>
             <div class="notice-title">${escHtml(notice.title)}</div>
@@ -128,7 +123,7 @@ function buildStudentNoticeCard(notice, index) {
 }
 
 /* ══════════════════════════════════════════════
-   BUILD NOTICE MODAL HTML
+   BUILD NOTICE MODAL
    ══════════════════════════════════════════════ */
 function buildNoticeModal(notice) {
     const modalId = `modal-notice-dyn-${notice.notice_id}`;
@@ -140,25 +135,21 @@ function buildNoticeModal(notice) {
     };
 
     const contentHtml = notice.content
-        ? notice.content.split('\n').map(line => `<p>${escHtml(line)}</p>`).join('')
+        ? notice.content.split('\n').map(line => `<p style="word-break:break-word;overflow-wrap:break-word;margin:0 0 8px;">${escHtml(line)}</p>`).join('')
         : '<p>No content available.</p>';
 
     const deadlineNote = notice.type === 'deadline' && notice.deadline_date
-        ? `<p style="font-size:13px;color:var(--saffron);font-weight:600;">
-               ⏰ Deadline: ${formatDate(notice.deadline_date)}
-           </p>`
+        ? `<p style="font-size:13px;color:var(--saffron);font-weight:600;">⏰ Deadline: ${formatDate(notice.deadline_date)}</p>`
         : '';
 
     return `
         <div class="modal-backdrop" id="${modalId}" role="dialog" aria-modal="true"
              aria-labelledby="${modalId}-title" data-modal-id="${modalId}">
-            <div class="modal-box">
+            <div class="modal-box" style="max-height:80vh;overflow-y:auto;word-break:break-word;overflow-wrap:break-word;">
                 <div class="modal-header">
                     <div class="modal-titles">
-                        <div class="modal-badge-wrap">
-                            ${badgeMap[notice.type] || badgeMap.general}
-                        </div>
-                        <div class="modal-title" id="${modalId}-title">${escHtml(notice.title)}</div>
+                        <div class="modal-badge-wrap">${badgeMap[notice.type] || badgeMap.general}</div>
+                        <div class="modal-title" id="${modalId}-title" style="word-break:break-word;">${escHtml(notice.title)}</div>
                     </div>
                     <button class="modal-close" data-close-modal="${modalId}" aria-label="Close notice">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -167,10 +158,10 @@ function buildNoticeModal(notice) {
                         </svg>
                     </button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" style="word-break:break-word;overflow-wrap:break-word;">
                     ${deadlineNote}
                     ${contentHtml}
-                    <p style="font-size:12px;color:var(--text-light);">
+                    <p style="font-size:12px;color:var(--text-light);margin-top:16px;">
                         Posted by: College Administration · ${formatDate(notice.posted_at)}
                     </p>
                 </div>
@@ -179,30 +170,26 @@ function buildNoticeModal(notice) {
 }
 
 /* ══════════════════════════════════════════════
-   WIRE NOTICE CARDS — uses openModal/closeModal from student-modal.js
+   WIRE NOTICE CARDS
    ══════════════════════════════════════════════ */
 function wireNoticeCards() {
-    // Wire notice cards
     document.querySelectorAll('.notice-card[data-modal]').forEach(card => {
         const fresh = card.cloneNode(true);
         card.parentNode.replaceChild(fresh, card);
-
         fresh.addEventListener('click', function () {
             openModal(this.dataset.modal);
         });
     });
 
-    // Wire close buttons on dynamic modals
     document.querySelectorAll('#dynamic-notice-modals [data-close-modal]').forEach(btn => {
         btn.addEventListener('click', function () {
             closeModal(this.dataset.closeModal);
         });
     });
 
-    // Wire backdrop click on dynamic modals
     document.querySelectorAll('#dynamic-notice-modals .modal-backdrop').forEach(backdrop => {
         backdrop.addEventListener('click', function (e) {
-            if (e.target === e.currentTarget) closeModal(this.dataset.modalId);
+            if (e.target === this) closeModal(this.dataset.modalId);
         });
     });
 }
@@ -220,12 +207,10 @@ async function loadStudentNotices() {
         const stack = document.querySelector('.notices-stack');
         if (!stack) return;
 
-        // Remove all existing modal-backdrops except modal-report
         document.querySelectorAll('.modal-backdrop').forEach(el => {
             if (el.id !== 'modal-report') el.remove();
         });
 
-        // Remove existing dynamic modal container if re-loading
         const existingContainer = document.getElementById('dynamic-notice-modals');
         if (existingContainer) existingContainer.remove();
 
@@ -237,23 +222,17 @@ async function loadStudentNotices() {
             return;
         }
 
-        // Render notice cards
-        stack.innerHTML = data.notices.map((n, i) => buildStudentNoticeCard(n, i)).join('');
+        stack.innerHTML = data.notices.map(n => buildStudentNoticeCard(n)).join('');
 
-        // Inject modals into body
         const modalContainer = document.createElement('div');
         modalContainer.id = 'dynamic-notice-modals';
         modalContainer.innerHTML = data.notices.map(buildNoticeModal).join('');
         document.body.appendChild(modalContainer);
 
-        // Wire click handlers
         wireNoticeCards();
 
-        // Start countdown for first deadline notice
         const deadlineNotice = data.notices.find(n => n.type === 'deadline' && n.deadline_date);
-        if (deadlineNotice) {
-            startCountdown(deadlineNotice.deadline_date);
-        }
+        if (deadlineNotice) startCountdown(deadlineNotice.deadline_date);
 
     } catch (err) {
         console.error('Failed to load student notices:', err);

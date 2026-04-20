@@ -103,19 +103,103 @@ function sdCloseModal() {
 
 function sdSaveEdit() {
     if (!sdCurrentRow) return;
-    const cells = sdCurrentRow.querySelectorAll('td');
-    cells[1].textContent = document.getElementById('m-name').value;
-    cells[2].textContent = document.getElementById('m-prn').value;
-    cells[3].textContent = document.getElementById('m-email').value;
-    cells[4].textContent = document.getElementById('m-contact').value;
-    cells[5].textContent = document.getElementById('m-dept').value;
-    cells[6].textContent = document.getElementById('m-year').value;
-    sdCurrentRow.dataset.name = document.getElementById('m-name').value;
-    sdCurrentRow.dataset.prn = document.getElementById('m-prn').value;
-    sdCurrentRow.dataset.dept = document.getElementById('m-dept').value;
-    sdCurrentRow.dataset.year = document.getElementById('m-year').value;
-    sdCloseModal();
-    gToast('Student record updated.');
+
+    const studentId = sdCurrentRow.dataset.studentId;
+    const payload = {
+        student_id: studentId,
+        full_name:       document.getElementById('m-name').value,
+        prn:             document.getElementById('m-prn').value,
+        email:           document.getElementById('m-email').value,
+        contact_number:  document.getElementById('m-contact').value,
+        department:      document.getElementById('m-dept').value,
+        year:            document.getElementById('m-year').value
+    };
+
+    fetch('/admin/update_student', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!data.success) {
+            gToast('❌ Update failed. Please try again.');
+            return;
+        }
+        /* Only update DOM after server confirms success */
+        const cells = sdCurrentRow.querySelectorAll('td');
+        cells[1].textContent = payload.full_name;
+        cells[2].textContent = payload.prn;
+        cells[3].textContent = payload.email;
+        cells[4].textContent = payload.contact_number;
+        cells[5].textContent = payload.department;
+        cells[6].textContent = payload.year;
+        sdCurrentRow.dataset.name = payload.full_name;
+        sdCurrentRow.dataset.prn  = payload.prn;
+        sdCurrentRow.dataset.dept = payload.department;
+        sdCurrentRow.dataset.year = payload.year;
+        sdCloseModal();
+        gToast('Student record updated.');
+        sdRenderMobileCards();
+    })
+    .catch(() => gToast('❌ Network error. Please try again.'));
+}
+
+/* ══════════════════════════════════
+   LOAD STUDENT DATA FROM BACKEND
+══════════════════════════════════ */
+function loadStudentData() {
+    fetch('/admin/get_students')
+        .then(r => r.json())
+        .then(data => {
+            if (!data.success) return;
+
+            const tbody = document.getElementById('sd-tbody');
+            tbody.innerHTML = '';
+
+            data.students.forEach((s, idx) => {
+                const verifiedLabel = s.is_verified ? 'Verified' : 'Pending';
+                const tr = document.createElement('tr');
+                tr.dataset.studentId = s.student_id;
+                tr.dataset.name = s.full_name;
+                tr.dataset.prn  = s.prn;
+                tr.dataset.dept = s.department;
+                tr.dataset.year = s.year;
+                tr.innerHTML = `
+                    <td>${idx + 1}</td>
+                    <td>${escHtml(s.full_name)}</td>
+                    <td>${escHtml(s.prn)}</td>
+                    <td>${escHtml(s.email)}</td>
+                    <td>${escHtml(s.contact_number || '')}</td>
+                    <td>${escHtml(s.department || '')}</td>
+                    <td>${escHtml(s.year || '')}</td>
+                    <td><button class="btn-edit-row">✍️ Edit</button></td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            /* Wire edit buttons for newly created rows */
+            tbody.querySelectorAll('.btn-edit-row').forEach(btn => {
+                btn.addEventListener('click', () => sdOpenEdit(btn));
+            });
+
+            /* Update metrics strip */
+            const total    = data.students.length;
+            const verified = data.students.filter(s => s.is_verified).length;
+            const pending  = total - verified;
+            const mTotal    = document.getElementById('m-total');
+            const mVerified = document.getElementById('m-verified');
+            const mPending  = document.getElementById('m-pending');
+            if (mTotal)    mTotal.textContent    = total;
+            if (mVerified) mVerified.textContent = verified;
+            if (mPending)  mPending.textContent  = pending;
+
+            /* Update count label and mobile cards */
+            const sdCount = document.getElementById('sd-count');
+            if (sdCount) sdCount.textContent = `Showing ${total} student${total !== 1 ? 's' : ''}`;
+            sdRenderMobileCards();
+        })
+        .catch(err => console.error('Failed to load students:', err));
 }
 
 /* ══════════════════════════════════
@@ -332,4 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* Init mobile student cards */
     sdRenderMobileCards();
+
+    /* Load real student data from backend */
+    loadStudentData();
 });

@@ -15,7 +15,6 @@ from flask import redirect
 from flask import url_for
 from flask import make_response
 import uuid 
-import os
 
 admin_bp=Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -92,7 +91,7 @@ def post_notice():
 
         title=data.get("title")
         content=data.get("content")
-        type=data.get("type")
+        notice_type =data.get("type")
         deadline_date=data.get("deadline_date")
 
         parsed_deadline = None
@@ -107,13 +106,16 @@ def post_notice():
                 college_id=session["user_id"],
                 title= title,
                 content= content,
-                type= type,
+                type= notice_type ,
                 deadline_date= parsed_deadline,
                 academic_year=get_academic_year()
             )
 
             try:
-                if type=="high":
+                db.session.add(notice)
+                db.session.commit()
+
+                if notice_type =="high":
                     db_student=Students.query.filter_by(college_id=session["user_id"]).all()
 
                     emails = [s.email for s in db_student]
@@ -135,10 +137,10 @@ def post_notice():
                     message.html = html_body
                     mail.send(message)
 
-                db.session.add(notice)
-                db.session.commit()
                 return jsonify({"success":True})
+                
             except Exception as e:
+                db.session.rollback()
                 return jsonify({"success":False})
         
         return jsonify({"success":False})
@@ -150,16 +152,76 @@ def get_notices():
 
     notices=Notices.query.filter_by(college_id=session["user_id"]).order_by(Notices.posted_at.desc()).all()
 
-    data=[]
+    if notices:
 
-    for notice in notices:
-        data.append({
-            "notice_id": notice.notice_id,
-            "title": notice.title,
-            "content": notice.content,
-            "type": notice.type,
-            "deadline_date": str(notice.deadline_date) if notice.deadline_date else None,
-            "posted_at": notice.posted_at.strftime("%d %b %Y") if notice.posted_at else None
-        })
+        data=[]
 
-    return jsonify({"success": True, "notices": data})
+        for notice in notices:
+            data.append({
+                "notice_id": notice.notice_id,
+                "title": notice.title,
+                "content": notice.content,
+                "type": notice.type,
+                "deadline_date": str(notice.deadline_date) if notice.deadline_date else None,
+                "posted_at": notice.posted_at.strftime("%d %b %Y") if notice.posted_at else None
+            })
+
+        return jsonify({"success": True, "notices": data})
+
+    return jsonify({"success":False})
+
+@admin_bp.route("/get_students")
+def get_students():
+    if "user_id" not in session or session["role"]!="admin":
+        return abort(401)
+
+    db_students=Students.query.filter_by(college_id=session["user_id"]).order_by(Students.student_id.asc()).all()
+
+    if db_students:
+        data=[]
+
+        for student in db_students:
+            data.append({
+                "student_id": student.student_id,
+                "full_name":student.full_name,
+                "prn":student.prn,
+                "email":student.email,
+                "contact_number":student.contact_number,
+                "department":student.department,
+                "year":student.year,
+                "is_verified":student.is_verified,
+                "joined_at":datetime.strftime(student.joined_at, "%Y-%m-%d")
+            })
+
+        return jsonify({"success":True, "students":data})
+
+    return jsonify({"success":False})
+        
+@admin_bp.route("/update_student", methods=["POST"])
+def update_student():
+    if request.method=="POST":
+        if "user_id" not in session or session["role"]!="admin":
+            return abort(401)
+
+        data=request.get_json()
+        student_id= data.get("student_id")
+
+        db_student=Students.query.filter_by(college_id=session["user_id"], student_id=student_id).first()
+
+        if db_student:
+            try:
+                db_student.full_name= data.get("full_name", db_student.full_name)
+                db_student.prn= data.get("prn", db_student.prn)
+                db_student.email= data.get("email", db_student.email)
+                db_student.contact_number= data.get("contact_number", db_student.contact_number)
+                db_student.department= data.get("department", db_student.department)
+                db_student.year= data.get("year", db_student.year)
+
+                db.session.commit()
+
+                return jsonify({"success":True})
+
+            except Exception as e:
+                db.session.rollback()
+                
+        return jsonify({"success":False}) 

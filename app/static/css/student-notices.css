@@ -1,5 +1,36 @@
 /*
  * student-notices.css
- * Notice Board specific styles are already covered in student-components.css.
- * This file is reserved for any future notice-board specific additions.
  */
+
+.notice-card {
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.notice-title {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
+.notice-preview {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+.modal-box {
+    max-height: 80vh;
+    overflow-y: auto;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.modal-body p {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    margin: 0 0 8px;
+}
