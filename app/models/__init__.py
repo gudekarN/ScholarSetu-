@@ -105,6 +105,16 @@ class EmailVerifications(db.Model):
     expires_at= db.Column(db.DateTime)
     is_used= db.Column(db.Boolean, nullable=False, default=False)
 
+class PasswordResets(db.Model):
+    __tablename__="passwordResets"
+
+    reset_id= db.Column(db.Integer, primary_key=True)
+    email= db.Column(db.Integer, nullable=False)
+    token= db.Column(db.String, unique=True, nullable=False)
+    expires_at= db.Column(db.DateTime)
+    is_used= db.Column(db.Boolean, nullable=False, default=False)
+    created_at= db.Column(db.DateTime, default=datetime.utcnow)
+
 class StepReports(db.Model):
     __tablename__="step_reports"
 

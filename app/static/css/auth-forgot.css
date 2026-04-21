@@ -1,7 +1,7 @@
 /* ── auth-forgot.css ── */
-/* Forgot-password page-specific styles only */
+/* Forgot_password page-specific styles only */
 
-/* ── Page wrapper override (forgot-password: 460px) ── */
+/* ── Page wrapper override (forgot_password: 460px) ── */
 .page-wrap { max-width: 460px; }
 
 /* ── Screen transitions ── */

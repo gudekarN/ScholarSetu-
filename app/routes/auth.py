@@ -4,10 +4,11 @@ from flask import jsonify, render_template, url_for, redirect
 from flask import request, session 
 from flask import Blueprint
 from app.extensions import db, mail
-from app.models import College, Students, SecretKeys, EmailVerifications, InviteTokens
+from app.models import College, Students, SecretKeys, EmailVerifications, InviteTokens, PasswordResets
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
 import uuid
+import secrets
 
 auth_bp = Blueprint('auth', __name__, url_prefix="/auth")
 
@@ -213,9 +214,214 @@ def register_student():
         return jsonify({"success": True})
         
 
-@auth_bp.route("/forgot-password")
+@auth_bp.route("/forgot_password", methods=["GET", "POST"])
 def forgot_password():
-    return render_template("forgot_password.html")
+    if request.method=="GET":
+        return render_template("forgot_password.html")
+
+    if request.method=="POST":
+        data=request.get_json()
+
+        email=data.get("email")
+
+        db_college= College.query.filter_by(admin_email=email).first()
+
+        if db_college:
+            token=secrets.token_urlsafe(36)
+            expires_at=datetime.utcnow() + timedelta(minutes=15)
+
+            passwordResets=PasswordResets(
+                email= email,
+                token= token,
+                expires_at= expires_at,
+                is_used= False
+            )
+
+            try:
+                db.session.add(passwordResets)
+                db.session.commit()
+
+            except Exception as e:
+                db.session.rollback()
+                return jsonify({"success":False})
+
+            link= url_for('auth.forgot_password', token=token, _external=True)
+
+            html_body=f'''<!DOCTYPE html>
+                            <html>
+                            <head>
+                            <meta charset="UTF-8">
+                            <title>Reset Password</title>
+                            </head>
+                            <body style="font-family: Arial, sans-serif; background-color: #f6f6f6; padding: 20px;">
+
+                            <div style="max-width: 600px; margin: auto; background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+
+                            <h2 style="color: #333;">Reset Your Password</h2>
+                            <p>Hello,</p>
+                            <p>You requested to reset your password for your <strong>ScholarSetu</strong> account.</p>
+                            <p>Click the button below to reset your password:</p>
+                            <div style="text-align: center; margin: 25px 0;">
+                            <a href="{link}" 
+                                style="background-color: #007bff; color: #ffffff; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                                Reset Password
+                            </a>
+                            </div>
+                            <p>If the button doesn't work, copy and paste this link into your browser:</p>
+                            <p style="word-break: break-all;">
+                            {link}
+                            </p>
+                            <p style="margin-top: 20px;">
+                            <strong>This link will expire in 15 minutes.</strong>
+                            </p>
+                            <hr style="margin: 20px 0; border: none; border-top: 1px solid #eee;">
+                            <p style="font-size: 12px; color: #888;">
+                            This is an automated email from ScholarSetu. Please do not reply.
+                            </p>
+
+                            </div>
+                            </body>
+                            </html>'''
+
+
+            message=Message(
+                subject="Forgot account password",
+                sender="gudekarnihar96@gmail.com",
+                recipients=[email]
+            )
+
+            message.html=html_body
+            mail.send(message)
+
+            return jsonify({"success":True})
+
+        db_student= Students.query.filter_by(email=email).first()
+
+        if db_student:
+            token=secrets.token_urlsafe(36)
+            expires_at=datetime.utcnow() + timedelta(minutes=15)
+
+            passwordResets=PasswordResets(
+                email= email,
+                token= token,
+                expires_at= expires_at,
+                is_used= False
+            )
+
+            try:
+                db.session.add(passwordResets)
+                db.session.commit()
+
+            except Exception as e:
+                db.session.rollback()
+                return jsonify({"success":False})
+
+            link= url_for('auth.forgot_password', token=token, _external=True)
+
+            html_body=f'''<!DOCTYPE html>
+                            <html>
+                            <head>
+                            <meta charset="UTF-8">
+                            <title>Reset Password</title>
+                            </head>
+                            <body style="font-family: Arial, sans-serif; background-color: #f6f6f6; padding: 20px;">
+
+                            <div style="max-width: 600px; margin: auto; background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #eee;">
+
+                            <h2 style="color: #333;">Reset Your Password</h2>
+                            <p>Hello,</p>
+                            <p>You requested to reset your password for your <strong>ScholarSetu</strong> account.</p>
+                            <p>Click the button below to reset your password:</p>
+                            <div style="text-align: center; margin: 25px 0;">
+                            <a href="{link}" 
+                                style="background-color: #007bff; color: #ffffff; padding: 12px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+                                Reset Password
+                            </a>
+                            </div>
+                            <p>If the button doesn't work, copy and paste this link into your browser:</p>
+                            <p style="word-break: break-all;">
+                            {link}
+                            </p>
+                            <p style="margin-top: 20px;">
+                            <strong>This link will expire in 15 minutes.</strong>
+                            </p>
+                            <hr style="margin: 20px 0; border: none; border-top: 1px solid #eee;">
+                            <p style="font-size: 12px; color: #888;">
+                            This is an automated email from ScholarSetu. Please do not reply.
+                            </p>
+
+                            </div>
+                            </body>
+                            </html>'''
+
+
+            message=Message(
+                subject="Forgot account password",
+                sender="gudekarnihar96@gmail.com",
+                recipients=[email]
+            )
+
+            message.html=html_body
+            mail.send(message)
+
+            return jsonify({"success":True})
+    
+        return jsonify({"success":False})
+
+@auth_bp.route("/reset_password", methods=["POST"])
+def reset_password():
+    if request.method=="POST":
+        data=request.get_json()
+
+        token=data.get("token")
+        new_password=data.get("new_password")
+
+        db_passwordReset= PasswordResets.query.filter_by(token=token).first()
+
+        if db_passwordReset:
+            if datetime.utcnow() > db_passwordReset.expires_at:
+                return jsonify({"success":False, "error":"expired"})
+
+            if db_passwordReset.is_used==True:
+                return jsonify({"success":False, "error":"invalid"})
+
+            db_college=College.query.filter_by(admin_email=db_passwordReset.email).first()
+
+            if db_college:
+                encrypted_password = generate_password_hash(new_password)
+
+                db_college.password = encrypted_password
+
+                try:
+                    db_passwordReset.is_used=True
+                    db.session.commit()
+
+                    return jsonify({"success":True})
+                
+                except Exception as e:
+                    db.session.rollback()
+                    return jsonify({"success":False})
+
+            db_student=Students.query.filter_by(email=db_passwordReset.email).first()
+
+            if db_student:
+                encrypted_password = generate_password_hash(new_password)
+
+                db_student.password = encrypted_password
+
+                try:
+                    db_passwordReset.is_used=True
+                    db.session.commit()
+
+                    return jsonify({"success":True})
+                
+                except Exception as e:
+                    db.session.rollback()
+                    return jsonify({"success":False})
+
+        return jsonify({"success":False})
+
+
 
 
 @auth_bp.route("/join/<token>")
@@ -228,9 +434,9 @@ def join(token):
         return render_template("join.html", invalid=True)
 
     # Valid token — fetch college name and pass to template
-    college = College.query.filter_by(college_id=invite.college_id).first()
+    db_college = College.query.filter_by(college_id=invite.college_id).first()
 
-    return render_template("join.html", invalid=False, college_name=college.college_name, token=token)
+    return render_template("join.html", invalid=False, college_name=db_college.college_name, token=token)
 
 @auth_bp.route("/verify/<token>", methods=["GET"])
 def verify(token):

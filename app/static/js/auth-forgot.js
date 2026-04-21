@@ -99,18 +99,40 @@ function handleSendLink(e) {
   arrow.style.display = 'none';
   spinner.style.display = 'block';
 
-  setTimeout(() => {
+  fetch('/auth/forgot_password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: val })
+  })
+  .then(r => r.json())
+  .then(data => {
     btn.classList.remove('loading');
     label.textContent = 'Send Reset Link';
     arrow.style.display = '';
     spinner.style.display = 'none';
+
+    if (!data.success) {
+      errTxt.textContent = data.message || 'No account found with this email.';
+      emailInp.classList.add('field-error');
+      errEl.classList.add('show');
+      emailInp.focus();
+      return;
+    }
 
     const sentEmailDisplay = document.getElementById('sent-email-display');
     if (sentEmailDisplay) sentEmailDisplay.textContent = userEmail;
 
     goToScreen(2);
     startResendCooldown();
-  }, 1400);
+  })
+  .catch(() => {
+    btn.classList.remove('loading');
+    label.textContent = 'Send Reset Link';
+    arrow.style.display = '';
+    spinner.style.display = 'none';
+    errTxt.textContent = 'Something went wrong. Please try again.';
+    errEl.classList.add('show');
+  });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -174,8 +196,19 @@ window.handleResend = function () {
   const btn = document.getElementById('resend-btn');
   if (!btn || btn.disabled) return;
   btn.disabled = true;
-  btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" width="15" height="15"><polyline points="20 6 9 17 4 12"/></svg> Sent!`;
-  setTimeout(() => startResendCooldown(), 900);
+  btn.innerHTML = `Sending…`;
+
+  fetch('/auth/forgot_password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: userEmail })
+  })
+  .then(r => r.json())
+  .then(() => {
+    btn.innerHTML = `✓ Sent!`;
+    setTimeout(() => startResendCooldown(), 900);
+  })
+  .catch(() => startResendCooldown());
 }
 
 /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
@@ -256,6 +289,8 @@ window.handleUpdatePassword = function (e) {
   }
   if (!valid) return;
 
+  const token = new URLSearchParams(window.location.search).get('token');
+
   const btn = document.getElementById('update-btn');
   const label = document.getElementById('update-label');
   const arrow = document.getElementById('update-arrow');
@@ -266,13 +301,38 @@ window.handleUpdatePassword = function (e) {
   arrow.style.display = 'none';
   spinner.style.display = 'block';
 
-  setTimeout(() => {
+  fetch('/auth/reset_password', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: token, new_password: pwInp.value })
+  })
+  .then(r => r.json())
+  .then(data => {
     btn.classList.remove('loading');
     label.textContent = 'Update Password';
     arrow.style.display = '';
     spinner.style.display = 'none';
-    goToScreen(4);
-  }, 1500);
+
+    if (data.success) {
+      goToScreen(4);
+      return;
+    }
+
+    if (data.error === 'expired') {
+      cfErr.querySelector('span').textContent = 'This reset link has expired. Please request a new one.';
+      cfErr.classList.add('show');
+      return;
+    }
+
+    cfErr.querySelector('span').textContent = 'Invalid or already used reset link.';
+    cfErr.classList.add('show');
+  })
+  .catch(() => {
+    btn.classList.remove('loading');
+    label.textContent = 'Update Password';
+    arrow.style.display = '';
+    spinner.style.display = 'none';
+  });
 }
 
 /* ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ ═ 
