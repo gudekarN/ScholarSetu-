@@ -33,7 +33,7 @@ def login():
                 decrypted_password = check_password_hash(college.password, password)
 
                 if decrypted_password:
-                    if college.status == True:
+                    if college.status != True:
                         return redirect(url_for('auth.login') + '?error=pending')
 
                     session['user_id'] = college.college_id

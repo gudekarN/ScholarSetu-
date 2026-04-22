@@ -133,16 +133,16 @@
 
                 <div class="metrics-strip">
                     <div class="metric-card m-total">
-                        <div class="metric-value">8</div>
+                        <div class="metric-value" id="m-total-val">—</div>
                         <div class="metric-label">Total Colleges</div>
                     </div>
                     <div class="metric-card m-active">
-                        <div class="metric-value">6</div>
+                        <div class="metric-value" id="m-active-val">—</div>
                         <div class="metric-label">Active</div>
                     </div>
                     <div class="metric-card m-pending">
-                        <div class="metric-value">2</div>
-                        <div class="metric-label">Pending / Inactive</div>
+                        <div class="metric-value" id="m-pending-val">—</div>
+                        <div class="metric-label">Inactive</div>
                     </div>
                 </div>
 
@@ -159,64 +159,8 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>DY Patil College of Engineering</strong></td>
-                                    <td class="td-mono">C-41324</td>
-                                    <td>admin@dypcoe.edu</td>
-                                    <td><span class="status-badge status-active">Active</span></td>
-                                    <td class="td-muted">12 Jan 2025</td>
-                                    <td>
-                                        <div class="action-group">
-                                            <button class="btn-deactivate">Deactivate</button>
-                                            <button class="btn-link" data-college-name="DY Patil College of Engineering"
-                                                data-college-email="admin@dypcoe.edu">Update Email</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Government College of Engineering, Pune</strong></td>
-                                    <td class="td-mono">C-41221</td>
-                                    <td>principal@coep.ac.in</td>
-                                    <td><span class="status-badge status-active">Active</span></td>
-                                    <td class="td-muted">05 Feb 2025</td>
-                                    <td>
-                                        <div class="action-group">
-                                            <button class="btn-deactivate">Deactivate</button>
-                                            <button class="btn-link"
-                                                data-college-name="Government College of Engineering, Pune"
-                                                data-college-email="principal@coep.ac.in">Update Email</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><strong>PICT Pune</strong></td>
-                                    <td class="td-mono">C-41200</td>
-                                    <td>admin@pict.edu</td>
-                                    <td><span class="status-badge status-pending">Pending</span></td>
-                                    <td class="td-muted">18 Mar 2026</td>
-                                    <td>
-                                        <div class="action-group">
-                                            <button class="btn-activate">Activate</button>
-                                            <button class="btn-link" data-college-name="PICT Pune"
-                                                data-college-email="admin@pict.edu">Update Email</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr style="opacity: 0.7;">
-                                    <td><strong>Sinhgad Institute of Technology</strong></td>
-                                    <td class="td-mono">C-41299</td>
-                                    <td>admin@sinhgad.edu</td>
-                                    <td><span class="status-badge status-inactive">Inactive</span></td>
-                                    <td class="td-muted">10 Nov 2024</td>
-                                    <td>
-                                        <div class="action-group">
-                                            <button class="btn-activate">Activate</button>
-                                            <button class="btn-link" data-college-name="Sinhgad Institute of Technology"
-                                                data-college-email="admin@sinhgad.edu">Update Email</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <tbody id="colleges-tbody">
+                                <!-- Populated by superadmin-colleges.js on page load -->
                             </tbody>
                         </table>
                     </div>
