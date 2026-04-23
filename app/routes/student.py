@@ -1,6 +1,7 @@
 from flask import jsonify
 from datetime import datetime
-from app.models import Students, Notices, College 
+from app.models import Students, Notices, College, Queries, QueryReplies
+from app.extensions import db
 from flask import abort
 from flask import make_response
 from flask import render_template
@@ -67,3 +68,105 @@ def get_notices():
     
     # for fallback
     return jsonify({"success": False, "notices": []})
+
+@student_bp.route("/get_questions")
+def get_questions():
+    if 'user_id' not in session or session["role"]!="student":
+        return abort(401)
+
+    db_student=Students.query.filter_by(student_id=session["user_id"]).first()
+
+    if db_student:
+        db_queries=Queries.query.filter_by(college_id=db_student.college_id).order_by(Queries.posted_at.desc()).all()
+
+        queries=[]
+
+        for query in db_queries:
+            db_queryReplies=QueryReplies.query.filter_by(query_id=query.query_id).order_by(QueryReplies.replied_at.asc()).all()
+
+            queryReplies=[]
+
+            for reply in db_queryReplies:
+                queryReplies.append({
+                    "reply_id": reply.reply_id,  
+                    "is_admin": reply.is_admin,
+                    "reply_text": reply.reply_text,
+                    "replied_at": str(reply.replied_at)
+                })
+
+           
+            queries.append({
+                "query_id": query.query_id,
+                "question_text": query.question_text,
+                "replies": queryReplies,
+                "is_answered": query.is_answered,
+                "posted_at": str(query.posted_at)
+            })
+
+        return jsonify({"success":True, "questions": queries})
+    
+    return jsonify({"success": False})
+
+@student_bp.route("/post_question", methods=["POST"])
+def post_question():
+    if 'user_id' not in session or session["role"]!="student":
+        return abort(401)
+
+    data=request.get_json()
+
+    question_text=data.get("question_text")
+
+    if not question_text or len(question_text.strip()) < 20:
+        return jsonify({"success":False, "error":"Enter minimum 20 charaters"})
+
+    db_student=Students.query.filter_by(student_id=session["user_id"]).first()
+
+    if db_student:
+        query=Queries(
+            student_id= session["user_id"],
+            college_id= db_student.college_id,
+            question_text= question_text,
+            is_answered= False
+        )
+
+        try:
+            db.session.add(query)
+            db.session.commit()
+            formatted_datetime = query.posted_at.strftime("%d %b %Y")
+            return jsonify({"success": True, "query_id": query.query_id, "posted_at": formatted_datetime})
+
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"success":False})
+    
+    return jsonify({"success": False})
+
+@student_bp.route("/post_reply", methods=["POST"])
+def post_reply():
+    if 'user_id' not in session or session["role"]!="student":
+        return abort(401)
+
+    data=request.get_json()
+
+    query_id=data.get("query_id")
+    reply_text=data.get("reply_text")
+
+    if not reply_text or len(reply_text.strip()) < 3:
+        return jsonify({"success": False})
+
+    queryReplay=QueryReplies(
+        query_id=query_id,
+        responder_id=session['user_id'], 
+        is_admin=False, 
+        reply_text=reply_text
+    )
+
+    try:
+        db.session.add(queryReplay)
+        db.session.commit()
+
+        return jsonify({"success": True})
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"success": False})

@@ -16,21 +16,36 @@ function qaHandleInput() {
     btn.disabled = len < 20;
 }
 
-// ── Post question (demo) ──
+// ── Post question — real fetch ──
 function qaPostQuestion() {
-    const ta = document.getElementById('qa-textarea');
+    const ta  = document.getElementById('qa-textarea');
     const suc = document.getElementById('qa-post-success');
     const btn = document.getElementById('qa-post-btn');
+    const text = ta.value.trim();
 
-    if (ta.value.trim().length < 20) return;
+    if (text.length < 20) return;
 
     btn.disabled = true;
-    ta.value = '';
-    document.getElementById('qa-char-counter').textContent = '0 / 500';
-    document.getElementById('qa-char-counter').classList.remove('warn', 'over');
-    suc.classList.add('show');
 
-    setTimeout(() => suc.classList.remove('show'), 4000);
+    fetch('/student/post_question', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question_text: text })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!data.success) {
+            btn.disabled = false;
+            return;
+        }
+        ta.value = '';
+        document.getElementById('qa-char-counter').textContent = '0 / 500';
+        document.getElementById('qa-char-counter').classList.remove('warn', 'over');
+        suc.classList.add('show');
+        setTimeout(() => suc.classList.remove('show'), 4000);
+        loadQuestions();
+    })
+    .catch(() => { btn.disabled = false; });
 }
 
 // ── Live search filter on feed ──
@@ -113,17 +128,151 @@ function qaCloseReplyBox(cardId) {
     if (btn) btn.setAttribute('aria-expanded', 'false');
 }
 
-// ── Submit peer reply (demo) ──
+// ── Submit peer reply — real fetch ──
 function qaSubmitReply(cardId) {
     const ta = document.getElementById(cardId + '-reply-ta');
     if (!ta || ta.value.trim().length < 3) return;
-    const t = document.createElement('div');
-    t.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:11px 22px;border-radius:10px;font-size:13.5px;font-weight:600;z-index:9999;box-shadow:0 6px 22px rgba(19,136,8,.3);white-space:nowrap;animation:fadeUp .25s ease;';
-    t.textContent = '✅ Reply posted!';
-    document.body.appendChild(t);
-    setTimeout(() => t.remove(), 3000);
-    ta.value = '';
-    qaCloseReplyBox(cardId);
+
+    const queryId = document.getElementById(cardId).dataset.queryId;
+
+    fetch('/student/post_reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query_id: queryId, reply_text: ta.value.trim() })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!data.success) return;
+        const t = document.createElement('div');
+        t.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:11px 22px;border-radius:10px;font-size:13.5px;font-weight:600;z-index:9999;box-shadow:0 6px 22px rgba(19,136,8,.3);white-space:nowrap;animation:fadeUp .25s ease;';
+        t.textContent = '✅ Reply posted!';
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 3000);
+        ta.value = '';
+        qaCloseReplyBox(cardId);
+        loadQuestions();
+    })
+    .catch(() => {});
+}
+
+// ── Build a single question card from data ──
+function buildQaCard(q) {
+    const cardId = 'qac-' + q.query_id;
+
+    let type = 'unanswered';
+    const adminReply = q.replies.find(r => r.is_admin);
+    const peerReplies = q.replies.filter(r => !r.is_admin);
+    if (adminReply) type = 'admin';
+    else if (peerReplies.length > 0) type = 'peer';
+
+    const stripClass = { admin: 'strip-admin', peer: 'strip-peer', unanswered: 'strip-await' }[type];
+    const badgeHtml = {
+        admin:      `<span class="qa-status-badge status-admin">✍️ Admin Replied</span>`,
+        peer:       `<span class="qa-status-badge status-peer">👤 Peer Reply</span>`,
+        unanswered: `<span class="qa-status-badge status-await">⏳ Awaiting Answer</span>`
+    }[type];
+
+    const adminReplyHtml = adminReply ? `
+        <div class="qa-admin-reply">
+            <div class="qa-reply-header">
+                <span class="qa-admin-badge">Admin</span>
+                <span class="qa-reply-date">${adminReply.replied_at || ''}</span>
+            </div>
+            <p class="qa-reply-text">${escHtml(adminReply.reply_text)}</p>
+        </div>` : '';
+
+    const peerCount = peerReplies.length;
+
+    const peerRepliesHtml = peerReplies.length > 0 ? `
+    <div class="qa-peer-replies" id="${cardId}-peer-replies" style="display:none;">
+        ${peerReplies.map(r => `
+            <div class="qa-peer-reply-item">
+                <div class="qa-peer-reply-header">
+                    <span class="qa-peer-badge">Student</span>
+                    <span class="qa-reply-date">${r.replied_at || ''}</span>
+                </div>
+                <p class="qa-reply-text">${escHtml(r.reply_text)}</p>
+            </div>`).join('')}
+    </div>` : '';
+
+    return `
+        <article class="qa-card" id="${cardId}" role="listitem"
+                 data-type="${type}"
+                 data-query-id="${q.query_id}"
+                 data-text="${escHtml((q.question_text || '').toLowerCase())}">
+            <div class="qa-card-strip ${stripClass}">
+                ${badgeHtml}
+                <span class="qa-card-date">${q.posted_at || ''}</span>
+            </div>
+            <div class="qa-card-body">
+                <p class="qa-question-text">&ldquo;${escHtml(q.question_text)}&rdquo;</p>
+                ${adminReplyHtml}
+                ${peerRepliesHtml}
+            </div>
+            <div class="qa-card-footer">
+                ${peerCount > 0 ? `<button class="qa-replies-link" onclick="qaTogglePeerReplies('${cardId}')" style="background:none;border:none;cursor:pointer;color:var(--saffron);font-size:13px;font-weight:600;">💬 ${peerCount} peer ${peerCount === 1 ? 'reply' : 'replies'}</button>` : ''}
+                <button class="btn-reply-ghost" id="${cardId}-reply-btn"
+                    data-qa-reply-box="${cardId}" aria-expanded="false">↩ Reply</button>
+            </div>
+            <div class="qa-reply-box" id="${cardId}-reply-box">
+                <textarea class="qa-reply-textarea" id="${cardId}-reply-ta"
+                    placeholder="Share what you know..." rows="3" maxlength="400"></textarea>
+                <div class="qa-reply-actions">
+                    <button class="btn-reply-ghost" data-qa-cancel-reply="${cardId}"
+                        style="font-size:12px;">Cancel</button>
+                    <button class="btn-post-qa" style="padding:7px 16px; font-size:12.5px;"
+                        data-qa-submit-reply="${cardId}">Post Reply</button>
+                </div>
+            </div>
+        </article>`;
+}
+
+function qaTogglePeerReplies(cardId) {
+    const block = document.getElementById(cardId + '-peer-replies');
+    if (!block) return;
+    block.style.display = block.style.display === 'none' ? 'block' : 'none';
+}
+
+// ── Load all questions from backend ──
+function loadQuestions() {
+    fetch('/student/get_questions')
+        .then(r => r.json())
+        .then(data => {
+            const feed = document.getElementById('qa-feed');
+            const empty = document.getElementById('qa-empty');
+            if (!feed) return;
+
+            if (!data.success || !data.questions.length) {
+                feed.innerHTML = '';
+                if (empty) feed.appendChild(empty);
+                return;
+            }
+
+            feed.innerHTML = data.questions.map(buildQaCard).join('');
+            if (empty) feed.appendChild(empty);
+
+            const countBadge = document.getElementById('qa-count-badge');
+            if (countBadge) countBadge.textContent = data.questions.length + ' questions';
+
+            feed.querySelectorAll('[data-qa-reply-box]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    qaToggleReplyBox(this.dataset.qaReplyBox);
+                });
+            });
+            feed.querySelectorAll('[data-qa-cancel-reply]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    qaCloseReplyBox(this.dataset.qaCancelReply);
+                });
+            });
+            feed.querySelectorAll('[data-qa-submit-reply]').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    qaSubmitReply(this.dataset.qaSubmitReply);
+                });
+            });
+
+            qaFilterFeed();
+        })
+        .catch(err => console.error('Failed to load questions:', err));
 }
 
 // ── Wire all Q&A buttons on DOMContentLoaded ──
@@ -150,38 +299,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Thread toggle buttons via data attribute
-    document.querySelectorAll('[data-qa-toggle-thread]').forEach(btn => {
-        btn.addEventListener('click', function () {
-            qaToggleThread(this.dataset.qaToggleThread);
-        });
-    });
-
-    // Peer reply toggle via data attribute
-    document.querySelectorAll('[data-qa-toggle-peer]').forEach(btn => {
-        btn.addEventListener('click', function () {
-            qaTogglePeerReply(this.dataset.qaTogglePeer);
-        });
-    });
-
-    // Reply box toggle via data attribute
-    document.querySelectorAll('[data-qa-reply-box]').forEach(btn => {
-        btn.addEventListener('click', function () {
-            qaToggleReplyBox(this.dataset.qaReplyBox);
-        });
-    });
-
-    // Reply cancel via data attribute
-    document.querySelectorAll('[data-qa-cancel-reply]').forEach(btn => {
-        btn.addEventListener('click', function () {
-            qaCloseReplyBox(this.dataset.qaCancelReply);
-        });
-    });
-
-    // Submit reply via data attribute
-    document.querySelectorAll('[data-qa-submit-reply]').forEach(btn => {
-        btn.addEventListener('click', function () {
-            qaSubmitReply(this.dataset.qaSubmitReply);
-        });
-    });
+    // Load real questions from backend
+    loadQuestions();
 });

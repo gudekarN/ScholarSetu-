@@ -974,7 +974,7 @@
                 <!-- Feed heading + sort -->
                 <div class="qa-feed-head">
                     <h2 class="qa-feed-title">Recent Questions</h2>
-                    <span class="qa-count-badge" id="qa-count-badge">14 questions</span>
+                    <span class="qa-count-badge" id="qa-count-badge">0 questions</span>
                 </div>
 
                 <div class="qa-sort-pills" role="group" aria-label="Sort questions">
@@ -986,169 +986,9 @@
                         Replied</button>
                 </div>
 
-                <!-- Feed cards -->
                 <div class="qa-feed" id="qa-feed" role="list">
-
-                    <!-- Card 1 — Admin replied (featured) -->
-                    <article class="qa-card" id="qac-1" role="listitem" data-type="admin"
-                        data-text="i submitted my application but haven't received the first installment after 4 months what should i do">
-
-                        <div class="qa-card-strip strip-admin">
-                            <span class="qa-status-badge status-admin">✍️“ Admin Replied</span>
-                            <span class="qa-card-date">3 days ago</span>
-                        </div>
-
-                        <div class="qa-card-body">
-                            <p class="qa-question-text">&ldquo;I submitted my application but haven&rsquo;t received the
-                                first installment after 4 months. What should I do?&rdquo;</p>
-                            <div class="qa-poster-meta">
-                                <span>Priya M.</span>
-                                <span class="qa-poster-dot"></span>
-                                <span>Computer Engg</span>
-                                <span class="qa-poster-dot"></span>
-                                <span>2nd Year</span>
-                                <span class="qa-poster-dot"></span>
-                                <span>3 days ago</span>
-                            </div>
-
-                            <!-- Admin reply (expanded by default) -->
-                            <div class="qa-admin-reply" id="qac1-admin-reply">
-                                <div class="qa-reply-header">
-                                    <span class="qa-admin-badge">Admin</span>
-                                    <span class="qa-reply-date">2 days ago</span>
-                                </div>
-                                <p class="qa-reply-text">Hi Priya, if your application status shows
-                                    &lsquo;Approved&rsquo; on MahaDBT portal, the delay is usually at the bank&rsquo;s
-                                    DBT processing queue. Please visit Tab 7 for the grievance process — you can raise a
-                                    formal complaint through the portal. Meanwhile, check your NPCI mapper status to
-                                    ensure the Aadhaar-bank linking is active.</p>
-                            </div>
-
-                        </div><!-- /card-body -->
-
-                        <div class="qa-card-footer">
-                            <button class="qa-replies-link" id="qac1-replies-btn" data-qa-toggle-thread="qac1"
-                                aria-expanded="false" aria-controls="qac1-thread">
-                                💬 2 replies · View thread
-                            </button>
-                        </div>
-
-                        <!-- Collapsed thread -->
-                        <div id="qac1-thread" style="display:none; padding:0 18px 14px;">
-                            <div
-                                style="border-left:3px solid var(--border-light); padding-left:14px; font-size:12.5px; color:var(--text-muted); line-height:1.6;">
-                                <strong style="color:var(--text);">Priya M.</strong> · 1 day ago<br>
-                                Thank you! I'll check the NPCI mapper now and raise a grievance.
-                            </div>
-                        </div>
-
-                    </article>
-
-                    <!-- Card 2 — Unanswered -->
-                    <article class="qa-card" id="qac-2" role="listitem" data-type="unanswered"
-                        data-text="is the ebc scholarship available for students who changed their branch in second year">
-
-                        <div class="qa-card-strip strip-await">
-                            <span class="qa-status-badge status-await">⏳ Awaiting Answer</span>
-                            <span class="qa-card-date">1 day ago</span>
-                        </div>
-
-                        <div class="qa-card-body">
-                            <p class="qa-question-text">&ldquo;Is the EBC scholarship available for students who changed
-                                their branch in second year?&rdquo;</p>
-                            <div class="qa-poster-meta">
-                                <span>Amit K.</span>
-                                <span class="qa-poster-dot"></span>
-                                <span>1 day ago</span>
-                            </div>
-                        </div>
-
-                        <div class="qa-card-footer">
-                            <button class="btn-reply-ghost" id="qac2-reply-btn" data-qa-reply-box="qac2"
-                                aria-expanded="false" aria-controls="qac2-reply-box">
-                                ↩ Reply
-                            </button>
-                        </div>
-
-                        <!-- Inline reply box -->
-                        <div class="qa-reply-box" id="qac2-reply-box">
-                            <textarea class="qa-reply-textarea" id="qac2-reply-ta"
-                                placeholder="Share what you know... (not an official answer)" rows="3"
-                                maxlength="400"></textarea>
-                            <div class="qa-reply-actions">
-                                <button class="btn-reply-ghost" data-qa-cancel-reply="qac2"
-                                    style="font-size:12px;">Cancel</button>
-                                <button class="btn-post-qa" style="padding:7px 16px; font-size:12.5px;"
-                                    data-qa-submit-reply="qac2">Post Reply</button>
-                            </div>
-                        </div>
-
-                    </article>
-
-                    <!-- Card 3 — Peer replied -->
-                    <article class="qa-card" id="qac-3" role="listitem" data-type="peer"
-                        data-text="what is the income certificate format accepted by social justice department">
-
-                        <div class="qa-card-strip strip-peer">
-                            <span class="qa-status-badge status-peer">👤 Peer Reply</span>
-                            <span class="qa-card-date">4 days ago</span>
-                        </div>
-
-                        <div class="qa-card-body">
-                            <p class="qa-question-text">&ldquo;What is the income certificate format accepted by Social
-                                Justice department?&rdquo;</p>
-                            <div class="qa-poster-meta">
-                                <span>Sneha D.</span>
-                                <span class="qa-poster-dot"></span>
-                                <span>Civil Engg</span>
-                                <span class="qa-poster-dot"></span>
-                                <span>3rd Year</span>
-                                <span class="qa-poster-dot"></span>
-                                <span>4 days ago</span>
-                            </div>
-
-                            <!-- Peer reply collapsed -->
-                            <div class="qa-peer-reply" id="qac3-peer-reply">
-                                <div class="qa-reply-header">
-                                    <span class="qa-peer-badge">Peer</span>
-                                    <span style="font-size:11px; color:var(--text-light); font-weight:500;">Rahul S. · 3
-                                        days ago</span>
-                                </div>
-                                <p class="qa-reply-text">The Social Justice dept. accepts the income certificate issued
-                                    by the Tehsildar of your district. The format is the standard Govt. of Maharashtra
-                                    template — you can download it from the MahaOnline portal. It must be for the
-                                    current financial year and show the total annual income of the family.</p>
-                            </div>
-
-                        </div><!-- /card-body -->
-
-                        <div class="qa-card-footer">
-                            <button class="qa-replies-link" id="qac3-view-btn" data-qa-toggle-peer="qac3"
-                                aria-expanded="false" aria-controls="qac3-peer-reply">
-                                👁 View 1 peer reply
-                            </button>
-                            <button class="btn-reply-ghost" data-qa-reply-box="qac3" style="margin-left:auto;">↩
-                                Reply</button>
-                        </div>
-
-                        <!-- Inline reply box -->
-                        <div class="qa-reply-box" id="qac3-reply-box">
-                            <textarea class="qa-reply-textarea" id="qac3-reply-ta"
-                                placeholder="Share what you know... (not an official answer)" rows="3"
-                                maxlength="400"></textarea>
-                            <div class="qa-reply-actions">
-                                <button class="btn-reply-ghost" data-qa-cancel-reply="qac3"
-                                    style="font-size:12px;">Cancel</button>
-                                <button class="btn-post-qa" style="padding:7px 16px; font-size:12.5px;"
-                                    data-qa-submit-reply="qac3">Post Reply</button>
-                            </div>
-                        </div>
-
-                    </article>
-
-                    <!-- Empty state -->
+                    <!-- Populated dynamically by student-qa.js via /student/get_questions -->
                     <div class="qa-empty" id="qa-empty" aria-live="polite">🔍 No questions match your search.</div>
-
                 </div><!-- /qa-feed -->
             </div><!-- /panel-b -->
 

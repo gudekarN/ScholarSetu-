@@ -4,7 +4,7 @@ from app.models import Students
 from datetime import datetime
 from flask import jsonify
 from app.extensions import db, mail
-from app.models import InviteTokens, Notices
+from app.models import InviteTokens, Notices, Queries, QueryReplies
 from flask import abort
 from app.models import College
 from flask import render_template
@@ -225,3 +225,87 @@ def update_student():
                 db.session.rollback()
                 
         return jsonify({"success":False}) 
+
+@admin_bp.route("/get_queries")
+def get_queries():
+    if "user_id" not in session or session["role"]!="admin":
+            return abort(401)
+
+    db_queries=Queries.query.filter_by(college_id=session["user_id"]).order_by(Queries.posted_at.desc()).all()
+
+    queries=[]
+    
+    for query in db_queries:
+        db_student=Students.query.filter_by(student_id=query.student_id).first()
+
+        db_queryReplies=QueryReplies.query.filter_by(query_id=query.query_id).order_by(QueryReplies.replied_at.asc()).all()
+
+        queryReplies=[]
+
+        for reply in db_queryReplies:
+            if reply.is_admin:
+                responder_name = "Admin"
+                responder_email = "Replay By Admin" if db_student else ""
+            else:
+                responder = Students.query.filter_by(student_id=reply.responder_id).first()
+                responder_name = responder.full_name if responder else "Student"
+                responder_email = responder.email if responder else ""
+
+            queryReplies.append({
+                "reply_id":        reply.reply_id,
+                "is_admin":        reply.is_admin,
+                "reply_text":      reply.reply_text,
+                "replied_at":      str(reply.replied_at),
+                "responder_name":  responder_name,
+                "responder_email": responder_email
+            })
+
+        queries.append({
+            "query_id": query.query_id,
+            "question_text": query.question_text,
+            "replies": queryReplies,
+            "is_answered": query.is_answered,
+            "posted_at": str(query.posted_at),
+            "student_name": db_student.full_name,
+            "student_email": db_student.email
+        })
+
+    return jsonify({"success": True, "questions": queries})
+
+@admin_bp.route("/post_reply", methods=["POST"])
+def post_reply():
+    if "user_id" not in session or session["role"]!="admin":
+        return abort(401)
+
+    data=request.get_json()
+
+    query_id=data.get("query_id")
+    reply_text=data.get("reply_text")
+
+    if not reply_text or len(reply_text.strip()) <=2:
+        return jsonify({"success": False})
+
+    query=Queries.query.filter_by(college_id=session["user_id"], query_id=query_id).first()    
+    
+    if not query:
+        return jsonify({"success":False})
+
+    queryreply=QueryReplies(
+        query_id=query_id, 
+        responder_id=session['user_id'], 
+        is_admin=True, 
+        reply_text=reply_text
+    )
+
+    query=Queries.query.get(query_id)
+    query.is_answered=True
+
+    try:
+        db.session.add(queryreply)
+        db.session.commit()
+        
+        return jsonify({"success":True})
+    except Exception as e:
+        db.session.rollback()
+
+        return jsonify({"success":False})

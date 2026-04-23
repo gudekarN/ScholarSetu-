@@ -36,54 +36,67 @@ function qtPostReply(cardId, textareaId, btnId, initials, name, dept, email) {
     const replyText = ta.value.trim();
     if (!replyText) return;
 
-    const card = document.getElementById(cardId);
-    const replyBody = card.querySelector('.qt-reply-body');
+    const queryId = document.getElementById(cardId).dataset.queryId;
 
-    const unansweredBadge = card.querySelector('.qt-badge-unanswered');
-    if (unansweredBadge) {
-        unansweredBadge.outerHTML = '<span class="qt-badge-replied">✅ Replied</span>';
-    }
+    fetch('/admin/post_reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query_id: queryId, reply_text: replyText })
+    })
+    .then(r => r.json())
+    .then(data => {
+        if (!data.success) {
+            gToast('Failed to post reply. Please try again.');
+            return;
+        }
 
-    const avatar = card.querySelector('.qt-avatar');
-    avatar.style.background = 'linear-gradient(135deg, var(--green), #0d6605)';
+        const card = document.getElementById(cardId);
+        const replyBody = card.querySelector('.qt-reply-body');
 
-    card.dataset.status = 'replied';
-    card.classList.add('qt-replied');
+        const unansweredBadge = card.querySelector('.qt-badge-unanswered');
+        if (unansweredBadge) {
+            unansweredBadge.outerHTML = '<span class="qt-badge-replied">✅ Replied</span>';
+        }
 
-    const blockId = 'qtreplyblock-' + cardId.split('-')[1];
-    const textId = 'qtreplytext-' + cardId.split('-')[1];
-    replyBody.innerHTML = `
-        <div class="qt-reply-block" id="${blockId}">
-          <div class="qt-reply-block-label">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12" /></svg>
-            Official Admin Reply
-          </div>
-          <div class="qt-reply-text" id="${textId}">${escHtml(replyText)}</div>
-        </div>
-        <textarea class="qt-reply-textarea" id="${textareaId}" style="display:none;"></textarea>
-        <div class="qt-reply-actions">
-          <div class="qt-replied-meta">
-            <span class="replied-tick">✅</span>
-            Replied just now · <a href="mailto:${email}" style="color:var(--blue);font-weight:600;text-decoration:none;font-size:11.5px;">${email}</a>
-          </div>
-          <div style="display:flex;gap:8px;align-items:center;">
-            <button class="btn-edit-reply" id="${btnId}">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px;"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              Edit Reply
-            </button>
-          </div>
-        </div>`;
+        const avatar = card.querySelector('.qt-avatar');
+        avatar.style.background = 'linear-gradient(135deg, var(--green), #0d6605)';
 
-    // Re-wire the newly created edit button
-    const newEditBtn = document.getElementById(btnId);
-    newEditBtn.addEventListener('click', () => qtEditReply(cardId, textareaId, btnId, blockId, textId));
+        card.dataset.status = 'replied';
+        card.classList.add('qt-replied');
 
-    // Re-wire textarea oninput
-    document.getElementById(textareaId).addEventListener('input', () => qtEnableBtn(textareaId, btnId));
+        const blockId = 'qtreplyblock-' + cardId.split('-')[1];
+        const textId  = 'qtreplytext-' + cardId.split('-')[1];
+        replyBody.innerHTML = `
+            <div class="qt-reply-block" id="${blockId}">
+              <div class="qt-reply-block-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="width:12px;height:12px;"><polyline points="20 6 9 17 4 12" /></svg>
+                Official Admin Reply
+              </div>
+              <div class="qt-reply-text" id="${textId}">${escHtml(replyText)}</div>
+            </div>
+            <textarea class="qt-reply-textarea" id="${textareaId}" style="display:none;"></textarea>
+            <div class="qt-reply-actions">
+              <div class="qt-replied-meta">
+                <span class="replied-tick">✅</span>
+                Replied just now · <a href="mailto:${email}" style="color:var(--blue);font-weight:600;text-decoration:none;font-size:11.5px;">${email}</a>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <button class="btn-edit-reply" id="${btnId}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="width:12px;height:12px;"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Edit Reply
+                </button>
+              </div>
+            </div>`;
 
-    qtRecountBadges();
-    qtFilter(qtCurrentFilter);
-    gToast('Reply posted successfully!');
+        const newEditBtn = document.getElementById(btnId);
+        newEditBtn.addEventListener('click', () => qtEditReply(cardId, textareaId, btnId, blockId, textId));
+        document.getElementById(textareaId).addEventListener('input', () => qtEnableBtn(textareaId, btnId));
+
+        qtRecountBadges();
+        qtFilter(qtCurrentFilter);
+        gToast('Reply posted successfully!');
+    })
+    .catch(() => gToast('Network error. Please try again.'));
 }
 
 function qtEditReply(cardId, textareaId, btnId, blockId, textId) {
@@ -138,6 +151,165 @@ function qtRecountBadges() {
     document.getElementById('qt-total-badge').textContent = `(${total} questions)`;
 }
 
+function qtTogglePeerReplies(cardId) {
+    const block = document.getElementById(cardId + '-peer-replies');
+    if (!block) return;
+    block.style.display = block.style.display === 'none' ? 'block' : 'none';
+}
+
+function buildQtCard(q) {
+    const cardId = 'qtc-' + q.query_id;
+    const taId   = 'qtreply-' + q.query_id;
+    const btnId  = 'qtbtn-' + q.query_id;
+    const initials = q.student_name
+        ? q.student_name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase()
+        : '??';
+
+    const status = q.is_answered ? 'replied' : 'unanswered';
+    const badgeHtml = q.is_answered
+        ? `<span class="qt-badge-replied">✅ Replied</span>`
+        : `<span class="qt-badge-unanswered">⏳ Unanswered</span>`;
+
+    const peerReplies = q.replies ? q.replies.filter(r => !r.is_admin) : [];
+    const peerRepliesHtml = peerReplies.length > 0 ? `
+        <div class="qt-peer-replies" id="${cardId}-peer-replies" style="display:none;">
+            ${peerReplies.map(r => `
+                <div class="qa-peer-reply-item" style="border-left:3px solid var(--saffron);padding:8px 12px;margin:6px 0;background:var(--bg-soft,#fafafa);border-radius:4px;">
+                    <div class="qa-peer-reply-header" style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+                        <span class="qa-peer-badge" style="background:var(--saffron);color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;">Student</span>
+                        <span style="font-size:11.5px;color:var(--text-muted);font-weight:600;">${escHtml(r.responder_name || 'Student')}</span>
+                        <a href="mailto:${escHtml(r.responder_email || '')}" style="font-size:11px;color:var(--blue);text-decoration:none;">${escHtml(r.responder_email || '')}</a>
+                        <span style="font-size:11px;color:var(--text-light);margin-left:auto;">${r.replied_at || ''}</span>
+                    </div>
+                    <p style="margin:0;font-size:13px;color:var(--text);">${escHtml(r.reply_text)}</p>
+                </div>`).join('')}
+        </div>` : '';
+
+    const peerToggleHtml = peerReplies.length > 0
+        ? `<button onclick="qtTogglePeerReplies('${cardId}')" style="background:none;border:none;cursor:pointer;color:var(--saffron);font-size:12.5px;font-weight:600;padding:0;">💬 ${peerReplies.length} peer ${peerReplies.length === 1 ? 'reply' : 'replies'}</button>`
+        : '';
+
+    const replyBodyHtml = q.is_answered && q.replies && q.replies.length > 0
+        ? (() => {
+            const adminReply = q.replies.find(r => r.is_admin);
+            const replyText = adminReply ? adminReply.reply_text : '';
+            const blockId = 'qtreplyblock-' + q.query_id;
+            const textId  = 'qtreplytext-' + q.query_id;
+            return `
+                <div class="qt-reply-block" id="${blockId}">
+                    <div class="qt-reply-block-label">✅ Official Admin Reply</div>
+                    <div class="qt-reply-text" id="${textId}">${escHtml(replyText)}</div>
+                </div>
+                ${peerRepliesHtml}
+                <textarea class="qt-reply-textarea" id="${taId}" style="display:none;"></textarea>
+                <div class="qt-reply-actions">
+                    <div class="qt-replied-meta">
+                        ${peerToggleHtml}
+                        <span class="replied-tick">✅</span>
+                        Replied · <a href="mailto:${q.student_email}"
+                            style="color:var(--blue);font-weight:600;text-decoration:none;font-size:11.5px;">
+                            ${escHtml(q.student_email || '')}
+                        </a>
+                    </div>
+                    <button class="btn-edit-reply" id="${btnId}"
+                        data-qt-edit="${cardId}" data-qt-ta="${taId}"
+                        data-qt-block="${blockId}" data-qt-text="${textId}">✏️ Edit Reply</button>
+                </div>`;
+          })()
+        : `
+            <div class="qt-reply-label">Admin Reply</div>
+            <textarea class="qt-reply-textarea" id="${taId}"
+                placeholder="Type your official reply here..."></textarea>
+            ${peerRepliesHtml}
+            <div class="qt-reply-actions">
+                ${peerToggleHtml}
+                <span class="qt-contact">Student contact:
+                    <a href="mailto:${q.student_email}">${escHtml(q.student_email || '')}</a>
+                </span>
+                <button class="btn-post-reply" id="${btnId}" disabled
+                    data-qt-reply="${cardId}" data-qt-ta="${taId}"
+                    data-qt-query-id="${q.query_id}"
+                    data-qt-name="${escHtml(q.student_name || '')}"
+                    data-qt-email="${escHtml(q.student_email || '')}">
+                    Post Reply
+                </button>
+            </div>`;
+
+    return `
+        <article class="qt-card ${q.is_answered ? 'qt-replied' : 'open'}"
+                 id="${cardId}" data-status="${status}"
+                 data-query-id="${q.query_id}"
+                 aria-label="Query from ${escHtml(q.student_name || 'Student')}">
+            <div class="qt-card-header" role="button" tabindex="0">
+                <div class="qt-card-top">
+                    <div class="qt-student-info">
+                        <div class="qt-avatar">${initials}</div>
+                        <div>
+                            <div class="qt-student-name">${escHtml(q.student_name || 'Student')}</div>
+                            <div class="qt-student-dept">${escHtml(q.department || '')}</div>
+                        </div>
+                    </div>
+                    <div class="qt-badges">
+                        ${badgeHtml}
+                        <span class="qt-posted-date">${q.posted_at || ''}</span>
+                    </div>
+                </div>
+                <div class="qt-question">${escHtml(q.question_text)}</div>
+            </div>
+            <div class="qt-reply-body">${replyBodyHtml}</div>
+        </article>`;
+}
+
+function loadQueries() {
+    fetch('/admin/get_queries')
+        .then(r => r.json())
+        .then(data => {
+            const stack = document.getElementById('qt-stack');
+            if (!stack) return;
+
+            if (!data.success || !data.questions.length) {
+                stack.innerHTML = '';
+                qtRecountBadges();
+                return;
+            }
+
+            stack.innerHTML = data.questions.map(buildQtCard).join('');
+
+            stack.querySelectorAll('.qt-reply-textarea').forEach(ta => {
+                ta.addEventListener('input', () => {
+                    const body = ta.closest('.qt-reply-body');
+                    if (!body) return;
+                    const btn = body.querySelector('.btn-post-reply');
+                    if (btn) btn.disabled = !ta.value.trim();
+                });
+            });
+
+            stack.querySelectorAll('[data-qt-reply]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const d = btn.dataset;
+                    qtPostReply(d.qtReply, d.qtTa, btn.id, '', d.qtName, '', d.qtEmail);
+                });
+            });
+
+            stack.querySelectorAll('[data-qt-edit]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    qtEditReply(btn.dataset.qtEdit, btn.dataset.qtTa,
+                                btn.id, btn.dataset.qtBlock, btn.dataset.qtText);
+                });
+            });
+
+            stack.querySelectorAll('.qt-card-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    header.closest('.qt-card').classList.toggle('open');
+                });
+            });
+
+            qtRecountBadges();
+            qtFilter(qtCurrentFilter);
+        })
+        .catch(err => console.error('Failed to load queries:', err));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     /* Filter pills */
     ['all', 'unanswered', 'replied'].forEach(f => {
@@ -184,4 +356,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (expDeptBtn) expDeptBtn.addEventListener('click', () => exportDownload(document.getElementById('exp-dept-sel').value));
     const expYearBtn = document.getElementById('exp-year-btn');
     if (expYearBtn) expYearBtn.addEventListener('click', () => exportDownload(document.getElementById('exp-year-sel').value));
+
+    loadQueries();
 });
