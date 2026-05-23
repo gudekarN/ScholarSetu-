@@ -1,0 +1,5494 @@
+[
+    {
+        "scheme_id": 1,
+        "name": "Government Of India Post-Matric Scholarship",
+        "department": "Social Justice and Special Assistance Department",
+        "category": "SC",
+        "category_label": "SC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "SC",
+                "Neo-Buddhist"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Day Scholar",
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 250000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma",
+                "ITI",
+                "PhD"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": "SSC Pass",
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Only 2 professional courses allowed",
+                "If student fails first time, eligible for exam fees and maintenance",
+                "If student fails second time in same class, not eligible",
+                "Applicable outside Maharashtra as per GOI rules"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "post_matric_scholarship",
+            "fees_covered": [
+                "Tuition Fees",
+                "Exam Fees",
+                "Other Compulsory Fees"
+            ],
+            "maintenance_allowance": {
+                "day_scholar": {
+                    "group_I": 550,
+                    "group_II": 530,
+                    "group_III": 300,
+                    "group_IV": 230
+                },
+                "hosteller": {
+                    "group_I": 1200,
+                    "group_II": 820,
+                    "group_III": 570,
+                    "group_IV": 380
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "additional_allowances: Disability-based allowances as per GR"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Income Certificate",
+            "Caste Certificate",
+            "Previous Year Marksheet",
+            "SSC/HSC Marksheet",
+            "Father Death Certificate (if applicable)",
+            "Gap Certificate (if applicable)",
+            "Hostel Certificate (if applicable)",
+            "Husband Income Certificate (if married girl)"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51A668ED132B54E2162E54C475F826D85C79DA948301E5F7772",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 2,
+        "name": "Post-Matric Tuition Fee and Examination Fee (Freeship)",
+        "department": "Social Justice and Special Assistance Department",
+        "category": "SC",
+        "category_label": "SC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "SC",
+                "Neo-Buddhist"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Day Scholar",
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": 250000,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma",
+                "ITI",
+                "PhD"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": "SSC Pass",
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Institute must be located in Maharashtra and government recognized",
+                "For professional courses, admission must be through CAP round",
+                "Only 1 failure is allowed in entire curriculum"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [
+                "Tuition Fees",
+                "Exam Fees",
+                "Other Compulsory Fees"
+            ],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Income Certificate",
+            "Caste Certificate",
+            "Caste Validity Certificate",
+            "Previous Year Marksheet",
+            "SSC/HSC Marksheet",
+            "Father Death Certificate (if applicable)",
+            "Hostel Certificate (if applicable)",
+            "CAP Allotment Letter"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51AE0CB048159E784170A4F3BD768B3A64E4772B0EF7B9990B2",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 3,
+        "name": "Maintenance Allowance for student Studying in professional courses",
+        "department": "Social Justice and Special Assistance Department",
+        "category": "SC",
+        "category_label": "SC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "SC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 250000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Student must be studying in a professional course",
+                "Student must be a beneficiary of Government of India Post-Matric Scholarship",
+                "Student must be residing in hostel (Government / Institute / outside)"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_allowance",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "government_hostel: {'4_to_5_years': 700, '2_to_3_years': 500, 'below_2_years': 500}",
+                "non_hostel_but_eligible: {'4_to_5_years': 1000, '2_to_3_years': 700, 'below_2_years': 500}",
+                "duration_limit: Maximum 10 months"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [
+            1
+        ],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "College Admission Receipt",
+            "Warden Letter (if applicable)",
+            "Registration/Application ID with GOI Post Matric Scholarship Scheme"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 4,
+        "name": "Rajarshri Chhatrapati Shahu Maharaj Merit Scholarship",
+        "department": "Social Justice and Special Assistance Department",
+        "category": "SC",
+        "category_label": "SC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "SC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "School"
+            ],
+            "course_types": [],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [
+                "11th",
+                "12th"
+            ],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": 75,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": "SSC",
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "merit_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": 300,
+            "duration_months_per_year": 10,
+            "duration_years": 2,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "applicable_classes: ['11th', '12th']"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [
+            1,
+            2
+        ],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "10th Marksheet",
+            "Transfer Certificate/Leaving Certificate",
+            "11th Admission Receipt"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 5,
+        "name": "Post-Matric Scholarship for persons with disability",
+        "department": "Social Justice and Special Assistance Department",
+        "category": "Open",
+        "category_label": "Open",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Day Scholar",
+                "Hosteller"
+            ],
+            "disability_required": true,
+            "minimum_disability_percentage": 40,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma",
+                "ITI",
+                "PhD"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Student must be studying in a recognized institution",
+                "Scheme applicable only once per education level",
+                "Student must not be employed full-time",
+                "Student must complete the course (not discontinue)",
+                "Applicable outside Maharashtra if domicile is Maharashtra",
+                "Distance education students eligible for limited benefits",
+                "Medical PG students with internship/stipend are eligible"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_allowance",
+            "fees_covered": [
+                "Tuition Fees",
+                "Exam Fees",
+                "Other Compulsory Fees"
+            ],
+            "maintenance_allowance": {
+                "day_scholar": {
+                    "group_A": 550,
+                    "group_B": 530,
+                    "group_C": 530,
+                    "group_D": 300,
+                    "group_E": 230
+                },
+                "hosteller": {
+                    "group_A": 1200,
+                    "group_B": 820,
+                    "group_C": 820,
+                    "group_D": 570,
+                    "group_E": 380
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "blind_allowance: {'group_A_B_C': 100, 'group_D': 75, 'group_E': 50}",
+                "additional_benefits: ['Study tour allowance up to 500 per year', 'Project printing/typing allowance up to 600 per year', 'Distance education students get 500 per year for books']",
+                "duration_limit: Maximum 10 months"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "group_A": "1 failure allowed, second failure not allowed",
+            "group_B_to_E": "No failure allowed"
+        },
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [
+            4
+        ],
+        "incompatible_with": [
+            "ALL"
+        ],
+        "dependent_on": [],
+        "documents_required": [
+            "Previous Year Marksheet",
+            "Domicile Certificate",
+            "Disability Certificate",
+            "Guardian Certificate",
+            "Gap Certificate (mandatory for Group A if gap exists)"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 6,
+        "name": "Vocational Training Fee reimbursement for the students belonging to Scheduled Caste category Students",
+        "department": "Social Justice and Special Assistance Department",
+        "category": "SC",
+        "category_label": "SC",
+        "selection_type": "cap_dependent",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "SC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": null,
+            "income_slabs": [
+                {
+                    "max": 250000,
+                    "condition": "SSC Pass",
+                    "benefit": "As per Government Of India Post-Matric Scholarship"
+                },
+                {
+                    "min": 250000,
+                    "max": 800000,
+                    "condition": "SSC Pass",
+                    "benefit": "100% Course Fee Reimbursement"
+                },
+                {
+                    "max": 800000,
+                    "condition": "SSC Fail",
+                    "benefit": "100% Course Fee Reimbursement"
+                }
+            ],
+            "income_definition": null,
+            "course_levels": [
+                "ITI",
+                "Diploma"
+            ],
+            "course_types": [
+                "Technical",
+                "Vocational"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "CAP"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": "SSC Pass or Fail allowed",
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Admission must be through PPP scheme",
+                "Admission must be through centralized admission process",
+                "No scholarship for management quota admission",
+                "Course must be approved by DGT or MSCVT",
+                "Candidate must not have taken benefit for same course previously",
+                "Candidate must not have taken benefit from any other training program",
+                "Attendance is mandatory",
+                "Candidate must attend all exams",
+                "If academic progress is unsatisfactory, candidate becomes ineligible",
+                "Orphan candidates require recommendation letter"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": true,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "details: Up to 100% course fee reimbursement based on income and SSC status"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Aadhaar Card",
+            "Ration Card",
+            "SSC/HSC Marksheet",
+            "Previous Year Marksheet (for renewal)",
+            "Domicile Certificate",
+            "Income Certificate",
+            "Caste Certificate"
+        ],
+        "renewal_policy": [
+            "Student must be promoted to next year",
+            "Attendance must be as per DGT criteria"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 7,
+        "name": "Post Matric Scholarship Scheme (Government Of India)",
+        "department": "Tribal Development Department",
+        "category": "ST",
+        "category_label": "ST",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "ST"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Day Scholar",
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 250000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma",
+                "ITI",
+                "PhD"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": "10th Pass",
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Applicable only for Scheduled Tribe students",
+                "If student has two consecutive drops, not eligible"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_and_fees",
+            "fees_covered": [],
+            "maintenance_allowance": {
+                "day_scholar": {
+                    "group_1": 550,
+                    "group_2": 530,
+                    "group_3": 300,
+                    "group_4": 230
+                },
+                "hosteller": {
+                    "group_1": 1200,
+                    "group_2": 820,
+                    "group_3": 570,
+                    "group_4": 380
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "additional_allowances: {'reader_allowance': {'group_1_2': 240, 'group_3': 200, 'group_4': 160}, 'escort_allowance': 160, 'special_pay': 160, 'extra_coaching': 240, 'study_tour': 1600, 'thesis_printing': 1600, 'book_grant': 1200}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "Previous Year Marksheet",
+            "Caste Validity Certificate (for professional courses)"
+        ],
+        "renewal_policy": [
+            "Student must pass previous year examination",
+            "If student fails, scholarship not granted for that year",
+            "Student must apply for renewal"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 8,
+        "name": "Tuition Fee & Exam Fee for Tribal Students (Freeship)",
+        "department": "Tribal Development Department",
+        "category": "ST",
+        "category_label": "ST",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "ST"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": 250000,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Applicable only for Scheduled Tribe students",
+                "State sponsored scheme"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [
+                "Tuition Fees",
+                "Exam Fees"
+            ],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [],
+            "note": "As per approved college fee structure"
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Previous Year Marksheet",
+            "Caste Validity Certificate"
+        ],
+        "renewal_policy": [
+            "Student must pass previous year examination",
+            "If student fails, scholarship not granted for that year"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 9,
+        "name": "Vocational Education Fee Reimbursement",
+        "department": "Tribal Development Department",
+        "category": "ST",
+        "category_label": "ST",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "ST"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": 250000,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Applicable only for Scheduled Tribe students",
+                "Applicable for vocational and professional courses"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [
+                "Tuition Fees",
+                "Exam Fees"
+            ],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [],
+            "note": "As per approved college fee structure"
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Domicile Certificate",
+            "College Admission Receipt",
+            "Caste Validity Certificate"
+        ],
+        "renewal_policy": [
+            "Student must pass previous year examination",
+            "If student fails, scholarship not granted for that year"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 10,
+        "name": "Vocational Education Maintenance Allowance",
+        "department": "Tribal Development Department",
+        "category": "ST",
+        "category_label": "ST",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "ST"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Day Scholar",
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 250000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Applicable only for Scheduled Tribe students",
+                "Applicable for vocational education courses"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_allowance",
+            "fees_covered": [],
+            "maintenance_allowance": {
+                "day_scholar": {
+                    "4_to_5_years": 7000,
+                    "2_to_3_years": 5000,
+                    "below_2_years": 5000
+                },
+                "hosteller": {
+                    "4_to_5_years": 10000,
+                    "2_to_3_years": 7000,
+                    "below_2_years": 5000
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [
+            {
+                "max": 250000,
+                "benefit": "Maintenance Allowance"
+            },
+            {
+                "min": 250000,
+                "benefit": "Eligible for Freeship Scheme"
+            }
+        ],
+        "location_classification": {},
+        "redirect_scheme": "Tuition Fee & Exam Fee for Tribal Students (Freeship)",
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "Previous Year Marksheet",
+            "Caste Validity Certificate",
+            "Declaration of Rector/Superintendent of the college"
+        ],
+        "renewal_policy": [
+            "Student must pass previous year examination",
+            "If student fails, scholarship not granted for that year"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 11,
+        "name": "Vocational Training Fee reimbursement for the students belonging to Scheduled Tribe Category",
+        "department": "Tribal Development Department",
+        "category": "ST",
+        "category_label": "ST",
+        "selection_type": "cap_dependent",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "ST"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": null,
+            "income_slabs": [
+                {
+                    "max": 250000,
+                    "condition": "SSC Pass",
+                    "benefit": "As per Government Of India Post-Matric Scholarship"
+                },
+                {
+                    "min": 250000,
+                    "max": 800000,
+                    "condition": "SSC Pass",
+                    "benefit": "100% Course Fee Reimbursement"
+                },
+                {
+                    "max": 800000,
+                    "condition": "SSC Fail",
+                    "benefit": "100% Course Fee Reimbursement"
+                }
+            ],
+            "income_definition": "Family income includes father and mother income",
+            "course_levels": [
+                "ITI",
+                "Diploma"
+            ],
+            "course_types": [
+                "Technical",
+                "Vocational"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "CAP"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": "SSC Pass or Fail allowed",
+            "previous_exam": null,
+            "family_constraints": [
+                "Benefit applicable to only 2 children in family"
+            ],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Admission must be through PPP scheme",
+                "No reimbursement for management quota admission",
+                "Course must be approved by DGT or MSCVT",
+                "Candidate must not have taken benefit for same course previously",
+                "Candidate must not have taken benefit from any other training program",
+                "Attendance is mandatory",
+                "Candidate must attend all exams",
+                "If academic progress is unsatisfactory, candidate becomes ineligible"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": true,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "details: Up to 100% course fee reimbursement based on income and SSC status"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Aadhaar Card",
+            "Ration Card",
+            "SSC/HSC Marksheet",
+            "Previous Year Marksheet (for renewal)",
+            "Domicile Certificate",
+            "Income Certificate",
+            "Caste Certificate",
+            "Caste Validity Certificate",
+            "Leaving Certificate/Transfer Certificate"
+        ],
+        "renewal_policy": [
+            "Student must be promoted to next year",
+            "Attendance must be as per DGT criteria"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 12,
+        "name": "Post Matric Scholarship to VJNT Students",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "VJNT",
+        "category_label": "VJNT",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "VJNT"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Day Scholar",
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 250000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma",
+                "ITI",
+                "PhD"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [
+                "Maximum 2 male children eligible; no limit for female children"
+            ],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission required only for professional courses",
+                "Course must be government approved",
+                "75% attendance is mandatory",
+                "Applicant must not receive another scholarship simultaneously",
+                "Course change allowed from non-professional to professional only",
+                "Scholarship continues only in same academic progression path"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_and_fees",
+            "fees_covered": [
+                "Tuition Fees",
+                "Exam Fees"
+            ],
+            "maintenance_allowance": {
+                "day_scholar": {
+                    "group_A": 190,
+                    "group_B": 190,
+                    "group_C": 190,
+                    "group_D": 120,
+                    "group_E": 90
+                },
+                "hosteller": {
+                    "group_A": 425,
+                    "group_B": 290,
+                    "group_C": 290,
+                    "group_D": 230,
+                    "group_E": 150
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "If admitted in government hostel, only 1/3rd allowance applicable",
+                "Full benefit applicable for B.Ed and D.Ed courses",
+                "Allowance applicable from admission date (before 20th rule applies)"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "group_A": "1 failure allowed, subsequent failures not allowed",
+            "group_B_to_E": "Must pass to continue benefits",
+            "general": "If fail, benefits only for that academic year"
+        },
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [
+            "ALL"
+        ],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "Caste Validity Certificate",
+            "SSC/HSC Marksheet",
+            "Gap Certificate (if applicable)",
+            "Father/Guardian Death Certificate (if applicable)",
+            "Ration Card",
+            "Leaving Certificate",
+            "Parent/Guardian Declaration Certificate"
+        ],
+        "renewal_policy": [
+            "Applicant must pass previous year examination",
+            "Medical exceptions may be considered with valid proof"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51AFD83FFC8C5199983E26D3BE9645241F26E1947ED73B2823D",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 13,
+        "name": "Tuition Fees and Examination Fees to VJNT Students",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "VJNT",
+        "category_label": "VJNT",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "VJNT"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission mandatory for professional courses",
+                "Not applicable for Deemed University students",
+                "Course must be government approved",
+                "Applicable to government, aided, and private unaided institutions",
+                "Applicable for post-matric education only",
+                "Course change allowed from non-professional to professional only",
+                "Not allowed from professional to non-professional",
+                "Applicant must follow same academic progression path"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [
+                "Tuition Fees",
+                "Exam Fees"
+            ],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "coverage: 100% as per approved fee structure"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "general": "If student fails, benefit only for that academic year",
+            "max_failures": "Not eligible after 2 failures in course duration"
+        },
+        "course_constraints": [
+            "Maximum 2 professional courses allowed",
+            "Only one course can be pursued at a time"
+        ],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "SSC/HSC Marksheet",
+            "Gap Certificate (if applicable)",
+            "Parent/Guardian Declaration Certificate",
+            "Father Death Certificate (if applicable)",
+            "CAP Allotment Letter (for professional courses)",
+            "Caste Validity Certificate (for professional courses)",
+            "Leaving Certificate",
+            "Ration Card"
+        ],
+        "renewal_policy": [
+            "Previous year marksheet required",
+            "Must continue same course until completion",
+            "Medical exceptions allowed with valid proof"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 14,
+        "name": "Payment of Maintenance Allowance to VJNT and SBC Students Studying in Professional Courses and Living in Hostel Attached to Professional Colleges",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "VJNT",
+        "category_label": "VJNT",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "VJNT",
+                "SBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 100000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Applicant must be studying in professional courses (Engineering, Medical, Agriculture, etc.)",
+                "Applicant must apply for government hostel admission",
+                "Not eligible if admitted in government hostel",
+                "Eligible if staying in attached hostel or private hostel with proof",
+                "Must provide non-availability certificate if hostel not allotted",
+                "Course change allowed from non-professional to professional only",
+                "Not allowed from professional to non-professional",
+                "Scholarship continues only in same academic progression path"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_allowance",
+            "fees_covered": [],
+            "maintenance_allowance": {
+                "government_hostel": {
+                    "4_to_5_years": 700,
+                    "2_to_3_years": 500,
+                    "below_2_years": 500
+                },
+                "non_government_hostel": {
+                    "4_to_5_years": 1000,
+                    "2_to_3_years": 700,
+                    "below_2_years": 500
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "duration: 10 months"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "general": "If student fails, benefit only for that academic year",
+            "continuation": "Benefit resumes after promotion to next class"
+        },
+        "course_constraints": [
+            "Maximum 2 professional courses allowed"
+        ],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [
+            12
+        ],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "College Admission Receipt",
+            "Warden Letter (if applicable)",
+            "Rent Agreement (if staying outside)",
+            "Student Affidavit (if staying outside)",
+            "Principal Letter (if staying in attached hostel)",
+            "Registration/Application ID with Post Matric Scholarship Scheme",
+            "Caste Validity Certificate (for professional courses)",
+            "Leaving Certificate"
+        ],
+        "renewal_policy": [
+            "Applicant must pass previous year examination",
+            "Must pass each academic year to continue benefits"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 15,
+        "name": "Rajarshi Chhatrapati Shahu Maharaj Merit Scholarship for students studying in 11th & 12th standard of VJNT & SBC category",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "VJNT",
+        "category_label": "VJNT",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "VJNT",
+                "SBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "School"
+            ],
+            "course_types": [],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [
+                "11th",
+                "12th"
+            ],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": 75,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 0,
+            "minimum_education": null,
+            "previous_exam": "SSC",
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "merit_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": 300,
+            "duration_months_per_year": 10,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "total_per_year: 3000"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [
+            12,
+            13
+        ],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "SSC Marksheet",
+            "Leaving Certificate"
+        ],
+        "renewal_policy": [
+            "Applicant must pass 11th standard examination"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 16,
+        "name": "Post Matric Scholarship to OBC Students",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "OBC",
+        "category_label": "OBC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "OBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Day Scholar",
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 250000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma",
+                "ITI",
+                "PhD"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [
+                "Maximum 2 male children eligible; no limit for female children"
+            ],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission required for professional courses",
+                "75% attendance is mandatory",
+                "Applicant must not receive another scholarship simultaneously",
+                "Course change allowed from non-professional to professional only",
+                "Not allowed from professional to non-professional",
+                "Scholarship continues only in same academic progression path"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_and_fees",
+            "fees_covered": [],
+            "maintenance_allowance": {
+                "day_scholar": {
+                    "group_A": 190,
+                    "group_B": 190,
+                    "group_C": 190,
+                    "group_D": 120,
+                    "group_E": 90
+                },
+                "hosteller": {
+                    "group_A": 425,
+                    "group_B": 290,
+                    "group_C": 290,
+                    "group_D": 230,
+                    "group_E": 150
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "If admitted in government hostel, only 1/3rd allowance applicable",
+                "B.Ed and D.Ed courses eligible for full benefit",
+                "fees: {'government_or_aided': '100%', 'private_unaided': '50%'}",
+                "gender_benefits: {'female': '100% fees and benefits'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "group_A": "1 failure allowed, subsequent failures not allowed",
+            "group_B_to_E": "Must pass to continue benefits",
+            "general": "If fail, benefit only for that academic year"
+        },
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [
+            "ALL"
+        ],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "Caste Validity Certificate",
+            "SSC/HSC Marksheet",
+            "Gap Certificate (if applicable)",
+            "Father/Guardian Death Certificate (if applicable)",
+            "Ration Card",
+            "Leaving Certificate",
+            "Parent/Guardian Declaration Certificate"
+        ],
+        "renewal_policy": [
+            "Applicant must pass previous year examination",
+            "Medical exceptions allowed with valid proof"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51AB02E984835E89FEFDB316E301CE6A991F41C5D42B01A7D7E",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 17,
+        "name": "Post Matric Scholarship to SBC Students",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "SBC",
+        "category_label": "SBC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "SBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Day Scholar",
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 250000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma",
+                "ITI",
+                "PhD"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [
+                "Maximum 2 male children eligible; no limit for female children"
+            ],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission required for professional courses",
+                "75% attendance is mandatory",
+                "Applicant must not receive another scholarship simultaneously",
+                "Course change allowed from non-professional to professional only",
+                "Not allowed from professional to non-professional",
+                "Scholarship continues only in same academic progression path"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_allowance",
+            "fees_covered": [],
+            "maintenance_allowance": {
+                "day_scholar": {
+                    "group_A": 190,
+                    "group_B": 190,
+                    "group_C": 190,
+                    "group_D": 120,
+                    "group_E": 90
+                },
+                "hosteller": {
+                    "group_A": 425,
+                    "group_B": 290,
+                    "group_C": 290,
+                    "group_D": 230,
+                    "group_E": 150
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "If admitted in government hostel, only 1/3rd allowance applicable",
+                "B.Ed and D.Ed courses eligible for full benefit",
+                "fees: {'coverage': '100% for all institutions'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "group_A": "1 failure allowed, subsequent failures not allowed",
+            "group_B_to_E": "Must pass to continue benefits",
+            "general": "If fail, benefit only for that academic year"
+        },
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [
+            "ALL"
+        ],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "Caste Validity Certificate",
+            "SSC/HSC Marksheet",
+            "Gap Certificate (if applicable)",
+            "Father/Guardian Death Certificate (if applicable)",
+            "Ration Card",
+            "Leaving Certificate",
+            "Parent/Guardian Declaration Certificate"
+        ],
+        "renewal_policy": [
+            "Applicant must pass previous year examination",
+            "Medical exceptions allowed with valid proof"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 18,
+        "name": "Tuition Fees and Examination Fees to OBC Students",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "OBC",
+        "category_label": "OBC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "OBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission mandatory for professional courses",
+                "Not applicable for Deemed University students",
+                "Course must be government approved",
+                "Applicable to government, aided, and private unaided institutions",
+                "Course change allowed from non-professional to professional only",
+                "Not allowed from professional to non-professional",
+                "Applicant must follow same academic progression path"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "B.Ed and D.Ed courses eligible for full benefit",
+                "Non-professional courses in private institutions follow government fee structure",
+                "fees: {'government_or_aided': '100%', 'private_unaided': '50%'}",
+                "gender_override: {'female': '100% fees'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "general": "If student fails, benefit only for that academic year",
+            "max_failures": "Not eligible after 2 failures in course duration"
+        },
+        "course_constraints": [
+            "Maximum 2 professional courses allowed",
+            "Only one course can be pursued at a time"
+        ],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate / Non-Creamy Layer Certificate",
+            "SSC/HSC Marksheet",
+            "Gap Certificate (if applicable)",
+            "Parent/Guardian Declaration Certificate",
+            "Father Death Certificate (if applicable)",
+            "CAP Allotment Letter (for professional courses)",
+            "Caste Validity Certificate (for professional courses)",
+            "Leaving Certificate",
+            "Ration Card"
+        ],
+        "renewal_policy": [
+            "Previous year marksheet required",
+            "Must pass each academic year to continue benefits",
+            "Medical exceptions allowed with valid proof"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 19,
+        "name": "Tuition Fees and Examination Fees to SBC Students",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "SBC",
+        "category_label": "SBC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "SBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission mandatory for professional courses",
+                "Not applicable for Deemed University students",
+                "Course must be government approved",
+                "Applicable to government, aided, and private unaided institutions",
+                "Course change allowed from non-professional to professional only",
+                "Not allowed from professional to non-professional",
+                "Applicant must follow same academic progression path"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "B.Ed and D.Ed courses eligible for full benefit",
+                "fees: {'coverage': '100% Tuition Fees and Exam Fees'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "general": "If student fails, benefit only for that academic year",
+            "max_failures": "Not eligible after 2 failures in course duration"
+        },
+        "course_constraints": [
+            "Maximum 2 professional courses allowed",
+            "Only one course can be pursued at a time"
+        ],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate / Non-Creamy Layer Certificate",
+            "SSC/HSC Marksheet",
+            "Gap Certificate (if applicable)",
+            "Parent/Guardian Declaration Certificate",
+            "Father Death Certificate (if applicable)",
+            "CAP Allotment Letter (for professional courses)",
+            "Caste Validity Certificate (for professional courses)",
+            "Leaving Certificate",
+            "Ration Card"
+        ],
+        "renewal_policy": [
+            "Previous year marksheet required",
+            "Must pass each academic year to continue benefits",
+            "Medical exceptions allowed with valid proof"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 20,
+        "name": "Vocational Training Fee reimbursement for the OBC, SEBC, VJNT & SBC Welfare Department students",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "OBC",
+        "category_label": "OBC/SEBC/VJNT/SBC",
+        "selection_type": "cap_dependent",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "OBC",
+                "SEBC",
+                "VJNT",
+                "SBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": "Non-creamy layer certificate required",
+            "course_levels": [
+                "ITI",
+                "Diploma"
+            ],
+            "course_types": [
+                "Technical",
+                "Vocational"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "CAP"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [
+                "Benefit applicable to only 2 children in family"
+            ],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Admission must be through PPP scheme",
+                "No reimbursement for management quota admission",
+                "Course must be approved by DGT or MSCVT",
+                "Candidate must not have taken benefit for same course previously",
+                "Candidate must not have taken benefit from any other training program",
+                "Attendance is mandatory",
+                "Candidate must attend all exams",
+                "If academic progress is unsatisfactory, candidate becomes ineligible"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": true,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "formula_based_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "formula: 0.8 * (private_institute_fee - government_institute_fee)",
+                "description: 80% reimbursement of difference between private and government institute fee"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Aadhaar Card",
+            "Ration Card",
+            "SSC/HSC Marksheet",
+            "Previous Year Marksheet (for renewal)",
+            "Domicile Certificate",
+            "Income Certificate",
+            "Non-Creamy Layer Certificate"
+        ],
+        "renewal_policy": [
+            "Student must be on roll in next year",
+            "Attendance must be as per DGT criteria"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 21,
+        "name": "Post Matric Scholarship to the Girls Belonging to Other Backward Classes taking admission in Professional Courses",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "OBC",
+        "category_label": "OBC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "OBC"
+            ],
+            "religion": [],
+            "gender": [
+                "Female"
+            ],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 250000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [
+                "No limit for female applicants; maximum 2 male children eligible in general policy"
+            ],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission mandatory for professional courses",
+                "75% attendance is mandatory",
+                "Applicant must not receive another scholarship simultaneously",
+                "Course change allowed from non-professional to professional only",
+                "Not allowed from professional to non-professional",
+                "Scholarship continues only in same academic progression path"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_and_fees",
+            "fees_covered": [],
+            "maintenance_allowance": {
+                "day_scholar": {
+                    "group_A": 190,
+                    "group_B": 190,
+                    "group_C": 190,
+                    "group_D": 120,
+                    "group_E": 90
+                },
+                "hosteller": {
+                    "group_A": 425,
+                    "group_B": 290,
+                    "group_C": 290,
+                    "group_D": 230,
+                    "group_E": 150
+                }
+            },
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "If admitted in government hostel, only 1/3rd allowance applicable",
+                "B.Ed and D.Ed courses eligible for full benefit",
+                "Full benefit applicable to girl students as per GR",
+                "fees: {'coverage': '100% Tuition Fees and Exam Fees for all institutions'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "group_A": "1 failure allowed, subsequent failures not allowed",
+            "group_B_to_E": "Must pass to continue benefits",
+            "general": "If fail, benefit only for that academic year"
+        },
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [
+            "ALL"
+        ],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate",
+            "Caste Validity Certificate",
+            "SSC/HSC Marksheet",
+            "Gap Certificate (if applicable)",
+            "Father/Guardian Death Certificate (if applicable)",
+            "Ration Card",
+            "Leaving Certificate",
+            "Parent/Guardian Declaration Certificate"
+        ],
+        "renewal_policy": [
+            "Applicant must pass previous year examination",
+            "Medical exceptions allowed with valid proof"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51A20E2AADEC5FCAFCAA9EF15C9E7BE6DA49EFF8397D1CB5063",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 22,
+        "name": "Payment of Tuition Fees and Examination Fees to OBC Girls Pursuing Professional Courses",
+        "department": "OBC, SEBC, VJNT & SBC Welfare Department",
+        "category": "OBC",
+        "category_label": "OBC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "OBC"
+            ],
+            "religion": [],
+            "gender": [
+                "Female"
+            ],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission mandatory for professional courses",
+                "Applicable to government, aided, and private unaided institutions",
+                "Applicable for Deemed University students",
+                "Course must be government approved",
+                "Course change allowed from non-professional to professional only",
+                "Not allowed from professional to non-professional"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "fees: {'coverage': '100% Tuition Fees and Exam Fees'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "general": "If student fails, benefit only for that academic year"
+        },
+        "course_constraints": [
+            "Only one course can be pursued at a time",
+            "Scheme valid until completion of course"
+        ],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Caste Certificate",
+            "Income Certificate / Non-Creamy Layer Certificate",
+            "SSC/HSC Marksheet",
+            "Gap Certificate (if applicable)",
+            "Parent/Guardian Declaration Certificate",
+            "CAP Allotment Letter (for professional courses)",
+            "Caste Validity Certificate (for professional courses)",
+            "Leaving Certificate",
+            "Ration Card"
+        ],
+        "renewal_policy": [
+            "Previous year marksheet required",
+            "Must pass each academic year to continue benefits",
+            "Medical exceptions allowed with valid proof"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 23,
+        "name": "Dr Panjabrao Deshmukh Vastigruh Nirvah Bhatta Yojana (DTE)",
+        "department": "Directorate of Technical Education",
+        "category": "Open",
+        "category_label": "Open/SEBC/EWS",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "Open",
+                "SEBC",
+                "EWS",
+                "General"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000,
+                "special_case": {
+                    "non_professional_courses_max": 100000
+                }
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 2,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [
+                "Only first two children eligible"
+            ],
+            "special_categories": [
+                "Child of registered labour",
+                "Child of small land holder farmer",
+                "Economically backward class students"
+            ],
+            "special_condition": null,
+            "additional_conditions": [
+                "Applicant must be hosteller (Govt/Private/PG/Rented)",
+                "Courses must be approved by AICTE/PCI/COA/MCI/NCTE/University",
+                "Applicant must not avail any other Nirvah Bhatta scheme",
+                "Applicant must attempt all exams",
+                "Admission through general or SEBC category",
+                "CAP/DSE applicable for certain courses",
+                "No academic gap more than 2 years"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": true,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": "33%",
+            "district_limit": 500,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_allowance",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "professional_courses: {'metro_cities': {'food': 32000, 'residence': 20000, 'subsistence': 8000, 'total': 60000}, 'divisional_cities': {'food': 28000, 'residence': 15000, 'subsistence': 8000, 'total': 51000}, 'other_districts': {'food': 25000, 'residence': 12000, 'subsistence': 6000, 'total': 43000}, 'taluka': {'food': 23000, 'residence': 10000, 'subsistence': 5000, 'total': 38000}}",
+                "non_professional_courses: {'amount': 20000, 'duration': '10 months'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Domicile Certificate",
+            "Registered Labour Certificate / Alpabhudharak Certificate / Income Certificate",
+            "Hosteller Documents",
+            "Previous Year Income Certificate",
+            "CAP Related Document",
+            "Gap Certificate (if applicable)",
+            "Family Declaration Certificate",
+            "Attendance Certificate",
+            "Previous Year Marksheet"
+        ],
+        "renewal_policy": [
+            "Student must apply using previous application ID",
+            "Must continue course without gap",
+            "Must attempt exams"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 24,
+        "name": "Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Yojna (EBC)",
+        "department": "Directorate of Technical Education",
+        "category": "Open",
+        "category_label": "Open/SEBC/EWS",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "Open",
+                "SEBC",
+                "EWS"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": "India",
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 2,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [
+                "Only first two children eligible"
+            ],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "CAP admission mandatory",
+                "Not applicable for Deemed and Private Universities",
+                "Applicant must not receive another scholarship",
+                "Minimum 50% attendance required",
+                "Course must be government approved",
+                "Student must be bonafide of institute"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "fees: {'male': {'tuition_fee': '50%', 'exam_fee': '50%'}, 'female': {'tuition_fee': '100%', 'exam_fee': '100%'}}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "SSC Marksheet and onwards",
+            "Domicile Certificate",
+            "Previous Year Family Annual Income Certificate",
+            "Undertaking for not more than 2 beneficiaries from family",
+            "CAP Related Document"
+        ],
+        "renewal_policy": [
+            "Previous year marksheet required",
+            "Attendance requirement must be satisfied",
+            "Must continue course without gap"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 25,
+        "name": "Education Fee reimbursement for open category students affected due to SEBC and EWS reservation in medical and Dental colleges",
+        "department": "Directorate of Medical Education and Research",
+        "category": "Open",
+        "category_label": "Open",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "Open"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null,
+                "note": "No income limit"
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Medical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [
+                "MBBS",
+                "BDS",
+                "MD",
+                "MS"
+            ],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 2,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Admission must be through CAP",
+                "Not applicable for management quota admission",
+                "Applicable only for private unaided medical/dental colleges",
+                "Not applicable for deemed universities",
+                "Applicant must not have academic gap of 2 or more years",
+                "Applicant must maintain academic performance and attendance"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": true,
+            "cap_dependent": false,
+            "total_seats": 112,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": "Merit based"
+        },
+        "benefits": {
+            "type": "formula_based_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "formula: private_college_fee (FRA approved) - government_college_fee",
+                "description: Difference between private institute fee and government institute fee reimbursed"
+            ],
+            "note": ""
+        },
+        "failure_rules": {
+            "general": "If student fails or has misconduct, becomes ineligible"
+        },
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Domicile Certificate",
+            "SSC/HSC Marksheet (for new applicants)",
+            "Previous Year Marksheet",
+            "Aadhaar Card",
+            "Student PAN Card (optional)",
+            "Father PAN Card",
+            "Mother PAN Card (optional)"
+        ],
+        "renewal_policy": [
+            "Student must pass previous year (ATKT allowed)",
+            "Minimum 50% attendance required"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 26,
+        "name": "Dr Panjabrao Deshmukh Hostel Maintenance Allowance",
+        "department": "Directorate of Medical Education and Research",
+        "category": "Open",
+        "category_label": "Open/SEBC/EWS",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "Open",
+                "SEBC",
+                "EWS"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Medical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [
+                "MBBS",
+                "BDS",
+                "BAMS",
+                "BHMS",
+                "BPTH",
+                "BOTH",
+                "B.Sc Nursing",
+                "BUMS",
+                "BP&O",
+                "BASLP"
+            ],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 2,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [
+                "Registered Labour",
+                "Small Land Holder Farmer"
+            ],
+            "special_condition": null,
+            "additional_conditions": [
+                "Admission must be through CAP/NEET",
+                "Not applicable for management quota",
+                "Applicable to government, aided and private unaided colleges",
+                "Student must stay in hostel",
+                "Applicant must be admitted under General or SEBC category"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "maintenance_allowance",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "normal_students: {'metro_cities': 3000, 'other_areas': 2000, 'duration': '10 months'}",
+                "special_category_students: {'criteria': ['Registered Labour', 'Small Land Holder Farmer'], 'metro_cities': 30000, 'other_areas': 20000, 'duration': '10 months'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {
+            "metro_cities": [
+                "Mumbai",
+                "Pune",
+                "Nagpur",
+                "Aurangabad"
+            ],
+            "other_areas": "Rest of Maharashtra"
+        },
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Domicile Certificate",
+            "SSC/HSC Marksheet",
+            "Income Certificate",
+            "Previous Year Marksheet",
+            "Affidavit",
+            "Registered Labour / Farmer Proof",
+            "Aadhaar Card",
+            "Student PAN Card (optional)",
+            "Father PAN Card",
+            "Mother PAN Card (optional)"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 27,
+        "name": "Rajarshri Chhatrapati Shahu Maharaj Fee Reimbursement Scheme",
+        "department": "Directorate of Medical Education and Research",
+        "category": "Open",
+        "category_label": "Open/SEBC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "Open",
+                "SEBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Medical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [
+                "MBBS",
+                "BDS",
+                "BAMS",
+                "BHMS",
+                "BPTH",
+                "BOTH",
+                "B.Sc Nursing",
+                "BUMS",
+                "BP&O",
+                "BASLP"
+            ],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 2,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Admission must be through CAP/NEET",
+                "Applicable to government, aided and private unaided colleges",
+                "Applicant must be admitted under General or SEBC category"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "partial_freeship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "fees: {'tuition_fee': '50%', 'exam_fee': '50%'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Domicile Certificate",
+            "SSC/HSC Marksheet",
+            "Income Certificate",
+            "Previous Year Marksheet",
+            "Affidavit",
+            "Aadhaar Card",
+            "Student PAN Card (optional)",
+            "Father PAN Card",
+            "Mother PAN Card (optional)"
+        ],
+        "renewal_policy": [
+            "Previous year marksheet required",
+            "Student must continue course without gap"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 28,
+        "name": "Reimbursement of tuition fee and examination fee for girls under Rajarshri Chhatrapati Shahu Maharaj Tuition Fee Scholarship Scheme",
+        "department": "Directorate of Medical Education and Research",
+        "category": "Open",
+        "category_label": "Open/SEBC",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "Open",
+                "SEBC"
+            ],
+            "religion": [],
+            "gender": [
+                "Female"
+            ],
+            "applicant_types": [
+                "Female"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 800000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Medical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [
+                "MBBS",
+                "BDS",
+                "BAMS",
+                "BHMS",
+                "BPTH",
+                "BOTH",
+                "B.Sc Nursing",
+                "BUMS",
+                "BP&O",
+                "BASLP"
+            ],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 2,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Admission must be through CAP/NEET",
+                "Applicable to government, aided and private unaided colleges",
+                "Applicant must be admitted under General or SEBC category"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "fees: {'tuition_fee': '100%', 'exam_fee': '100%'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Domicile Certificate",
+            "SSC/HSC Marksheet",
+            "Income Certificate",
+            "Previous Year Marksheet",
+            "Affidavit",
+            "Aadhaar Card",
+            "Student PAN Card (optional)",
+            "Father PAN Card",
+            "Mother PAN Card (optional)"
+        ],
+        "renewal_policy": [
+            "Previous year marksheet required",
+            "Student must continue course without gap"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 29,
+        "name": "Assistance to Meritorious Students Scholarship - Junior Level",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-Based",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "School"
+            ],
+            "course_types": [
+                "Any"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [
+                "11th",
+                "12th"
+            ],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Student must be in merit list of board exam",
+                "DHE sanctioned letter is mandatory",
+                "Maharashtra domicile required",
+                "Students studying outside Maharashtra are eligible"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": {
+                "type": "Merit-Based",
+                "rank_required": "Top rankers in board exam",
+                "max_students": 120,
+                "per_board": 15
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "amount_range: {'min': 1600, 'max': 2300}",
+                "duration: 11th and 12th"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Previous Year Marksheet",
+            "Fee Receipt of Current Year",
+            "Hostel Fee Receipt",
+            "DHE Scholarship Sanctioned Letter"
+        ],
+        "renewal_policy": [
+            "Minimum 55% marks required",
+            "Must continue to next class"
+        ],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 30,
+        "name": "Education Concession to the Children of Ex-Servicemen",
+        "department": "Directorate of Higher Education",
+        "category": "Special",
+        "category_label": "Special Category (Ex-Servicemen Family)",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Dependent"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG",
+                "Diploma"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": {
+                "relation_required": [
+                    "Son",
+                    "Daughter",
+                    "Wife",
+                    "Widow"
+                ],
+                "parent_status": "Ex-Servicemen"
+            },
+            "additional_conditions": [
+                "Applicable only to government and aided colleges",
+                "Student must study within Maharashtra",
+                "Eligibility certificate from DSSA board is mandatory"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "full_concession",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "fees: {'admission_fee': '100%', 'semester_fee': '100%', 'library_fee': '100%', 'laboratory_fee': '100%'}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Eligibility Certificate issued by Collector and DSSA Board",
+            "Admission Receipt",
+            "Domicile Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 31,
+        "name": "Eklavya Scholarship",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-cum-Income",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": "Unemployed",
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": 75000
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "PG"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": {
+                "Arts": 60,
+                "Commerce": 60,
+                "Law": 60,
+                "Science": 70
+            },
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Applicant must not be employed (full-time or part-time)",
+                "Student must study within Maharashtra"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": {
+                "type": "Merit-Based"
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "amount: 5000"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Annual Income Certificate issued by Tahsildar",
+            "Previous Year Marksheet",
+            "Domicile Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 32,
+        "name": "State Government Open Merit Scholarship",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-Based",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG"
+            ],
+            "course_types": [
+                "Any"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [
+                "Arts",
+                "Commerce",
+                "Science",
+                "Law"
+            ],
+            "min_previous_percentage": 60,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Student must study within Maharashtra",
+                "Admission must be after 12th standard"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": {
+                "type": "Merit-Based",
+                "max_students": 1208,
+                "basis": "12th marks"
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": 100,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Previous Year Marksheet",
+            "Domicile Certificate",
+            "Bonafide Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 33,
+        "name": "Scholarship to Meritorious Students possessing Mathematics / Physics",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-Based",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG"
+            ],
+            "course_types": [
+                "Science"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": 60,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Student must not receive any other State or Central scholarship",
+                "Student must study within Maharashtra",
+                "Admission must be based on 12th Science"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": {
+                "type": "Merit-Based",
+                "max_students": 100,
+                "subject_distribution": {
+                    "Mathematics": 50,
+                    "Physics": 50
+                }
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": 100,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Previous Year Marksheet",
+            "Domicile Certificate",
+            "College Bonafide Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 34,
+        "name": "Government Vidyaniketan Scholarship",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-Based (Vidyaniketan Students)",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "School",
+                "UG"
+            ],
+            "course_types": [
+                "Any"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": 60,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": {
+                "required_school_type": "Government Vidyaniketan",
+                "entitlement_card_required": true
+            },
+            "additional_conditions": [
+                "Student must have passed 10th from Government Vidyaniketan",
+                "Student must study within Maharashtra"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": {
+                "type": "Merit-Based",
+                "max_students": 80,
+                "distribution": {
+                    "Pusegaon": 20,
+                    "Amravati": 20,
+                    "Aurangabad": 20,
+                    "Dhule": 20
+                }
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": 100,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Previous Year Marksheet",
+            "Entitlement Card from Vidyaniketan",
+            "Bonafide Certificate",
+            "Domicile Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 35,
+        "name": "State Government Daxshina Adhichatra Scholarship",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-Based (PG Students)",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "PG"
+            ],
+            "course_types": [
+                "Any"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": 60,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": {
+                "allowed_institutions": {
+                    "government_colleges": [
+                        "Elphinstone College, Mumbai",
+                        "Institute of Science, Mumbai",
+                        "Ismail Yusuf College, Jogeshwari",
+                        "Sydenham College of Commerce",
+                        "Government Law College, Mumbai",
+                        "Rajaram College, Kolhapur",
+                        "College of Science, Nagpur",
+                        "Nagpur Mahavidyalaya",
+                        "Vidarbha Mahavidyalaya, Amravati",
+                        "Government Arts and Science College, Aurangabad"
+                    ],
+                    "universities": [
+                        "Mumbai University",
+                        "Pune University",
+                        "Nagpur University",
+                        "Kolhapur University",
+                        "SNDT University"
+                    ]
+                }
+            },
+            "additional_conditions": [
+                "Applicant must be a graduate",
+                "Applicant must study in Maharashtra",
+                "Scholarship applicable only to selected institutions"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": {
+                "type": "Merit-Based",
+                "total_students": 76,
+                "distribution": {
+                    "government_colleges": 54,
+                    "universities": 22
+                }
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": 250,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Previous Year Marksheet",
+            "Bonafide Certificate for PG Admission",
+            "Domicile Certificate",
+            "Progress Report of PG 1st Year (for renewal)"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 36,
+        "name": "Government Research Adhichatra",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-Based (PhD Research Students)",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "PhD"
+            ],
+            "course_types": [
+                "Research"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": {
+                "default_pg_required": 60,
+                "exceptions": [
+                    "BA",
+                    "BSc",
+                    "BEd"
+                ],
+                "exception_note": "For certain degrees below 60% marks may be acceptable"
+            },
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": {
+                "required": [
+                    "Applicant must be a postgraduate",
+                    "Applicant must be pursuing PhD research",
+                    "Applicant must have an approved research guide"
+                ],
+                "allowed_institutions": {
+                    "government_science_institutes": [
+                        "Mumbai",
+                        "Nagpur",
+                        "Aurangabad"
+                    ],
+                    "specific_colleges": [
+                        "Government Vidarbha Institute, Amravati",
+                        "Vasantrao Naik Mahavidyalaya, Nagpur"
+                    ],
+                    "universities_and_affiliated_colleges": true
+                }
+            },
+            "additional_conditions": [
+                "Applicant must be resident of Maharashtra",
+                "Students studying outside Maharashtra are not eligible"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": {
+                "type": "Merit-Based with Institutional Selection",
+                "total_seats": 14,
+                "distribution": {
+                    "government_colleges": 11,
+                    "universities": 3
+                },
+                "selection_authority": {
+                    "college_level": "Principal Committee",
+                    "university_level": "Director-Level Committee"
+                }
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": 750,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "annual_additional_allowance: 1000"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Name of the Guide",
+            "Sanction Letter of University for the Guide",
+            "Graduation and PG Marksheet",
+            "Annual Progressive Report (for renewal)",
+            "Domicile Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 37,
+        "name": "Education Concession to the Children Freedom Fighter",
+        "department": "Directorate of Higher Education",
+        "category": "Special",
+        "category_label": "Special Beneficiary (Freedom Fighter Family)",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": {
+                "required": [
+                    "Applicant must be Son/Daughter/Wife/Widow of a Freedom Fighter"
+                ]
+            },
+            "additional_conditions": [
+                "Applicable only for courses after 12th",
+                "Students studying outside Maharashtra are not eligible"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": {
+                "degree_pg": 50,
+                "engineering": 60
+            },
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "book_allowance: {'degree_pg': 200, 'engineering': 400}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Freedom Fighter Certificate",
+            "Current Year Fee Receipt",
+            "Domicile Certificate",
+            "Bonafide Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 38,
+        "name": "Jawaharlal Nehru University Scholarship",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-Based (JNU Research Student)",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "PG"
+            ],
+            "course_types": [
+                "Research"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": {
+                "required": [
+                    "Applicant must be studying at Jawaharlal Nehru University (JNU)",
+                    "Applicant must be pursuing Junior Research Fellowship (JRF)"
+                ]
+            },
+            "additional_conditions": [
+                "Applicant must be resident of Maharashtra"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": {
+                "type": "Merit-Based",
+                "total_seats": 1,
+                "selection_authority": "Jawaharlal Nehru University (JNU)"
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": 8000,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "annual_additional_allowance: 10000"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Fee Receipt",
+            "Domicile Certificate",
+            "Previous Year Marksheet"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 39,
+        "name": "Assistance to Meritorious Students Scholarship - Senior Level",
+        "department": "Directorate of Higher Education",
+        "category": "Merit",
+        "category_label": "Merit-Based (Top Rank Students)",
+        "selection_type": "merit_based",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "min": null,
+                "max": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG"
+            ],
+            "course_types": [
+                "Any"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": {
+                "required": [
+                    "Applicant must be a top-ranking student in board examination",
+                    "Applicant must have secured admission after 12th"
+                ]
+            },
+            "additional_conditions": [
+                "Students studying outside Maharashtra are eligible"
+            ],
+            "renewal_conditions": {
+                "min_percentage_required": 65,
+                "must_be_promoted_to_next_class": true
+            },
+            "selection_criteria": {
+                "type": "Merit-Based",
+                "total_seats": 120,
+                "distribution": {
+                    "per_division": 15,
+                    "total_divisions": 8
+                }
+            }
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "amount_range: {'min': 2800, 'max': 72000}"
+            ],
+            "note": "Amount varies depending on course"
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Previous Year Marksheet",
+            "Fee Receipt of Current Year",
+            "Hostel Fee Receipt",
+            "DHE Scholarship Sanctioned Letter"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 40,
+        "name": "Dr. Panjabrao Deshmukh Vasatigruh Nirvah Bhatta Yojna (DHE)",
+        "department": "Directorate of Higher Education",
+        "category": "Special",
+        "category_label": "Income + Special Condition (Labour/Farmer)",
+        "selection_type": "cap_dependent",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "Open",
+                "SEBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Hosteller"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "max": 800000,
+                "min": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "CAP"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 2,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": {
+                "any_one_required": [
+                    "Child of Registered Labour",
+                    "Child of Marginal Farmer (Alpabhudharak)",
+                    "Income Certificate (if above not applicable)"
+                ]
+            },
+            "additional_conditions": [
+                "Minimum 50% attendance required",
+                "Only 2 children per family eligible",
+                "Deemed and Private Universities are not eligible",
+                "Applicant must be bonafide student"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": true,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fixed_monthly_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "breakdown: {'metro_cities': {'cities': ['Mumbai', 'Mumbai Suburbs', 'Navi Mumbai', 'Thane', 'Pune', 'Pimpri Chinchwad', 'Nagpur'], 'food': 32000, 'residence': 20000, 'subsistence': 8000, 'total': 60000}, 'other_revenue_cities': {'food': 28000, 'residence': 15000, 'subsistence': 8000, 'total': 51000}, 'other_districts': {'food': 25000, 'residence': 12000, 'subsistence': 6000, 'total': 43000}, 'talukas': {'food': 23000, 'residence': 10000, 'subsistence': 5000, 'total': 38000}}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Domicile Certificate",
+            "Income Certificate",
+            "Registered Labour / Alpabhudharak Certificate",
+            "Hostel Certificate",
+            "CAP Related Document",
+            "Gap Certificate (if applicable)",
+            "Family Declaration Certificate (max 2 children)",
+            "Attendance Certificate",
+            "Previous Year Marksheet"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 41,
+        "name": "Rajarshi Chhatrapati Shahu Maharaj Shikshan Shulkh Shishyavrutti Scheme",
+        "department": "Directorate of Higher Education",
+        "category": "Special",
+        "category_label": "Income + Gender Based",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [
+                "Open",
+                "SEBC"
+            ],
+            "religion": [],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "max": 800000,
+                "min": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Professional",
+                "Non-Professional"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "Regular",
+                "CAP"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": 2,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Only 2 children per family eligible",
+                "Not applicable for distance or part-time courses",
+                "Courses must be approved by Government/University/AICTE/PCI/COA/MCI/NCTE",
+                "Applicant must not be availing any other scholarship",
+                "Applicant must attempt every semester or annual exam"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": null,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "tuition_fee: {'professional_courses': {'income_up_to_2_5_lakh': {'girl': {'all_colleges': '100%'}, 'boy': {'govt_and_aided': '100%', 'unaided': '50%'}}, 'income_2_5_to_8_lakh': {'girl': {'all_colleges': '100%'}, 'boy': {'all_colleges': '50%'}}}, 'non_professional_courses': {'income_up_to_8_lakh': {'girl': '100%', 'boy': '100%'}}}",
+                "exam_fee: {'professional_courses': {'girl': '100%', 'boy': '50%'}, 'non_professional_courses': {'girl': '100%', 'boy': '100%'}}"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Domicile Certificate",
+            "Previous Year Annual Income Certificate",
+            "CAP Related Document (if applicable)",
+            "Gap Certificate (if applicable)",
+            "Family Declaration Certificate (max 2 children)",
+            "Attendance Certificate",
+            "Previous Year Marksheet"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 42,
+        "name": "State Minority Scholarship Part II (DHE)",
+        "department": "Minority Development Department",
+        "category": "Minority",
+        "category_label": "Minority",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [
+                "Muslim",
+                "Christian",
+                "Sikh",
+                "Buddhist",
+                "Parsi",
+                "Jain"
+            ],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "max": 800000,
+                "min": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [],
+            "course_streams": [
+                "Arts",
+                "Commerce",
+                "Science",
+                "Law",
+                "Education"
+            ],
+            "admission_types": [
+                "Regular"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Applicable only for students studying within Maharashtra",
+                "Limited to 2000 fresh applicants (quota based)"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "formula_based_scholarship",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": 5000,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "rule: min(course_fee, 5000)",
+                "coverage: Course Fee"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "Previous Year Marksheet",
+            "Domicile Certificate",
+            "Income Certificate",
+            "12th Marksheet",
+            "Current Year Fee Receipt",
+            "Minority Self-Declaration Certificate",
+            "College Bonafide Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51A0D73B666D1DADFB476AD7228CCFCCECE862BCF76CF63E6DB",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 43,
+        "name": "Scholarship for students of minority communities pursuing Higher and Professional courses (DTE)",
+        "department": "Minority Development Department",
+        "category": "Minority",
+        "category_label": "Minority",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [
+                "Muslim",
+                "Christian",
+                "Sikh",
+                "Buddhist",
+                "Parsi",
+                "Jain",
+                "Jew"
+            ],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "max": 800000,
+                "min": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "Diploma",
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Professional",
+                "Technical"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "CAP",
+                "Institute Level"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Must have passed SSC from Maharashtra",
+                "Should not be availing any other scholarship or stipend",
+                "Must be a bonafide student of recognized institute"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": 50000,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "rule: min(actual_fee, 50000)",
+                "coverage: ['Tuition Fee', 'Exam Fee']"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "SSC (10th) and onwards Educational Certificates",
+            "Income Certificate or Minority Declaration Affidavit",
+            "Domicile Certificate / Residence Proof",
+            "Previous Year Marksheet (for renewal)"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/SchemeData/SchemeData?str=E9DDFA703C38E51A3DED9E25855FB26766A86AA048E5C167661433728284252E",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 44,
+        "name": "Scholarship for students of minority communities pursuing Higher and Professional courses (DMER)",
+        "department": "Minority Development Department",
+        "category": "Minority",
+        "category_label": "Minority",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [
+                "Muslim",
+                "Christian",
+                "Sikh",
+                "Buddhist",
+                "Parsi",
+                "Jain",
+                "Jew"
+            ],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "max": 800000,
+                "min": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Medical",
+                "Professional"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "CET",
+                "NEET",
+                "Merit"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [
+                "MBBS",
+                "BDS",
+                "BAMS",
+                "BHMS",
+                "BUMS",
+                "BPTH",
+                "BOTH",
+                "BASLP",
+                "BP&O",
+                "BSc Nursing",
+                "MSc Nursing",
+                "BPMT",
+                "Ophthalmic Assistant",
+                "Optometry",
+                "PB BSc Nursing"
+            ],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Must be admitted through CET/NEET/merit-based process",
+                "Applicable for Maharashtra domicile students",
+                "Students studying outside Maharashtra are eligible with required documents",
+                "30% reservation for girls",
+                "Should not be availing any other scholarship",
+                "Course must be affiliated with Maharashtra University of Health Sciences or equivalent authority"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": 50000,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "rule: min(actual_fee, 50000)",
+                "coverage: Course Fee"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "School Leaving Certificate",
+            "SSC and HSC Marksheet",
+            "Income Certificate / Form 16",
+            "Minority Declaration",
+            "Domicile Certificate",
+            "Aadhaar Card",
+            "Previous Year Marksheet",
+            "Father PAN Card",
+            "Student PAN Card (optional)",
+            "Mother PAN Card (optional)",
+            "If studying outside Maharashtra:",
+            "Recognition Letter from Council",
+            "FRA Copy",
+            "Bonafide Certificate"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    },
+    {
+        "scheme_id": 45,
+        "name": "Scholarship for students of minority communities pursuing Higher and Professional courses of MCAER Department",
+        "department": "Minority Development Department",
+        "category": "Minority",
+        "category_label": "Minority",
+        "selection_type": "standard",
+        "eligibility": {
+            "domicile": "Maharashtra",
+            "caste_categories": [],
+            "religion": [
+                "Muslim",
+                "Christian",
+                "Sikh",
+                "Buddhist",
+                "Parsi",
+                "Jain",
+                "Jew"
+            ],
+            "gender": [],
+            "applicant_types": [
+                "Student"
+            ],
+            "disability_required": false,
+            "minimum_disability_percentage": null,
+            "employment_required": null,
+            "nationality": null,
+            "income_criteria": {
+                "max": 800000,
+                "min": null
+            },
+            "income_slabs": [],
+            "income_definition": null,
+            "course_levels": [
+                "UG",
+                "PG"
+            ],
+            "course_types": [
+                "Agriculture",
+                "Professional"
+            ],
+            "course_streams": [],
+            "admission_types": [
+                "CAP",
+                "Institute Level"
+            ],
+            "specific_courses": [],
+            "allowed_courses": [],
+            "class_levels": [],
+            "eligible_classes": [],
+            "eligible_streams": [],
+            "min_previous_percentage": null,
+            "min_percentage_by_stream": null,
+            "percentage_rules": null,
+            "max_gap_years": null,
+            "minimum_education": null,
+            "previous_exam": null,
+            "family_constraints": [],
+            "special_categories": [],
+            "special_condition": null,
+            "additional_conditions": [
+                "Must have passed SSC from Maharashtra",
+                "Must be a bonafide student of recognized institute",
+                "Only two children per family are eligible",
+                "Should not be availing any other scholarship or stipend"
+            ],
+            "renewal_conditions": [],
+            "selection_criteria": null
+        },
+        "seat_quota": {
+            "is_seat_limited": false,
+            "cap_dependent": false,
+            "total_seats": null,
+            "female_reservation": null,
+            "district_limit": null,
+            "selection_authority": null
+        },
+        "benefits": {
+            "type": "fee_reimbursement",
+            "fees_covered": [],
+            "maintenance_allowance": null,
+            "monthly_scholarship": null,
+            "annual_amount": null,
+            "max_amount": 50000,
+            "amount_per_month": null,
+            "duration_months_per_year": null,
+            "duration_years": null,
+            "income_slab_benefits": [],
+            "special_conditions": [
+                "rule: min(actual_fee, 50000)",
+                "coverage: Course Fee"
+            ],
+            "note": ""
+        },
+        "failure_rules": null,
+        "course_constraints": [],
+        "income_logic": [],
+        "location_classification": {},
+        "redirect_scheme": null,
+        "compatible_with": [],
+        "incompatible_with": [],
+        "dependent_on": [],
+        "documents_required": [
+            "SSC/HSC and onwards Educational Certificates",
+            "Income Certificate / Form 16",
+            "Minority Declaration",
+            "Domicile Certificate",
+            "Aadhaar Card",
+            "Previous Year Marksheet",
+            "FRA Copy"
+        ],
+        "renewal_policy": [],
+        "official_link": "https://mahadbt.maharashtra.gov.in/login/login",
+        "updated_at": "2025",
+        "notes": ""
+    }
+]

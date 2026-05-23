@@ -1,3 +1,5 @@
+import json
+import os
 from flask import jsonify
 from datetime import datetime
 from app.models import Students, Notices, College, Queries, QueryReplies
@@ -10,6 +12,7 @@ from flask import Blueprint
 from flask import session
 from flask import redirect
 from flask import url_for
+from app.utils import check_eligibility
 
 student_bp=Blueprint('student', __name__, url_prefix="/student")
 
@@ -170,3 +173,43 @@ def post_reply():
     except Exception as e:
         db.session.rollback()
         return jsonify({"success": False})
+
+
+@student_bp.route('/check_eligibility', methods=['POST'])
+def check_eligibility_route():
+    if session.get('role') != 'student':
+        return jsonify({"success": False, "message": "Unauthorized"}), 403
+
+    data = request.get_json()
+
+    inputs = {
+        "domicile":              data.get("domicile"),
+        "caste":                 data.get("caste"),
+        "religion":              data.get("religion"),
+        "income":                data.get("income"),
+        "course_level":          data.get("course_level"),
+        "course_type":           data.get("course_type"),
+        "admission_type":        data.get("admission_type"),
+        "year":                  data.get("year"),
+        "percentage":            data.get("percentage"),
+        "gap_years":             data.get("gap_years"),
+        "applicant_type":        data.get("applicant_type"),
+        "disability":            data.get("disability"),
+        "disability_percentage": data.get("disability_percentage", 0),
+        "gender":                data.get("gender"),
+        "employment_status":     data.get("employment_status")
+    }
+
+    json_path = os.path.join(
+        os.path.dirname(__file__), '..', 'static', 'data', 'scholarships.json'
+    )
+
+    try:
+        with open(json_path, 'r', encoding='utf-8') as f:
+            schemes = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        return jsonify({"success": False, "message": "Could not load scholarship data."}), 500
+
+    eligible_schemes = check_eligibility(inputs, schemes)
+
+    return jsonify({"success": True, "eligible_schemes": eligible_schemes})

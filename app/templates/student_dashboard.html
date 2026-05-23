@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -441,6 +441,7 @@
                                     <option value="OBC">OBC (Other Backward Class)</option>
                                     <option value="VJNT">VJNT (Vimukta Jati / Nomadic Tribes)</option>
                                     <option value="SBC">SBC (Special Backward Category)</option>
+                                    <option value="SEBC">SEBC (Socially and Educationally Backward Class)</option>
                                     <option value="EWS">EWS (Economically Weaker Section)</option>
                                     <option value="Open">Open / General</option>
                                 </select>
@@ -455,6 +456,19 @@
                                     <option value="Christian">Christian</option>
                                     <option value="Buddhist">Buddhist</option>
                                     <option value="Jain">Jain</option>
+                                    <option value="Sikh">Sikh</option>
+                                    <option value="Parsi">Parsi</option>
+                                    <option value="Jew">Jew</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-gender">Gender</label>
+                                <select class="elig-select" id="elig-gender" name="gender">
+                                    <option value="" disabled selected>Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
                                     <option value="Other">Other</option>
                                 </select>
                             </div>
@@ -472,23 +486,21 @@
                             </div>
 
                             <div class="elig-field">
-                                <label class="elig-label" for="elig-ration">Ration Card Type</label>
-                                <select class="elig-select" id="elig-ration" name="ration">
-                                    <option value="">— Select —</option>
-                                    <option value="Yellow">Yellow (Antyodaya / BPL)</option>
-                                    <option value="Saffron">Saffron (Priority Household)</option>
-                                    <option value="White">White (Non-Priority)</option>
-                                    <option value="APL">APL</option>
-                                    <option value="None">No Ration Card</option>
-                                </select>
-                            </div>
-
-                            <div class="elig-field">
                                 <label class="elig-label" for="elig-disability">Disability Status</label>
                                 <select class="elig-select" id="elig-disability" name="disability">
                                     <option value="">— Select —</option>
                                     <option value="none">None</option>
                                     <option value="40plus">40% or more disability (with certificate)</option>
+                                </select>
+                            </div>
+
+                            <div class="elig-field">
+                                <label class="elig-label" for="elig-employment">Employment Status</label>
+                                <select class="elig-select" id="elig-employment" name="employment">
+                                    <option value="" disabled selected>Select status</option>
+                                    <option value="Unemployed">Unemployed</option>
+                                    <option value="PartTime">Employed (Part-time)</option>
+                                    <option value="FullTime">Employed (Full-time)</option>
                                 </select>
                             </div>
                         </div>
@@ -501,8 +513,9 @@
                                 <label class="elig-label" for="elig-level">Course Level</label>
                                 <select class="elig-select" id="elig-level" name="level" required>
                                     <option value="">— Select —</option>
-                                    <option value="11-12">11th – 12th (Junior College)</option>
+                                    <option value="School">11th – 12th (Junior College)</option>
                                     <option value="Diploma">Diploma</option>
+                                    <option value="ITI">ITI (Industrial Training Institute)</option>
                                     <option value="UG">Under-Graduate (UG)</option>
                                     <option value="PG">Post-Graduate (PG)</option>
                                     <option value="PhD">PhD / Research</option>
@@ -513,8 +526,13 @@
                                 <label class="elig-label" for="elig-type">Course Type</label>
                                 <select class="elig-select" id="elig-type" name="type">
                                     <option value="">— Select —</option>
-                                    <option value="Technical">Technical (Engineering / Pharmacy / Architecture)</option>
-                                    <option value="NonTech">Non-Technical (Arts / Science / Commerce / Law)</option>
+                                    <option value="Professional">Professional (Engineering / Medical / Architecture / Pharmacy)</option>
+                                    <option value="Non-Professional">Non-Professional (Arts / Commerce / Science / Law)</option>
+                                    <option value="Technical">Technical (Diploma / ITI level)</option>
+                                    <option value="Medical">Medical (MBBS / BDS / BAMS / Nursing etc.)</option>
+                                    <option value="Agriculture">Agriculture</option>
+                                    <option value="Research">Research / PhD</option>
+                                    <option value="Vocational">Vocational / Skill Development (ITI)</option>
                                 </select>
                             </div>
 
@@ -522,9 +540,10 @@
                                 <label class="elig-label" for="elig-admission">Admission Type</label>
                                 <select class="elig-select" id="elig-admission" name="admission">
                                     <option value="">— Select —</option>
-                                    <option value="Regular">Regular</option>
-                                    <option value="Lateral">Lateral Entry (Direct Second Year)</option>
-                                    <option value="DSP">DSP (Defence Service Personnel quota)</option>
+                                    <option value="Regular">Regular (Merit / General)</option>
+                                    <option value="CAP">CAP (Centralized Admission Process)</option>
+                                    <option value="NEET">NEET / CET (Entrance Exam Based)</option>
+                                    <option value="Institute Level">Institute Level / Management Quota</option>
                                 </select>
                             </div>
 
