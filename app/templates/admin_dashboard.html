@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -45,8 +45,8 @@
         </span>
 
         <div class="nav-college-wrap">
-            <span class="nav-college-center">DY Patil College of Engineering</span>
-            <span class="nav-college-sub">Pune, Maharashtra</span>
+            <span class="nav-college-center">{{ college.college_name }}</span>
+            <span class="nav-college-sub">{{ college.district }}, Maharashtra</span>
         </div>
 
         <div class="nav-spacer"></div>
@@ -54,12 +54,12 @@
         <!-- Profile -->
         <div class="profile-wrap">
             <div class="profile-circle" id="profile-btn" role="button" aria-haspopup="true" aria-expanded="false"
-                aria-controls="profile-dropdown" tabindex="0" aria-label="Open admin profile menu">DA
+                aria-controls="profile-dropdown" tabindex="0" aria-label="Open admin profile menu">{{ initials }}
             </div>
 
             <div class="profile-dropdown" id="profile-dropdown" role="menu" aria-label="Admin profile menu">
                 <div class="dropdown-header">
-                    <div class="dropdown-avatar">DA</div>
+                    <div class="dropdown-avatar">{{ initials }}</div>
                     <div>
                         <div class="dropdown-name">Dr. Amruta Kulkarni</div>
                         <div class="dropdown-role">Scholarship Coordinator</div>
@@ -131,19 +131,19 @@
                 <!-- Metrics strip -->
                 <div class="metrics-strip" role="region" aria-label="Key statistics">
                     <div class="metric-card m-total">
-                        <div class="metric-value" id="m-total">312</div>
+                        <div class="metric-value" id="m-total"></div>
                         <div class="metric-label">Total Students</div>
                     </div>
                     <div class="metric-card m-verified">
-                        <div class="metric-value" id="m-verified">298</div>
+                        <div class="metric-value" id="m-verified"></div>
                         <div class="metric-label">Verified</div>
                     </div>
                     <div class="metric-card m-pending">
-                        <div class="metric-value" id="m-pending">14</div>
+                        <div class="metric-value" id="m-pending"></div>
                         <div class="metric-label">Pending Verification</div>
                     </div>
                     <div class="metric-card m-notices">
-                        <div class="metric-value" id="m-notices">8</div>
+                        <div class="metric-value" id="m-notices"></div>
                         <div class="metric-label">Notices Posted</div>
                     </div>
                 </div>
@@ -189,9 +189,7 @@
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
                             <polyline points="22,6 12,13 2,6" />
                         </svg>
-                        📧 Email alert will be sent automatically to all <strong style="margin:0 4px;">312
-                            students</strong> when
-                        this notice is posted.
+                        📧 Email alert will be sent automatically to all students when this notice is posted.
                     </div>
 
                     <!-- Title -->

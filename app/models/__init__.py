@@ -136,6 +136,7 @@ class StudentScholarshipData(db.Model):
     application_date=db.Column(db.DateTime)
     status=  db.Column(db.String(200))
     added_via=  db.Column(db.String(200))
+    extra_data = db.Column(db.Text, nullable=True)
 
 class QueryReplies(db.Model):
     __tablename__="query_replies"

@@ -107,12 +107,12 @@ function sdSaveEdit() {
     const studentId = sdCurrentRow.dataset.studentId;
     const payload = {
         student_id: studentId,
-        full_name:       document.getElementById('m-name').value,
-        prn:             document.getElementById('m-prn').value,
-        email:           document.getElementById('m-email').value,
-        contact_number:  document.getElementById('m-contact').value,
-        department:      document.getElementById('m-dept').value,
-        year:            document.getElementById('m-year').value
+        full_name: document.getElementById('m-name').value,
+        prn: document.getElementById('m-prn').value,
+        email: document.getElementById('m-email').value,
+        contact_number: document.getElementById('m-contact').value,
+        department: document.getElementById('m-dept').value,
+        year: document.getElementById('m-year').value
     };
 
     fetch('/admin/update_student', {
@@ -120,29 +120,29 @@ function sdSaveEdit() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     })
-    .then(r => r.json())
-    .then(data => {
-        if (!data.success) {
-            gToast('❌ Update failed. Please try again.');
-            return;
-        }
-        /* Only update DOM after server confirms success */
-        const cells = sdCurrentRow.querySelectorAll('td');
-        cells[1].textContent = payload.full_name;
-        cells[2].textContent = payload.prn;
-        cells[3].textContent = payload.email;
-        cells[4].textContent = payload.contact_number;
-        cells[5].textContent = payload.department;
-        cells[6].textContent = payload.year;
-        sdCurrentRow.dataset.name = payload.full_name;
-        sdCurrentRow.dataset.prn  = payload.prn;
-        sdCurrentRow.dataset.dept = payload.department;
-        sdCurrentRow.dataset.year = payload.year;
-        sdCloseModal();
-        gToast('Student record updated.');
-        sdRenderMobileCards();
-    })
-    .catch(() => gToast('❌ Network error. Please try again.'));
+        .then(r => r.json())
+        .then(data => {
+            if (!data.success) {
+                gToast('❌ Update failed. Please try again.');
+                return;
+            }
+            /* Only update DOM after server confirms success */
+            const cells = sdCurrentRow.querySelectorAll('td');
+            cells[1].textContent = payload.full_name;
+            cells[2].textContent = payload.prn;
+            cells[3].textContent = payload.email;
+            cells[4].textContent = payload.contact_number;
+            cells[5].textContent = payload.department;
+            cells[6].textContent = payload.year;
+            sdCurrentRow.dataset.name = payload.full_name;
+            sdCurrentRow.dataset.prn = payload.prn;
+            sdCurrentRow.dataset.dept = payload.department;
+            sdCurrentRow.dataset.year = payload.year;
+            sdCloseModal();
+            gToast('Student record updated.');
+            sdRenderMobileCards();
+        })
+        .catch(() => gToast('❌ Network error. Please try again.'));
 }
 
 /* ══════════════════════════════════
@@ -154,15 +154,42 @@ function loadStudentData() {
         .then(data => {
             if (!data.success) return;
 
+            const students = data.students;
+            
+            const extraKeys = [];
+            students.forEach(s => {
+                if (s.extra_data) {
+                    Object.keys(s.extra_data).forEach(k => {
+                        if (!extraKeys.includes(k)) extraKeys.push(k);
+                    });
+                }
+            });
+
+            // Dynamically update the HTML table header to include the new extraKeys
+            const theadTr = document.querySelector('.sd-table thead tr');
+            if (theadTr) {
+                theadTr.innerHTML = `
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>PRN</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Department</th>
+                    <th>Year</th>
+                    ${extraKeys.map(k => `<th>${escHtml(k)}</th>`).join('')}
+                    <th>Actions</th>
+                `;
+            }
+
             const tbody = document.getElementById('sd-tbody');
             tbody.innerHTML = '';
 
-            data.students.forEach((s, idx) => {
+            students.forEach((s, idx) => {
                 const verifiedLabel = s.is_verified ? 'Verified' : 'Pending';
                 const tr = document.createElement('tr');
                 tr.dataset.studentId = s.student_id;
                 tr.dataset.name = s.full_name;
-                tr.dataset.prn  = s.prn;
+                tr.dataset.prn = s.prn;
                 tr.dataset.dept = s.department;
                 tr.dataset.year = s.year;
                 tr.innerHTML = `
@@ -173,6 +200,7 @@ function loadStudentData() {
                     <td>${escHtml(s.contact_number || '')}</td>
                     <td>${escHtml(s.department || '')}</td>
                     <td>${escHtml(s.year || '')}</td>
+                    ${extraKeys.map(k => `<td>${s.extra_data && s.extra_data[k] ? escHtml(s.extra_data[k]) : '—'}</td>`).join('')}
                     <td><button class="btn-edit-row">✍️ Edit</button></td>
                 `;
                 tbody.appendChild(tr);
@@ -184,15 +212,15 @@ function loadStudentData() {
             });
 
             /* Update metrics strip */
-            const total    = data.students.length;
+            const total = data.students.length;
             const verified = data.students.filter(s => s.is_verified).length;
-            const pending  = total - verified;
-            const mTotal    = document.getElementById('m-total');
+            const pending = total - verified;
+            const mTotal = document.getElementById('m-total');
             const mVerified = document.getElementById('m-verified');
-            const mPending  = document.getElementById('m-pending');
-            if (mTotal)    mTotal.textContent    = total;
+            const mPending = document.getElementById('m-pending');
+            if (mTotal) mTotal.textContent = total;
             if (mVerified) mVerified.textContent = verified;
-            if (mPending)  mPending.textContent  = pending;
+            if (mPending) mPending.textContent = pending;
 
             /* Update count label and mobile cards */
             const sdCount = document.getElementById('sd-count');
@@ -211,6 +239,61 @@ function genAddCol() {
     const inp = document.getElementById('gen-col-input');
     const name = inp.value.trim();
     if (!name) return;
+
+    // Blocked column names — case insensitive check
+    const blocked = ['prn', 'full name', 'email'];
+    if (blocked.includes(name.toLowerCase())) {
+        const messages = {
+            'prn':       '⚠️ PRN is already included as a locked column and cannot be added again.',
+            'full name': '⚠️ Full Name is already included as a locked column and cannot be added again.',
+            'email':     '⚠️ Email requires verification and cannot be updated through Excel upload. Use the Edit button in Student Data to change emails individually.'
+        };
+        const msg = messages[name.toLowerCase()];
+
+        // Show warning below the input field
+        let warningEl = document.getElementById('gen-col-warning');
+        if (!warningEl) {
+            warningEl = document.createElement('div');
+            warningEl.id = 'gen-col-warning';
+            warningEl.style.cssText = 'font-size:13px; color:#b91c1c; background:#fef2f2; border:1px solid #fca5a5; border-radius:7px; padding:9px 13px; margin-top:8px; line-height:1.5;';
+            inp.parentElement.insertAdjacentElement('afterend', warningEl);
+        }
+        warningEl.textContent = msg;
+        warningEl.style.display = 'block';
+
+        // Auto-hide warning after 4 seconds
+        clearTimeout(warningEl._hideTimer);
+        warningEl._hideTimer = setTimeout(() => {
+            warningEl.style.display = 'none';
+        }, 4000);
+
+        inp.value = '';
+        return;
+    }
+
+    // Hide warning if visible
+    const warningEl = document.getElementById('gen-col-warning');
+    if (warningEl) warningEl.style.display = 'none';
+
+    // Check for duplicate column name
+    if (genCols.map(c => c.toLowerCase()).includes(name.toLowerCase())) {
+        let warningEl = document.getElementById('gen-col-warning');
+        if (!warningEl) {
+            warningEl = document.createElement('div');
+            warningEl.id = 'gen-col-warning';
+            warningEl.style.cssText = 'font-size:13px; color:#b91c1c; background:#fef2f2; border:1px solid #fca5a5; border-radius:7px; padding:9px 13px; margin-top:8px; line-height:1.5;';
+            inp.parentElement.insertAdjacentElement('afterend', warningEl);
+        }
+        warningEl.textContent = `⚠️ "${name}" is already added as a column.`;
+        warningEl.style.display = 'block';
+        clearTimeout(warningEl._hideTimer);
+        warningEl._hideTimer = setTimeout(() => {
+            warningEl.style.display = 'none';
+        }, 4000);
+        inp.value = '';
+        return;
+    }
+
     genCols.push(name);
     inp.value = '';
     genRenderCols();
@@ -419,4 +502,173 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* Load real student data from backend */
     loadStudentData();
+});
+
+// ── GENERATE EXCEL ───────────────────────────────────────────────────────────
+
+function generateExcel() {
+    // Read custom column names from the UI column list
+    const colItems = document.querySelectorAll('#gen-col-list .custom-col-item span');
+    const customCols = Array.from(colItems).map(el => el.textContent.trim()).filter(Boolean);
+
+    // Build query string with custom cols
+    const params = new URLSearchParams();
+    customCols.forEach(col => params.append('cols', col));
+
+    const url = '/admin/generate_excel' + (customCols.length ? '?' + params.toString() : '');
+
+    // Trigger file download
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// ── UPLOAD EXCEL ─────────────────────────────────────────────────────────────
+
+async function uploadExcel(file) {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Show loading state
+    const zone = document.getElementById('upload-zone');
+    if (zone) zone.querySelector('.upload-zone-title').textContent = 'Uploading…';
+
+    try {
+        const resp = await fetch('/admin/upload_excel', {
+            method: 'POST',
+            body: formData
+        });
+        const data = await resp.json();
+
+        if (!data.success) {
+            alert(data.message || 'Upload failed. Please try again.');
+            return;
+        }
+
+        renderUploadReport(file.name, data.report);
+
+    } catch (err) {
+        alert('Upload failed. Please check your connection and try again.');
+    } finally {
+        if (zone) zone.querySelector('.upload-zone-title').textContent = 'Drop your .xlsx file here';
+    }
+}
+
+function renderUploadReport(filename, report) {
+    // Show filename
+    const fnEl = document.getElementById('upload-filename');
+    if (fnEl) fnEl.textContent = `${filename} · ${report.total_rows} rows detected`;
+
+    // Update metric cards
+    const cards = document.querySelectorAll('.upload-metric-card');
+    if (cards[0]) cards[0].querySelector('.upload-metric-val').textContent = report.success_count;
+    if (cards[1]) cards[1].querySelector('.upload-metric-val').textContent = report.unmatched.length;
+    if (cards[2]) cards[2].querySelector('.upload-metric-val').textContent = report.skipped.length;
+
+    // Render unmatched PRN chips
+    const unmatchedList = document.getElementById('unmatched-list');
+    if (unmatchedList) {
+        unmatchedList.innerHTML = report.unmatched.length
+            ? report.unmatched.map(prn => `<span class="prn-chip">${prn}</span>`).join('')
+            : '<span style="font-size:13px;color:var(--text-muted);">No unmatched PRNs ✅</span>';
+    }
+
+    // Show result section
+    const resultEl = document.getElementById('upload-result');
+    if (resultEl) resultEl.style.display = 'block';
+}
+
+// ── EXPORT DATA ──────────────────────────────────────────────────────────────
+
+function exportData(filterType, filterValue) {
+    let url = '/admin/export_data';
+    if (filterType && filterValue) {
+        url += `?${filterType}=${encodeURIComponent(filterValue)}`;
+    }
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// ── EVENT WIRING ─────────────────────────────────────────────────────────────
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Generate Excel download button
+    const genBtn = document.getElementById('gen-download-btn');
+    if (genBtn) genBtn.addEventListener('click', generateExcel);
+
+    // Upload zone — click to browse
+    const uploadZone = document.getElementById('upload-zone');
+    const uploadInput = document.getElementById('upload-file-input');
+
+    if (uploadZone && uploadInput) {
+        uploadZone.addEventListener('click', () => uploadInput.click());
+
+        // Drag and drop
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.style.borderColor = 'var(--saffron)';
+        });
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.style.borderColor = '';
+        });
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.style.borderColor = '';
+            const file = e.dataTransfer.files[0];
+            if (file && file.name.endsWith('.xlsx')) uploadExcel(file);
+            else alert('Please drop a .xlsx file only.');
+        });
+
+        // File input change
+        uploadInput.addEventListener('change', () => {
+            const file = uploadInput.files[0];
+            if (file) uploadExcel(file);
+        });
+    }
+
+    // Unmatched toggle
+    const unmatchedToggle = document.getElementById('unmatched-toggle');
+    const unmatchedList = document.getElementById('unmatched-list');
+    if (unmatchedToggle && unmatchedList) {
+        unmatchedToggle.addEventListener('click', () => {
+            const isVisible = unmatchedList.style.display !== 'none';
+            unmatchedList.style.display = isVisible ? 'none' : 'flex';
+            unmatchedToggle.textContent = isVisible ? 'View Unmatched PRNs ▼' : 'Hide Unmatched PRNs ▲';
+        });
+    }
+
+    // Export — Full report
+    document.querySelectorAll('[data-export-label]').forEach(btn => {
+        btn.addEventListener('click', () => exportData(null, null));
+    });
+
+    // Export — By department
+    const expDeptBtn = document.getElementById('exp-dept-btn');
+    if (expDeptBtn) {
+        expDeptBtn.addEventListener('click', () => {
+            const dept = document.getElementById('exp-dept-sel')?.value;
+            if (!dept) return;
+            exportData('department', dept);
+        });
+    }
+
+    // Export — By year
+    const expYearBtn = document.getElementById('exp-year-btn');
+    if (expYearBtn) {
+        expYearBtn.addEventListener('click', () => {
+            const year = document.getElementById('exp-year-sel')?.value;
+            if (!year) return;
+            exportData('year', year);
+        });
+    }
 });

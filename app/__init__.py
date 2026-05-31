@@ -13,6 +13,15 @@ def create_app():
 
     with app.app_context():
         db.create_all()
+        
+        # Add extra_data column if it doesn't exist yet
+        from sqlalchemy import text, inspect
+        with db.engine.connect() as conn:
+            inspector = inspect(db.engine)
+            columns = [col['name'] for col in inspector.get_columns('student_scholarship_data')]
+            if 'extra_data' not in columns:
+                conn.execute(text('ALTER TABLE student_scholarship_data ADD COLUMN extra_data TEXT'))
+                conn.commit()
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)

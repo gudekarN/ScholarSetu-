@@ -4,7 +4,7 @@ from app.models import Students
 from datetime import datetime
 from flask import jsonify
 from app.extensions import db, mail
-from app.models import InviteTokens, Notices, Queries, QueryReplies
+from app.models import InviteTokens, Notices, Queries, QueryReplies, StudentScholarshipData
 from flask import abort
 from app.models import College
 from flask import render_template
@@ -15,6 +15,9 @@ from flask import redirect
 from flask import url_for
 from flask import make_response
 import uuid 
+import openpyxl
+from io import BytesIO
+from flask import send_file
 
 admin_bp=Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -26,7 +29,19 @@ def dashboard():
         session.clear() # wipe any partial/wrong session
         return redirect(url_for('auth.login'))
 
-    response = make_response(render_template("admin_dashboard.html"))
+    college = College.query.filter_by(college_id=session['user_id']).first()
+    initials = "NA"
+    if college and college.college_name:
+        words = [w for w in college.college_name.replace('.', ' ').split() if w]
+        if words:
+            if len(words) == 1:
+                initials = words[0][:2].upper()
+            elif words[0].isupper() and len(words[0]) >= 2:
+                initials = words[0][:2].upper()
+            else:
+                initials = (words[0][0] + words[1][0]).upper()
+
+    response = make_response(render_template("admin_dashboard.html", college=college, initials=initials))
     response.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate, max-age=0'
     response.headers['Pragma']        = 'no-cache'
     response.headers['Expires']       = '0'
@@ -180,17 +195,31 @@ def get_students():
     if db_students:
         data=[]
 
+        import json as _json
         for student in db_students:
+            scholarship = StudentScholarshipData.query.filter_by(
+                student_id=student.student_id,
+                college_id=session['user_id']
+            ).first()
+
+            extra = {}
+            if scholarship and scholarship.extra_data:
+                try:
+                    extra = _json.loads(scholarship.extra_data)
+                except Exception:
+                    extra = {}
+
             data.append({
                 "student_id": student.student_id,
-                "full_name":student.full_name,
-                "prn":student.prn,
-                "email":student.email,
-                "contact_number":student.contact_number,
-                "department":student.department,
-                "year":student.year,
-                "is_verified":student.is_verified,
-                "joined_at":datetime.strftime(student.joined_at, "%Y-%m-%d")
+                "full_name": student.full_name,
+                "prn": student.prn,
+                "email": student.email,
+                "contact_number": student.contact_number,
+                "department": student.department,
+                "year": student.year,
+                "is_verified": student.is_verified,
+                "joined_at": datetime.strftime(student.joined_at, "%Y-%m-%d"),
+                "extra_data": extra
             })
 
         return jsonify({"success":True, "students":data})
@@ -309,3 +338,290 @@ def post_reply():
         db.session.rollback()
 
         return jsonify({"success":False})
+
+@admin_bp.route("/generate_excel", methods=["GET"])
+def generate_excel():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return abort(401)
+
+    try:
+        custom_cols = request.args.getlist('cols')
+
+        students = Students.query.filter_by(
+            college_id=session['user_id']
+        ).order_by(Students.student_id.asc()).all()
+
+        wb = openpyxl.Workbook()
+        ws = wb.active
+        ws.title = "Students"
+
+        from openpyxl.styles import PatternFill, Font, Protection
+        from openpyxl.utils import get_column_letter
+
+        fixed_headers = ["PRN", "Full Name"]
+        all_headers = fixed_headers + (custom_cols if custom_cols else [
+            "Application ID", "Scheme Name", "Category", "Status"
+        ])
+
+        locked_fill = PatternFill(start_color="FFD700", end_color="FFD700", fill_type="solid")
+        locked_font = Font(bold=True, color="000000")
+
+        for col_idx, header in enumerate(all_headers, start=1):
+            cell = ws.cell(row=1, column=col_idx, value=header)
+            if header in fixed_headers:
+                cell.fill = locked_fill
+                cell.font = locked_font
+                cell.protection = Protection(locked=True)
+            else:
+                cell.protection = Protection(locked=False)
+
+        for row_idx, student in enumerate(students, start=2):
+            prn_cell = ws.cell(row=row_idx, column=1, value=student.prn)
+            name_cell = ws.cell(row=row_idx, column=2, value=student.full_name)
+            prn_cell.protection = Protection(locked=True)
+            name_cell.protection = Protection(locked=True)
+
+            # Explicitly unlock all custom column cells for this row
+            for col_idx in range(3, len(all_headers) + 1):
+                ws.cell(row=row_idx, column=col_idx).protection = Protection(locked=False)
+
+        ws.protection.sheet = True
+        ws.protection.password = "scholarsetu"
+        ws.protection.enable()
+
+        ws.column_dimensions['A'].width = 20
+        ws.column_dimensions['B'].width = 30
+        for i in range(3, len(all_headers) + 1):
+            ws.column_dimensions[get_column_letter(i)].width = 25
+
+        buffer = BytesIO()
+        wb.save(buffer)
+        buffer.seek(0)
+
+        filename = f"students_{session['user_id']}.xlsx"
+
+        return send_file(
+            buffer,
+            as_attachment=True,
+            download_name=filename,
+            mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+
+    except Exception as e:
+        import traceback
+        return jsonify({"success": False, "error": str(e), "trace": traceback.format_exc()}), 500
+
+@admin_bp.route("/upload_excel", methods=["POST"])
+def upload_excel():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return abort(401)
+
+    file = request.files.get('file')
+    if not file or not file.filename.endswith('.xlsx'):
+        return jsonify({"success": False, "message": "Please upload a valid .xlsx file"}), 400
+
+    try:
+        wb = openpyxl.load_workbook(file)
+        ws = wb.active
+    except Exception:
+        return jsonify({"success": False, "message": "Could not read the Excel file"}), 400
+
+    success_count = 0
+    unmatched = []
+    skipped = []
+
+    headers = [str(cell.value).strip() if cell.value else '' for cell in ws[1]]
+
+    if 'PRN' not in headers:
+        return jsonify({"success": False, "message": "Excel file is missing required PRN column"}), 400
+
+    prn_col = headers.index('PRN')
+
+    skip_cols = {'prn', 'full name'}
+    custom_col_indices = [
+        (i, headers[i]) for i in range(len(headers))
+        if headers[i].lower() not in skip_cols and headers[i] != ''
+    ]
+
+    for row in ws.iter_rows(min_row=2, values_only=True):
+        prn = str(row[prn_col]).strip() if row[prn_col] else None
+        if not prn or prn == 'None':
+            continue
+
+        student = Students.query.filter_by(
+            prn=prn,
+            college_id=session['user_id']
+        ).first()
+
+        if not student:
+            unmatched.append(prn)
+            continue
+
+        has_data = any(
+            row[i] is not None and str(row[i]).strip() not in ('', 'None')
+            for i, _ in custom_col_indices
+        )
+        if not has_data:
+            skipped.append(prn)
+            continue
+
+        import json as _json
+        extra = {}
+        for col_idx, col_name in custom_col_indices:
+            val = row[col_idx]
+            if val is not None and str(val).strip() not in ('', 'None'):
+                extra[col_name] = str(val).strip()
+
+        existing = StudentScholarshipData.query.filter_by(
+            student_id=student.student_id,
+            college_id=session['user_id']
+        ).first()
+
+        if existing:
+            old_extra = _json.loads(existing.extra_data) if existing.extra_data else {}
+            old_extra.update(extra)
+            existing.extra_data = _json.dumps(old_extra)
+            existing.added_via = "excel_upload"
+        else:
+            record = StudentScholarshipData(
+                student_id=student.student_id,
+                college_id=session['user_id'],
+                application_id="",
+                category="",
+                scheme_name="",
+                status="Pending",
+                added_via="excel_upload",
+                extra_data=_json.dumps(extra)
+            )
+            db.session.add(record)
+
+        success_count += 1
+
+    try:
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"success": False, "message": "Database error during save"}), 500
+
+    return jsonify({
+        "success": True,
+        "report": {
+            "success_count": success_count,
+            "total_rows": success_count + len(unmatched) + len(skipped),
+            "unmatched": unmatched,
+            "skipped": skipped
+        }
+    })
+
+@admin_bp.route("/export_data", methods=["GET"])
+def export_data():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return abort(401)
+
+    dept_filter = request.args.get('department')
+    year_filter = request.args.get('year')
+
+    query = Students.query.filter_by(college_id=session['user_id'])
+    if dept_filter:
+        query = query.filter_by(department=dept_filter)
+    if year_filter:
+        query = query.filter_by(year=year_filter)
+
+    students = query.order_by(Students.student_id.asc()).all()
+
+    import json as _json
+    from openpyxl.styles import Font, PatternFill
+    from openpyxl.utils import get_column_letter
+
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Student Data"
+
+    # Collect all unique extra_data keys across all students
+    extra_keys = []
+    for student in students:
+        scholarship = StudentScholarshipData.query.filter_by(
+            student_id=student.student_id,
+            college_id=session['user_id']
+        ).first()
+        if scholarship and scholarship.extra_data:
+            try:
+                extra = _json.loads(scholarship.extra_data)
+                for k in extra.keys():
+                    if k not in extra_keys:
+                        extra_keys.append(k)
+            except Exception:
+                pass
+
+    # Build fixed headers + dynamic extra headers
+    fixed_headers = [
+        "PRN", "Full Name", "Email", "Contact Number",
+        "Department", "Year", "Verified", "Joined At"
+    ]
+    all_headers = fixed_headers + extra_keys
+
+    # Style header row — saffron background
+    header_fill = PatternFill(
+        start_color="F97316", end_color="F97316", fill_type="solid"
+    )
+    header_font = Font(bold=True, color="FFFFFF")
+
+    for col_idx, header in enumerate(all_headers, start=1):
+        cell = ws.cell(row=1, column=col_idx, value=header)
+        cell.fill = header_fill
+        cell.font = header_font
+
+    # Write student rows — all cells editable (no protection)
+    for row_idx, student in enumerate(students, start=2):
+        scholarship = StudentScholarshipData.query.filter_by(
+            student_id=student.student_id,
+            college_id=session['user_id']
+        ).first()
+
+        extra = {}
+        if scholarship and scholarship.extra_data:
+            try:
+                extra = _json.loads(scholarship.extra_data)
+            except Exception:
+                extra = {}
+
+        ws.cell(row=row_idx, column=1, value=student.prn)
+        ws.cell(row=row_idx, column=2, value=student.full_name)
+        ws.cell(row=row_idx, column=3, value=student.email)
+        ws.cell(row=row_idx, column=4, value=student.contact_number)
+        ws.cell(row=row_idx, column=5, value=student.department)
+        ws.cell(row=row_idx, column=6, value=student.year)
+        ws.cell(row=row_idx, column=7, value="Yes" if student.is_verified else "No")
+        ws.cell(row=row_idx, column=8, value=student.joined_at.strftime("%Y-%m-%d") if student.joined_at else "")
+
+        for extra_idx, key in enumerate(extra_keys, start=len(fixed_headers) + 1):
+            ws.cell(row=row_idx, column=extra_idx, value=extra.get(key, ""))
+
+    # Set column widths
+    col_widths = [20, 28, 32, 16, 22, 12, 10, 14]
+    for i, width in enumerate(col_widths, start=1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    for i in range(len(fixed_headers) + 1, len(all_headers) + 1):
+        ws.column_dimensions[get_column_letter(i)].width = 22
+
+    buffer = BytesIO()
+    wb.save(buffer)
+    buffer.seek(0)
+
+    if dept_filter:
+        label = f"Dept_{dept_filter}"
+    elif year_filter:
+        label = f"Year_{year_filter}"
+    else:
+        label = "Full_Report"
+
+    college = College.query.filter_by(college_id=session['user_id']).first()
+    college_name = college.college_name.replace(' ', '_') if college else str(session['user_id'])
+    filename = f"{college_name}_{label}.xlsx"
+
+    return send_file(
+        buffer,
+        as_attachment=True,
+        download_name=filename,
+        mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
