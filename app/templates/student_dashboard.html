@@ -37,7 +37,7 @@
             <div class="nav-logo-icon">🎓</div>
             <div class="nav-logo-texts">
                 <span class="nav-logo-text">ScholarSetu</span>
-                <span class="nav-logo-sub">Maharashtra Scholarship Platform</span>
+                <span class="nav-logo-sub">Maharashtra Scholarship Gaidance Platform</span>
             </div>
         </a>
 
@@ -346,8 +346,6 @@
             <div class="method-pills" id="enable-dbt-pills" role="tablist" aria-label="Choose method">
                 <button class="method-pill" id="enable-dbt-pill-online" role="tab" aria-selected="false"
                     data-story-method="online" data-story-id="enable-dbt">🌐 Online Method</button>
-                <button class="method-pill active" id="enable-dbt-pill-offline" role="tab" aria-selected="true"
-                    data-story-method="offline" data-story-id="enable-dbt">🏦 Offline Method</button>
             </div>
 
             <!-- Progress bar -->
@@ -389,6 +387,14 @@
                         Next Step →
                     </button>
                 </div>
+            </div>
+            <div
+                style="margin-top: 28px; background: #fff8f0; border-left: 4px solid #ff6b00; border-radius: 8px; padding: 14px 20px; display: flex; align-items: flex-start; gap: 12px;">
+                <span style="font-size: 1.3rem; line-height: 1;">💡</span>
+                <p style="margin: 0; font-size: 0.88rem; color: #555; line-height: 1.6;">
+                    <strong style="color: #ff6b00;">Prefer offline?</strong> You can also enable DBT by visiting your
+                    nearest bank branch and submitting a written request to link your Aadhaar with your account.
+                </p>
             </div>
 
             <!-- Completion banner -->
@@ -526,8 +532,10 @@
                                 <label class="elig-label" for="elig-type">Course Type</label>
                                 <select class="elig-select" id="elig-type" name="type">
                                     <option value="">— Select —</option>
-                                    <option value="Professional">Professional (Engineering / Medical / Architecture / Pharmacy)</option>
-                                    <option value="Non-Professional">Non-Professional (Arts / Commerce / Science / Law)</option>
+                                    <option value="Professional">Professional (Engineering / Medical / Architecture /
+                                        Pharmacy)</option>
+                                    <option value="Non-Professional">Non-Professional (Arts / Commerce / Science / Law)
+                                    </option>
                                     <option value="Technical">Technical (Diploma / ITI level)</option>
                                     <option value="Medical">Medical (MBBS / BDS / BAMS / Nursing etc.)</option>
                                     <option value="Agriculture">Agriculture</option>
@@ -768,10 +776,13 @@
             <!-- Filter pills -->
             <div class="scheme-filters" role="group" aria-label="Filter by category">
                 <button class="filter-pill active" id="pill-all" data-pill="all" aria-pressed="true">All</button>
-                <button class="filter-pill" id="pill-scst" data-pill="scst" aria-pressed="false">SC/ST</button>
+                <button class="filter-pill" id="pill-sc" data-pill="sc" aria-pressed="false">SC</button>
+                <button class="filter-pill" id="pill-st" data-pill="st" aria-pressed="false">ST</button>
                 <button class="filter-pill" id="pill-obc" data-pill="obc" aria-pressed="false">OBC</button>
-                <button class="filter-pill" id="pill-ews" data-pill="ews" aria-pressed="false">EWS</button>
-                <button class="filter-pill" id="pill-open" data-pill="open" aria-pressed="false">Open</button>
+                <button class="filter-pill" id="pill-vjnt" data-pill="vjnt" aria-pressed="false">VJNT</button>
+                <button class="filter-pill" id="pill-ews" data-pill="ews" aria-pressed="false">EWS/Open</button>
+                <button class="filter-pill" id="pill-minority" data-pill="minority"
+                    aria-pressed="false">Minority</button>
                 <button class="filter-pill" id="pill-technical" data-pill="technical"
                     aria-pressed="false">Technical</button>
                 <button class="filter-pill" id="pill-nontechnical" data-pill="nontechnical"
@@ -781,149 +792,10 @@
             <!-- Scheme cards grid -->
             <div class="scheme-grid" id="scheme-grid" role="list">
 
-                <!-- Card 1 -->
-                <article class="scheme-card" id="sc-1" role="listitem"
-                    data-name="rajarshi chhatrapati shahu maharaj scholarship" data-cats="scst technical open">
-                    <div class="scheme-card-header">
-                        <h3 class="scheme-name">Rajarshi Chhatrapati Shahu Maharaj Scholarship</h3>
-                        <span class="dept-badge dept-sj">Social Justice</span>
-                    </div>
-                    <div class="scheme-cats">
-                        <span class="cat-pill">SC</span>
-                        <span class="cat-pill cat-neutral">Income limit ₹2.5L</span>
-                        <span class="cat-pill cat-neutral">UG / PG</span>
-                    </div>
-                    <div class="scheme-actions">
-                        <button class="btn-ghost-sm" data-open-scheme-docs="sc1" id="sc1-docs-btn">
-                            📄 Required Documents
-                        </button>
-                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
-                            class="btn-saffron-sm" id="sc1-apply-btn">
-                            Apply on MahaDBT ↗
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Card 2 -->
-                <article class="scheme-card" id="sc-2" role="listitem" data-name="post matric scholarship sc students"
-                    data-cats="scst nontechnical">
-                    <div class="scheme-card-header">
-                        <h3 class="scheme-name">Post-Matric Scholarship for SC Students</h3>
-                        <span class="dept-badge dept-sj">Social Justice</span>
-                    </div>
-                    <div class="scheme-cats">
-                        <span class="cat-pill">SC</span>
-                        <span class="cat-pill cat-neutral">Income limit ₹2.5L</span>
-                        <span class="cat-pill cat-neutral">Post-Matric</span>
-                    </div>
-                    <div class="scheme-actions">
-                        <button class="btn-ghost-sm" data-open-scheme-docs="sc2" id="sc2-docs-btn">
-                            📄 Required Documents
-                        </button>
-                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
-                            class="btn-saffron-sm" id="sc2-apply-btn">
-                            Apply on MahaDBT ↗
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Card 3 -->
-                <article class="scheme-card" id="sc-3" role="listitem"
-                    data-name="tribal development scholarship vijay raje scholarship"
-                    data-cats="scst technical nontechnical">
-                    <div class="scheme-card-header">
-                        <h3 class="scheme-name">Vijay Raje Scholarship for ST Students</h3>
-                        <span class="dept-badge dept-td">Tribal Dev.</span>
-                    </div>
-                    <div class="scheme-cats">
-                        <span class="cat-pill">ST</span>
-                        <span class="cat-pill cat-neutral">Income limit ₹2.5L</span>
-                        <span class="cat-pill cat-neutral">UG / PG</span>
-                    </div>
-                    <div class="scheme-actions">
-                        <button class="btn-ghost-sm" data-open-scheme-docs="sc3" id="sc3-docs-btn">
-                            📄 Required Documents
-                        </button>
-                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
-                            class="btn-saffron-sm" id="sc3-apply-btn">
-                            Apply on MahaDBT ↗
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Card 4 -->
-                <article class="scheme-card" id="sc-4" role="listitem"
-                    data-name="obc welfare scholarship non creamy layer" data-cats="obc nontechnical technical">
-                    <div class="scheme-card-header">
-                        <h3 class="scheme-name">OBC Non-Creamy Layer Post-Matric Scholarship</h3>
-                        <span class="dept-badge dept-obc">OBC Welfare</span>
-                    </div>
-                    <div class="scheme-cats">
-                        <span class="cat-pill">OBC</span>
-                        <span class="cat-pill cat-neutral">Non-Creamy Layer</span>
-                        <span class="cat-pill cat-neutral">Post-Matric</span>
-                    </div>
-                    <div class="scheme-actions">
-                        <button class="btn-ghost-sm" data-open-scheme-docs="sc4" id="sc4-docs-btn">
-                            📄 Required Documents
-                        </button>
-                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
-                            class="btn-saffron-sm" id="sc4-apply-btn">
-                            Apply on MahaDBT ↗
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Card 5 -->
-                <article class="scheme-card" id="sc-5" role="listitem"
-                    data-name="ebc economically backward class freeship open category scholarship"
-                    data-cats="open ews technical nontechnical">
-                    <div class="scheme-card-header">
-                        <h3 class="scheme-name">EBC Freeship — Open Category</h3>
-                        <span class="dept-badge dept-hte">Higher &amp; Tech. Ed.</span>
-                    </div>
-                    <div class="scheme-cats">
-                        <span class="cat-pill">EWS / Open</span>
-                        <span class="cat-pill cat-neutral">Income limit ₹8L</span>
-                        <span class="cat-pill cat-neutral">UG Only</span>
-                    </div>
-                    <div class="scheme-actions">
-                        <button class="btn-ghost-sm" data-open-scheme-docs="sc5" id="sc5-docs-btn">
-                            📄 Required Documents
-                        </button>
-                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
-                            class="btn-saffron-sm" id="sc5-apply-btn">
-                            Apply on MahaDBT ↗
-                        </a>
-                    </div>
-                </article>
-
-                <!-- Card 6 -->
-                <article class="scheme-card" id="sc-6" role="listitem"
-                    data-name="minority welfare scholarship ntdnt vimukta jati nomadic tribes"
-                    data-cats="scst nontechnical technical">
-                    <div class="scheme-card-header">
-                        <h3 class="scheme-name">VJNT &amp; Special Backward Class Scholarship</h3>
-                        <span class="dept-badge dept-obc">OBC Welfare</span>
-                    </div>
-                    <div class="scheme-cats">
-                        <span class="cat-pill">VJNT</span>
-                        <span class="cat-pill cat-neutral">Income limit ₹1L</span>
-                        <span class="cat-pill cat-neutral">Post-Matric</span>
-                    </div>
-                    <div class="scheme-actions">
-                        <button class="btn-ghost-sm" data-open-scheme-docs="sc6" id="sc6-docs-btn">
-                            📄 Required Documents
-                        </button>
-                        <a href="https://mahadbt.maharashtra.gov.in" target="_blank" rel="noopener"
-                            class="btn-saffron-sm" id="sc6-apply-btn">
-                            Apply on MahaDBT ↗
-                        </a>
-                    </div>
-                </article>
+                <!-- Cards dynamically rendered by student-schemes.js from scholarships.json -->
 
                 <!-- No results message -->
-                <div class="scheme-no-results" id="scheme-no-results" aria-live="polite">
+                <div class="scheme-no-results" id="scheme-no-results" aria-live="polite" style="display:none;">
                     🔍 No schemes match your search. Try a different keyword or filter.
                 </div>
 
@@ -1034,8 +906,6 @@
             <div class="method-pills" id="grievance-pills" role="tablist" aria-label="Choose grievance method">
                 <button class="method-pill active" id="grievance-pill-online" role="tab" aria-selected="true"
                     data-story-method="online" data-story-id="grievance">💻 Online Grievance</button>
-                <button class="method-pill" id="grievance-pill-offline" role="tab" aria-selected="false"
-                    data-story-method="offline" data-story-id="grievance">🏢 Offline Grievance</button>
             </div>
 
             <!-- Progress bar -->
@@ -1097,7 +967,8 @@
                         <div class="esc-icon">📧</div>
                         <div class="esc-title">Email Department Head</div>
                         <div class="esc-desc">Email <strong>grievance@mahadbt.maharashtra.gov.in</strong> with your App
-                            ID and issue details.</div>
+                            ID and issue details.(Add correct email of departments.Should provode link of tab taht have
+                            the list of deppartments with email)</div>
                     </div>
                     <div class="esc-card">
                         <div class="esc-icon">📝</div>
@@ -1166,7 +1037,7 @@
             </div>
             <div class="modal-body" style="padding-top:4px;">
                 <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
-                    Click any document to view a guide on how to obtain it.
+                    Click any document to view a infographic on how to obtain it.
                 </p>
                 <ul class="sdm-checklist" id="sdm-checklist" role="list">
                     <!-- Populated by JS -->

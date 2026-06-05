@@ -7,27 +7,27 @@ const BASE_URL = window.location.origin;
 const JOIN_BASE = BASE_URL + '/auth/join/';
 
 /* ── DOM refs ── */
-const inviteLinkInput  = document.getElementById('invite-link-val');
-const inviteCopyBtn    = document.getElementById('invite-copy-btn');
-const inviteRegenBtn   = document.getElementById('invite-regen-btn');
-const regenModal       = document.getElementById('regen-modal');
-const regenConfirmBtn  = document.getElementById('regen-confirm-btn');
-const regenCancelBtn   = document.getElementById('regen-cancel-btn');
-const createdChip      = document.getElementById('invite-created-chip');
+const inviteLinkInput = document.getElementById('invite-link-val');
+const inviteCopyBtn = document.getElementById('invite-copy-btn');
+const inviteRegenBtn = document.getElementById('invite-regen-btn');
+const regenModal = document.getElementById('regen-modal');
+const regenConfirmBtn = document.getElementById('regen-confirm-btn');
+const regenCancelBtn = document.getElementById('regen-cancel-btn');
+const createdChip = document.getElementById('invite-created-chip');
 
 /* ══════════════════════════════════════════════
    1. LOAD CURRENT TOKEN ON PAGE LOAD
    ══════════════════════════════════════════════ */
 async function loadToken() {
     try {
-        const res  = await fetch('/admin/get_token');
+        const res = await fetch('/admin/get_token');
         const data = await res.json();
 
         if (data.success && data.token) {
-            setLinkDisplay(data.token, data.created_at);
+            setLinkDisplay(data.token, data.created_at, data.student_count);
         } else {
             /* No active token yet */
-            inviteLinkInput.value       = 'No active invite link — click Regenerate to create one';
+            inviteLinkInput.value = 'No active invite link — click Regenerate to create one';
             inviteLinkInput.style.color = 'var(--text-muted)';
             if (createdChip) createdChip.textContent = '🔗 No link created yet';
         }
@@ -39,10 +39,28 @@ async function loadToken() {
 }
 
 /* ── helper: update input + created chip ── */
-function setLinkDisplay(token, createdAt) {
-    inviteLinkInput.value       = JOIN_BASE + token;
+function setLinkDisplay(token, createdAt, studentCount) {
+    inviteLinkInput.value = JOIN_BASE + token;
     inviteLinkInput.style.color = '';
 
+    const chips = document.querySelectorAll('.invite-stat-chip');
+
+    // First chip — student count
+    if (chips[0] != null) {
+        chips[0].textContent = '👥 ' + (studentCount ?? 0) + ' students registered';
+    }
+
+    // Second chip — valid until (created_at + 13 months)
+    if (chips[1] != null && createdAt) {
+        const validDate = new Date(createdAt);
+        validDate.setMonth(validDate.getMonth() + 13);
+        const formatted = validDate.toLocaleDateString('en-IN', {
+            day: '2-digit', month: 'short', year: 'numeric'
+        });
+        chips[1].textContent = '📅 Valid until: ' + formatted;
+    }
+
+    // Third chip — created at (existing behaviour)
     if (createdChip && createdAt) {
         const date = new Date(createdAt);
         const formatted = date.toLocaleDateString('en-IN', {
@@ -50,6 +68,8 @@ function setLinkDisplay(token, createdAt) {
         });
         createdChip.textContent = '🔗 Created: ' + formatted;
     }
+
+    generateQR(inviteLinkInput.value);
 }
 
 /* ══════════════════════════════════════════════
@@ -82,10 +102,29 @@ function showCopyFeedback(message, success) {
     inviteCopyBtn.disabled = true;
 
     setTimeout(() => {
-        inviteCopyBtn.innerHTML    = original;
+        inviteCopyBtn.innerHTML = original;
         inviteCopyBtn.style.background = '';
-        inviteCopyBtn.disabled     = false;
+        inviteCopyBtn.disabled = false;
     }, 2000);
+}
+
+/* ══════════════════════════════════════════════
+   2.5 GENERATE QR CODE
+   ══════════════════════════════════════════════ */
+function generateQR(link) {
+    const qrBox = document.querySelector('.qr-box');
+    if (!qrBox) return;
+    
+    qrBox.innerHTML = ''; // Clear SVG/text placeholder
+    
+    new QRCode(qrBox, {
+        text: link,
+        width: 140,
+        height: 140,
+        colorDark: '#000080',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+    });
 }
 
 /* ══════════════════════════════════════════════
@@ -104,19 +143,19 @@ function closeRegenModal() {
    ══════════════════════════════════════════════ */
 async function confirmRegen() {
     regenConfirmBtn.textContent = 'Generating…';
-    regenConfirmBtn.disabled    = true;
+    regenConfirmBtn.disabled = true;
 
     try {
-        const res  = await fetch('/admin/generate_token', {
-            method:  'POST',
+        const res = await fetch('/admin/generate_token', {
+            method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body:    JSON.stringify({})
+            body: JSON.stringify({})
         });
 
         const data = await res.json();
 
         if (data.success && data.token) {
-            setLinkDisplay(data.token, new Date().toISOString());
+            setLinkDisplay(data.token, new Date().toISOString(), data.student_count ?? 0);
             closeRegenModal();
             showToast('✅ New invite link generated successfully!');
         } else {
@@ -130,7 +169,7 @@ async function confirmRegen() {
         closeRegenModal();
     } finally {
         regenConfirmBtn.textContent = 'Yes, Regenerate';
-        regenConfirmBtn.disabled    = false;
+        regenConfirmBtn.disabled = false;
     }
 }
 
@@ -163,13 +202,13 @@ function showToast(message, isError = false) {
         document.body.appendChild(toast);
     }
 
-    toast.textContent        = message;
-    toast.style.background   = isError ? '#ef4444' : '#16a34a';
-    toast.style.opacity      = '1';
-    toast.style.display      = 'block';
+    toast.textContent = message;
+    toast.style.background = isError ? '#ef4444' : '#16a34a';
+    toast.style.opacity = '1';
+    toast.style.display = 'block';
 
     setTimeout(() => {
-        toast.style.opacity  = '0';
+        toast.style.opacity = '0';
         setTimeout(() => { toast.style.display = 'none'; }, 300);
     }, 3000);
 }
@@ -185,6 +224,34 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Copy button */
     if (inviteCopyBtn) {
         inviteCopyBtn.addEventListener('click', copyLink);
+    }
+
+    /* Download QR button */
+    const qrDownloadBtn = document.getElementById('qr-download-btn');
+    if (qrDownloadBtn) {
+        qrDownloadBtn.addEventListener('click', () => {
+            const qrBox = document.querySelector('.qr-box');
+            if (!qrBox) return;
+
+            const canvas = qrBox.querySelector('canvas');
+            const img = qrBox.querySelector('img');
+            
+            let dataUrl = '';
+            if (canvas) {
+                dataUrl = canvas.toDataURL('image/png');
+            } else if (img && img.src) {
+                dataUrl = img.src;
+            }
+
+            if (dataUrl) {
+                const a = document.createElement('a');
+                a.href = dataUrl;
+                a.download = "scholarsetu-invite-qr.png";
+                a.click();
+            } else {
+                showToast('QR not ready yet', true);
+            }
+        });
     }
 
     /* Open regen modal */

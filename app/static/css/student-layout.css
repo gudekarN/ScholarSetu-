@@ -303,7 +303,7 @@
     margin-top: calc(3px + var(--navbar-h) + var(--tabs-h));
     flex: 1;
     padding: 28px 24px 48px;
-    max-width: 1000px;
+    max-width: 1160px;
     width: 100%;
     margin-left: auto;
     margin-right: auto;

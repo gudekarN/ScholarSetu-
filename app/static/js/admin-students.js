@@ -22,6 +22,7 @@ function escHtml(s) {
    STUDENT DATA
 ══════════════════════════════════ */
 let sdCurrentRow = null;
+const SD_MODAL_BODY_HTML = document.querySelector('#sd-modal .modal-body').innerHTML;
 
 function sdFilter() {
     const q = (document.getElementById('sd-search').value || '').toLowerCase();
@@ -94,11 +95,78 @@ function sdOpenEdit(btn) {
     document.getElementById('m-contact').value = cells[4].textContent;
     document.getElementById('m-dept').value = cells[5].textContent;
     document.getElementById('m-year').value = cells[6].textContent;
+
+    // Get all header names from index 7 onwards (after Year), excluding last Actions column
+    const headers = Array.from(document.querySelectorAll('.sd-table thead tr th'));
+    const extraHeaders = headers.slice(7, headers.length - 1).map(th => th.textContent.trim());
+
+    // Get matching cell values
+    const extraValues = Array.from(cells).slice(7, cells.length - 1).map(td => td.textContent.trim());
+
+    // Build dynamic fields in modal
+    const modalGrid = document.querySelector('#sd-modal .modal-grid');
+    // Remove previously added dynamic fields
+    modalGrid.querySelectorAll('.dynamic-extra-field').forEach(el => el.remove());
+
+    extraHeaders.forEach((key, i) => {
+        const div = document.createElement('div');
+        div.className = 'form-row dynamic-extra-field';
+        div.innerHTML = `<label class="form-label">${escHtml(key)}</label>
+            <input class="form-input" data-extra-key="${escHtml(key)}" type="text" value="${escHtml(extraValues[i] || '')}">`;
+        modalGrid.appendChild(div);
+    });
+
     document.getElementById('sd-modal').classList.add('open');
+
+    const deleteBtn = document.getElementById('sd-modal-delete');
+    if (deleteBtn) {
+        deleteBtn.onclick = () => {
+            // Replace modal body with confirmation view
+            const modalBody = document.querySelector('#sd-modal .modal-body');
+            modalBody.innerHTML = `
+                <div style="text-align:center;padding:16px 0;">
+                    <div style="font-size:32px;margin-bottom:12px;">⚠️</div>
+                    <div style="font-weight:600;font-size:16px;margin-bottom:8px;">Delete ${escHtml(sdCurrentRow.dataset.name)}?</div>
+                    <div style="color:var(--text-secondary);font-size:13px;margin-bottom:20px;">This will permanently remove the student and all their data from the system. This action cannot be undone.</div>
+                    <div style="display:flex;gap:10px;justify-content:center;">
+                        <button class="btn-ghost" id="sd-delete-cancel">Cancel</button>
+                        <button class="btn-red-ghost" id="sd-delete-confirm" style="background:#ef4444;color:white;border:none;">Yes, Delete</button>
+                    </div>
+                </div>`;
+            document.querySelector('#sd-modal .modal-footer').style.display = 'none';
+            document.getElementById('sd-delete-cancel').onclick = () => sdCloseModal();
+            document.getElementById('sd-delete-confirm').onclick = () => sdConfirmDelete();
+        };
+    }
 }
 
 function sdCloseModal() {
+    const modalBody = document.querySelector('#sd-modal .modal-body');
+    if (modalBody) modalBody.innerHTML = SD_MODAL_BODY_HTML;
+    document.querySelector('#sd-modal .modal-footer').style.display = '';
     document.getElementById('sd-modal').classList.remove('open');
+}
+
+async function sdConfirmDelete() {
+    const studentId = sdCurrentRow.dataset.studentId;
+    try {
+        const res = await fetch('/admin/delete_student', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ student_id: studentId })
+        });
+        const data = await res.json();
+        if (data.success) {
+            sdCurrentRow.remove();
+            sdCloseModal();
+            gToast('Student deleted successfully.');
+            sdRenderMobileCards();
+        } else {
+            gToast('❌ Delete failed. Please try again.');
+        }
+    } catch {
+        gToast('❌ Network error.');
+    }
 }
 
 function sdSaveEdit() {
@@ -114,6 +182,12 @@ function sdSaveEdit() {
         department: document.getElementById('m-dept').value,
         year: document.getElementById('m-year').value
     };
+
+    const extraData = {};
+    document.querySelectorAll('#sd-modal .dynamic-extra-field input').forEach(inp => {
+        extraData[inp.dataset.extraKey] = inp.value.trim();
+    });
+    if (Object.keys(extraData).length > 0) payload.extra_data = extraData;
 
     fetch('/admin/update_student', {
         method: 'POST',
@@ -138,6 +212,13 @@ function sdSaveEdit() {
             sdCurrentRow.dataset.prn = payload.prn;
             sdCurrentRow.dataset.dept = payload.department;
             sdCurrentRow.dataset.year = payload.year;
+
+            const extraInputs = document.querySelectorAll('#sd-modal .dynamic-extra-field input');
+            const extraCells = Array.from(sdCurrentRow.querySelectorAll('td')).slice(7, cells.length - 1);
+            extraInputs.forEach((inp, i) => {
+                if (extraCells[i]) extraCells[i].textContent = inp.value.trim();
+            });
+
             sdCloseModal();
             gToast('Student record updated.');
             sdRenderMobileCards();
@@ -155,7 +236,7 @@ function loadStudentData() {
             if (!data.success) return;
 
             const students = data.students;
-            
+
             const extraKeys = [];
             students.forEach(s => {
                 if (s.extra_data) {
@@ -169,15 +250,15 @@ function loadStudentData() {
             const theadTr = document.querySelector('.sd-table thead tr');
             if (theadTr) {
                 theadTr.innerHTML = `
-                    <th>#</th>
-                    <th>Full Name</th>
+                    <th>SR.NO.</th>
+                    <th>FULL NAME</th>
                     <th>PRN</th>
-                    <th>Email</th>
-                    <th>Contact</th>
-                    <th>Department</th>
-                    <th>Year</th>
+                    <th>EMAIL</th>
+                    <th>CONTACT</th>
+                    <th>DEPARTMENT</th>
+                    <th>YEAR</th>
                     ${extraKeys.map(k => `<th>${escHtml(k)}</th>`).join('')}
-                    <th>Actions</th>
+                    <th>ACTIONS</th>
                 `;
             }
 
@@ -241,12 +322,12 @@ function genAddCol() {
     if (!name) return;
 
     // Blocked column names — case insensitive check
-    const blocked = ['prn', 'full name', 'email'];
+    const blocked = ['PRN', 'FULL NAME', 'EMAIL'];
     if (blocked.includes(name.toLowerCase())) {
         const messages = {
-            'prn':       '⚠️ PRN is already included as a locked column and cannot be added again.',
-            'full name': '⚠️ Full Name is already included as a locked column and cannot be added again.',
-            'email':     '⚠️ Email requires verification and cannot be updated through Excel upload. Use the Edit button in Student Data to change emails individually.'
+            'PRN': '⚠️ PRN is already included as a locked column and cannot be added again.',
+            'FULL NAME': '⚠️ Full Name is already included as a locked column and cannot be added again.',
+            'EMAIL': '⚠️ Email requires verification and cannot be updated through Excel upload. Use the Edit button in Student Data to change emails individually.'
         };
         const msg = messages[name.toLowerCase()];
 
@@ -376,8 +457,41 @@ function upToggleUnmatched() {
     const open = list.classList.toggle('open');
     document.getElementById('unmatched-toggle').textContent = open ? 'Hide Unmatched PRNs ▲' : 'View Unmatched PRNs ▼';
 }
-function upConfirm() {
-    gToast('Database updated successfully. Student Data tab now reflects new fields.');
+async function upConfirm() {
+    const btn = document.getElementById('up-confirm-btn');
+    if (!btn) return;
+
+    const originalText = btn.textContent;
+    btn.textContent = 'Saving…';
+    btn.disabled = true;
+
+    try {
+        const resp = await fetch('/admin/confirm_excel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ rows: pendingRows.filter(r => r._status === 'success') })
+        });
+        const data = await resp.json();
+
+        if (data.success) {
+            gToast(`✅ ${data.saved} records saved to database.`);
+            pendingRows = [];
+            const resultEl = document.getElementById('upload-result');
+            if (resultEl) resultEl.style.display = 'none';
+            const zoneTitle = document.querySelector('#upload-zone .upload-zone-title');
+            if (zoneTitle) zoneTitle.textContent = 'Drop your .xlsx file here';
+
+            // Optionally, reload the student data to reflect changes
+            loadStudentData();
+        } else {
+            gToast('❌ Save failed. Please try again.');
+        }
+    } catch (err) {
+        gToast('❌ Save failed. Please check your connection.');
+    } finally {
+        btn.textContent = originalText;
+        btn.disabled = false;
+    }
 }
 
 /* ══════════════════════════════════
@@ -451,33 +565,76 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    const genDownloadBtn = document.getElementById('gen-download-btn');
-    if (genDownloadBtn) genDownloadBtn.addEventListener('click', genDownload);
+    const genBtn = document.getElementById('gen-download-btn');
+    if (genBtn) genBtn.addEventListener('click', generateExcel);
 
     /* Upload Excel */
     const uploadZone = document.getElementById('upload-zone');
-    if (uploadZone) {
-        uploadZone.addEventListener('dragover', upDragOver);
-        uploadZone.addEventListener('dragleave', upDragLeave);
-        uploadZone.addEventListener('drop', upDrop);
-        uploadZone.addEventListener('click', () => document.getElementById('upload-file-input').click());
-    }
+    const uploadInput = document.getElementById('upload-file-input');
 
-    const uploadFileInput = document.getElementById('upload-file-input');
-    if (uploadFileInput) {
-        uploadFileInput.addEventListener('change', e => upHandleFile(e.target.files[0]));
+    if (uploadZone && uploadInput) {
+        uploadZone.addEventListener('click', () => uploadInput.click());
+
+        // Drag and drop
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.style.borderColor = 'var(--saffron)';
+        });
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.style.borderColor = '';
+        });
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.style.borderColor = '';
+            const file = e.dataTransfer.files[0];
+            if (file && file.name.endsWith('.xlsx')) uploadExcel(file);
+            else alert('Please drop a .xlsx file only.');
+        });
+
+        // File input change
+        uploadInput.addEventListener('change', () => {
+            const file = uploadInput.files[0];
+            if (file) uploadExcel(file);
+        });
     }
 
     const unmatchedToggle = document.getElementById('unmatched-toggle');
-    if (unmatchedToggle) unmatchedToggle.addEventListener('click', upToggleUnmatched);
+    const unmatchedList = document.getElementById('unmatched-list');
+    if (unmatchedToggle && unmatchedList) {
+        unmatchedToggle.addEventListener('click', () => {
+            const isVisible = unmatchedList.style.display !== 'none';
+            unmatchedList.style.display = isVisible ? 'none' : 'flex';
+            unmatchedToggle.textContent = isVisible ? 'View Unmatched PRNs ▼' : 'Hide Unmatched PRNs ▲';
+        });
+    }
 
     const upConfirmBtn = document.getElementById('up-confirm-btn');
     if (upConfirmBtn) upConfirmBtn.addEventListener('click', upConfirm);
 
     /* Export buttons */
     document.querySelectorAll('[data-export-label]').forEach(btn => {
-        btn.addEventListener('click', () => exportDownload(btn.dataset.exportLabel));
+        btn.addEventListener('click', () => exportData(null, null));
     });
+
+    // Export — By department
+    const expDeptBtn = document.getElementById('exp-dept-btn');
+    if (expDeptBtn) {
+        expDeptBtn.addEventListener('click', () => {
+            const dept = document.getElementById('exp-dept-sel')?.value;
+            if (!dept) return;
+            exportData('department', dept);
+        });
+    }
+
+    // Export — By year
+    const expYearBtn = document.getElementById('exp-year-btn');
+    if (expYearBtn) {
+        expYearBtn.addEventListener('click', () => {
+            const year = document.getElementById('exp-year-sel')?.value;
+            if (!year) return;
+            exportData('year', year);
+        });
+    }
 
     /* Invite Link */
     const inviteCopyBtn = document.getElementById('invite-copy-btn');
@@ -496,6 +653,17 @@ document.addEventListener('DOMContentLoaded', () => {
     /* Invite QR download */
     const qrDownloadBtn = document.getElementById('qr-download-btn');
     if (qrDownloadBtn) qrDownloadBtn.addEventListener('click', () => gToast('QR code downloaded.'));
+
+    // Manage Columns
+    document.getElementById('dd-manage-cols')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        const pd = document.getElementById('profile-dropdown');
+        if (pd) pd.classList.remove('open');
+        openManageCols();
+    });
+    document.getElementById('col-modal-close')?.addEventListener('click', () => {
+        document.getElementById('col-modal').classList.remove('open');
+    });
 
     /* Init mobile student cards */
     sdRenderMobileCards();
@@ -528,6 +696,8 @@ function generateExcel() {
 
 // ── UPLOAD EXCEL ─────────────────────────────────────────────────────────────
 
+let pendingRows = [];
+
 async function uploadExcel(file) {
     if (!file) return;
 
@@ -539,7 +709,7 @@ async function uploadExcel(file) {
     if (zone) zone.querySelector('.upload-zone-title').textContent = 'Uploading…';
 
     try {
-        const resp = await fetch('/admin/upload_excel', {
+        const resp = await fetch('/admin/parse_excel', {
             method: 'POST',
             body: formData
         });
@@ -550,7 +720,7 @@ async function uploadExcel(file) {
             return;
         }
 
-        renderUploadReport(file.name, data.report);
+        renderUploadReport(file.name, data.report, data.headers);
 
     } catch (err) {
         alert('Upload failed. Please check your connection and try again.');
@@ -559,7 +729,7 @@ async function uploadExcel(file) {
     }
 }
 
-function renderUploadReport(filename, report) {
+function renderUploadReport(filename, report, headers) {
     // Show filename
     const fnEl = document.getElementById('upload-filename');
     if (fnEl) fnEl.textContent = `${filename} · ${report.total_rows} rows detected`;
@@ -570,12 +740,70 @@ function renderUploadReport(filename, report) {
     if (cards[1]) cards[1].querySelector('.upload-metric-val').textContent = report.unmatched.length;
     if (cards[2]) cards[2].querySelector('.upload-metric-val').textContent = report.skipped.length;
 
-    // Render unmatched PRN chips
+    // Hide the old unmatched chip toggle / list — replaced by preview table
+    const unmatchedToggle = document.getElementById('unmatched-toggle');
     const unmatchedList = document.getElementById('unmatched-list');
-    if (unmatchedList) {
-        unmatchedList.innerHTML = report.unmatched.length
-            ? report.unmatched.map(prn => `<span class="prn-chip">${prn}</span>`).join('')
-            : '<span style="font-size:13px;color:var(--text-muted);">No unmatched PRNs ✅</span>';
+    if (unmatchedToggle) unmatchedToggle.style.display = 'none';
+    if (unmatchedList) unmatchedList.style.display = 'none';
+
+    // Remove any existing preview table before re-rendering
+    const existingPreview = document.getElementById('upload-preview-wrap');
+    if (existingPreview) existingPreview.remove();
+
+    pendingRows = report.rows || [];
+
+    // Build preview table (only if rows data exists)
+    if (report.rows && report.rows.length > 0) {
+        const colKeys = headers || Object.keys(report.rows[0]).filter(k => k !== '_status');
+
+        // Legend
+        const legend = `
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap;">
+                <span style="font-size:12px;font-weight:600;color:var(--text-muted);">Legend:</span>
+                <span style="background:#FFF3CD;color:#92400e;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:500;">⚠️ PRN Not Matched</span>
+                <span style="background:#F0F0F0;color:#6b7280;border-radius:4px;padding:2px 8px;font-size:12px;font-weight:500;">⏭ Row Skipped</span>
+            </div>`;
+
+        // Table header
+        const thCells = ['Status', ...colKeys].map(k =>
+            `<th style="background:#f5f5f0;padding:8px 12px;text-align:left;white-space:nowrap;position:sticky;top:0;border-bottom:1px solid var(--border);font-size:13px;">${escHtml(k)}</th>`
+        ).join('');
+
+        // Table rows
+        const trRows = report.rows.map(row => {
+            let rowBg = '';
+            let statusCell = '';
+            if (row._status === 'unmatched') {
+                rowBg = 'background:#FFF3CD;';
+                statusCell = `<td style="padding:7px 12px;border-bottom:1px solid var(--border);white-space:nowrap;color:#92400e;font-weight:600;">⚠️ PRN Not Matched</td>`;
+            } else if (row._status === 'skipped') {
+                rowBg = 'background:#F0F0F0;';
+                statusCell = `<td style="padding:7px 12px;border-bottom:1px solid var(--border);white-space:nowrap;color:#6b7280;">⏭ Skipped</td>`;
+            } else {
+                statusCell = `<td style="padding:7px 12px;border-bottom:1px solid var(--border);white-space:nowrap;color:#16a34a;font-weight:600;">✅ Data Filled</td>`;
+            }
+            const dataCells = colKeys.map(k =>
+                `<td style="padding:7px 12px;border-bottom:1px solid var(--border);white-space:nowrap;">${escHtml(row[k] ?? '')}</td>`
+            ).join('');
+            return `<tr style="${rowBg}">${statusCell}${dataCells}</tr>`;
+        }).join('');
+
+        const previewHtml = `
+            <div id="upload-preview-wrap" style="margin:18px 0;">
+                ${legend}
+                <div style="overflow-x:auto;overflow-y:auto;max-height:340px;border-radius:10px;border:1px solid var(--border);">
+                    <table style="border-collapse:collapse;width:100%;font-size:13px;font-family:'DM Sans',sans-serif;">
+                        <thead><tr>${thCells}</tr></thead>
+                        <tbody>${trRows}</tbody>
+                    </table>
+                </div>
+            </div>`;
+
+        // Insert between metric cards and unmatched-toggle
+        const toggleEl = document.getElementById('unmatched-toggle');
+        if (toggleEl) {
+            toggleEl.insertAdjacentHTML('beforebegin', previewHtml);
+        }
     }
 
     // Show result section
@@ -598,77 +826,65 @@ function exportData(filterType, filterValue) {
     document.body.removeChild(a);
 }
 
-// ── EVENT WIRING ─────────────────────────────────────────────────────────────
+// ── MANAGE COLUMNS ───────────────────────────────────────────────────────────
 
-document.addEventListener('DOMContentLoaded', function () {
+function openManageCols() {
+    // Get current extra column headers from the table
+    const headers = Array.from(document.querySelectorAll('.sd-table thead tr th'));
+    const extraHeaders = headers.slice(7, headers.length - 1).map(th => th.textContent.trim());
 
-    // Generate Excel download button
-    const genBtn = document.getElementById('gen-download-btn');
-    if (genBtn) genBtn.addEventListener('click', generateExcel);
+    const colList = document.getElementById('col-list');
+    const colEmpty = document.getElementById('col-empty');
+    if (!colList || !colEmpty) return;
+    
+    colList.innerHTML = '';
 
-    // Upload zone — click to browse
-    const uploadZone = document.getElementById('upload-zone');
-    const uploadInput = document.getElementById('upload-file-input');
-
-    if (uploadZone && uploadInput) {
-        uploadZone.addEventListener('click', () => uploadInput.click());
-
-        // Drag and drop
-        uploadZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadZone.style.borderColor = 'var(--saffron)';
-        });
-        uploadZone.addEventListener('dragleave', () => {
-            uploadZone.style.borderColor = '';
-        });
-        uploadZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadZone.style.borderColor = '';
-            const file = e.dataTransfer.files[0];
-            if (file && file.name.endsWith('.xlsx')) uploadExcel(file);
-            else alert('Please drop a .xlsx file only.');
-        });
-
-        // File input change
-        uploadInput.addEventListener('change', () => {
-            const file = uploadInput.files[0];
-            if (file) uploadExcel(file);
+    if (extraHeaders.length === 0) {
+        colEmpty.style.display = 'block';
+    } else {
+        colEmpty.style.display = 'none';
+        extraHeaders.forEach(key => {
+            const row = document.createElement('div');
+            row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--white);';
+            row.innerHTML = `
+                <span style="font-size:14px;font-weight:500;">${escHtml(key)}</span>
+                <button data-col-key="${escHtml(key)}" style="background:none;border:none;cursor:pointer;font-size:18px;color:#ef4444;" title="Delete column">🗑️</button>`;
+            row.querySelector('button').onclick = () => confirmDeleteCol(key, row);
+            colList.appendChild(row);
         });
     }
+    document.getElementById('col-modal').classList.add('open');
+}
 
-    // Unmatched toggle
-    const unmatchedToggle = document.getElementById('unmatched-toggle');
-    const unmatchedList = document.getElementById('unmatched-list');
-    if (unmatchedToggle && unmatchedList) {
-        unmatchedToggle.addEventListener('click', () => {
-            const isVisible = unmatchedList.style.display !== 'none';
-            unmatchedList.style.display = isVisible ? 'none' : 'flex';
-            unmatchedToggle.textContent = isVisible ? 'View Unmatched PRNs ▼' : 'Hide Unmatched PRNs ▲';
-        });
-    }
-
-    // Export — Full report
-    document.querySelectorAll('[data-export-label]').forEach(btn => {
-        btn.addEventListener('click', () => exportData(null, null));
-    });
-
-    // Export — By department
-    const expDeptBtn = document.getElementById('exp-dept-btn');
-    if (expDeptBtn) {
-        expDeptBtn.addEventListener('click', () => {
-            const dept = document.getElementById('exp-dept-sel')?.value;
-            if (!dept) return;
-            exportData('department', dept);
-        });
-    }
-
-    // Export — By year
-    const expYearBtn = document.getElementById('exp-year-btn');
-    if (expYearBtn) {
-        expYearBtn.addEventListener('click', () => {
-            const year = document.getElementById('exp-year-sel')?.value;
-            if (!year) return;
-            exportData('year', year);
-        });
-    }
-});
+function confirmDeleteCol(key, rowEl) {
+    rowEl.innerHTML = `
+        <span style="font-size:13px;color:#92400e;flex:1;">Delete "<strong>${escHtml(key)}</strong>" for all students?</span>
+        <div style="display:flex;gap:8px;">
+            <button id="col-del-cancel" class="btn-ghost" style="padding:4px 10px;font-size:12px;">No</button>
+            <button id="col-del-confirm" style="background:#ef4444;color:white;border:none;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;">Yes, Delete</button>
+        </div>`;
+    rowEl.querySelector('#col-del-cancel').onclick = () => openManageCols();
+    rowEl.querySelector('#col-del-confirm').onclick = async () => {
+        try {
+            const res = await fetch('/admin/delete_column', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ column: key })
+            });
+            const data = await res.json();
+            if (data.success) {
+                gToast(`Column "${key}" deleted.`);
+                rowEl.remove();
+                if (document.querySelectorAll('#col-list > div').length === 0) {
+                    document.getElementById('col-empty').style.display = 'block';
+                }
+                loadStudentData();
+            } else {
+                gToast('❌ Delete failed.');
+            }
+        } catch {
+            gToast('❌ Network error.');
+        }
+    };
+}
+

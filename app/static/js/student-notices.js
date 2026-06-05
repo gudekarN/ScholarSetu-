@@ -34,22 +34,22 @@ function startCountdown(deadlineDateStr) {
 
     function tick() {
         const now = new Date();
-        let diff  = Math.max(0, Math.floor((countdownTarget - now) / 1000));
+        let diff = Math.max(0, Math.floor((countdownTarget - now) / 1000));
 
         const d = Math.floor(diff / 86400); diff -= d * 86400;
-        const h = Math.floor(diff / 3600);  diff -= h * 3600;
-        const m = Math.floor(diff / 60);    diff -= m * 60;
+        const h = Math.floor(diff / 3600); diff -= h * 3600;
+        const m = Math.floor(diff / 60); diff -= m * 60;
         const s = diff;
 
-        const elDays  = document.getElementById('cd-days');
+        const elDays = document.getElementById('cd-days');
         const elHours = document.getElementById('cd-hours');
-        const elMins  = document.getElementById('cd-mins');
-        const elSecs  = document.getElementById('cd-secs');
+        const elMins = document.getElementById('cd-mins');
+        const elSecs = document.getElementById('cd-secs');
 
-        if (elDays)  elDays.textContent  = pad(d);
+        if (elDays) elDays.textContent = pad(d);
         if (elHours) elHours.textContent = pad(h);
-        if (elMins)  elMins.textContent  = pad(m);
-        if (elSecs)  elSecs.textContent  = pad(s);
+        if (elMins) elMins.textContent = pad(m);
+        if (elSecs) elSecs.textContent = pad(s);
     }
 
     tick();
@@ -63,8 +63,8 @@ function buildStudentNoticeCard(notice) {
     const modalId = `modal-notice-dyn-${notice.notice_id}`;
 
     const badgeMap = {
-        general:  `<span class="badge badge-general">General</span>`,
-        high:     `<span class="badge badge-high">🔴 High Priority</span>`,
+        general: `<span class="badge badge-general">General</span>`,
+        high: `<span class="badge badge-high">🔴 High Priority</span>`,
         deadline: `<span class="badge badge-deadline">📌 Deadline</span><span class="badge badge-pinned">Pinned</span>`
     };
 
@@ -129,8 +129,8 @@ function buildNoticeModal(notice) {
     const modalId = `modal-notice-dyn-${notice.notice_id}`;
 
     const badgeMap = {
-        general:  `<span class="badge badge-general">General</span>`,
-        high:     `<span class="badge badge-high">🔴 High Priority</span>`,
+        general: `<span class="badge badge-general">General</span>`,
+        high: `<span class="badge badge-high">🔴 High Priority</span>`,
         deadline: `<span class="badge badge-deadline">📌 Deadline</span><span class="badge badge-pinned">Pinned</span>`
     };
 
@@ -199,7 +199,7 @@ function wireNoticeCards() {
    ══════════════════════════════════════════════ */
 async function loadStudentNotices() {
     try {
-        const res  = await fetch('/student/get_notices');
+        const res = await fetch('/student/get_notices');
         const data = await res.json();
 
         if (!data.success) return;
@@ -208,7 +208,7 @@ async function loadStudentNotices() {
         if (!stack) return;
 
         document.querySelectorAll('.modal-backdrop').forEach(el => {
-            if (el.id !== 'modal-report') el.remove();
+            if (el.id !== 'modal-report' && el.id !== 'modal-scheme-docs' && el.id !== 'modal-docs') el.remove();
         });
 
         const existingContainer = document.getElementById('dynamic-notice-modals');

@@ -30,8 +30,14 @@ def dashboard():
         return redirect(url_for('auth.login'))
 
     college = College.query.filter_by(college_id=session['user_id']).first()
+    
+    # Handle invalid or missing college safely
+    if not college:
+        session.clear()
+        return redirect(url_for('auth.login'))
+
     initials = "NA"
-    if college and college.college_name:
+    if college.college_name:
         words = [w for w in college.college_name.replace('.', ' ').split() if w]
         if words:
             if len(words) == 1:
@@ -91,7 +97,9 @@ def get_token():
         token=inviteToken.token
         createdAt=inviteToken.created_at
 
-        return jsonify({"success":True, "token":token, "created_at":str(createdAt)})
+        student_count = Students.query.filter_by(college_id=session['user_id']).count()
+
+        return jsonify({"success":True, "token":token, "created_at":str(createdAt), "student_count":student_count})
 
     return jsonify({"success":False})
 
@@ -246,6 +254,18 @@ def update_student():
                 db_student.department= data.get("department", db_student.department)
                 db_student.year= data.get("year", db_student.year)
 
+                extra_data = data.get("extra_data")  # dict or None
+                if extra_data is not None:
+                    record = StudentScholarshipData.query.filter_by(
+                        student_id=student_id,
+                        college_id=session['user_id']
+                    ).first()
+                    if record:
+                        import json as _json
+                        old = _json.loads(record.extra_data) if record.extra_data else {}
+                        old.update(extra_data)
+                        record.extra_data = _json.dumps(old)
+
                 db.session.commit()
 
                 return jsonify({"success":True})
@@ -358,7 +378,7 @@ def generate_excel():
         from openpyxl.styles import PatternFill, Font, Protection
         from openpyxl.utils import get_column_letter
 
-        fixed_headers = ["PRN", "Full Name"]
+        fixed_headers = ["PRN", "FULL NAME"]
         all_headers = fixed_headers + (custom_cols if custom_cols else [
             "Application ID", "Scheme Name", "Category", "Status"
         ])
@@ -411,8 +431,8 @@ def generate_excel():
         import traceback
         return jsonify({"success": False, "error": str(e), "trace": traceback.format_exc()}), 500
 
-@admin_bp.route("/upload_excel", methods=["POST"])
-def upload_excel():
+@admin_bp.route("/parse_excel", methods=["POST"])
+def parse_excel():
     if 'user_id' not in session or session.get('role') != 'admin':
         return abort(401)
 
@@ -429,6 +449,7 @@ def upload_excel():
     success_count = 0
     unmatched = []
     skipped = []
+    rows = []  # full row data for preview table
 
     headers = [str(cell.value).strip() if cell.value else '' for cell in ws[1]]
 
@@ -437,14 +458,80 @@ def upload_excel():
 
     prn_col = headers.index('PRN')
 
-    skip_cols = {'prn', 'full name'}
+    skip_cols = {
+        'prn', 'full name', 'email', 'contact number', 'contact',
+        'department', 'year', 'verified', 'joined at'
+    }
     custom_col_indices = [
         (i, headers[i]) for i in range(len(headers))
-        if headers[i].lower() not in skip_cols and headers[i] != ''
+        if headers[i].strip().lower() not in skip_cols and headers[i].strip() != ''
     ]
 
     for row in ws.iter_rows(min_row=2, values_only=True):
         prn = str(row[prn_col]).strip() if row[prn_col] else None
+        if not prn or prn == 'None':
+            continue
+
+        # Build a dict of all column values for the preview
+        row_data = {headers[i]: (str(row[i]).strip() if row[i] is not None else '') for i in range(len(headers))}
+
+        student = Students.query.filter_by(
+            prn=prn,
+            college_id=session['user_id']
+        ).first()
+
+        if not student:
+            unmatched.append(prn)
+            row_data['_status'] = 'unmatched'
+            rows.append(row_data)
+            continue
+
+        all_filled = all(
+            row[i] is not None and str(row[i]).strip() not in ('', 'None')
+            for i, _ in custom_col_indices
+        )
+        if not all_filled:
+            skipped.append(prn)
+            row_data['_status'] = 'skipped'
+            rows.append(row_data)
+            continue
+
+        success_count += 1
+        row_data['_status'] = 'success'
+        rows.append(row_data)
+
+    return jsonify({
+        "success": True,
+        "headers": [h for h in headers if h],
+        "report": {
+            "success_count": success_count,
+            "total_rows": success_count + len(unmatched) + len(skipped),
+            "unmatched": unmatched,
+            "skipped": skipped,
+            "rows": rows
+        }
+    })
+
+@admin_bp.route("/confirm_excel", methods=["POST"])
+def confirm_excel():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return abort(401)
+
+    data = request.get_json()
+    rows = data.get('rows', [])
+    if not rows:
+        return jsonify({"success": False, "message": "No rows provided to save"}), 400
+
+    skip_cols = {
+        'prn', 'full name', 'email', 'contact number', 'contact',
+        'department', 'year', 'verified', 'joined at', '_status'
+    }
+    saved_count = 0
+
+    import json as _json
+
+    for row_data in rows:
+        prn = str(row_data.get('PRN', '')).strip()
         if not prn or prn == 'None':
             continue
 
@@ -454,23 +541,19 @@ def upload_excel():
         ).first()
 
         if not student:
-            unmatched.append(prn)
             continue
 
-        has_data = any(
-            row[i] is not None and str(row[i]).strip() not in ('', 'None')
-            for i, _ in custom_col_indices
-        )
-        if not has_data:
-            skipped.append(prn)
-            continue
-
-        import json as _json
+        all_filled = True
         extra = {}
-        for col_idx, col_name in custom_col_indices:
-            val = row[col_idx]
-            if val is not None and str(val).strip() not in ('', 'None'):
-                extra[col_name] = str(val).strip()
+        for col_name, val in row_data.items():
+            if col_name.lower() not in skip_cols:
+                if val is not None and str(val).strip() not in ('', 'None'):
+                    extra[col_name] = str(val).strip()
+                else:
+                    all_filled = False
+
+        if not all_filled or not extra:
+            continue
 
         existing = StudentScholarshipData.query.filter_by(
             student_id=student.student_id,
@@ -495,7 +578,7 @@ def upload_excel():
             )
             db.session.add(record)
 
-        success_count += 1
+        saved_count += 1
 
     try:
         db.session.commit()
@@ -503,15 +586,9 @@ def upload_excel():
         db.session.rollback()
         return jsonify({"success": False, "message": "Database error during save"}), 500
 
-    return jsonify({
-        "success": True,
-        "report": {
-            "success_count": success_count,
-            "total_rows": success_count + len(unmatched) + len(skipped),
-            "unmatched": unmatched,
-            "skipped": skipped
-        }
-    })
+
+
+    return jsonify({"success": True, "saved": saved_count})
 
 @admin_bp.route("/export_data", methods=["GET"])
 def export_data():
@@ -555,8 +632,8 @@ def export_data():
 
     # Build fixed headers + dynamic extra headers
     fixed_headers = [
-        "PRN", "Full Name", "Email", "Contact Number",
-        "Department", "Year", "Verified", "Joined At"
+        "PRN", "FULL NAME", "EMAIL", "CONTACT",
+        "DEPARTMENT", "YEAR", "VERIFIED", "JOINED AT"
     ]
     all_headers = fixed_headers + extra_keys
 
@@ -625,3 +702,44 @@ def export_data():
         download_name=filename,
         mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
+
+@admin_bp.route("/delete_student", methods=["POST"])
+def delete_student():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return abort(401)
+    data = request.get_json()
+    student_id = data.get('student_id')
+    student = Students.query.filter_by(student_id=student_id, college_id=session['user_id']).first()
+    if not student:
+        return jsonify({"success": False})
+    try:
+        StudentScholarshipData.query.filter_by(student_id=student_id).delete()
+        db.session.delete(student)
+        db.session.commit()
+        return jsonify({"success": True})
+    except:
+        db.session.rollback()
+        return jsonify({"success": False})
+
+@admin_bp.route("/delete_column", methods=["POST"])
+def delete_column():
+    if 'user_id' not in session or session.get('role') != 'admin':
+        return abort(401)
+    data = request.get_json()
+    col_name = data.get('column', '').strip()
+    if not col_name:
+        return jsonify({"success": False})
+    import json as _json
+    records = StudentScholarshipData.query.filter_by(college_id=session['user_id']).all()
+    try:
+        for record in records:
+            if record.extra_data:
+                extra = _json.loads(record.extra_data)
+                if col_name in extra:
+                    del extra[col_name]
+                    record.extra_data = _json.dumps(extra)
+        db.session.commit()
+        return jsonify({"success": True})
+    except:
+        db.session.rollback()
+        return jsonify({"success": False})

@@ -2,181 +2,138 @@
 // student-schemes.js — Apply Guide (Tab 5) schemes & document modal
 // ─────────────────────────────────────────
 
-// ── Per-scheme document + guide data ──────────────────────────
-const SCHEME_DOCS = {
-    sc1: {
-        name: 'Rajarshi Chhatrapati Shahu Maharaj Scholarship',
-        docs: [
-            {
-                name: 'Aadhaar Card',
-                checked: true,
-                guide: {
-                    title: 'How to obtain your Aadhaar Card',
-                    icon: '🪪',
-                    label: 'Infographic: How to get Aadhaar Card',
-                    steps: [
-                        'Visit your nearest Aadhaar Enrolment Centre (locate via uidai.gov.in) with proof of identity and address.',
-                        'Fill the enrolment form and biometric scan. Collect the acknowledgement slip with Enrolment ID.',
-                        'Download your e-Aadhaar PDF from uidai.gov.in using the Enrolment ID within 90 days.'
-                    ]
-                }
-            },
-            {
-                name: 'SC Caste Certificate',
-                checked: true,
-                guide: {
-                    title: 'How to obtain your SC Caste Certificate',
-                    icon: '📋',
-                    label: 'Infographic: Get Caste Certificate',
-                    steps: [
-                        'Apply at your Tehsildar / Sub-Divisional Officer office or via MahaOnline portal (mahaonline.gov.in).',
-                        'Submit Aadhaar, address proof, school leaving certificate, and affidavit from your family.',
-                        'Certificate is issued within 15 working days. Verify validity each year for fresh applications.'
-                    ]
-                }
-            },
-            {
-                name: 'Income Certificate (below ₹2.5L)',
-                checked: true,
-                guide: {
-                    title: 'How to obtain an Income Certificate',
-                    icon: '💰',
-                    label: 'Infographic: Income Certificate Process',
-                    steps: [
-                        'Apply at the Tehsildar office or MahaOnline. Submit Aadhaar, bank statements, and Form 16 (if salaried parent).',
-                        'Certificate is issued after field verification by a Revenue officer.',
-                        'Income certificate must be of the current financial year.'
-                    ]
-                }
-            },
-            {
-                name: 'Bonafide Certificate',
-                checked: false,
-                guide: {
-                    title: 'How to obtain a Bonafide Certificate',
-                    icon: '📑',
-                    label: 'Infographic: College Bonafide',
-                    steps: [
-                        "Apply via your college's scholarship / student section with your PRN and fee receipt.",
-                        "The college issues it with a seal and principal's signature — usually within 2–3 working days.",
-                        'It must include your name, PRN, course, year, and academic year.'
-                    ]
-                }
-            },
-            {
-                name: 'Previous Year Marksheet',
-                checked: true,
-                guide: {
-                    title: 'How to obtain your Marksheet',
-                    icon: '📝',
-                    label: 'Infographic: Getting Marksheet',
-                    steps: [
-                        'Collect the original from your college examination section after results are declared.',
-                        'If lost, apply for a duplicate from the university with prescribed fee and affidavit.',
-                        'For first-year students, submit HSC (12th) marksheet as the previous qualifying exam.'
-                    ]
-                }
-            },
-            {
-                name: 'DBT-enabled Bank Account Passbook',
-                checked: false,
-                guide: {
-                    title: 'How to enable DBT on your bank account',
-                    icon: '🏦',
-                    label: 'Infographic: Enable DBT on Bank Account',
-                    steps: [
-                        'Visit your bank branch with your Aadhaar card and request Aadhaar-account seeding (DBT activation).',
-                        'Verify seeding status on NPCI mapper at npci.org.in/npci/bankseeding.html.',
-                        'Check the passbook or bank statement after 2–3 days to confirm DBT-enabled status.'
-                    ]
-                }
-            },
-            {
-                name: 'Domicile Certificate',
-                checked: false,
-                guide: {
-                    title: 'How to obtain a Domicile Certificate',
-                    icon: '🗺️',
-                    label: 'Infographic: Domicile Certificate',
-                    steps: [
-                        "Apply via MahaOnline or Tehsildar office. Submit Aadhaar, school certificate, and proof of 15-year residency in Maharashtra.",
-                        "Submit parent's Domicile Certificate if you are below 18 years.",
-                        'The certificate is issued usually within 15 days of verification.'
-                    ]
-                }
-            }
-        ]
-    },
-    sc2: {
-        name: 'Post-Matric Scholarship for SC Students',
-        docs: [
-            { name: 'Aadhaar Card', checked: true, guide: { title: 'How to obtain your Aadhaar Card', icon: '🪪', label: 'Infographic: Aadhaar Card', steps: ['Visit uidai.gov.in to locate nearest enrolment centre.', 'Provide biometric and document proof for enrolment.', 'Download e-Aadhaar from uidai.gov.in after enrolment.'] } },
-            { name: 'SC Caste Certificate', checked: true, guide: { title: 'How to get SC Caste Certificate', icon: '📋', label: 'Infographic: Caste Certificate', steps: ['Apply at Tehsildar or via MahaOnline.', 'Submit Aadhaar, address proof and school certificate.', 'Certificate issued within 15 working days.'] } },
-            { name: 'Income Certificate (current year)', checked: false, guide: { title: 'How to get an Income Certificate', icon: '💰', label: 'Infographic: Income Certificate', steps: ['Apply at Tehsildar office or via MahaOnline.', 'Submit income proofs — salary slips or Form 16.', 'Current-year certificate mandatory each application cycle.'] } },
-            { name: 'Bonafide Certificate', checked: false, guide: { title: 'Bonafide Certificate from College', icon: '📑', label: 'Infographic: Bonafide Certificate', steps: ['Request from college student section with PRN.', 'Must include course, year, and academic session.', 'Collect within 2–3 working days after request.'] } },
-            { name: 'SSC (10th) Marksheet', checked: true, guide: { title: 'How to get SSC Marksheet', icon: '📝', label: 'Infographic: SSC Marksheet', steps: ['Collect original at your secondary school.', 'For duplicates, apply at Maharashtra State Board (MSBSHSE).', 'Provide board registration number and affidavit.'] } },
-            { name: 'Previous Year Marksheet', checked: true, guide: { title: 'Previous Year Marksheet', icon: '📝', label: 'Infographic: Marksheet', steps: ['Collect from college examination section.', 'First-year students submit HSC (12th) marksheet.', 'Duplicate available from university with fee.'] } },
-            { name: 'DBT-enabled Bank Account Passbook', checked: false, guide: { title: 'Enable DBT on Bank Account', icon: '🏦', label: 'Infographic: DBT Activation', steps: ['Visit bank branch with Aadhaar for seeding.', 'Check NPCI mapper status at npci.org.in.', 'Confirm DBT status in passbook after 2–3 days.'] } },
-            { name: 'Passport-size Photograph', checked: true, guide: { title: 'Passport-size Photograph', icon: '📸', label: 'Infographic: Photo Requirements', steps: ['Use a recent (within 3 months) white background photo.', 'Size: 35mm × 45mm, colour preferred.', 'Upload as JPEG/PNG (max 200KB) on MahaDBT portal.'] } }
-        ]
-    },
-    sc3: {
-        name: 'Vijay Raje Scholarship for ST Students',
-        docs: [
-            { name: 'Aadhaar Card', checked: true, guide: { title: 'How to obtain Aadhaar Card', icon: '🪪', label: 'Infographic: Aadhaar', steps: ['Visit uidai.gov.in enrolment centre.', 'Biometric + document submission.', 'Download e-Aadhaar within 90 days.'] } },
-            { name: 'ST Tribe Certificate', checked: true, guide: { title: 'How to get ST Tribe Certificate', icon: '📋', label: 'Infographic: Tribe Certificate', steps: ['Apply at Tribal Development Office or MahaOnline.', 'Submit Aadhaar, address proof, and family documents.', 'Issued within 30 working days after scrutiny.'] } },
-            { name: 'Tribe Validity Certificate', checked: false, guide: { title: 'Tribe Validity Certificate', icon: '✅', label: 'Infographic: Validity Certificate', steps: ['Apply at District Caste Certificate Scrutiny Committee.', 'Submit original tribe certificate + supporting documents.', 'Hearing and issuance may take 3–6 months.'] } },
-            { name: 'Income Certificate (below ₹2.5L)', checked: true, guide: { title: 'Income Certificate', icon: '💰', label: 'Infographic: Income Certificate', steps: ['Apply at Tehsildar or MahaOnline.', 'Submit salary slips or Form 16.', 'Must be current-year certificate.'] } },
-            { name: 'Bonafide Certificate', checked: false, guide: { title: 'Bonafide from College', icon: '📑', label: 'Infographic: Bonafide', steps: ['Request at college scholarship cell.', 'Issued in 2–3 days.', 'Must have college seal and signature.'] } },
-            { name: 'Previous Year Marksheet', checked: true, guide: { title: 'Marksheet', icon: '📝', label: 'Infographic: Marksheet', steps: ['Collect from examination section.', 'Duplicate from university if lost.', 'First-years: submit HSC marksheet.'] } },
-            { name: 'DBT-enabled Bank Passbook', checked: false, guide: { title: 'DBT Bank Account', icon: '🏦', label: 'Infographic: DBT', steps: ['Seed Aadhaar to bank account.', 'Verify on NPCI mapper.', 'Confirm in passbook.'] } }
-        ]
-    },
-    sc4: {
-        name: 'OBC Non-Creamy Layer Post-Matric Scholarship',
-        docs: [
-            { name: 'Aadhaar Card', checked: true, guide: { title: 'Aadhaar Card', icon: '🪪', label: 'Infographic: Aadhaar', steps: ['Visit UIDAI enrolment centre.', 'Submit biometric and documents.', 'Download e-Aadhaar from uidai.gov.in.'] } },
-            { name: 'OBC Caste Certificate', checked: true, guide: { title: 'OBC Caste Certificate', icon: '📋', label: 'Infographic: OBC Certificate', steps: ['Apply via MahaOnline or Tehsildar.', 'Submit Aadhaar, address proof, school certificate.', 'Issued within 15 working days.'] } },
-            { name: 'Non-Creamy Layer Certificate (current year)', checked: false, guide: { title: 'Non-Creamy Layer Certificate', icon: '💰', label: 'Infographic: NCL Certificate', steps: ['Apply at Tehsildar office with income proof.', 'Family income must be below ₹8L per year.', 'Annual certificate — renew every year.'] } },
-            { name: 'Income Certificate', checked: true, guide: { title: 'Income Certificate', icon: '💰', label: 'Infographic: Income', steps: ['Apply at Tehsildar or MahaOnline.', 'Submit salary slips, Form 16 or affidavit.', 'Must be for current financial year.'] } },
-            { name: 'Bonafide Certificate', checked: false, guide: { title: 'Bonafide from College', icon: '📑', label: 'Infographic: Bonafide', steps: ['Request at college scholarship section.', 'Mention PRN, course, year, and session.', 'Issued within 2–3 days.'] } },
-            { name: 'Previous Year Marksheet', checked: true, guide: { title: 'Marksheet', icon: '📝', label: 'Infographic: Marksheet', steps: ['From examination section.', 'University duplicate if lost.', 'HSC for first-year students.'] } },
-            { name: 'DBT-enabled Bank Passbook', checked: false, guide: { title: 'DBT Bank Account', icon: '🏦', label: 'Infographic: DBT Account', steps: ['Seed Aadhaar to bank.', 'Check NPCI mapper status.', 'Confirm in passbook after 2–3 days.'] } }
-        ]
-    },
-    sc5: {
-        name: 'EBC Freeship — Open Category',
-        docs: [
-            { name: 'Aadhaar Card', checked: true, guide: { title: 'Aadhaar Card', icon: '🪪', label: 'Infographic: Aadhaar', steps: ['Visit uidai.gov.in enrolment centre.', 'Biometric and document submission.', 'Download e-Aadhaar after enrolment.'] } },
-            { name: 'EBC Income Certificate (below ₹8L)', checked: false, guide: { title: 'EBC Income Certificate', icon: '💰', label: 'Infographic: EBC Income Certificate', steps: ['Apply at District Collector / Tehsildar office.', 'Submit salary proof — Form 16, pay slips, and IT returns.', 'Certificate must explicitly state "Economically Backward Class" category.'] } },
-            { name: 'Admission Letter / Bonafide', checked: true, guide: { title: 'Admission Letter or Bonafide', icon: '📑', label: 'Infographic: Admission Letter', steps: ['Obtain from college scholarship / admission section.', 'Should mention course, year, and academic session.', 'Issued within 2–3 working days upon request.'] } },
-            { name: '10th (SSC) Marksheet', checked: true, guide: { title: 'SSC Marksheet', icon: '📝', label: 'Infographic: SSC Marksheet', steps: ['Collect from secondary school.', 'Duplicate from MSBSHSE if lost.', 'Submit self-attested photocopy on portal.'] } },
-            { name: '12th (HSC) Marksheet', checked: true, guide: { title: 'HSC Marksheet', icon: '📝', label: 'Infographic: HSC Marksheet', steps: ['Collect from junior college.', 'Duplicate from MSBSHSE if lost.', 'Self-attest before uploading.'] } },
-            { name: 'Domicile Certificate', checked: false, guide: { title: 'Domicile Certificate', icon: '🗺️', label: 'Infographic: Domicile', steps: ['Apply at Tehsildar or MahaOnline.', 'Submit 15-year Maharashtra residency proof.', 'Issued within 15 working days.'] } },
-            { name: 'DBT-enabled Bank Account Passbook', checked: false, guide: { title: 'Enable DBT on Bank Account', icon: '🏦', label: 'Infographic: DBT Activation', steps: ['Visit bank with Aadhaar for seeding.', 'Check NPCI mapper.', 'Confirm DBT-enabled status.'] } }
-        ]
-    },
-    sc6: {
-        name: 'VJNT & Special Backward Class Scholarship',
-        docs: [
-            { name: 'Aadhaar Card', checked: true, guide: { title: 'Aadhaar Card', icon: '🪪', label: 'Infographic: Aadhaar', steps: ['Visit UIDAI enrolment centre.', 'Biometric + document submission.', 'Download e-Aadhaar from uidai.gov.in.'] } },
-            { name: 'VJNT / SBC Caste Certificate', checked: true, guide: { title: 'VJNT / SBC Caste Certificate', icon: '📋', label: 'Infographic: VJNT Certificate', steps: ['Apply at Tehsildar or MahaOnline.', 'Submit Aadhaar, address proof, and family certificate.', 'Issued within 15 working days.'] } },
-            { name: 'Income Certificate (below ₹1L)', checked: false, guide: { title: 'Income Certificate', icon: '💰', label: 'Infographic: Income Certificate', steps: ['Apply at Tehsildar office.', 'Submit salary slips or sworn affidavit.', 'Must be current-year certificate.'] } },
-            { name: 'Caste Validity Certificate', checked: false, guide: { title: 'Caste Validity Certificate', icon: '✅', label: 'Infographic: Validity Certificate', steps: ['Apply at District Caste Scrutiny Committee.', 'Submit original caste certificate and family documents.', 'Process takes 3–6 months — apply early.'] } },
-            { name: 'Bonafide Certificate', checked: true, guide: { title: 'Bonafide from College', icon: '📑', label: 'Infographic: Bonafide', steps: ['Request at college scholarship section.', 'Includes PRN, course, year, academic session.', 'Issued within 2–3 days.'] } },
-            { name: 'Previous Year Marksheet', checked: true, guide: { title: 'Marksheet', icon: '📝', label: 'Infographic: Marksheet', steps: ['From examination section.', 'University duplicate if lost.', 'HSC for first-year students.'] } },
-            { name: 'DBT-enabled Bank Passbook', checked: false, guide: { title: 'DBT Bank Account', icon: '🏦', label: 'Infographic: DBT', steps: ['Seed Aadhaar to bank account.', 'Verify on NPCI mapper.', 'Confirm in passbook.'] } },
-            { name: 'Passport-size Photograph', checked: true, guide: { title: 'Photograph Requirements', icon: '📸', label: 'Infographic: Photo', steps: ['White background, recent (within 3 months).', 'Size: 35mm × 45mm.', 'Upload as JPEG/PNG (max 200KB).'] } }
-        ]
-    }
-};
+// SCHEME_DOCS is built dynamically from scholarships.json after fetch
+let SCHEME_DOCS = {};
 
 // Currently open guide item index
 let _sdmOpenGuide = null;
 let _currentSchemeKey = null;
 
+// ── Category mapping from JSON field → data-cats tokens ──────────
+function buildDataCats(scheme) {
+    const cats = [];
+    const cat = (scheme.category || '').toLowerCase();
+    const courseTypes = (scheme.eligibility && scheme.eligibility.course_types) || [];
+
+    // Primary caste/category pill
+    if (cat.includes('sc') || cat.includes('neo-buddhist')) cats.push('sc');
+    if (cat.includes('st')) cats.push('st');
+    if (cat.includes('obc')) cats.push('obc');
+    if (cat.includes('vjnt') || cat.includes('sbc')) cats.push('vjnt');
+    if (cat.includes('open') || cat.includes('ews')) {
+        cats.push('ews');
+        cats.push('open');
+    }
+    if (cat.includes('minority')) cats.push('minority');
+
+    // Course type pills
+    const courseTypesLower = courseTypes.map(t => t.toLowerCase());
+    if (courseTypesLower.some(t => t.includes('technical') || t.includes('professional'))) {
+        cats.push('technical');
+    }
+    if (courseTypesLower.some(t => t.includes('non-professional') || t.includes('non professional'))) {
+        cats.push('nontechnical');
+    }
+
+    return [...new Set(cats)].join(' ');
+}
+
+// ── Income limit display ───────────────────────────────────────────
+function incomeLabel(scheme) {
+    const ic = scheme.eligibility && scheme.eligibility.income_criteria;
+    if (!ic || ic.max === null) return null;
+    const lakh = ic.max / 100000;
+    const display = Number.isInteger(lakh) ? `₹${lakh}L` : `₹${lakh}L`;
+    return `Income limit ${display}`;
+}
+
+// ── Department badge helper ───────────────────────────────────────
+function getDeptBadge(department) {
+    const d = department || '';
+    if (d.includes('Social Justice')) return { cls: 'dept-sj', label: 'Social Justice' };
+    if (d.includes('Tribal')) return { cls: 'dept-td', label: 'Tribal Dev.' };
+    if (d.includes('OBC') || d.includes('Backward') || d.includes('Nomadic'))
+        return { cls: 'dept-obc', label: 'OBC Welfare' };
+    if (d.includes('Higher') || d.includes('Technical Education'))
+        return { cls: 'dept-hte', label: 'Higher & Tech. Ed.' };
+    if (d.includes('Minority')) return { cls: 'dept-hte', label: 'Minority Dev.' };
+    // Fallback: first 3 words
+    const short = d.split(' ').slice(0, 3).join(' ');
+    return { cls: 'dept-sj', label: short };
+}
+
+// ── Card HTML builder ──────────────────────────────────────────────
+function buildCardHTML(scheme) {
+    const key = `sc${scheme.scheme_id}`;
+    const dataCats = buildDataCats(scheme);
+    const dataName = scheme.name.toLowerCase();
+    const badge = getDeptBadge(scheme.department);
+    const income = incomeLabel(scheme);
+    const levels = (scheme.eligibility && scheme.eligibility.course_levels) || [];
+
+    // Income pill
+    const incomePill = income
+        ? `<span class="cat-pill cat-neutral">${income}</span>`
+        : '';
+
+    // Course levels pill (shorten long lists)
+    let levelPill = '';
+    if (levels.length > 0 && levels.length <= 4) {
+        levelPill = `<span class="cat-pill cat-neutral">${levels.join(' / ')}</span>`;
+    } else if (levels.length > 4) {
+        levelPill = `<span class="cat-pill cat-neutral">${levels.slice(0, 3).join(' / ')} …</span>`;
+    }
+
+    // Category label pill (first readable one)
+    const catLabel = scheme.category_label || scheme.category || '';
+    const catPill = catLabel ? `<span class="cat-pill">${catLabel}</span>` : '';
+
+    return `
+        <article class="scheme-card" id="sc-${scheme.scheme_id}" role="listitem"
+            data-name="${dataName}" data-cats="${dataCats}">
+            <div class="scheme-card-header">
+                <h3 class="scheme-name">${scheme.name}</h3>
+                <span class="dept-badge ${badge.cls}">${badge.label}</span>
+            </div>
+            <div class="scheme-cats">
+                ${catPill}
+                ${incomePill}
+                ${levelPill}
+            </div>
+            <div class="scheme-actions">
+                <button class="btn-ghost-sm" data-open-scheme-docs="${key}">
+                    📄 Required Documents
+                </button>
+                <a href="${scheme.official_link || 'https://mahadbt.maharashtra.gov.in'}"
+                    target="_blank" rel="noopener" class="btn-saffron-sm">
+                    Apply on MahaDBT ↗
+                </a>
+            </div>
+        </article>`;
+}
+
+// ── Build SCHEME_DOCS entry from JSON scheme ───────────────────────
+function buildSchemeDocsEntry(scheme) {
+    const docs = (scheme.documents_required || []).map(d => ({
+        name: d,
+        checked: true,
+        guide: {
+            title: 'How to obtain: ' + d,
+            icon: '📄',
+            label: d,
+            steps: [
+                'Visit the relevant government office or portal.',
+                'Submit required supporting documents.',
+                'Collect the certificate within the stipulated time.'
+            ]
+        }
+    }));
+    return { name: scheme.name, docs };
+}
+
 function openSchemeDocModal(schemeKey) {
     _currentSchemeKey = schemeKey;
+    console.log('key:', schemeKey, 'found:', !!SCHEME_DOCS[schemeKey]);
     _sdmOpenGuide = null;
     const data = SCHEME_DOCS[schemeKey];
     if (!data) return;
@@ -314,10 +271,45 @@ document.addEventListener('DOMContentLoaded', function () {
         schemeSearch.addEventListener('keyup', filterSchemes);
     }
 
-    // Scheme doc modal buttons via data attribute
-    document.querySelectorAll('[data-open-scheme-docs]').forEach(btn => {
-        btn.addEventListener('click', function () {
-            openSchemeDocModal(this.dataset.openSchemeDocs);
+    // ── Fetch scholarships.json and render cards ──────────────────
+    const grid = document.getElementById('scheme-grid');
+    const noResults = document.getElementById('scheme-no-results');
+
+    fetch('/static/data/scholarships.json')
+        .then(res => res.json())
+        .then(schemes => {
+            // Build SCHEME_DOCS map
+            SCHEME_DOCS = {};
+            schemes.forEach(scheme => {
+                const key = `sc${scheme.scheme_id}`;
+                SCHEME_DOCS[key] = buildSchemeDocsEntry(scheme);
+            });
+
+            // Render cards (insert before the no-results div)
+            const fragment = document.createDocumentFragment();
+            schemes.forEach(scheme => {
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = buildCardHTML(scheme).trim();
+                fragment.appendChild(wrapper.firstElementChild);
+            });
+            grid.insertBefore(fragment, noResults);
+
+            // Run initial filter (keeps "All" pill correct on load)
+            filterSchemes();
+
+            // ── Event delegation for "Required Documents" buttons ──
+            grid.addEventListener('click', function (e) {
+                const btn = e.target.closest('[data-open-scheme-docs]');
+                if (btn) {
+                    openSchemeDocModal(btn.dataset.openSchemeDocs);
+                }
+            });
+        })
+        .catch(err => {
+            console.error('Failed to load scholarships.json:', err);
+            if (noResults) {
+                noResults.textContent = '⚠️ Could not load scheme data. Please refresh the page.';
+                noResults.style.display = 'block';
+            }
         });
-    });
 });

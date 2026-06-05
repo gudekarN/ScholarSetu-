@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ScholarSetu — Maharashtra Scholarship Platform</title>
+  <title>ScholarSetu — Maharashtra Scholarship Guidance Platform</title>
   <meta name="description"
     content="ScholarSetu is Maharashtra's centralized scholarship platform helping students explore schemes, check eligibility, link DBT, and apply with guidance." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -35,7 +35,7 @@
         </div>
         <div class="nav-actions">
           <a href="{{ url_for('auth.login') }}" class="btn btn-ghost">
-            Student Login
+            Login
           </a>
           <a href="{{ url_for('auth.register_college')}}" class="btn btn-saffron">
             Register College
@@ -83,7 +83,7 @@
         <!-- Left -->
         <div>
           <div class="hero-badge reveal">
-            <div class="badge"><span class="badge-dot"></span>Maharashtra Scholarship Platform</div>
+            <div class="badge"><span class="badge-dot"></span>Maharashtra Scholarship Guidance Platform</div>
           </div>
           <h1 class="reveal reveal-delay-1">Every student deserves their <span>scholarship.</span></h1>
           <p class="hero-sub reveal reveal-delay-2">ScholarSetu bridges the gap between Maharashtra's scholarship
@@ -263,11 +263,11 @@
   </section>
 
   <!-- ══════════ FEATURES GRID ══════════ -->
-  <section class="how-it-works" id="how-it-works"></section>
+  <section class="how-it-works"></section>
   <section class="features" id="features">
     <div class="container">
       <div class="features-header">
-        <div class="section-tag" style="justify-content:center"><span>Platform Features</span></div>
+        <div class="section-tag" id="how-it-works" style="justify-content:center"><span>Platform Features</span></div>
         <h2 class="section-head reveal">Everything a college needs</h2>
         <p class="section-sub reveal reveal-delay-1" style="margin:0 auto">Seven student-facing modules plus a powerful
           admin dashboard — designed for Maharashtra's scholarship ecosystem.</p>
@@ -275,9 +275,9 @@
       <div class="features-grid">
         <div class="feature-card reveal">
           <div class="feature-num saffron">Tab 01</div>
-          <h3>Scheme Explorer</h3>
-          <p>Browse all 35+ Maharashtra scholarship schemes with eligibility filters, income criteria, and caste
-            requirements.</p>
+          <h3>Notice Board</h3>
+          <p>College admins post important scholarship updates, deadlines, and announcements — instantly delivered to
+            your inbox and visible here.</p>
         </div>
         <div class="feature-card reveal reveal-delay-1">
           <div class="feature-num saffron">Tab 02</div>
@@ -322,14 +322,14 @@
   </section>
 
   <!-- ══════════ HOW IT WORKS ══════════ -->
-  <div class="container">
+  <div class="container" id="for-colleges">
     <div class="how-header">
       <div class="section-tag" style="justify-content:center"><span>Process</span></div>
       <h2 class="section-head reveal">Simple for colleges. Powerful for students.</h2>
       <p class="section-sub reveal reveal-delay-1" style="margin:0 auto">Two clear journeys — one for the institution,
         one for the student.</p>
     </div>
-    <div class="how-grid" id="for-colleges">
+    <div class="how-grid">
       <!-- For Colleges -->
       <div class="reveal">
         <h3 style="color:var(--navy)">For Colleges <span class="how-col-badge saffron">Institution</span></h3>
@@ -341,7 +341,7 @@
             </div>
             <div class="step-content">
               <h4>Register your college</h4>
-              <p>Submit your college details — AISHE code, principal contact, and student enrollment count.
+              <p>Submit your college details — AISHE code, principal contact, and admin email, etc.
                 Verification takes under 24 hours.</p>
             </div>
           </div>
@@ -352,8 +352,8 @@
             </div>
             <div class="step-content">
               <h4>Get your college portal live</h4>
-              <p>A branded college page is auto-generated with your logo, announcement board, and unique student
-                invite link.</p>
+              <p>A college page is auto-generated with announcement board, unique student
+                invite link with other student data management features.</p>
             </div>
           </div>
           <div class="how-step">

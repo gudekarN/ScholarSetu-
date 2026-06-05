@@ -155,6 +155,12 @@ def register_student():
             if existing_prn:
                 return jsonify({"success": False, "field": "prn", "message": "PRN already registered"})
 
+            # Check contact_number uniqueness within this college
+            existing_contact = Students.query.filter_by(college_id=db_inviteToken.college_id, contact_number=contact_number).first()
+
+            if existing_contact:
+                return jsonify({"success": False, "field": "contact_number", "message": "Contact number already registered"})
+
             # Check email uniqueness globally 
             # We don’t check college_id for email because email is treated as a globally unique identifier across the system,
             # unlike PRN which is unique only within a specific college.

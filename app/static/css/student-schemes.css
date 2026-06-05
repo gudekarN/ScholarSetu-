@@ -114,7 +114,7 @@
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, var(--saffron), #FF3E00);
-    opacity: 0;
+    opacity: 1;
     transition: opacity .2s;
 }
 
@@ -124,9 +124,6 @@
     border-color: rgba(255, 107, 0, .25);
 }
 
-.scheme-card:hover::before {
-    opacity: 1;
-}
 
 .scheme-card-header {
     display: flex;
@@ -496,4 +493,9 @@
     padding: 40px 20px;
     color: var(--text-muted);
     font-size: 14px;
+}
+
+.doc-guide-steps,
+.doc-guide-title {
+    display: none;
 }
