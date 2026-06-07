@@ -1,12 +1,13 @@
 from flask import session
 from flask import render_template, redirect, url_for
 from flask import render_template_string
-from app.models import SecretKeys, College
+from app.models import SecretKeys, College, StepReports
 from flask import jsonify
 from flask import request
 from flask import Blueprint
 from app.extensions import db
 import secrets
+from datetime import timezone, timedelta
 
 
 superadmin_bp=Blueprint('superadmin', __name__, url_prefix="/superadmin")
@@ -150,3 +151,46 @@ def update_admin_email():
             return jsonify({"success":False})
     
     return jsonify({"success": False, "message": "College not found"})
+
+@superadmin_bp.route("/get_step_reports")
+def get_step_reports():
+    if 'user_id' not in session or session.get('role') != 'superadmin':
+        return jsonify({"success": False, "message": "Unauthorized"}), 401
+    from sqlalchemy import func
+    rows = db.session.query(
+        StepReports.process,
+        StepReports.step_number,
+        func.count(StepReports.report_id).label('report_count'),
+        func.max(StepReports.reported_at).label('last_reported')
+    ).group_by(
+        StepReports.process,
+        StepReports.step_number
+    ).order_by(
+        func.count(StepReports.report_id).desc()
+    ).all()
+    IST = timezone(timedelta(hours=5, minutes=30))
+    data = [
+        {
+            "process": r.process,
+            "step_number": r.step_number,
+            "report_count": r.report_count,
+            "last_reported": r.last_reported.replace(tzinfo=timezone.utc).astimezone(IST).strftime('%d %b %Y, %I:%M %p') if r.last_reported else '—'
+        }
+        for r in rows
+    ]
+    return jsonify({"success": True, "reports": data})
+
+@superadmin_bp.route("/clear_step_reports", methods=["POST"])
+def clear_step_reports():
+    if 'user_id' not in session or session.get('role') != 'superadmin':
+        return jsonify({"success": False}), 401
+    try:
+        data = request.get_json()
+        process = data.get('process')
+        step_number = data.get('step_number')
+        StepReports.query.filter_by(process=process, step_number=step_number).delete()
+        db.session.commit()
+        return jsonify({"success": True})
+    except Exception:
+        db.session.rollback()
+        return jsonify({"success": False})

@@ -20,6 +20,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/student-eligibility.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/student-schemes.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/student-qa.css') }}">
+    <style id="tab-init-style">
+        #tab-home,
+        #tab-dbt-status,
+        #tab-enable-dbt,
+        #tab-eligibility,
+        #tab-apply-guide,
+        #tab-qa,
+        #tab-grievance {
+            opacity: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -104,7 +115,7 @@
 
     <!-- ══ TAB BAR ══ -->
     <div class="tab-bar" role="tablist" aria-label="Dashboard sections">
-        <button class="tab-btn active" id="tab-home" role="tab" aria-selected="true" aria-controls="panel-home"
+        <button class="tab-btn" id="tab-home" role="tab" aria-selected="true" aria-controls="panel-home"
             data-tab="home"><span class="tab-icon">🏠</span> Home</button>
         <button class="tab-btn" id="tab-dbt-status" role="tab" aria-selected="false" aria-controls="panel-dbt-status"
             data-tab="dbt-status"><span class="tab-icon">📋</span> Check DBT Status</button>
@@ -124,7 +135,7 @@
     <main class="main-content">
 
         <!-- ── TAB: HOME ── -->
-        <section class="tab-panel active" id="panel-home" role="tabpanel" aria-labelledby="tab-home">
+        <section class="tab-panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home">
 
             <!-- SECTION A — Notice Board -->
             <div class="section-head">
@@ -295,17 +306,10 @@
                     <div class="step-title" id="dbt-status-title">Open NPCI portal at npci.org.in</div>
                 </div>
                 <div class="step-screenshot" aria-label="Step screenshot placeholder">
-                    <div class="screenshot-icon" id="dbt-status-ss-icon">🖥️</div>
-                    <div class="screenshot-label" id="dbt-status-screenshot-label">Screenshot: NPCI homepage with URL
-                        bar showing npci.org.in</div>
-                    <div class="screenshot-tag">Screenshot Placeholder</div>
+                    <img id="dbt-status-screenshot-img" src="" alt="" style="width:100%; border-radius:8px; display:block;">
                 </div>
                 <div class="step-instruction-wrap">
-                    <p class="step-instruction" id="dbt-status-instruction">
-                        <span class="student-name">Rahul</span>, open your browser and go to
-                        <strong>npci.org.in</strong>. You can use Chrome, Firefox, or any browser on your phone or
-                        laptop.
-                    </p>
+                    <p class="step-instruction" id="dbt-status-instruction"></p>
                 </div>
                 <div class="step-nav-bar">
                     <button class="step-btn-ghost" id="dbt-status-prev" data-story-nav="prev" data-story-id="dbt-status"
@@ -363,17 +367,10 @@
                     <div class="step-title" id="enable-dbt-title">Visit your nearest bank branch</div>
                 </div>
                 <div class="step-screenshot" aria-label="Step screenshot placeholder">
-                    <div class="screenshot-icon" id="enable-dbt-ss-icon">🏦</div>
-                    <div class="screenshot-label" id="enable-dbt-screenshot-label">Screenshot: Bank branch exterior or
-                        entrance illustration</div>
-                    <div class="screenshot-tag">Screenshot Placeholder</div>
+                    <img id="enable-dbt-screenshot-img" src="" alt="" style="width:100%; border-radius:8px; display:block;">
                 </div>
                 <div class="step-instruction-wrap">
-                    <p class="step-instruction" id="enable-dbt-instruction">
-                        <span class="student-name">Rahul</span>, go to the bank branch where your scholarship account is
-                        held. Make sure to visit during banking hours — usually <strong>10 AM to 4 PM on
-                            weekdays</strong>.
-                    </p>
+                    <p class="step-instruction" id="enable-dbt-instruction"></p>
                 </div>
                 <div class="step-nav-bar">
                     <button class="step-btn-ghost" id="enable-dbt-prev" data-story-nav="prev" data-story-id="enable-dbt"
@@ -923,12 +920,10 @@
                     <div class="step-title" id="grievance-title">Log in to MahaDBT portal</div>
                 </div>
                 <div class="step-screenshot" aria-label="Step screenshot placeholder">
-                    <div class="screenshot-icon" id="grievance-ss-icon">🔑</div>
-                    <div class="screenshot-label" id="grievance-screenshot-label">Screenshot Placeholder</div>
-                    <div class="screenshot-tag">Screenshot Placeholder</div>
+                    <img id="grievance-screenshot-img" src="" alt="" style="width:100%; border-radius:8px; display:block;">
                 </div>
                 <div class="step-instruction-wrap">
-                    <p class="step-instruction" id="grievance-instruction">...</p>
+                    <p class="step-instruction" id="grievance-instruction"></p>
                 </div>
                 <div class="step-nav-bar">
                     <button class="step-btn-ghost" id="grievance-prev" data-story-nav="prev" data-story-id="grievance"

@@ -24,6 +24,7 @@ class StoryImages(db.Model):
     step_number= db.Column(db.Integer, nullable=False)
     image_path= db.Column(db.String(200), nullable=False)
     caption= db.Column(db.String(200))
+    description = db.Column(db.Text, nullable=True)
     method= db.Column(db.String(200))
 
 class ScholarshipData(db.Model):

@@ -9,9 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ── Default active tab ──────────────────────────────────────
     // Ensure the first tab is active on page load.
-    if (typeof switchTab === 'function') {
-        switchTab('home');
-    }
+
 
     // ── Toast animation keyframe (fallback if utils not loaded) ──
     if (!document.getElementById('fadeup-style')) {

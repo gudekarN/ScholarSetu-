@@ -108,7 +108,7 @@
 
 .step-screenshot {
     margin: 0;
-    height: 400px;
+    height: auto;
     background: #F8F7F5;
     border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
@@ -120,7 +120,14 @@
     border-left: 2px dashed #D5D0C9;
     border-right: 2px dashed #D5D0C9;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
+}
+
+.step-screenshot img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
 }
 
 .step-screenshot::before {
@@ -168,7 +175,8 @@
 
 .step-instruction {
     font-size: 15px;
-    color: var(--text);
+    color: #222;
+    font-weight: 500;
     line-height: 1.75;
 }
 
@@ -401,7 +409,7 @@
     }
 
     .step-screenshot {
-        height: 260px;
+        height: auto;
     }
 
     .step-nav-bar {

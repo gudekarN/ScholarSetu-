@@ -2,7 +2,7 @@ import json
 import os
 from flask import jsonify
 from datetime import datetime
-from app.models import Students, Notices, College, Queries, QueryReplies
+from app.models import Students, Notices, College, Queries, QueryReplies, StoryImages, StepReports
 from app.extensions import db
 from flask import abort
 from flask import make_response
@@ -213,3 +213,45 @@ def check_eligibility_route():
     eligible_schemes = check_eligibility(inputs, schemes)
 
     return jsonify({"success": True, "eligible_schemes": eligible_schemes})
+
+
+@student_bp.route("/get_story/<process>/<method>")
+def get_story(process, method):
+    if 'user_id' not in session or session.get('role') != 'student':
+        return jsonify({"success": False, "message": "Unauthorized"}), 401
+    images = StoryImages.query.filter_by(process=process, method=method)\
+               .order_by(StoryImages.step_number.asc()).all()
+    if not images:
+        return jsonify({"success": False, "message": "No steps found"})
+    data = [
+        {
+            "step_number": img.step_number,
+            "image_path": url_for('static', filename=img.image_path),
+            "caption": img.caption,
+            "description": img.description
+        }
+        for img in images
+    ]
+    return jsonify({"success": True, "steps": data})
+
+@student_bp.route("/report_step", methods=["POST"])
+def report_step():
+    if 'user_id' not in session or session.get('role') != 'student':
+        return jsonify({"success": False, "message": "Unauthorized"}), 401
+    try:
+        data = request.get_json()
+        process = data.get('process')
+        step_number = data.get('step_number')
+        if not process or step_number is None:
+            return jsonify({"success": False, "message": "Missing fields"})
+        report = StepReports(
+            student_id=session['user_id'],
+            process=process,
+            step_number=step_number
+        )
+        db.session.add(report)
+        db.session.commit()
+        return jsonify({"success": True})
+    except Exception:
+        db.session.rollback()
+        return jsonify({"success": False})
